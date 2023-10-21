@@ -1,8 +1,7 @@
-export const App = () => {
+export function App() {
   return (
     <>
       Hi
     </>
   )
 }
-
