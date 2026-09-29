@@ -4,20 +4,21 @@ import {
   createBrowserRouter,
   RouterProvider,
   Link,
-} from "react-router-dom";
+} from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <div>
         <h1>Hello World</h1>
         <Link to="about">About Us</Link>
       </div>
     ),
+    errorElement: (<>访问的页面不存在</>),
   },
   {
-    path: "about",
+    path: 'about',
     element: <div>About</div>,
   },
 ])
