@@ -1,3 +1,4 @@
+import { Demo } from '@/components/Demo'
 import { RedirectToWelcome1 } from '@/components/RedirectToWelcome1'
 import { NavLink, Outlet } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ export const routes = [
             element: (
               <div>
                 welcome 1
+                <Demo />
                 <NavLink to="/welcome/2">下一页</NavLink>
               </div>
             ),
