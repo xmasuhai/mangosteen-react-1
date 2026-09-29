@@ -2,7 +2,7 @@ import { useRouteError } from 'react-router-dom'
 
 export const ErrorPage: React.FC = () => {
   const error = useRouteError() as
-    Error & { statusText?: string, message?: string }
+    Error & { statusText?: string, data?: string }
   console.error(error)
 
   return (
@@ -10,7 +10,7 @@ export const ErrorPage: React.FC = () => {
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i>{error.statusText || error.data}</i>
       </p>
     </div>
   )

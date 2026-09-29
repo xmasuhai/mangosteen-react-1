@@ -1,3 +1,4 @@
+import { ErrorPage } from '@/components/ErrorPage'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
@@ -6,7 +7,7 @@ import {
   Link,
 } from 'react-router-dom'
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
     element: (
@@ -15,13 +16,15 @@ const router = createBrowserRouter([
         <Link to="about">About Us</Link>
       </div>
     ),
-    errorElement: (<>访问的页面不存在</>),
+    errorElement: (<ErrorPage />),
   },
   {
     path: 'about',
     element: <div>About</div>,
   },
-])
+]
+
+const router = createBrowserRouter(routes)
 
 // const div = document.getElementById('root') as HTMLElement
 const div = document.getElementById('root')
