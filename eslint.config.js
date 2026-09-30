@@ -29,7 +29,7 @@ export default antfu(
       ],
       'perfectionist/sort-named-imports': 'off',
       'perfectionist/sort-imports': 'off',
-      'jsx-closing-bracket-location': false
+      'style/jsx-closing-bracket-location': ["error", { "location": "after-props" }]
     },
   }
 )
