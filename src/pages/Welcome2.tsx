@@ -1,10 +1,20 @@
 import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+
+const BorderedDiv = styled.div`
+  color: darkblue;
+  border: 1px solid darkred;
+
+  &:hover {
+    background-color: yellow;
+  }
+`
 
 export const Welcome2: React.FC = () => {
   return (
-    <div style={{ border: '8px solid purple', height: '100%', display: 'flex', placeItems: 'center', justifyContent: 'center' }}>
+    <BorderedDiv>
       welcome 2
       <NavLink to="/welcome/3">下一页</NavLink>
-    </div>
+    </BorderedDiv>
   )
 }
