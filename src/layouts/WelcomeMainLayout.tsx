@@ -33,6 +33,7 @@ export const WelcomeMainLayout: React.FC = () => {
         ? 'translate3d(100%, 0, 0)'
         : 'translate3d(-100%, 0, 0)',
     },
+    keys: pathname => pathname,
     // 物理参数微调：让过渡更轻快
     config: { tension: 280, friction: 30 },
   })
@@ -44,9 +45,9 @@ export const WelcomeMainLayout: React.FC = () => {
       height: '100vh',
       overflow: 'hidden',
     }}>
-      {transitions((style, _item) => (
+      {transitions((style, pathname) => (
         // style 必须作用在 animated.div 上
-        <animated.div style={style}>
+        <animated.div key={pathname} style={style}>
           {/* 核心：这里直接渲染当前的 outlet 即可 */}
           <div className="welcome-page-wrapper" style={{ width: '100%', height: '100%' }}>
             {currentOutlet}
