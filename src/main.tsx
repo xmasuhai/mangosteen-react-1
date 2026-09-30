@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { router } from '@/route/router'
-import './main.scss'
+import '@/main.scss'
+import 'virtual:uno.css'
 
 // const div = document.getElementById('root') as HTMLElement
 const div = document.getElementById('root')

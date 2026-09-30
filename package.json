@@ -26,12 +26,16 @@
     "@types/react-dom": "18.3.7",
     "@typescript-eslint/eslint-plugin": "8.71.0",
     "@typescript-eslint/parser": "8.71.0",
+    "@unocss/preset-attributify": "66.10.5",
+    "@unocss/preset-wind4": "66.10.5",
+    "@unocss/vite": "66.10.5",
     "@vitejs/plugin-react": "6.1.1",
     "eslint": "10.11.0",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.7",
     "sass-embedded": "1.105.1",
     "typescript": "6.0.3",
+    "unocss": "66.10.5",
     "vite": "8.3.1"
   },
   "packageManager": "pnpm@11.27.0+sha512.ad12821463bb143295f1fa3ecde77a6b9b97a7990386da800ff57bffc3964dc64b7b1c7559d5dbe5c337aea659ed9c8937d4370bd198ca2009bc6fa0249808e7"
