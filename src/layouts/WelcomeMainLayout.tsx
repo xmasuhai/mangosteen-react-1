@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web'
 import { useRef } from 'react'
-import { Outlet, useLocation, useOutlet } from 'react-router-dom'
+import { useLocation, useOutlet } from 'react-router-dom'
 
 export const WelcomeMainLayout: React.FC = () => {
   const location = useLocation()
@@ -46,16 +46,18 @@ export const WelcomeMainLayout: React.FC = () => {
       overflow: 'hidden',
     }}
     >
-      {transitions((style, item) => (
-        // style 必须作用在 animated.div 上
-        <animated.div style={style}>
-          <div className="welcome-page-wrapper" style={{ width: '100%', height: '100%' }}>
-            {/* 核心：这里直接渲染当前的 outlet 即可 */}
-            <Outlet />
-            {window.console.log('item', item)}
-          </div>
-        </animated.div>
-      ))}
+      {transitions((style, _item) => {
+        window.console.log('item', _item)
+        return (
+          // style 必须作用在 animated.div 上
+          <animated.div style={style}>
+            <div className="welcome-page-wrapper" style={{ width: '100%', height: '100%' }}>
+              {/* 核心：这里直接渲染当前的 outlet 即可 */}
+              {currentOutlet}
+            </div>
+          </animated.div>
+        )
+      })}
     </div>
   )
 }
