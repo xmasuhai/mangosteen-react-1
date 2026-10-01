@@ -9,7 +9,7 @@ export default defineConfig({
   // base: '/mangosteen-react-1-preview/',
   plugins: [
     UnoCSS(),
-    jsxScoped(),
+    jsxScoped(/* { scopedIdAttributeName: 'scopedid' } */),
     react(),
   ],
   server: {
