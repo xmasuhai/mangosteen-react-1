@@ -12,6 +12,7 @@ declare module 'react' {
     block?: boolean
     relative?: boolean
     absolute?: boolean
+    scopedId?: string
     // 或者直接使用通配符或特殊定义
     [key: string]: unknown
   }
