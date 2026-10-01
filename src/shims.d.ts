@@ -4,9 +4,14 @@ import type { AttributifyAttributes } from '@unocss/preset-attributify'
 declare module 'react' {
   interface HTMLAttributes<T> extends AriaAttributes, AttributifyAttributes, DOMAttributes<T> {
     // 允许传入 UnoCSS 属性
+    bold?: boolean
     text?: string
+    bordered?: boolean
     bg?: string
-    flex?: string
+    flex?: string | boolean
+    block?: boolean
+    relative?: boolean
+    absolute?: boolean
     // 或者直接使用通配符或特殊定义
     [key: string]: unknown
   }
