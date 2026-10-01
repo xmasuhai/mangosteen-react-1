@@ -1,6 +1,8 @@
 import { animated, useTransition } from '@react-spring/web'
 import { useRef } from 'react'
-import { useLocation, useOutlet } from 'react-router-dom'
+import { NavLink, useLocation, useOutlet } from 'react-router-dom'
+import logo from '@/assets/icons/mangosteen.svg'
+import { cn } from 'cn'
 
 export const WelcomeMainLayout: React.FC = () => {
   const location = useLocation()
@@ -45,15 +47,23 @@ export const WelcomeMainLayout: React.FC = () => {
       height: '100vh',
       overflow: 'hidden',
     }}>
-      {transitions((style, pathname) => (
-        // style 必须作用在 animated.div 上
-        <animated.div key={pathname} style={style}>
-          {/* 核心：这里直接渲染当前的 outlet 即可 */}
-          <div className="welcome-page-wrapper" style={{ width: '100%', height: '100%' }}>
+      <header>
+        <img alt="logo" src={logo} />
+        <h1>山竹记账</h1>
+      </header>
+
+      <main
+        className={cn('')}>
+        {transitions((style, pathname) => (
+          <animated.div key={pathname} style={style}>
             {currentOutlet}
-          </div>
-        </animated.div>
-      ))}
+          </animated.div>
+        ))}
+      </main>
+
+      <section className="to-last-page">
+        <NavLink to="/welcome/1">跳过</NavLink>
+      </section>
     </div>
   )
 }
