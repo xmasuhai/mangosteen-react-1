@@ -29,7 +29,8 @@
       ]
     },
     "types": [
-      // "vite/client",
+      "vite/client",
+      "@10coding/vite-plugin-jsx-scoped/client"
     ],
   },
   "include": [

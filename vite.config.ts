@@ -2,12 +2,14 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
+import jsxScoped from '@10coding/vite-plugin-jsx-scoped'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   // base: '/mangosteen-react-1-preview/',
   plugins: [
     UnoCSS(),
+    jsxScoped(),
     react(),
   ],
   server: {
