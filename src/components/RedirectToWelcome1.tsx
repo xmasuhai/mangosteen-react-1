@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export const RedirectToWelcome1: React.FC = () => {
   const nav = useNavigate()
   useEffect(() => {
-    nav('/welcome/1')
+    nav('/welcome/1', { replace: true })
   // eslint-disable-next-line react/exhaustive-deps
   }, [])
 
