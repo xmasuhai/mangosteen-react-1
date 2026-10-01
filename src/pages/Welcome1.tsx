@@ -1,11 +1,17 @@
 import { NavLink } from 'react-router-dom'
-import s from './Welcome1.module.scss'
 
 export const Welcome1: React.FC = () => {
   return (
-    <div className={s.wrapper}>
-      Welcome1
-      <NavLink to="/welcome/2">下一页</NavLink>
+    <div className="wrapper">
+      <article>
+        <h2 className="slogan">
+          <p>ASX</p>
+          <p>TTR</p>
+        </h2>
+      </article>
+      <section>
+        <NavLink to="/welcome/2">下一页</NavLink>
+      </section>
     </div>
   )
 }
