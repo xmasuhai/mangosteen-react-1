@@ -29,7 +29,11 @@ export default antfu(
       ],
       'perfectionist/sort-named-imports': 'off',
       'perfectionist/sort-imports': 'off',
-      'style/jsx-closing-bracket-location': ["error", { "location": "after-props" }]
+      'style/jsx-closing-bracket-location': ["error", { "location": "after-props" }],
+
+      // 强制文件末尾保留且仅保留一行空行
+      '@stylistic/eol-last': ['error', 'always'],
+      '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
     },
   }
 )
