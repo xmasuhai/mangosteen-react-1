@@ -24,7 +24,7 @@ export const WelcomeMainLayout: React.FC = () => {
       transform: direction === 'forward'
         ? 'translate3d(-100%, 0, 0)'
         : 'translate3d(100%, 0, 0)',
-      position: 'absolute' as const,
+      // position: 'absolute' as const,
       width: '100%',
       height: '100%',
     },
@@ -41,27 +41,43 @@ export const WelcomeMainLayout: React.FC = () => {
   })
 
   return (
-    <div style={{
-      position: 'relative',
-      width: '100vw',
-      height: '100vh',
-      overflow: 'hidden',
-    }}>
-      <header>
-        <img alt="logo" src={logo} />
-        <h1>山竹记账</h1>
+    <div className={cn(
+      'relative w-screen h-screen overflow-hidden',
+      'flex flex-col justify-center items-stretch',
+      'bg-[#5f34bf]',
+    )}>
+      <header
+        className="mt-[4em]"
+        shrink-0
+        text-center
+        flex
+        flex-col
+        items-center>
+        <img alt="logo" src={logo} w-64px h-64px />
+        <h1 className="text-[#d4d4ee] text-[2em]">山竹记账</h1>
       </header>
 
       <main
-        className={cn('')}>
+        className={cn(
+          'flex grow-1 shrink-1',
+          'bg-white relative m-[16px] rounded-[8px]',
+          'mb-64px',
+        )}>
         {transitions((style, pathname) => (
-          <animated.div key={pathname} style={style}>
+          <animated.div
+            key={pathname}
+            style={style}
+            className="flex">
             {currentOutlet}
           </animated.div>
         ))}
       </main>
 
-      <section className="to-last-page">
+      <section
+        className={cn(
+          'absolute fixed right-[0.5em] top-[0.25em]',
+          'text-[#d4d4ee] text-[1.5em]',
+        )}>
         <NavLink to="/welcome/1">跳过</NavLink>
       </section>
     </div>
