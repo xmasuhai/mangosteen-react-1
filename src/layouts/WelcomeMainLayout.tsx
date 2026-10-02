@@ -1,81 +1,66 @@
 import { animated, useTransition } from '@react-spring/web'
-import { useRef } from 'react'
+import type { ReactNode } from 'react'
+import { useRef, useState } from 'react'
 import { NavLink, useLocation, useOutlet } from 'react-router-dom'
 import logo from '@/assets/icons/mangosteen.svg'
 import { cn } from 'cn'
 
 export const WelcomeMainLayout: React.FC = () => {
-  const location = useLocation()
-  // 1. 获取当前的子路径（例如: "1", "2" 等）
-  const currentPath = location.pathname.split('/').pop() || '1'
+  const mapRef = useRef<Record<string, ReactNode>>({})
+  const { pathname } = useLocation()
   // 获取当前的 outlet
   const currentOutlet = useOutlet() as React.ReactElement
-  // 2. 用 ref 记录上一次的路径，用来判断是“前进”还是“后退”
-  const prevPathRef = useRef(currentPath)
-  const direction = Number(currentPath) > Number(prevPathRef.current)
-    ? 'forward'
-    : 'backward'
-  prevPathRef.current = currentPath
+  mapRef.current[pathname] = currentOutlet
 
+  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
   // 3. 根据方向动态设置动画的初始位置和退出位置
-  const transitions = useTransition(currentPath, {
-    from: {
-      opacity: 0,
-      transform: direction === 'forward'
-        ? 'translate3d(-100%, 0, 0)'
-        : 'translate3d(100%, 0, 0)',
-      // position: 'absolute' as const,
-      width: '100%',
-      height: '100%',
-    },
-    enter: { opacity: 1, transform: 'translate3d(0%, 0, 0)' },
-    leave: {
-      opacity: 0,
-      transform: direction === 'forward'
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-    },
-    keys: pathname => pathname,
+  const transitions = useTransition(pathname, {
+    onStart: () => { setExtraStyle({ position: 'absolute' }) },
+    onRest: () => { setExtraStyle({ position: 'relative' }) },
+    from: { transform: 'translate3D(100%, 0, 0)' },
+    enter: { transform: 'translate3D(0%, 0, 0)' },
+    leave: { transform: 'translate3D(-100%, 0, 0)' },
     // 物理参数微调：让过渡更轻快
-    config: { tension: 280, friction: 30 },
+    config: { duration: 1800 },
   })
 
   return (
     <div className={cn(
-      'relative w-screen h-screen overflow-hidden',
-      'flex flex-col justify-center items-stretch',
       'bg-[#5f34bf]',
+      'h-screen pb-16px',
+      'flex flex-col items-stretch',
     )}>
-      <header
-        className="mt-[4em]"
-        shrink-0
-        text-center
-        flex
-        flex-col
-        items-center>
-        <img alt="logo" src={logo} w-64px h-64px />
-        <h1 className="text-[#d4d4ee] text-[2em]">山竹记账</h1>
+
+      <header shrink-0 text-center pt-4em>
+        <img alt="logo" src={logo} w-64px h-69px inline />
+        <h1 text="#d4d4ee" text-2em>山竹记账</h1>
       </header>
 
       <main
         className={cn(
-          'relative flex grow-1 shrink-1',
-          'bg-white m-[16px] rounded-[8px]',
-          'mb-64px',
+          'grow-1 shrink-1 mb-2em relative',
         )}>
         {transitions((style, pathname) => (
           <animated.div
             key={pathname}
-            style={style}
-            className="flex grow-1 shrink-1  bg-white rounded-[8px]">
-            {currentOutlet}
+            style={{ ...style, ...extraStyle }}
+            className={cn(
+              'flex h-100% w-100% p-16px',
+            )}>
+            <div
+              className={cn(
+                'grow-1 flex justify-center items-center',
+                'bg-white rounded-8px',
+              )}>
+              {mapRef.current[pathname]}
+            </div>
           </animated.div>
         ))}
       </main>
 
       <section
         className={cn(
-          'absolute fixed right-[0.5em] top-[0.25em]',
+          'fixed right-[0.5em] top-[0.25em]',
           'text-[#d4d4ee] text-[1.5em]',
         )}>
         <NavLink to="/welcome/1">跳过</NavLink>
