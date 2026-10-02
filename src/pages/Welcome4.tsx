@@ -1,26 +1,19 @@
 import { NavLink } from 'react-router-dom'
-import '@/pages/Welcome4.scoped.scss'
+import cloud from '@/assets/icons/cloud.svg'
 
 export const Welcome4: React.FC = () => {
   return (
-    <div className="wrapper">
-      <header className="title">welcome 4</header>
-      <main className="card">
-        第四页
-      </main>
-      <footer className="link">
-        <NavLink to="/welcome/1">开始记账</NavLink>
-      </footer>
-      <style lang="scss" scoped>
-        {`
-          .link {
-            border: 1px solid #4f46e5;
-            font-size: 2rem;
-            color: orangered;
-          }
-        `}
-      </style>
+    <div className="grow-1 flex flex-col items-center justify-around">
+      <img alt="pig" src={cloud} className="mt-[25%]" />
+      <article>
+        <h2 className="text-center flex flex-col items-center text-[2em]">
+          <p>云备份</p>
+          <p>再也不怕数据丢失</p>
+        </h2>
+      </article>
+      <section className="text-[var(--primary-color)] mb-[84px] text-[2em] font-bold">
+        <NavLink to="/welcome/2">开启应用</NavLink>
+      </section>
     </div>
-
   )
 }
