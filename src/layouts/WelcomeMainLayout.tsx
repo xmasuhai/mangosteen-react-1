@@ -59,15 +59,15 @@ export const WelcomeMainLayout: React.FC = () => {
 
       <main
         className={cn(
-          'flex grow-1 shrink-1',
-          'bg-white relative m-[16px] rounded-[8px]',
+          'relative flex grow-1 shrink-1',
+          'bg-white m-[16px] rounded-[8px]',
           'mb-64px',
         )}>
         {transitions((style, pathname) => (
           <animated.div
             key={pathname}
             style={style}
-            className="flex">
+            className="flex grow-1 shrink-1  bg-white rounded-[8px]">
             {currentOutlet}
           </animated.div>
         ))}
