@@ -40,8 +40,10 @@ export const SwiperGuide: React.FC = () => {
   const nav = useNavigate()
   useEffect(() => {
     if (isAnimatingRef.current) { return }
-    isAnimatingRef.current = true
-    if (direction === 'left') { nav(welcomeLinkMap[pathname]) }
+    if (direction === 'left') {
+      isAnimatingRef.current = true
+      nav(welcomeLinkMap[pathname])
+    }
   }, [direction, nav, pathname])
 
   return (
