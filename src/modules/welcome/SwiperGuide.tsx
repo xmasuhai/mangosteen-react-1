@@ -1,21 +1,33 @@
+import { useSwipe } from '@/hooks/useSwipe'
 import { animated, useTransition } from '@react-spring/web'
 import { cn } from 'cn'
 import type { ReactNode } from 'react'
-import { useRef, useState } from 'react'
-import { useLocation, useOutlet } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate, useOutlet } from 'react-router-dom'
+
+const welcomeLinkMap: Record<string, string> = {
+  '/welcome/1': '/welcome/2',
+  '/welcome/2': '/welcome/3',
+  '/welcome/3': '/welcome/4',
+  '/welcome/4': '/welcome/xxx',
+} as const
 
 export const SwiperGuide: React.FC = () => {
-  const mapRef = useRef<Record<string, ReactNode>>({})
   const { pathname } = useLocation()
+  const mapRef = useRef<Record<string, ReactNode>>({})
   // 获取当前的 outlet
   const currentOutlet = useOutlet() as React.ReactElement
   mapRef.current[pathname] = currentOutlet
 
   const [extraStyle, setExtraStyle] = useState<Record<string, string | number>>({ position: 'relative' })
-  // 3. 根据方向动态设置动画的初始位置和退出位置
+
+  const isAnimatingRef = useRef(false)
   const transitions = useTransition(pathname, {
     onStart: () => { setExtraStyle({ position: 'absolute' }) },
-    onRest: () => { setExtraStyle({ position: 'relative' }) },
+    onRest: () => {
+      isAnimatingRef.current = false
+      setExtraStyle({ position: 'relative' })
+    },
     from: { opacity: 0, transform: 'translate3D(100%, 0, 0)' },
     enter: { opacity: 1, transform: 'translate3D(0%, 0, 0)' },
     leave: { opacity: 0, transform: 'translate3D(-100%, 0, 0)' },
@@ -23,8 +35,18 @@ export const SwiperGuide: React.FC = () => {
     config: { tension: 280, friction: 30, duration: 300 },
   })
 
+  const mainRef = useRef<HTMLElement>(null)
+  const { direction } = useSwipe(mainRef, { onTouchStart: (e) => { e.preventDefault() } })
+  const nav = useNavigate()
+  useEffect(() => {
+    if (isAnimatingRef.current) { return }
+    isAnimatingRef.current = true
+    if (direction === 'left') { nav(welcomeLinkMap[pathname]) }
+  }, [direction, nav, pathname])
+
   return (
     <main
+      ref={mainRef}
       className={cn(
         'grow-1 shrink-1 mb-2em relative overflow-clip',
       )}>
