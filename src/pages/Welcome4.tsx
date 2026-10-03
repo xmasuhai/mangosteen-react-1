@@ -12,7 +12,7 @@ export const Welcome4: React.FC = () => {
         </h2>
       </article>
       <section className="text-[var(--primary-color)] mb-[84px] text-[2em] font-bold">
-        <NavLink to="/welcome/2">开启应用</NavLink>
+        <NavLink to="/welcome/1">开启应用</NavLink>
       </section>
     </div>
   )

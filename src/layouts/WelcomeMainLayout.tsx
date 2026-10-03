@@ -17,11 +17,11 @@ export const WelcomeMainLayout: React.FC = () => {
   const transitions = useTransition(pathname, {
     onStart: () => { setExtraStyle({ position: 'absolute' }) },
     onRest: () => { setExtraStyle({ position: 'relative' }) },
-    from: { transform: 'translate3D(100%, 0, 0)' },
-    enter: { transform: 'translate3D(0%, 0, 0)' },
-    leave: { transform: 'translate3D(-100%, 0, 0)' },
+    from: { /* opacity: 0, */ transform: 'translate3D(100%, 0, 0)' },
+    enter: { /* opacity: 1, */ transform: 'translate3D(0%, 0, 0)' },
+    leave: { /* opacity: 0, */ transform: 'translate3D(-100%, 0, 0)' },
     // 物理参数微调：让过渡更轻快
-    config: { duration: 1800 },
+    config: { duration: 300 },
   })
 
   return (
