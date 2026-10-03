@@ -34,6 +34,7 @@ export default antfu(
       // 强制文件末尾保留且仅保留一行空行
       '@stylistic/eol-last': ['error', 'always'],
       '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
+      '@stylistic/max-statements-per-line': ['error', { 'max': 2 }]
     },
   }
 )
