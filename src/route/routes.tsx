@@ -1,13 +1,14 @@
-import { RedirectToWelcome1 } from '@/components/RedirectToWelcome1'
+import { NotFoundPage } from '@/pages/NotFoundPage'
 import { MainLayout } from '@/layouts/MainLayout'
 import { welcomeRouter } from '@/route/welcomeRouter'
+import type { RouteObject } from 'react-router-dom'
 import { redirect } from 'react-router-dom'
 
-export const routes = [
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: (<RedirectToWelcome1 />),
+    errorElement: (<NotFoundPage />),
     loader: () => redirect('/welcome/1'),
   },
   welcomeRouter,
