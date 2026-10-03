@@ -39,7 +39,7 @@
     "stylelint-config-standard-scss": "17.0.0",
     "typescript": "6.0.3",
     "unocss": "66.10.5",
-    "vite": "8.3.1"
+    "vite": "8.3.2"
   },
   "packageManager": "pnpm@11.27.0+sha512.ad12821463bb143295f1fa3ecde77a6b9b97a7990386da800ff57bffc3964dc64b7b1c7559d5dbe5c337aea659ed9c8937d4370bd198ca2009bc6fa0249808e7"
 }
