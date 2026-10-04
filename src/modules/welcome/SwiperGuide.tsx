@@ -5,12 +5,14 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useOutlet } from 'react-router-dom'
 
-const welcomeLinkMap: Record<string, string> = {
+const forwardLinkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
   '/welcome/2': '/welcome/3',
   '/welcome/3': '/welcome/4',
-  '/welcome/4': '/welcome/xxx',
+  '/welcome/4': '/home',
 } as const
+
+interface Position { position: 'relative' | 'absolute' }
 
 export const SwiperGuide: React.FC = () => {
   const { pathname } = useLocation()
@@ -18,9 +20,12 @@ export const SwiperGuide: React.FC = () => {
   const currentOutlet = useOutlet() as React.ReactElement
   mapRef.current[pathname] = currentOutlet
 
-  const [extraStyle, setExtraStyle] = useState<Record<string, string | number>>({ position: 'relative' })
+  const [extraStyle, setExtraStyle] = useState<Position>({ position: 'relative' })
 
   const isAnimatingRef = useRef(false)
+  const mainRef = useRef<HTMLElement>(null)
+  const { direction } = useSwipe(mainRef)
+
   const transitions = useTransition(pathname, {
     onStart: () => { setExtraStyle({ position: 'absolute' }) },
     onRest: () => {
@@ -34,14 +39,12 @@ export const SwiperGuide: React.FC = () => {
     config: { tension: 280, friction: 30, duration: 300 },
   })
 
-  const mainRef = useRef<HTMLElement>(null)
-  const { direction } = useSwipe(mainRef)
   const nav = useNavigate()
   useEffect(() => {
     if (isAnimatingRef.current) { return }
     if (direction === 'left') {
       isAnimatingRef.current = true
-      nav(welcomeLinkMap[pathname])
+      nav(forwardLinkMap[pathname], { replace: true })
     }
   }, [direction, nav, pathname])
 
