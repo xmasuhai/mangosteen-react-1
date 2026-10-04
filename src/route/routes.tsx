@@ -1,4 +1,5 @@
 import { Root } from '@/components/Root'
+import { Home } from '@/pages/Home'
 import { welcomeRouter } from '@/route/welcomeRouter'
 import type { RouteObject } from 'react-router-dom'
 
@@ -9,7 +10,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: '/home',
-    element: (<div>home</div>),
+    element: <Home />,
   },
   welcomeRouter,
 ]
