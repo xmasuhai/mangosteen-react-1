@@ -35,7 +35,7 @@ export const SwiperGuide: React.FC = () => {
   })
 
   const mainRef = useRef<HTMLElement>(null)
-  const { direction } = useSwipe(mainRef, { onTouchStart: (e) => { e.preventDefault() } })
+  const { direction } = useSwipe(mainRef)
   const nav = useNavigate()
   useEffect(() => {
     if (isAnimatingRef.current) { return }

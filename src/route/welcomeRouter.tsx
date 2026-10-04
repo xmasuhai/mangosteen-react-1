@@ -7,7 +7,7 @@ import { Welcome4 } from '@/pages/Welcome4'
 import type { RouteObject } from 'react-router-dom'
 
 export const welcomeRouter: RouteObject = {
-  path: '/welcome/',
+  path: '/welcome',
   element: <WelcomeMainLayout />,
   errorElement: <NotFoundPage />,
   children: [
