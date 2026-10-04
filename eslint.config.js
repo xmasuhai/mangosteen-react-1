@@ -11,7 +11,7 @@ export default antfu(
     stylistic: {
       indent: 2,
       quotes: 'single',
-      braceStyle: 'stroustrup',
+      // braceStyle: 'stroustrup',
       semi: false,
       'comma-dangle': 'only-multiline',
     },

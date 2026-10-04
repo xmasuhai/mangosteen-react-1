@@ -15,7 +15,6 @@ const welcomeLinkMap: Record<string, string> = {
 export const SwiperGuide: React.FC = () => {
   const { pathname } = useLocation()
   const mapRef = useRef<Record<string, ReactNode>>({})
-  // 获取当前的 outlet
   const currentOutlet = useOutlet() as React.ReactElement
   mapRef.current[pathname] = currentOutlet
 
