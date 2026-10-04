@@ -36,16 +36,17 @@ export const useSwipe = (
   }
 
   useEffect(() => {
-    if (!elementRef.current) { return }
-    elementRef.current.addEventListener('touchstart', onTouchStart)
-    elementRef.current.addEventListener('touchmove', onTouchMove)
-    elementRef.current.addEventListener('touchend', onTouchEnd)
+    const refCurrent = elementRef.current
+    if (!refCurrent) { return }
+    refCurrent.addEventListener('touchstart', onTouchStart)
+    refCurrent.addEventListener('touchmove', onTouchMove)
+    refCurrent.addEventListener('touchend', onTouchEnd)
 
     return () => {
-      if (!elementRef.current) { return }
-      elementRef.current.removeEventListener('touchstart', onTouchStart)
-      elementRef.current.removeEventListener('touchmove', onTouchMove)
-      elementRef.current.removeEventListener('touchend', onTouchEnd)
+      if (!refCurrent) { return }
+      refCurrent.removeEventListener('touchstart', onTouchStart)
+      refCurrent.removeEventListener('touchmove', onTouchMove)
+      refCurrent.removeEventListener('touchend', onTouchEnd)
     }
   // eslint-disable-next-line react/exhaustive-deps
   }, [])
