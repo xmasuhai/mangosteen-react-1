@@ -1,10 +1,10 @@
+import { useLocalStore } from '@/stores/useLocalStore'
 import { cn } from 'cn'
 import { NavLink } from 'react-router-dom'
 
 export const ToStartPage: React.FC = () => {
-  const onSkip = () => {
-    localStorage.setItem('hasReadWelcome', 'true')
-  }
+  const { setHasReadWelcome } = useLocalStore()
+  const onSkip = () => { setHasReadWelcome(true) }
 
   return (
     <section

@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import cloud from '@/assets/icons/cloud.svg'
+import { useLocalStore } from '@/stores/useLocalStore'
 
 export const Welcome4: React.FC = () => {
+  const { setHasReadWelcome } = useLocalStore()
   return (
     <div className="h-[100%] overflow-clip flex flex-col justify-around items-center">
       <img alt="cloud" src={cloud} w-129px h-83px className="translate-y-[120%]" />
@@ -12,7 +14,7 @@ export const Welcome4: React.FC = () => {
         </h2>
       </article>
       <section className="text-[var(--primary-color)] text-[2em] font-bold translate-y-[-100%]">
-        <NavLink to="/home">开启应用</NavLink>
+        <NavLink to="/home" onClick={() => setHasReadWelcome(true)}>开启应用</NavLink>
       </section>
     </div>
   )
