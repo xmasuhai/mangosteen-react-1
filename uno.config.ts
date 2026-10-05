@@ -20,7 +20,8 @@ export default defineConfig({
     colors: {
       // 绑定你的 CSS 变量
       welcomeCardBg: 'var(--welcome-card-bg-color)',
-      primaryColor: '#var(--primary-color)',
+      primaryColor: 'var(--primary-color)',
+      btnPrimaryColor: 'var(--button-primary-color)',
     }
   }
 })
