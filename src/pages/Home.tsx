@@ -8,22 +8,21 @@ export const Home: React.FC = () => {
       <div flex justify-center items-center>
         <img src={pig} alt="pig" w-128px h-130px mt-20vh mb-20vh block />
       </div>
+
       <div px-16px self-stretch>
         <button
-          h-48px
           w="100%"
-          text="var(--button-primary-color)"
           className={cn(
-            'bg-[var(--button-primary-color)] b-none rounded-8px',
+            'h-48px bg-[var(--button-primary-color)] b-none rounded-8px',
             'text-[var(--button-primary-text-color)]',
           )}>
           开始记账
         </button>
       </div>
+
       <button
-        w-56px
-        h-56px
         className={cn(
+          'w-56px h-56px',
           'bg-[var(--button-primary-color)] rounded-full',
           'text-[var(--button-primary-text-color)] text-6xl',
           'p-4px text-center flex place-content-center place-items-center-safe',
