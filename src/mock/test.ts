@@ -1,23 +1,31 @@
+import type { Item, Resource, Resources, ResponseData, User } from '@/global.d.ts'
 import type { MockMethod } from 'vite-plugin-mock'
 
 export default [
   {
     url: '/api/v1/me',
     method: 'get',
+    timeout: 1000,
     response: () => {
       return {
         code: 0,
         data: {
-          id: 1,
-          email: 'frank@frank.com',
+          resource: {
+            id: 1,
+            name: 'frank',
+            email: 'frank@frank.com',
+            updated_at: '2027-01-01T00:00:00.000Z',
+            created_at: '2027-01-01T00:00:00.000Z',
+          },
         },
-      }
+      } satisfies ResponseData<Partial<Resource<User>>>
     },
   },
   {
     url: '/api/v1/items',
     method: 'get',
-    response: () => {
+    timeout: 1000,
+    response: (): ResponseData<Partial<Resources<Item>>> => {
       return {
         code: 0,
         data: {
