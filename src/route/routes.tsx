@@ -13,4 +13,8 @@ export const routes: RouteObject[] = [
     element: <Home />,
   },
   welcomeRouter,
+  {
+    path: '/items',
+    element: <div>items</div>,
+  },
 ]
