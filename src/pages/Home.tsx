@@ -2,22 +2,15 @@ import pig from '@/assets/icons/pig.svg'
 import add from '@/assets/icons/add.svg'
 import { cn } from 'cn'
 import useSWR from 'swr'
-import axios from 'axios'
+import { request } from '@/lib/request/request'
 
 export const Home: React.FC = () => {
   const { data: meData, error: meError } = useSWR('/api/v1/me', (path) => {
-    return axios.get(path)
+    return request.get(path)
   })
   const { data: itemsData, error: itemsError } = useSWR(meData ? '/api/v1/items' : null, (path) => {
-    return axios.get(path)
+    return request.get(path)
   })
-
-  window.console.log('Home_______________________')
-  window.console.log('meData', meData?.data?.data)
-  window.console.log('meError', meError)
-  window.console.log('itemsData', itemsData?.data?.data)
-  window.console.log('itemsError', itemsError)
-  window.console.log('_______________________Home')
 
   return (
     <main flex flex-col justify-center items-center>
