@@ -8,6 +8,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 // https://vitejs.dev/config/
 export default defineConfig(({ command }: ConfigEnv) => ({
   // base: '/mangosteen-react-1-preview/',
+  define: {
+    IS_DEV: command === 'serve',
+  },
   plugins: [
     UnoCSS(),
     jsxScoped({ scopedIdAttributeName: 'scopedid' }),
