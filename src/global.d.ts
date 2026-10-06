@@ -3,7 +3,7 @@ export interface Resource<T> {
 }
 
 export interface Resources<T> {
-  resource: T[]
+  resources: T[]
   pager: {
     page: number
     per_page: number
@@ -34,4 +34,9 @@ export interface Item {
   updated_at: ISOString
   deleted_at?: ISOString
   // tags?: []
+}
+
+export interface ResponseData<T> {
+  code: number
+  data: T
 }

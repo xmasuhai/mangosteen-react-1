@@ -1,8 +1,8 @@
 import { axiosInstance } from '@/lib/request/axiosInstances'
 
 export const request = {
-  get: (path: string) => {
-    return axiosInstance.get(path)
+  get: <T>(path: string) => {
+    return axiosInstance.get<T>(path)
   },
   post: () => { },
   patch: () => { },
