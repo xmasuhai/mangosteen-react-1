@@ -9,7 +9,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 export default defineConfig(({ command }: ConfigEnv) => ({
   // base: '/mangosteen-react-1-preview/',
   define: {
-    IS_DEV: command === 'serve',
+    __IS_DEV__: command === 'serve',
   },
   plugins: [
     UnoCSS(),
