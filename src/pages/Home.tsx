@@ -5,17 +5,19 @@ import useSWR from 'swr'
 import { request } from '@/lib/request/request'
 import type { Item, Resource, Resources, ResponseData, User } from '@/global'
 import { Navigate } from 'react-router-dom'
+import { useTitle } from '@/hooks/useTitle'
 
-export const Home: React.FC = () => {
-  const { data: meData, error: meError, isLoading: isLoadingMe } = useSWR('/api/v1/me', async path =>
+interface Props {
+  title?: string
+}
+
+export const Home: React.FC<Props> = ({ title }) => {
+  useTitle(title ?? '记账首页')
+
+  const { data: meData, /* error: meError, */ isLoading: isLoadingMe } = useSWR('/api/v1/me', async path =>
     (await request.get<ResponseData<Resource<User>>>(path))?.data?.data)
-  const { data: itemsData, error: itemsError, isLoading: isLoadingItems } = useSWR(meData ? '/api/v1/items' : null, async path =>
+  const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems } = useSWR(meData ? '/api/v1/items' : null, async path =>
     (await request.get<ResponseData<Resources<Item>>>(path))?.data?.data)
-
-  window.console.log('meData', meData)
-  window.console.log('meError', meError)
-  window.console.log('itemsData', itemsData)
-  window.console.log('itemsError', itemsError)
 
   if (isLoadingMe || isLoadingItems) { return <div text-6xl>加载中...</div> }
 
