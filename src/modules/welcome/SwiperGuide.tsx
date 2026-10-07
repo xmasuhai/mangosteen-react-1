@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useOutlet } from 'react-router-dom'
-import { animated, useTransition } from '@react-spring/web'
 import { useSwipe } from '@/hooks/useSwipe'
+import { animated, useTransition } from '@react-spring/web'
 import { cn } from 'cn'
 
 const forwardLinkMap: Record<string, string> = {

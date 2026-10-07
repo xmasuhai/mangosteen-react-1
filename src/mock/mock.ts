@@ -34,6 +34,11 @@ export default [
               id: 1,
               user_id: 1,
               amount: 100,
+              kind: 'incomes',
+              tag_ids: [],
+              happened_at: '2027-10-07T00:00:00.000Z',
+              created_at: '2027-10-07T00:00:00.000Z',
+              updated_at: '2027-10-07T00:00:00.000Z',
             },
           ],
           pager: {
