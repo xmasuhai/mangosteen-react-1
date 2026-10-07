@@ -7,12 +7,20 @@ interface Config {
   onTouchEnd?: (e: TouchEvent) => void
 }
 
+type SwipDirection = '' | 'left' | 'right'
+const SWIPE_THRESHOLD = 3
+
+function getSwipDirection(distance: number): SwipDirection {
+  if(Math.abs(distance) < SWIPE_THRESHOLD) { return '' }
+  return distance > 0 ? 'right' : 'left'
+}
+
 // eslint-disable-next-line antfu/top-level-function
 export const useSwipe = (
   elementRef: RefObject<HTMLElement | null>,
   config?: Config,
 ) => {
-  const [direction, setDirection] = useState<'' | 'left' | 'right'>('')
+  const [direction, setDirection] = useState<SwipDirection>('')
   const coordinateXRef = useRef(-1)
 
   const onTouchStart = (e: TouchEvent) => {
@@ -24,10 +32,7 @@ export const useSwipe = (
     config?.onTouchMove?.(e)
     const tempX = e.touches[0].clientX
     const distance = tempX - coordinateXRef.current
-
-    if (Math.abs(distance) < 3) { setDirection('') }
-    if (distance > 0) { setDirection('right') }
-    if (distance < 0) { setDirection('left') }
+    setDirection(getSwipDirection(distance))
   }
 
   const onTouchEnd = (e: TouchEvent) => {
@@ -36,19 +41,14 @@ export const useSwipe = (
   }
 
   useEffect(() => {
-    const refCurrent = elementRef.current
-    if (!refCurrent) { return }
-    refCurrent.addEventListener('touchstart', onTouchStart)
-    refCurrent.addEventListener('touchmove', onTouchMove)
-    refCurrent.addEventListener('touchend', onTouchEnd)
-
-    return () => {
-      if (!refCurrent) { return }
-      refCurrent.removeEventListener('touchstart', onTouchStart)
-      refCurrent.removeEventListener('touchmove', onTouchMove)
-      refCurrent.removeEventListener('touchend', onTouchEnd)
-    }
-  // eslint-disable-next-line react/exhaustive-deps
+    const el = elementRef.current
+    if(!el) { return }
+    const aborter = new AbortController()
+    const opts = { signal: aborter.signal }
+    el.addEventListener('touchstart', onTouchStart, opts)
+    el.addEventListener('touchmove', onTouchMove, opts)
+    el.addEventListener('touchend', onTouchEnd, opts)
+    return () => { aborter.abort() }
   }, [])
 
   return ({
