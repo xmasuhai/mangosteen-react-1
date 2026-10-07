@@ -48,6 +48,7 @@ export const Home: React.FC<Props> = ({ title }) => {
           'p-4px text-center flex place-content-center place-items-center-safe',
           'fixed bottom-.5em right-.5em',
         )}>
+        <span className="hidden">Add</span>
         <img src={add} alt="add" max-w="80%" max-h="80%" translate-y="-3px" />
       </button>
     </main>

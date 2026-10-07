@@ -1,9 +1,9 @@
-import { useSwipe } from '@/hooks/useSwipe'
-import { animated, useTransition } from '@react-spring/web'
-import { cn } from 'cn'
 import type { ReactNode } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useOutlet } from 'react-router-dom'
+import { animated, useTransition } from '@react-spring/web'
+import { useSwipe } from '@/hooks/useSwipe'
+import { cn } from 'cn'
 
 const forwardLinkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
@@ -17,8 +17,7 @@ interface Position { position: 'relative' | 'absolute' }
 export const SwiperGuide: React.FC = () => {
   const { pathname } = useLocation()
   const mapRef = useRef<Record<string, ReactNode>>({})
-  const currentOutlet = useOutlet() as React.ReactElement
-  mapRef.current[pathname] = currentOutlet
+  mapRef.current[pathname] = useOutlet() as React.ReactElement
 
   const [extraStyle, setExtraStyle] = useState<Position>({ position: 'relative' })
 
