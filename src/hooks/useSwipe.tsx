@@ -7,10 +7,10 @@ interface Config {
   onTouchEnd?: (e: TouchEvent) => void
 }
 
-type SwipDirection = '' | 'left' | 'right'
+type SwipeDirection = '' | 'left' | 'right'
 const SWIPE_THRESHOLD = 3
 
-function getSwipDirection(distance: number): SwipDirection {
+function getSwipeDirection(distance: number): SwipeDirection {
   if(Math.abs(distance) < SWIPE_THRESHOLD) { return '' }
   return distance > 0 ? 'right' : 'left'
 }
@@ -20,7 +20,7 @@ export const useSwipe = (
   elementRef: RefObject<HTMLElement | null>,
   config?: Config,
 ) => {
-  const [direction, setDirection] = useState<SwipDirection>('')
+  const [direction, setDirection] = useState<SwipeDirection>('')
   const coordinateXRef = useRef(-1)
 
   const onTouchStart = (e: TouchEvent) => {
@@ -32,7 +32,7 @@ export const useSwipe = (
     config?.onTouchMove?.(e)
     const tempX = e.touches[0].clientX
     const distance = tempX - coordinateXRef.current
-    setDirection(getSwipDirection(distance))
+    setDirection(getSwipeDirection(distance))
   }
 
   const onTouchEnd = (e: TouchEvent) => {
