@@ -25,3 +25,9 @@ declare module 'svgstore' {
 
   export default svgstore
 }
+
+declare module 'virtual:svgsprites' {
+  export * from '@svgoStore'
+  const defaultExport: readonly ["add", "back-arrow", "backspace", "chart", "clock", "cloud", "date", "decimal_point", "export", "mangosteen", "menu", "notes", "notify", "pig", "radix_point", "tech_stack"]
+  export default defaultExport
+}
