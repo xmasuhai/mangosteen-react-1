@@ -15,8 +15,11 @@
 本项目利用 Node.js 自带的 Corepack 来管理包管理器版本，无需你全局手动安装 pnpm。请在终端执行以下命令开启它：
 
 ```bash
-corepack enable
-corepack prepare pnpm@12.15.0 --activate
+npm install -g corepack@latest &&
+corepack enable &&
+corepack prepare pnpm@12.15.0 --active
+# 在项目路径下执行
+corepack use pnpm@12.15.0
 ```
 
 ## 📦 技术栈
@@ -113,3 +116,6 @@ A: 本项目已锁定包管理器，请严格使用 `pnpm install` 提交和管�
 
 **Q: `node -v` 显示版本低于 `26` 怎么办？**
 A: 请升级你的 Node.js 到 `>=26` 版本后再进行开发，否则可能会遇到依赖安装或构建失败的问题。
+
+---
+---
