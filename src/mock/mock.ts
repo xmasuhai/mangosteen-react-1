@@ -5,7 +5,7 @@ export default [
   {
     url: '/api/v1/me',
     method: 'get',
-    timeout: 1000,
+    timeout: 888,
     response: () => {
       return {
         code: 0,
@@ -24,12 +24,13 @@ export default [
   {
     url: '/api/v1/items',
     method: 'get',
-    timeout: 1000,
+    timeout: 888,
     response: (): ResponseData<Partial<Resources<Item>>> => {
       return {
         code: 0,
         data: {
           resources: [
+            /*
             {
               id: 1,
               user_id: 1,
@@ -40,11 +41,12 @@ export default [
               created_at: '2027-10-07T00:00:00.000Z',
               updated_at: '2027-10-07T00:00:00.000Z',
             },
+             */
           ],
           pager: {
             page: 1,
             per_page: 25,
-            count: 1,
+            count: 0,
           },
         },
       }

@@ -1,11 +1,12 @@
 import pig from '@/assets/icons/pig.svg'
-import add from '@/assets/icons/add.svg'
 import { cn } from 'cn'
 import useSWR from 'swr'
 import { request } from '@/lib/request/request'
 import type { Item, Resource, Resources, ResponseData, User } from '@/global'
 import { Navigate } from 'react-router-dom'
 import { useTitle } from '@/hooks/useTitle'
+import { InLoading } from '@/components/InLoading'
+import { AddItemFloatButton } from '@/components/AddItemFloatButton'
 
 interface Props {
   title?: string
@@ -19,7 +20,7 @@ export const Home: React.FC<Props> = ({ title }) => {
   const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems } = useSWR(meData ? '/api/v1/items' : null, async path =>
     (await request.get<ResponseData<Resources<Item>>>(path))?.data?.data)
 
-  if (isLoadingMe || isLoadingItems) { return <div text-6xl>加载中...</div> }
+  if (isLoadingMe || isLoadingItems) { return <InLoading /> }
 
   if (itemsData?.resources?.[0]) { return <Navigate to="/items" /> }
 
@@ -40,17 +41,7 @@ export const Home: React.FC<Props> = ({ title }) => {
         </button>
       </div>
 
-      <button
-        className={cn(
-          'w-56px h-56px',
-          'bg-[var(--button-primary-color)] rounded-full',
-          'text-[var(--button-primary-text-color)] text-6xl',
-          'p-4px text-center flex place-content-center place-items-center-safe',
-          'fixed bottom-.5em right-.5em',
-        )}>
-        <span className="hidden">Add</span>
-        <img src={add} alt="add" max-w="80%" max-h="80%" translate-y="-3px" />
-      </button>
+      <AddItemFloatButton />
     </main>
   )
 }
