@@ -16,4 +16,12 @@ declare module 'react' {
     // 或者直接使用通配符或特殊定义
     [key: string]: unknown
   }
+
+  interface SVGProps<T> extends SVGAttributes<T>, ClassAttributes<T> {
+    // 允许传入 UnoCSS 属性
+    w?: string
+    h?: string
+    // 或者直接使用通配符或特殊定义
+    [key: string]: unknown
+  }
 }
