@@ -24,7 +24,7 @@ export interface User {
 // 账目信息
 export interface Item {
   id: number
-  user_id: number
+  user_id: string | number
   kind: 'incomes' | 'expenses'
   amount: number
   note?: string
