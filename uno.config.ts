@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx, transformerVariantGroup } from 'unocss'
 import { presetWind4 } from '@unocss/preset-wind4'
 
 export default defineConfig({
@@ -14,6 +14,8 @@ export default defineConfig({
     presetTypography(),
   ],
   transformers: [
+    // 支持 where:(a b c) 这种分组写法
+    transformerVariantGroup(),
     transformerAttributifyJsx(),
   ],
   theme: {
@@ -23,5 +25,16 @@ export default defineConfig({
       primaryColor: 'var(--primary-color)',
       btnPrimaryColor: 'var(--button-primary-color)',
     }
-  }
+  },
+  variants: [
+    // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
+    (matcher) => {
+      if (!matcher.startsWith('where:'))
+        return matcher
+      return {
+        matcher: matcher.slice(6),
+        selector: s => `:where(${s})`,
+      }
+    },
+  ],
 })
