@@ -9,8 +9,8 @@ interface Props {
 export const TopNav: React.FC<Props> = ({ title = '山竹记账', className }) => {
   return (
     <div
-      class={cn(
-        'h-64px pl-1em text-white flex items-center gap-x-1em',
+      className={cn(
+        'h-64px pt-24px pb-.5em px-24px text-white flex items-center gap-x-1em',
         className,
       )}>
       <SvgIcon name="menu" className="size-[2em]" />
