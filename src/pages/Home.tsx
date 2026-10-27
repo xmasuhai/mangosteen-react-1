@@ -20,7 +20,7 @@ export const Home: React.FC<Props> = ({ title }) => {
   const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems } = useSWR(meData ? '/api/v1/items' : null, async path =>
     (await request.get<ResponseData<Resources<Item>>>(path))?.data?.data)
 
-  if (isLoadingMe || isLoadingItems) { return <InLoading /> }
+  if (isLoadingMe || isLoadingItems) { return <InLoading className="h-screen" /> }
 
   if (itemsData?.resources?.[0]) { return <Navigate to="/items" /> }
 
