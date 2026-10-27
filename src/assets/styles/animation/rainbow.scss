@@ -1,0 +1,31 @@
+@use 'sass:list';
+@use '@/assets/styles/animation/rainbow-colors.scss' as *;
+
+/**
+ * @Description:彩虹渐变动画
+ * @Author: xmasuhai <xmasuhai@163.com>
+ * @Date: 2026-10-15 15:58:34
+ * @LastEditors: xmasuhai <xmasuhai@163.com>
+ * @LastEditTime: 2026-10-15 16:51:24
+ * @FilePath: src/assets/styles/animation/rainbow.scss
+ */
+@keyframes rainbow {
+  @for $i from 0 through 80 {
+    $keyframe: $i * 1.25 + '%';
+    $colorIndex: (
+      (6 * $i) % 480) + 1;
+
+    #{$keyframe} {
+      --vp-c-brand-1: #{list.nth($colors, $colorIndex)};
+      --vp-c-brand-light: #{list.nth($colors, $colorIndex + 1)};
+      --vp-c-brand-lighter: #{list.nth($colors, $colorIndex + 2)};
+      --vp-c-brand-dark: #{list.nth($colors, $colorIndex + 3)};
+      --vp-c-brand-darker: #{list.nth($colors, $colorIndex + 4)};
+      --vp-c-brand-next: #{list.nth($colors, $colorIndex + 5)};
+    }
+  }
+}
+
+.animation-rainbow {
+  animation: rainbow 8s linear infinite;
+}

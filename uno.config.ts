@@ -26,6 +26,12 @@ export default defineConfig({
       btnPrimaryColor: 'var(--button-primary-color)',
     }
   },
+  rules: [
+    [
+      'animate-rainbow',
+      { animation: 'rainbow 8s linear infinite' },
+    ],
+  ],
   variants: [
     // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
     (matcher) => {
