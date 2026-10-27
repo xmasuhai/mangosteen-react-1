@@ -1,7 +1,6 @@
 import { AddItemFloatButton } from "@/components/AddItemFloatButton"
 import { DateRangePicker, DateTabRangeStr } from "@/components/DateRangePicker"
 import { TopNav } from "@/components/TopNav"
-import { ItemsList } from "@/modules/items/ItemsList"
 import { ItemsSummary } from "@/modules/items/ItemsSummary"
 import { cn } from "cn"
 import { useState } from "react"
@@ -19,8 +18,7 @@ export const ItemsPage: React.FC = () => {
         <DateRangePicker selectedId={selectedDate} onSelected={setSelectedDate} />
       </header>
 
-      <ItemsSummary />
-      <ItemsList />
+      <ItemsSummary startDate={selectedDate} endDate={selectedDate} />
 
       <AddItemFloatButton />
     </div>
