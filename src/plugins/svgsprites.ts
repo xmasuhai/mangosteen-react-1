@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import store from 'svgstore'
+import store, { SvgStoreOptions } from 'svgstore'
 import { optimize } from 'svgo'
 import type { Plugin, ViteDevServer } from 'vite'
 
@@ -11,14 +11,21 @@ interface Options {
   noOptimizeList?: string[]
 }
 
-
+/*
+ * @Author: xmasuhai
+ * @Email: xmasuhai@163.com
+ * @Date: 2026-10-27 12:29:31
+ * @Last Modified by:   xmasuhai xmasuhai@163.com
+ * @Last Modified time: 2026-10-27 12:30:10
+ * @Description: @/src/plugins/svgsprites.ts
+ */
 export const svgsprites = (options: Options = {}): Plugin => {
   const virtualModuleId = `virtual:svgsprites${options.id ? `-${options.id}` : ''}`
   const resolvedVirtualModuleId = `\0${virtualModuleId}`
   const { inputFolder = 'src/assets/icons', inline = false } = options
 
   const generateCode = () => {
-    const sprites = store(options)
+    const sprites = store(options as SvgStoreOptions)
     const iconsDir = path.resolve(inputFolder)
     for (const file of fs.readdirSync(iconsDir)) {
       if (!file.endsWith('.svg')) { continue }

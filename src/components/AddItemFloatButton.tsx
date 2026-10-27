@@ -13,7 +13,12 @@ export const AddItemFloatButton: React.FC = () => {
         'fixed bottom-.5em right-.5em',
       )}>
       <span className="hidden">Add</span>
-      <img src={add} alt="add" max-w="80%" max-h="80%" translate-y="-3px" />
+
+      <svg max-w="80%" max-h="80%" fill="white" translate-y="-2px">
+        <use xlinkHref="#add" />
+      </svg>
+
+      {/* <img src={add} alt="add" max-w="80%" max-h="80%" translate-y="-3px" /> */}
     </button>
   )
 }
