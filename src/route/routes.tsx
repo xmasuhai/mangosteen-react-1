@@ -1,5 +1,6 @@
 import { Root } from '@/components/Root'
 import { Home } from '@/pages/Home'
+import { ItemsPage } from '@/pages/ItemsPage'
 import { welcomeRouter } from '@/route/welcomeRouter'
 import type { RouteObject } from 'react-router-dom'
 
@@ -15,6 +16,6 @@ export const routes: RouteObject[] = [
   welcomeRouter,
   {
     path: '/items',
-    element: <div>items</div>,
+    element: <ItemsPage />,
   },
 ]
