@@ -7,17 +7,22 @@ interface Props {
   onSelected: (selectedId: DateTabRangeStr) => void
 }
 
+type DateRange = {
+  key: DateTabRangeStr
+  text: string
+}
+
+const dateRanges: Readonly<DateRange[]> = [
+  { key: 'thisMonth', text: '本月', },
+  { key: 'lastMonth', text: '上月', },
+  { key: 'thisYear', text: '今年', },
+  { key: 'customDate', text: '去自定义日期', },
+]
+
 export const DateRangePicker: React.FC<Props> = ({
   selectedId = 'thisMonth',
   onSelected,
 }) => {
-  const dateRanges: { key: DateTabRangeStr; text: string, }[] = [
-    { key: 'thisMonth', text: '本月', },
-    { key: 'lastMonth', text: '上月', },
-    { key: 'thisYear', text: '今年', },
-    { key: 'customDate', text: '去自定义日期', },
-  ]
-
   const selectedClass = (tabId: string) =>
     selectedId === tabId
       ? cn(
