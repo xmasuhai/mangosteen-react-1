@@ -43,4 +43,15 @@ export default defineConfig({
       }
     },
   ],
+  preflights: [
+    {
+      getCSS: () => `
+        @property --sibling-idx {
+          syntax: '<integer>'; /* 核心：限制为整数类型，迫使浏览器立即求值 */
+          inherits: true;      /* 允许向下继承计算后的结果 */
+          initial-value: 1;
+        }
+      `
+    }
+  ]
 })
