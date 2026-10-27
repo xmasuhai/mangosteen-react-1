@@ -1,4 +1,9 @@
 :root {
+  --main: #5c33be;
+  --main-text: #555;
+  --main-light-bg: white;
+  --app-name-text: #7878ff;
+  --error-color: #e10505;
   --spacing: 2px;
   --welcome-card-bg-color: white;
   --welcome-text: white;
@@ -8,6 +13,28 @@
   --primary-color: #6035BF;
   --button-primary-color: #5d33be;
   --button-primary-text-color: white;
+  --button-radius: 8px;
+  --amount-text-color: #53a867;
+  --date-text-color: #999;
   // tabs
-  --tabs-indicator-bg: rgba(255, 255, 255, 0.5);
+  --tabs-indicator-bg: rgba(255, 255, 255, 0.5); // item
+  --list-tag-text: #333;
+  --list-amount-text: var(--amount-text-color);
+  --list-time-text: var(--date-text-color);
+  --total-bg: #252a43;
+  --total-text: white;
+  --total-income: #fe7275;
+  --total-expenses: #53a867;
+  // button
+  --button-border-color: #ddd;
+  --button-bg: var(--main);
+  --button-bg-default: #909399;
+  --button-bg-primary: var(--button-bg);
+  --button-bg-success: #67c23a;
+  --button-bg-warning: #e6a23c;
+  --button-bg-danger: var(--error-color);
+  --button-text-color: contrast-color(var(--main));
+  --button-text-size: 18px;
+  --button-radius: 8px;
+  --button-height: 48px;
 }
