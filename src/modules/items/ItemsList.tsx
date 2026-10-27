@@ -43,7 +43,12 @@ export const ItemsList: React.FC<Props> = ({ items }) => {
         }
       </ol>
 
-      <div className="pt-[2em] mb-[2em] text-center">向下滑动加载更多</div>
+      <div className="px-[1em] pt-[2em] mb-[2em] text-center">
+        <button
+          className={cn('primary-btn')}>
+          加载更多
+        </button>
+      </div>
     </div>
   )
 }

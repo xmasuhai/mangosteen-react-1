@@ -37,11 +37,7 @@ export const Home: React.FC<Props> = ({ title }) => {
 
       <div px-16px self-stretch>
         <button
-          w="100%"
-          className={cn(
-            'h-48px bg-[var(--button-primary-color)] b-none rounded-8px',
-            'text-[var(--button-primary-text-color)]',
-          )}>
+          className={cn('primary-btn')}>
           开始记账
         </button>
       </div>
