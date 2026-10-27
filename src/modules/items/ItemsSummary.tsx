@@ -1,5 +1,8 @@
+import { Item } from "@/global"
+import { accountItems } from "@/mock/items"
 import { ItemsList } from "@/modules/items/ItemsList"
 import { cn } from "cn"
+import { useState } from "react"
 
 interface Props {
   startDate: string
@@ -10,6 +13,7 @@ export const ItemsSummary: React.FC<Props> = ({
   startDate,
   endDate
 }) => {
+  const [items,] = useState<Item[]>(accountItems)
 
   return (
     <div className="flex flex-col h-[calc(100vh-112px)] scrollbar-hide relative">
@@ -35,7 +39,7 @@ export const ItemsSummary: React.FC<Props> = ({
         </li>
       </ul>
 
-      <ItemsList />
+      <ItemsList items={items}/>
     </div>
   )
 }
