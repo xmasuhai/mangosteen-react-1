@@ -11,10 +11,11 @@ type MenuLinkItemType = {
 }
 
 const menuLinkItemList: Readonly<MenuLinkItemType[]> = Object.freeze([
-  { linkPath: '/statistics', linkTitle: '统计图表', iconName: 'chart' },
-  { linkPath: '/export', linkTitle: '导出数据', iconName: 'export' },
-  { linkPath: '/notify', linkTitle: '记账提醒', iconName: 'notify' },
-  { linkPath: '/tech_stack', linkTitle: '本App技术栈', iconName: 'tech_stack' },
+  { linkPath: '/statistics', linkTitle: '统计图表', iconName: 'chart', },
+  { linkPath: '/export', linkTitle: '导出数据', iconName: 'export', },
+  { linkPath: '/notify', linkTitle: '记账提醒', iconName: 'notify', },
+  { linkPath: '/tags', linkTitle: '自定义标签', iconName: 'work-card', },
+  { linkPath: '/tech_stack', linkTitle: '本App技术栈', iconName: 'tech_stack', },
 ])
 
 export const MenuList: React.FC<Props> = ({ className, }) => {

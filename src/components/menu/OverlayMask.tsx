@@ -4,7 +4,6 @@ import { cn } from "cn"
 
 interface Props { }
 
-
 export const OverlayMask: React.FC<Props> = () => {
   const { visible, setVisible, } = useMenuStore()
   const maskAnimeStyle = useSpring({
