@@ -1,5 +1,6 @@
 import { SvgIcon } from "@/components/SvgIcon"
 import { cn } from "cn"
+import { NavLink } from "react-router-dom"
 
 interface Props {
   className?: string
@@ -12,16 +13,23 @@ export const MenuLinkItem: React.FC<Props> = ({
   className,
   iconName,
   linkTitle,
+  linkPath,
 }) => {
-
   return (
     <li
       className={cn(
-        'flex items-center px-1em py-.5em mb-.25em',
+        'px-1em py-.5em mb-.25em',
         className,
       )}>
-      <SvgIcon name={iconName} className="mr-[1em] size-[2em]" />
-      <span>{linkTitle}</span>
+      <NavLink
+        to={linkPath}
+        className={cn(
+          'flex items-center',
+          className,
+        )}>
+        <SvgIcon name={iconName} className="mr-[1em] size-[2em]" />
+        <span>{linkTitle}</span>
+      </NavLink>
     </li>
   )
 }
