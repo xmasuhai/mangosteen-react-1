@@ -10,13 +10,6 @@ export const OverlayMask: React.FC<Props> = () => {
   const maskAnimeStyle = useSpring({
     opacity: visible ? 1 : 0,
     visibility: visible ? 'visible' : 'hidden',
-    onStart(result) {
-      console.log('maskAnimeStyle_______________________')
-      console.log('%c%s', 'color: #aa00ff', visible);
-      console.log('%c⧭', 'color: #00a3cc', result);
-      console.log('%c⧭', 'color: #00a3cc', result.value);
-      console.log('_______________________maskAnimeStyle')
-    },
   })
   return (
     <animated.div
