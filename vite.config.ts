@@ -6,6 +6,7 @@ import jsxScoped from '@10coding/vite-plugin-jsx-scoped'
 import { viteMockServe } from 'vite-plugin-mock'
 import { consoleBanner } from "vite-plugin-console-banner"
 import { svgsprites } from './src/plugins/svgsprites.ts'
+import { noOptimizeIconList } from './src/plugins/noOptimizeIconList.ts'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }: ConfigEnv) => ({
@@ -30,7 +31,9 @@ export default defineConfig(({ command }: ConfigEnv) => ({
         { label: "徐帅${year}简历", url: "https://xmasuhai.xyz/my-latest-resume/" },
       ],
     }),
-    svgsprites(),
+    svgsprites({
+      noOptimizeList: noOptimizeIconList,
+    }),
   ],
   server: {
     host: true
