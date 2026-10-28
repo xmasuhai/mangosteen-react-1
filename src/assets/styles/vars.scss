@@ -39,4 +39,16 @@
   --button-height: 48px;
   // sign_in
   --user-text: #cea1ff;
+  // 划出浮层 遮罩层
+  --z-index-float-overlay: 40;
+  --overlay-mask-bg: rgba(0, 0, 0, 0.5);
+  --overlay-bg: var(--main-light-bg);
+  --overlay-user-bg: var(--button-bg);
+  --overlay-user-text: var(--button-text-color);
+  --top-safe-area-height: 24px;
+
+  // z-index
+  --z-default: 128;
+  --z-menu: 256;
+  --z-dialog: 512;
 }
