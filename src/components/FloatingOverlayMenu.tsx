@@ -1,3 +1,5 @@
+import { MenuList } from "@/components/menu/MenuList"
+import { UserHeader } from "@/components/menu/UserHeader"
 import { cn } from "cn"
 
 export const FloatingOverlayMenu: React.FC = () => {
@@ -6,9 +8,11 @@ export const FloatingOverlayMenu: React.FC = () => {
     <div
       className={cn(
         'fixed top-0 left-0',
-        'b-1 b-solid b-red bg-red',
+        'w-70vw max-w-20em h-screen',
+        'flex flex-col',
       )}>
-      FloatingOverlayMenu
+      <UserHeader className="grow-0 shrink-0" />
+      <MenuList className="grow-1 shrink-1" />
     </div>
   )
 }
