@@ -9,13 +9,16 @@ interface Props {
 
 export const TopNav: React.FC<Props> = ({ title = '山竹记账', className }) => {
   const { visible, setVisible, } = useMenuStore()
+  const onClickMenu = () => {
+    setVisible(!visible)
+  }
   return (
     <div
       className={cn(
         'h-64px pt-24px pb-.5em px-24px text-white flex items-center gap-x-1em',
         className,
       )}>
-      <SvgIcon name="menu" className="size-[2em]" onClick={() => setVisible(!visible)} />
+      <SvgIcon name="menu" className="size-[2em]" onClick={onClickMenu} />
       <h1 className="text-[2em]">{title}</h1>
     </div>
   )
