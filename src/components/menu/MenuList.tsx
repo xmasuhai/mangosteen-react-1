@@ -21,22 +21,23 @@ export const MenuList: React.FC<Props> = ({ className, }) => {
   return (
     <nav
       className={cn(
+        'menu-list',
         'bg-white text-20px py-1em',
         className,
       )}>
       <menu className={cn(
-          'pt-1em text-20px',
-          'flex flex-col justify-start',
-        )}>
-          {menuLinkItemList.map((item) => (
-            <MenuLinkItem
-              key={item.linkPath}
-              linkPath={item.linkPath}
-              linkTitle={item.linkTitle}
-              iconName={item.iconName}
-            />
-          ))}
-        </menu>
-      </nav>
+        'pt-1em text-20px',
+        'flex flex-col justify-start',
+      )}>
+        {menuLinkItemList.map((item) => (
+          <MenuLinkItem
+            key={item.linkPath}
+            linkPath={item.linkPath}
+            linkTitle={item.linkTitle}
+            iconName={item.iconName}
+          />
+        ))}
+      </menu>
+    </nav>
   )
 }
