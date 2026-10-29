@@ -1,6 +1,6 @@
 import type { Item, Resources } from "@/global"
 import { request } from "@/lib/request/request"
-import { accountItems } from "@/mock/items"
+import { accountItems } from "@/mock_fake/accountItems"
 import { ItemsList } from "@/modules/items/ItemsList"
 import { cn } from "cn"
 import { useState } from "react"
