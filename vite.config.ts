@@ -3,10 +3,10 @@ import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
 import jsxScoped from '@10coding/vite-plugin-jsx-scoped'
-import { viteMockServe } from 'vite-plugin-mock'
 import { consoleBanner } from "vite-plugin-console-banner"
 import { svgsprites } from './src/plugins/svgsprites.ts'
 import { noOptimizeIconList } from './src/plugins/noOptimizeIconList.ts'
+import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }: ConfigEnv) => ({
@@ -17,11 +17,16 @@ export default defineConfig(({ command }: ConfigEnv) => ({
   plugins: [
     UnoCSS(),
     jsxScoped({ scopedIdAttributeName: 'scopedid' }),
-    react(),
-    viteMockServe({
-      mockPath: './src/mock',
-      enable: command === 'serve',
+    mockDevServerPlugin({
+      dir: './src/mock',
+      enabled: command === 'serve',
+      reload: true,
+      awaitInitialLoad: command === 'serve',
+      exclude: [
+        '**/*.d.{js,ts,cjs,mjs,json,json5}',
+      ],
     }),
+    react(),
     consoleBanner({
       text: "xmasuhai.xyz",
       font: "big", // 大小写不敏感，也可用 "Big"、"ANSI Shadow"
@@ -36,7 +41,10 @@ export default defineConfig(({ command }: ConfigEnv) => ({
     }),
   ],
   server: {
-    host: true
+    host: true,
+    proxy: {
+      '^/api': { target: '//192.168.0.104', },
+    },
   },
   resolve: {
     // 开启 Vite 8 的原生 tsconfig 路径解析支持
