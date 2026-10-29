@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const ItemsList: React.FC<Props> = ({ items }) => {
-
   return (
     <div className="item-list-wrapper max-h-[calc(100%-112px)] grow-1 shrink-1 overflow-auto scrollbar-hide">
       <ol className={cn(
