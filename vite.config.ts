@@ -3,7 +3,7 @@ import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
 import jsxScoped from '@10coding/vite-plugin-jsx-scoped'
-import { consoleBanner } from "vite-plugin-console-banner"
+import { consoleBanner,} from "vite-plugin-console-banner"
 import { svgsprites } from './src/plugins/svgsprites.ts'
 import { noOptimizeIconList } from './src/plugins/noOptimizeIconList.ts'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
@@ -28,6 +28,7 @@ export default defineConfig(({ command }: ConfigEnv) => ({
     }),
     react(),
     consoleBanner({
+      enable: command === 'build',
       text: "xmasuhai.xyz",
       font: "big", // 大小写不敏感，也可用 "Big"、"ANSI Shadow"
       color: "#476EE3",
