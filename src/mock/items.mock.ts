@@ -53,15 +53,27 @@ export const createItemsMockResponse = (
   }
 }
 
-export default defineMock({
-  url: '/api/v1/items',
-  method: 'get',
-  delay: 1800,
-  body({ query }: ResponseParams): ResponseData<Partial<Resources<Item>>> {
-    return createItemsMockResponse({
-      count: 24,
-      perPage: 10,
-      page: parseInt(query.page) ?? 1,
-    })
+export default defineMock([
+  {
+    url: '/api/v1/items',
+    method: 'get',
+    status: 500,
+    delay: 800,
+    // 模拟错误添加查询参数 `/api/v1/items?page=${pageIndex + 1}&error=true`
+    validator: (request) => request.query.error === 'true' /* || request.query.page === '2' */,
+    body: {},
   },
-})
+  {
+    url: '/api/v1/items',
+    method: 'get',
+    status: 200,
+    delay: 1800,
+    body({ query }: ResponseParams): ResponseData<Partial<Resources<Item>>> {
+      return createItemsMockResponse({
+        count: 24,
+        perPage: 10,
+        page: parseInt(query.page) ?? 1,
+      })
+    },
+  },
+])

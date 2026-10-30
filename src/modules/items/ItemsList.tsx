@@ -18,7 +18,7 @@ export const ItemsList: React.FC<Props> = ({
     if (prev) {
       const sentCount = (prev.data.pager.page - 1) * prev.data.pager.per_page + prev.data.resources.length
       const count = prev.data.pager.count
-      if (sentCount >= count) { return null}
+      if (sentCount >= count) { return null }
     }
     return `/api/v1/items?page=${pageIndex + 1}`
   }
@@ -30,15 +30,20 @@ export const ItemsList: React.FC<Props> = ({
 
   const loadMore = () => { setSize(size + 1) }
 
+  const errorTip = error && (
+    <div className="p-1em text-center color-[var(--error-color)]">
+      {error && <span>数据加载失败，请稍后刷新页面</span>}
+    </div>
+  )
+
   console.log('ItemsSummary_______________________')
   console.log('%c⧭', 'color: #733d00', data);
   console.log('%c⧭ size', 'color: #733d00', size);
   console.log('%c⧭ isLoading', 'color: #733d00', isLoading);
   console.log('_______________________ItemsSummary')
 
-  if (error) { return (<span>数据加载失败，请稍后刷新页面</span>) }
   if (!data) {
-    return (<span>还没搞定</span>)
+    return errorTip
   } else {
     const lastPageData = data?.[size - 1]
     const { page, per_page, count } = lastPageData?.data.pager ?? {}
@@ -79,6 +84,8 @@ export const ItemsList: React.FC<Props> = ({
               </li>
             ))))
         }
+
+        {errorTip}
 
         <li className="px-1em pt-2em mb-2em text-center">
           <button
