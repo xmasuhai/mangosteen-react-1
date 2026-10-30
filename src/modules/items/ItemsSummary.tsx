@@ -15,10 +15,8 @@ export const ItemsSummary: React.FC<Props> = ({
   startDate,
   endDate
 }) => {
-
-  const getKey = (pageIndex: number = 0) => {
-    return `/api/v1/items?page=${pageIndex + 1}`                    // SWR key
-  }
+  // SWR key
+  const getKey = (pageIndex: number = 0) => `/api/v1/items?page=${pageIndex + 1}`
   const { data, error, /* isLoading, isValidating, mutate, size, setSize */ } = useSWRInfinite(
     getKey,
     async (path) => (await request.get<Resources<Item[]>>(path)).data,

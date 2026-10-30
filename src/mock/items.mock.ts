@@ -1,4 +1,5 @@
 import { Item, Resources, ResponseData } from "@/global"
+import { customFaker } from "@/mock/fake/customFaker"
 import type { ResponseParams } from "@/mock/mockType"
 import { defineMock } from 'vite-plugin-mock-dev-server'
 
@@ -11,12 +12,12 @@ const createId = () => {
 const createMockItem = (attrs?: Partial<Item>): Item => ({
   id: createId(),
   user_id: 1,
-  amount: 100,
+  amount: customFaker.number.int({ min: 99, max: 10_0000_00 }),
   kind: 'incomes',
-  tag_ids: [],
-  happened_at: '2027-10-07T00:00:00.000Z',
-  created_at: '2027-10-07T00:00:00.000Z',
-  updated_at: '2027-10-07T00:00:00.000Z',
+  tag_ids: [1, 2],
+  happened_at: customFaker.date.past().toISOString(),
+  created_at: customFaker.date.past().toISOString(),
+  updated_at: customFaker.date.past().toISOString(),
   ...attrs,
 })
 
