@@ -1,6 +1,8 @@
+import { InLoading } from "@/components/InLoading"
 import { Item, Resources, ResponseData } from "@/global"
 import { request } from "@/lib/request/request"
 import { cn } from "cn"
+import styled from "styled-components"
 import useSWRInfinite from "swr/infinite"
 
 interface Props {
@@ -30,20 +32,28 @@ export const ItemsList: React.FC<Props> = ({
 
   const loadMore = () => { setSize(size + 1) }
 
-  const errorTip = error && (
-    <div className="p-1em text-center color-[var(--error-color)]">
-      {error && <span>数据加载失败，请稍后刷新页面</span>}
-    </div>
-  )
+  const Div = styled.div`
+    padding: 16px;
+    text-align: center;
+  `
+  const errorTip = error && (<Div className="color-[var(--error-color)]">数据加载失败，请稍后刷新页面</Div>)
+
+  const inLoadingState = isLoading || isValidating
 
   console.log('ItemsSummary_______________________')
   console.log('%c⧭', 'color: #733d00', data);
   console.log('%c⧭ size', 'color: #733d00', size);
+  console.log('%c⧭ isValidating', 'color: #733d00', isValidating);
   console.log('%c⧭ isLoading', 'color: #733d00', isLoading);
   console.log('_______________________ItemsSummary')
 
   if (!data) {
-    return errorTip
+    return (
+      <div className="p-1em text-center">
+        {errorTip}
+        {inLoadingState && (<Div>数据加载中……</Div>) }
+      </div>
+    )
   } else {
     const lastPageData = data?.[size - 1]
     const { page, per_page, count } = lastPageData?.data.pager ?? {}
@@ -89,10 +99,19 @@ export const ItemsList: React.FC<Props> = ({
 
         <li className="px-1em pt-2em mb-2em text-center">
           <button
-            disabled={!hasMore}
+            disabled={!hasMore || inLoadingState}
             onClick={loadMore}
-            className={cn('primary-btn', hasMore ? '' : 'disabled',)}>
-            {hasMore ? '加载更多' : '没有更多'}
+            className={cn(
+              'primary-btn flex items-center justify-center',
+              hasMore && !inLoadingState ? '' : 'disabled',
+            )}>
+            {
+              !hasMore && !inLoadingState
+                ? '没有更多数据了'
+                : inLoadingState
+                  ? (<InLoading direction="horizontal" hasRainbow={false} className="size-1em flex text-1em fill-white" />)
+                  : '加载更多'
+            }
           </button>
         </li>
       </ol>

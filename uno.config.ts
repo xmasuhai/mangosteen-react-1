@@ -1,5 +1,6 @@
 import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx, transformerVariantGroup } from 'unocss'
 import { presetWind4 } from '@unocss/preset-wind4'
+import { cn } from 'cn'
 
 export default defineConfig({
   presets: [
@@ -61,7 +62,11 @@ export default defineConfig({
     }
   ],
   shortcuts: {
-    'primary-btn': 'w-100% h-48px bg-[var(--button-primary-color)] text-[var(--button-primary-text-color)] b-none rounded-8px',
+    'primary-btn': cn(
+      'w-100% h-48px b-none rounded-8px',
+      'bg-[var(--button-primary-color)] text-center color-[var(--button-primary-text-color)]',
+
+    ),
     'disabled': 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
   },
 })

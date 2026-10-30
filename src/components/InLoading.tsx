@@ -4,20 +4,32 @@ import { cn } from "cn"
 interface Props {
   className?: string
   message?: string
+  direction?: 'vertical' | 'horizontal',
+  hasRainbow?: boolean
 }
 
-export const InLoading: React.FC<Props> = ({ className, message, }) => {
+export const InLoading: React.FC<Props> = ({
+  direction = 'vertical',
+  className,
+  message,
+  hasRainbow  = true,
+
+}) => {
   return (
-    <div className="flex flex-col items-center justify-center max-h-[10em] animate-rainbow">
+    <div className={cn(
+      'flex items-center justify-center max-h-[10em] ',
+      direction === 'horizontal' ? 'flex-row' : 'flex-col',
+      hasRainbow ? 'animate-rainbow' : '',
+    )}>
       <SvgIcon
         name="loading"
         className={cn(
-          'size-[5em] animate-spin',
+          'where:(size-[5em]) animate-spin',
           'fill-[var(--vp-c-brand-next)]',
           className,
         )} />
       <p
-        className="p-[1em] text-lg color-[var(--vp-c-brand-next)]" >
+        className="where:(p-[1em] text-lg color-[var(--vp-c-brand-next)])" >
           {message ?? '加载中……'}
         </p>
     </div>
