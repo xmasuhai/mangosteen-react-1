@@ -35,7 +35,11 @@ export const ItemsList: React.FC<Props> = ({
   } else {
     console.log('ItemsSummary_______________________')
     console.log('%c⧭', 'color: #733d00', data);
+    console.log('%c⧭ size', 'color: #733d00', size);
     console.log('_______________________ItemsSummary')
+    const lastPageData = data?.[size - 1]
+    const { page, per_page, count } = lastPageData?.data.pager ?? {}
+    const hasMore = (page - 1) * per_page + lastPageData?.data.resources.length < count
 
     return (
       <ol
@@ -75,9 +79,10 @@ export const ItemsList: React.FC<Props> = ({
 
         <li className="px-1em pt-2em mb-2em text-center">
           <button
+            disabled={!hasMore}
             onClick={loadMore}
-            className={cn('primary-btn')}>
-            加载更多
+            className={cn('primary-btn', hasMore ? '' : 'disabled',)}>
+            {hasMore ? '加载更多' : '没有更多'}
           </button>
         </li>
       </ol>

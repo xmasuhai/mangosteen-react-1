@@ -62,5 +62,6 @@ export default defineConfig({
   ],
   shortcuts: {
     'primary-btn': 'w-100% h-48px bg-[var(--button-primary-color)] text-[var(--button-primary-text-color)] b-none rounded-8px',
+    'disabled': 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
   },
 })

@@ -58,7 +58,7 @@ export default defineMock({
   method: 'get',
   body({ query }: ResponseParams): ResponseData<Partial<Resources<Item>>> {
     return createItemsMockResponse({
-      count: 11,
+      count: 24,
       perPage: 10,
       page: parseInt(query.page) ?? 1,
     })
