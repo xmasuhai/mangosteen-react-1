@@ -17,9 +17,9 @@
 ```bash
 npm install -g corepack@latest &&
 corepack enable &&
-corepack prepare pnpm@12.15.0 --active
+corepack prepare pnpm@12.16.1 --activate
 # 在项目路径下执行
-corepack use pnpm@12.15.0
+corepack use pnpm@12.16.1
 ```
 
 ## 📦 技术栈
@@ -59,7 +59,7 @@ corepack use pnpm@12.15.0
 
 ### 包管理器与运行时要求
 
-* **包管理器**：`pnpm >=12.15.0`（`packageManager: pnpm@12.15.0`）
+* **包管理器**：`pnpm >=12.16.1`（`packageManager: pnpm@12.16.1`）
 * **Node.js**：`>=26`
 
 ## 📦 依赖安装与启动
