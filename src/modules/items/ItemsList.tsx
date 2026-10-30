@@ -14,10 +14,13 @@ export const ItemsList: React.FC<Props> = ({
 }) => {
   // SWR key
   const getKey = (pageIndex: number = 0) => `/api/v1/items?page=${pageIndex + 1}`
-  const { data, /* error, isLoading, isValidating, mutate, size, setSize */ } = useSWRInfinite(
+  const fetcher = async (path: string) => (await request.get<ResponseData<Resources<Item>>>(path)).data
+  const { data, size, setSize, /* error, isLoading, isValidating, mutate, */ } = useSWRInfinite(
     getKey,
-    async (path) => (await request.get<ResponseData<Resources<Item>>>(path)).data,
+    (path) => fetcher(path),
   )
+
+  const loadMore = () => { setSize(size + 1) }
 
   if (!data) {
     return (<span>还没搞定</span>)
@@ -35,38 +38,36 @@ export const ItemsList: React.FC<Props> = ({
           '[&>li>div:first-child]:bg-[oklch(70%_0.15_calc(var(--sibling-idx)*70))]',
         )}>
         {
-          data.map(({ data: { resources, pager: _pager } }, dataIndex) => (<>
-            {
-              resources.map((item: Item) => (
-                <li
-                  key={`${dataIndex}-${item.id}`}
-                  className={cn(
-                    'account-item',
-                    'flex justify-between items-start py-[12px] px-[1em] ',
-                    'b-b-[1px] b-t-[1px] b-t-[transparent] b-b-[var(--button-border-color)]',
-                  )}>
-                  <div className="sign grow-0 shrink-0 size-[48px] rounded-[50%] flex justify-center items-center my-0 mx-.5em">
-                    <span>😀</span>
+          data.flatMap(({ data: { resources, pager: _pager } }, dataIndex) => (
+            resources.map((item: Item) => (
+              <li
+                key={`${dataIndex}-${item.id}`}
+                className={cn(
+                  'account-item',
+                  'flex justify-between items-start py-[12px] px-[1em] ',
+                  'b-b-[1px] b-t-[1px] b-t-[transparent] b-b-[var(--button-border-color)]',
+                )}>
+                <div className="sign grow-0 shrink-0 size-[48px] rounded-[50%] flex justify-center items-center my-0 mx-.5em">
+                  <span>😀</span>
+                </div>
+
+                <div className="mx-.25em grow-1 shrink-1">
+                  <div className="flex justify-between">
+                    <span className="text-[var(--list-tag-text)]">{item.note}</span>
+                    <span className="text-[var(--list-amount-text)]">¥&nbsp;{item.amount / 100}</span>
                   </div>
 
-                  <div className="mx-.25em grow-1 shrink-1">
-                    <div className="flex justify-between">
-                      <span className="text-[var(--list-tag-text)]">{item.note}</span>
-                      <span className="text-[var(--list-amount-text)]">¥&nbsp;{item.amount / 100}</span>
-                    </div>
-
-                    <div className="text-[var(--list-time-text)] mt-.25em">
-                      2027-01-01 12:00:00
-                    </div>
+                  <div className="text-[var(--list-time-text)] mt-.25em">
+                    2027-01-01 12:00:00
                   </div>
-                </li>
-              ))
-            }
-          </>))
+                </div>
+              </li>
+            ))))
         }
 
         <li className="px-1em pt-2em mb-2em text-center">
           <button
+            onClick={loadMore}
             className={cn('primary-btn')}>
             加载更多
           </button>
