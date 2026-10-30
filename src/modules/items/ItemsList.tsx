@@ -12,9 +12,17 @@ export const ItemsList: React.FC<Props> = ({
   // startDate,
   // endDate,
 }) => {
+  type ResourcesData = ResponseData<Resources<Item>>
   // SWR key
-  const getKey = (pageIndex: number = 0) => `/api/v1/items?page=${pageIndex + 1}`
-  const fetcher = async (path: string) => (await request.get<ResponseData<Resources<Item>>>(path)).data
+  const getKey = (pageIndex: number = 0, prev: ResourcesData) => {
+    if (prev) {
+      const sentCount = (prev.data.pager.page - 1) * prev.data.pager.per_page + prev.data.resources.length
+      const count = prev.data.pager.count
+      if (sentCount >= count) { return null}
+    }
+    return `/api/v1/items?page=${pageIndex + 1}`
+  }
+  const fetcher = async (path: string) => (await request.get<ResourcesData>(path)).data
   const { data, size, setSize, /* error, isLoading, isValidating, mutate, */ } = useSWRInfinite(
     getKey,
     (path) => fetcher(path),
