@@ -12,7 +12,12 @@ const createId = () => {
 const createMockItem = (attrs?: Partial<Item>): Item => ({
   id: createId(),
   user_id: 1,
-  amount: customFaker.number.int({ min: 99, max: 10_0000_00 }),
+  note: customFaker.helpers.arrayElement([
+    customFaker.food.dish(),
+    customFaker.book.series(),
+    customFaker.commerce.department(),
+  ]),
+  amount: customFaker.number.int({ min: 99, max: 1_0000_00 }),
   kind: 'incomes',
   tag_ids: [1, 2],
   happened_at: customFaker.date.past().toISOString(),
