@@ -23,20 +23,23 @@ export const ItemsList: React.FC<Props> = ({
     return `/api/v1/items?page=${pageIndex + 1}`
   }
   const fetcher = async (path: string) => (await request.get<ResourcesData>(path)).data
-  const { data, size, setSize, /* error, isLoading, isValidating, mutate, */ } = useSWRInfinite(
+  const { data, size, setSize, error, isLoading, isValidating, /*   mutate, */ } = useSWRInfinite(
     getKey,
     (path) => fetcher(path),
   )
 
   const loadMore = () => { setSize(size + 1) }
 
+  console.log('ItemsSummary_______________________')
+  console.log('%c⧭', 'color: #733d00', data);
+  console.log('%c⧭ size', 'color: #733d00', size);
+  console.log('%c⧭ isLoading', 'color: #733d00', isLoading);
+  console.log('_______________________ItemsSummary')
+
+  if (error) { return (<span>数据加载失败，请稍后刷新页面</span>) }
   if (!data) {
     return (<span>还没搞定</span>)
   } else {
-    console.log('ItemsSummary_______________________')
-    console.log('%c⧭', 'color: #733d00', data);
-    console.log('%c⧭ size', 'color: #733d00', size);
-    console.log('_______________________ItemsSummary')
     const lastPageData = data?.[size - 1]
     const { page, per_page, count } = lastPageData?.data.pager ?? {}
     const hasMore = (page - 1) * per_page + lastPageData?.data.resources.length < count

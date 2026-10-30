@@ -56,6 +56,7 @@ export const createItemsMockResponse = (
 export default defineMock({
   url: '/api/v1/items',
   method: 'get',
+  delay: 1800,
   body({ query }: ResponseParams): ResponseData<Partial<Resources<Item>>> {
     return createItemsMockResponse({
       count: 24,
