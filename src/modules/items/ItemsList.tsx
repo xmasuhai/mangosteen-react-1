@@ -4,9 +4,14 @@ import { cn } from "cn"
 import useSWRInfinite from "swr/infinite"
 
 interface Props {
+  startDate: string
+  endDate: string
 }
 
-export const ItemsList: React.FC<Props> = () => {
+export const ItemsList: React.FC<Props> = ({
+  // startDate,
+  // endDate,
+}) => {
   // SWR key
   const getKey = (pageIndex: number = 0) => `/api/v1/items?page=${pageIndex + 1}`
   const { data, /* error, isLoading, isValidating, mutate, size, setSize */ } = useSWRInfinite(
