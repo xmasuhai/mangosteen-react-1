@@ -1,10 +1,5 @@
-import type { Item, Resources } from "@/global"
-import { request } from "@/lib/request/request"
-import { accountItems } from "@/mock/fake/accountItems"
 import { ItemsList } from "@/modules/items/ItemsList"
 import { cn } from "cn"
-import { useState } from "react"
-import useSWRInfinite from 'swr/infinite'
 
 interface Props {
   startDate: string
@@ -15,22 +10,8 @@ export const ItemsSummary: React.FC<Props> = ({
   startDate,
   endDate
 }) => {
-  // SWR key
-  const getKey = (pageIndex: number = 0) => `/api/v1/items?page=${pageIndex + 1}`
-  const { data, error, /* isLoading, isValidating, mutate, size, setSize */ } = useSWRInfinite(
-    getKey,
-    async (path) => (await request.get<Resources<Item[]>>(path)).data,
-  )
-
-  const [items,] = useState<Item[]>(accountItems)
-
-  console.log('ItemsSummary_______________________')
-  console.log('%c⧭', 'color: #733d00', data);
-  console.log('%c%s', 'color: #e50000', error);
-  console.log('_______________________ItemsSummary')
-
   return (
-    <div className="flex flex-col h-[calc(100vh-112px)] scrollbar-hide relative">
+    <div className="relative max-h-[calc(100vh-112px)] flex flex-col">
       {startDate}-{endDate}
 
       <ul className={cn(
@@ -53,7 +34,7 @@ export const ItemsSummary: React.FC<Props> = ({
         </li>
       </ul>
 
-      <ItemsList items={items}/>
+      <ItemsList />
     </div>
   )
 }

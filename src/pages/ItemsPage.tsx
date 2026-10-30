@@ -10,7 +10,7 @@ import { useState } from "react"
 export const ItemsPage: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<DateTabRangeStr>('thisMonth')
   return (
-    <div>
+    <div className={cn('container w-screen h-screen relative')}>
       <header
         className={cn(
           'bg-linear-to-b from-[var(--welcome-card-start)] to-[var(--welcome-card-end)]',
@@ -19,11 +19,13 @@ export const ItemsPage: React.FC = () => {
         <DateRangePicker selectedId={selectedDate} onSelected={setSelectedDate} />
       </header>
 
-      <ItemsSummary startDate={selectedDate} endDate={selectedDate} />
+      <main className="max-h-[calc(100vh-112px)]">
+        <ItemsSummary startDate={selectedDate} endDate={selectedDate} />
 
-      <AddItemFloatButton />
+        <AddItemFloatButton />
 
-      <FloatingOverlayMenu />
+        <FloatingOverlayMenu />
+      </main>
     </div>
   )
 }
