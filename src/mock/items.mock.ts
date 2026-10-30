@@ -38,10 +38,12 @@ export const createItemsMockResponse = (
   },
   attrs?: Partial<Item>,
 ) => {
+  const sentCount = (page - 1) * perPage
+  const rest = count - sentCount
   return {
     code: 0,
     data: {
-      resources: createMockItemList(perPage, attrs),
+      resources: rest > 0 ? createMockItemList(Math.min(rest, perPage), attrs) : [],
       pager: {
         page,
         per_page: perPage,
@@ -56,7 +58,7 @@ export default defineMock({
   method: 'get',
   body({ query }: ResponseParams): ResponseData<Partial<Resources<Item>>> {
     return createItemsMockResponse({
-      count: 100,
+      count: 11,
       perPage: 10,
       page: parseInt(query.page) ?? 1,
     })
