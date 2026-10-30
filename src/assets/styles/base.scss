@@ -15,4 +15,18 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+#app, #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-weight: normal;
+
+  &,
+  &>.container {
+    // iPhone12Pro
+    min-width: 390px;
+    min-height: 844px;
+  }
 }

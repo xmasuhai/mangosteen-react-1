@@ -31,6 +31,12 @@ export default defineConfig({
       'animate-rainbow',
       { animation: 'rainbow 8s linear infinite' },
     ],
+    [/^scrollbar-hide$/, () => ({
+      'scrollbar-width': 'none',
+    })],
+    [/^scrollbar-default$/, () => ({
+      'scrollbar-width': 'auto',
+    })],
   ],
   variants: [
     // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
