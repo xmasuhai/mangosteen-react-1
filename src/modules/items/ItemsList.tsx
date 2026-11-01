@@ -78,7 +78,7 @@ export const ItemsList: React.FC<Props> = ({
                   'b-b-[1px] b-t-[1px] b-t-[transparent] b-b-[var(--button-border-color)]',
                 )}>
                 <div className="sign grow-0 shrink-0 size-[48px] rounded-[50%] flex justify-center items-center my-0 mx-.5em">
-                  <span>😀</span>
+                  <span text-24px>😀</span>
                 </div>
 
                 <div className="mx-.25em grow-1 shrink-1">
