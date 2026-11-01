@@ -30,16 +30,13 @@ export const ItemsList: React.FC<Props> = ({
     (path) => fetcher(path),
     {
       revalidateOnMount: true, // 强迫组件挂载时，无论缓存是否存在都重新发送请求
-      dedupingInterval: 0     // 将重复数据删除的时间间隔设为 0
+      dedupingInterval: 0,     // 将重复数据删除的时间间隔设为 0
+      revalidateFirstPage: false,
     },
   )
 
   const loadMore = () => {
     setSize(size + 1)
-    console.log('loadMore_______________________')
-    console.log('%c⧭', 'color: #f200e2', size);
-    console.log('_______________________loadMore')
-
   }
 
   const Div = styled.div`
@@ -49,13 +46,6 @@ export const ItemsList: React.FC<Props> = ({
   const errorTip = error && (<Div className="color-[var(--error-color)]">数据加载失败，请稍后刷新页面</Div>)
 
   const inLoadingState = isLoading || isValidating
-
-  console.log('ItemsSummary_______________________')
-  console.log('%c⧭ resourcesData', 'color: #733d00', resourcesData);
-  console.log('%c⧭ size', 'color: #733d00', size);
-  console.log('%c⧭ isValidating', 'color: #733d00', isValidating);
-  console.log('%c⧭ isLoading', 'color: #733d00', isLoading);
-  console.log('_______________________ItemsSummary')
 
   if (!resourcesData?.[0]) {
     return (
@@ -68,11 +58,6 @@ export const ItemsList: React.FC<Props> = ({
     const lastPageData = resourcesData?.[size - 1]
     const { page, per_page, count } = lastPageData?.data?.pager ?? {}
     const hasMore = (page - 1) * per_page + lastPageData?.data?.resources.length < count
-    console.log('hasData_______________________')
-    console.log('%c⧭ resourcesData', 'color: #733d00', resourcesData);
-    console.log('%c⧭ lastPageData', 'color: #1d5673', lastPageData);
-    console.log('_______________________hasData')
-
 
     return (
       <ol
@@ -84,10 +69,6 @@ export const ItemsList: React.FC<Props> = ({
         )}>
         {
           resourcesData?.map(({ data: { resources, pager: _pager } = {} } , dataIndex) => {
-            console.log('return resourcesData_______________________')
-            console.log('%c⧭', 'color: #ffa640', _pager);
-            console.log('%c⧭', 'color: #d90000', resources);
-            console.log('_______________________return resourcesData')
             return resources?.map((item: Item) => (
               <li
                 key={`${dataIndex}-${item.id}`}
