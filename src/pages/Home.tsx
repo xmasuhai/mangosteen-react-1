@@ -17,17 +17,22 @@ export const Home: React.FC<Props> = ({ title }) => {
 
   const { data: meData, /* error: meError, */ isLoading: isLoadingMe } = useSWR('/api/v1/me', async path =>
     (await request.get<ResponseData<Resource<User>>>(path))?.data?.data)
-  const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems } = useSWR(meData ? '/api/v1/items' : null, async path =>
-    (await request.get<ResponseData<Resources<Item>>>(path))?.data?.data)
+  // 为两个页面的请求设置不同的 Key 查询参数&scene=verify-不与跳转后页面相同请求互相干扰
+  const getItemKey = (meData: unknown) => meData ? '/api/v1/items?page=1&scene=verify' : null
+  const itemFetch = async (path: string) => (await request.get<ResponseData<Resources<Item>>>(path))?.data
+  const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems, mutate, } = useSWR(getItemKey(meData), itemFetch)
 
   if (isLoadingMe || isLoadingItems) {
     return (
       <main h-screen flex flex-col justify-center items-center>
-        <InLoading className="h-100vh" message="正在加载，请稍等..." />
-    </main>
-  ) }
+        <InLoading className="h-100vh size-[5em]" message="正在加载，请稍等..." />
+      </main>
+    )
+  }
 
-  if (itemsData?.resources?.[0]) { return <Navigate to="/items" /> }
+  if (itemsData?.data?.resources?.[0]) {
+    return <Navigate to="/items" />
+  }
 
   return (
     <main flex flex-col justify-center items-center>

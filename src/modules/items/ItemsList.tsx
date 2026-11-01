@@ -24,13 +24,23 @@ export const ItemsList: React.FC<Props> = ({
     }
     return `/api/v1/items?page=${pageIndex + 1}`
   }
-  const fetcher = async (path: string) => (await request.get<ResourcesData>(path)).data
-  const { data, size, setSize, error, isLoading, isValidating, /*   mutate, */ } = useSWRInfinite(
+  const fetcher = async (path: string) => (await request.get<ResourcesData>(path))?.data
+  const { data: resourcesData, size, setSize, error, isLoading, isValidating, /* mutate, */ } = useSWRInfinite(
     getKey,
     (path) => fetcher(path),
+    {
+      revalidateOnMount: true, // 强迫组件挂载时，无论缓存是否存在都重新发送请求
+      dedupingInterval: 0     // 将重复数据删除的时间间隔设为 0
+    },
   )
 
-  const loadMore = () => { setSize(size + 1) }
+  const loadMore = () => {
+    setSize(size + 1)
+    console.log('loadMore_______________________')
+    console.log('%c⧭', 'color: #f200e2', size);
+    console.log('_______________________loadMore')
+
+  }
 
   const Div = styled.div`
     padding: 16px;
@@ -41,13 +51,13 @@ export const ItemsList: React.FC<Props> = ({
   const inLoadingState = isLoading || isValidating
 
   console.log('ItemsSummary_______________________')
-  console.log('%c⧭', 'color: #733d00', data);
+  console.log('%c⧭ resourcesData', 'color: #733d00', resourcesData);
   console.log('%c⧭ size', 'color: #733d00', size);
   console.log('%c⧭ isValidating', 'color: #733d00', isValidating);
   console.log('%c⧭ isLoading', 'color: #733d00', isLoading);
   console.log('_______________________ItemsSummary')
 
-  if (!data) {
+  if (!resourcesData?.[0]) {
     return (
       <div className="p-1em text-center">
         {errorTip}
@@ -55,9 +65,14 @@ export const ItemsList: React.FC<Props> = ({
       </div>
     )
   } else {
-    const lastPageData = data?.[size - 1]
-    const { page, per_page, count } = lastPageData?.data.pager ?? {}
-    const hasMore = (page - 1) * per_page + lastPageData?.data.resources.length < count
+    const lastPageData = resourcesData?.[size - 1]
+    const { page, per_page, count } = lastPageData?.data?.pager ?? {}
+    const hasMore = (page - 1) * per_page + lastPageData?.data?.resources.length < count
+    console.log('hasData_______________________')
+    console.log('%c⧭ resourcesData', 'color: #733d00', resourcesData);
+    console.log('%c⧭ lastPageData', 'color: #1d5673', lastPageData);
+    console.log('_______________________hasData')
+
 
     return (
       <ol
@@ -68,8 +83,12 @@ export const ItemsList: React.FC<Props> = ({
           '[&>li>div:first-child]:bg-[oklch(70%_0.15_calc(var(--sibling-idx)*70))]',
         )}>
         {
-          data.flatMap(({ data: { resources, pager: _pager } }, dataIndex) => (
-            resources.map((item: Item) => (
+          resourcesData?.map(({ data: { resources, pager: _pager } = {} } , dataIndex) => {
+            console.log('return resourcesData_______________________')
+            console.log('%c⧭', 'color: #ffa640', _pager);
+            console.log('%c⧭', 'color: #d90000', resources);
+            console.log('_______________________return resourcesData')
+            return resources?.map((item: Item) => (
               <li
                 key={`${dataIndex}-${item.id}`}
                 className={cn(
@@ -92,14 +111,15 @@ export const ItemsList: React.FC<Props> = ({
                   </div>
                 </div>
               </li>
-            ))))
+            ))
+          })
         }
 
         {errorTip}
 
         <li className="px-1em pt-2em mb-2em text-center">
           <button
-            disabled={!hasMore || inLoadingState}
+            disabled={!hasMore || (inLoadingState && !hasMore)}
             onClick={loadMore}
             className={cn(
               'primary-btn flex items-center justify-center',
