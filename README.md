@@ -104,6 +104,20 @@ pnpm build
 pnpm preview
 ```
 
+### 临时部署静态页面
+
+```bash
+pnpm deploy
+```
+
+- 先将 `bin/deploy_to_github.sh` 中的 `git@github.com:xmasuhai/mangosteen-react-1-preview.git`替换为你的仓库地址，然后在 bash 中执行：
+
+```bash
+bin/deploy_to_github.sh
+#或
+sh bin/deploy_to_github.sh
+```
+
 ---
 
 ## ❓ 常见问题排查
