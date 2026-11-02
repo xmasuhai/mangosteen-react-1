@@ -1,10 +1,12 @@
 import { GradientBanner } from "@/components/GradientBanner"
 import { SvgIcon } from "@/components/SvgIcon"
 import { TopNav } from "@/components/TopNav"
-import { FormErrorsType, FormRules, formValidate, JSONValue, } from "@/lib/validator/formValidate";
+import { request } from "@/lib/request/request";
+import {  FormRules, hasError, } from "@/lib/validator/formValidate";
 import { SignInFormData, useSignInStore } from "@/stores/useSignInStore";
 import { cn } from "cn"
 import { FormEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   className?: string
@@ -36,9 +38,16 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
     })
   }
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const nav = useNavigate()
+  const onSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
     e.preventDefault()
     revalidateFormItems<SignInFormData>(data, signInRules)
+    if (!hasError(error)) {
+      await request.post('/api/v1/session', data)
+      // TODO
+      // 保存 JWT 作为登录凭证
+      nav('/home')
+    }
   }
 
   return (

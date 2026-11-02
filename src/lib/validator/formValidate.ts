@@ -1,6 +1,4 @@
-interface JSONValue {
-  [key: string]: string | number | null | undefined | JSONValue
-}
+import { JSONValue } from "@/global";
 
 interface FormValidatingData {
   [key: string]: JSONValue
@@ -20,7 +18,7 @@ type FormRule<T> = {
 type FormRules<T> = FormRule<T>[]
 type FormErrorsType<T extends JSONValue> = { [k in keyof T]?: string[] }
 
-export type { JSONValue, FormValidatingData, FormRule, FormRules, FormErrorsType, }
+export type { FormValidatingData, FormRule, FormRules, FormErrorsType, }
 
 /**
  * @Description: 验证表单
@@ -42,7 +40,7 @@ export const formValidate = <T extends JSONValue>(
       errorHash[key] ??= []
       errorHash[key].push(message)
     }
-    const value = formData[key] satisfies JSONValue[string]
+    const value = formData[key]
     switch (type) {
       case 'required':
         if (isEmpty(value)) { pushMsgToErrorHash() }
@@ -83,6 +81,20 @@ export const formValidate = <T extends JSONValue>(
   return errorHash
 }
 
-export function isEmpty(value: JSONValue[string]) {
+export function isEmpty(value: JSONValue) {
   return [null, undefined, ''].includes(value?.toString())
+}
+
+export function hasError(errors?: Record<string, string[]>) {
+  // return Object.values(errors)
+  // .reduce((result, value) => result + value.length, 0) > 0
+  if (!errors) { return false }
+  let result = false
+  for (const key in errors) {
+    if (errors[key]?.length > 0) {
+      result = true
+      break
+    }
+  }
+  return result
 }

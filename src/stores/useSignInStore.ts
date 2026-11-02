@@ -1,4 +1,5 @@
-import { FormErrorsType, FormRules, formValidate, JSONValue } from '@/lib/validator/formValidate';
+import { JSONValue } from '@/global';
+import { FormErrorsType, FormRules, formValidate, } from '@/lib/validator/formValidate';
 import { create } from 'zustand'
 
 export type SignInFormData = { email: string; code: string }

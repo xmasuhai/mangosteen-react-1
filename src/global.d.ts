@@ -40,3 +40,5 @@ export interface ResponseData<T> {
   code: number
   data: T
 }
+
+export type JSONValue = string | number | boolean | null | { [key: string]: JSONValue } | JSONValue[]
