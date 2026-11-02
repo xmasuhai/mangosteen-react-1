@@ -68,7 +68,7 @@ export default defineConfig({
     ),
     'disabled': 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
     'form-sc': 'px-1em flex flex-col gap-y-24px children:(flex flex-col)',
-    'form-label-sc': 'text-18px mb-.5em',
+    'form-label-sc': 'vertical-mid text-18px mb-.5em',
     'form-input-text-sc': cn(
       'w-full h-3em px-1em leading-2em py-.5em',
       'b-1 b-[var(--main)] rounded-.5em text-18px',

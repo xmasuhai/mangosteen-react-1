@@ -29,7 +29,7 @@ export const useSignInStore = create<SignIn>()((set, /* get */) => ({
   setError: (error: Partial<FormErrorsType<FormData>>) => {
     set((state) => ({
       ...state,
-      error: { ...state.error, ...error, },
+      error: { ...error, },
     }))
   },
   clearError: () => {

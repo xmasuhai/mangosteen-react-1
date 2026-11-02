@@ -13,7 +13,7 @@ interface Props {
 export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
   const Icon = (<SvgIcon name="back-arrow" className="" />)
 
-  const { data, setData, error, setError, clearError } = useSignInStore()
+  const { data, setData, error, setError, } = useSignInStore()
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -31,7 +31,6 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    clearError()
     const error = formValidate(data, [
       {key: 'email', type: 'required', required: true, message: '请输入邮箱地址',},
       {key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确',},
@@ -63,12 +62,12 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
       {/* 表单 */}
       <form onSubmit={onSubmit} className="form-sc">
         {/* 邮箱 */}
-        <section form-label-sc>
-          <label htmlFor="email" className="vertical-mid block text-[0.8em] mb-[0.5em]">
+        <section>
+          <label htmlFor="email" className="form-label-sc">
             邮箱地址：
             {(
               error.email &&
-                <span className="color-[var(--error-color)]">{error.email.join('，')}</span>
+                <span className="vertical-mid color-[var(--error-color)] text-.75em">{error.email.join('，')}</span>
             )}
           </label>
           <input
@@ -82,17 +81,18 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
         </section>
 
         {/* 验证码 */}
-        <section form-label-sc>
-          <label htmlFor="sms-code" className="vertical-mid block text-[0.8em] mb-[0.5em]">
+        <section>
+          <label htmlFor="sms-code" className="form-label-sc">
             验证码：
             {(
               error.code &&
-              <span className="color-[var(--error-color)]">{error.code.join('，')}</span>
+              <span className="vertical-mid color-[var(--error-color)] text-.75em">{error.code.join('，')}</span>
             )}
           </label>
           <div className="flex w-full gap-x-[1em]">
             <input
               type="text"
+              id="sms-code"
               value={data.code}
               onChange={onChangeCode}
               placeholder="六位数字"
