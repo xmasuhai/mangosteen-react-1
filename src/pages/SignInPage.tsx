@@ -20,7 +20,7 @@ const signInRules: FormRules<SignInFormData> = [
 export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
   const Icon = (<SvgIcon name="back-arrow" className="" />)
 
-  const { data, setData, error, setError, clearError, } = useSignInStore()
+  const { data, setData, error, clearError, revalidateFormItems } = useSignInStore()
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -36,21 +36,9 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
     })
   }
 
-  const onFormItemsBlur = <T extends JSONValue>(
-    formData: Partial<T>,
-    formRules: FormRules<T>,
-    lastError?: FormErrorsType<T>
-  ) => {
-    clearError()
-    const keys = Object.keys(formData)
-    const validatingRules = formRules.filter(rule => keys.includes(String(rule.key)))
-    const formError = formValidate(formData, validatingRules)
-    setError({...lastError, ...formError})
-  }
-
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    onFormItemsBlur<SignInFormData>(data, signInRules)
+    revalidateFormItems<SignInFormData>(data, signInRules)
   }
 
   return (
@@ -82,7 +70,7 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
             id="email"
             value={data.email}
             onChange={onChangeEmail}
-            onBlur={() => onFormItemsBlur<SignInFormData>({ email: data.email }, signInRules, error)}
+            onBlur={() => revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)}
             onFocus={() => clearError('email')}
             placeholder="请输入邮箱，然后点击发送验证码"
             className="form-input-text-sc" />
@@ -103,7 +91,7 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
               id="sms-code"
               value={data.code}
               onChange={onChangeCode}
-              onBlur={() => onFormItemsBlur<SignInFormData>({ code: data.code }, signInRules, error)}
+              onBlur={() => revalidateFormItems<SignInFormData>({ code: data.code }, signInRules, error)}
               onFocus={() => clearError('code')}
               placeholder="六位数字"
               className="form-input-text-sc w-[9em]" />
