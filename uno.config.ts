@@ -63,10 +63,17 @@ export default defineConfig({
   ],
   shortcuts: {
     'primary-btn': cn(
-      'w-100% h-48px b-none rounded-8px',
-      'bg-[var(--button-primary-color)] text-center color-[var(--button-primary-text-color)]',
-
+      'w-100% h-48px b-none rounded-8px text-center',
+      'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]',
     ),
     'disabled': 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
+    'form-sc': 'px-1em flex flex-col gap-y-24px children:(flex flex-col)',
+    'form-label-sc': 'text-18px mb-.5em',
+    'form-input-text-sc': cn(
+      'w-full h-3em px-1em leading-2em py-.5em',
+      'b-1 b-[var(--main)] rounded-.5em text-18px',
+      'focus:(shadow-[inset_0_0_3px_var(--main)] outline-none)',
+    ),
+    'form-btn-sc': 'h-3em w-full bg-[var(--main)] b-unset color-white text-18px rounded-.5em',
   },
 })

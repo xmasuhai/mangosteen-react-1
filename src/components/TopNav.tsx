@@ -6,7 +6,7 @@ interface Props {
   icon: React.ReactNode
 }
 
-export const TopNav: React.FC<Props> = ({ title, className, icon }) => {
+export const TopNav: React.FC<Props> = ({ title = '山竹记账', className, icon }) => {
   return (
     <div
       className={cn(
