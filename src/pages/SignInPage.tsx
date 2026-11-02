@@ -39,9 +39,9 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
         {/* 验证码 */}
         <section form-label-sc>
           <label htmlFor="sms-code" className="block text-[0.8em] mb-[0.5em]">验证码</label>
-          <div className="flex w-full">
+          <div className="flex w-full gap-x-[1em]">
             <input type="text" placeholder="六位数字" className="form-input-text-sc w-[9em]" />
-            <button type="button" className="grow-1 ml-[1em] form-btn-sc">发送验证码</button>
+            <button type="button" className="grow-1 form-btn-sc">发送验证码</button>
           </div>
         </section>
 

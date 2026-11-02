@@ -13,6 +13,7 @@ declare module 'react' {
     relative?: boolean
     absolute?: boolean
     scopedId?: string
+    'focus:shadow'?: boolean
     // 或者直接使用通配符或特殊定义
     [key: string]: unknown
   }
