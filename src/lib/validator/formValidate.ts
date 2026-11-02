@@ -2,7 +2,7 @@ interface JSONValue {
   [key: string]: string | number | null | undefined | JSONValue
 }
 
-interface FormData {
+interface FormValidatingData {
   [key: string]: JSONValue
 }
 
@@ -20,7 +20,7 @@ type FormRule<T> = {
 type FormRules<T> = FormRule<T>[]
 type FormErrorsType<T extends JSONValue> = { [k in keyof T]?: string[] }
 
-export type { JSONValue, FormData, FormRule, FormRules, FormErrorsType, }
+export type { JSONValue, FormValidatingData, FormRule, FormRules, FormErrorsType, }
 
 /**
  * @Description: 验证表单
@@ -31,7 +31,7 @@ export type { JSONValue, FormData, FormRule, FormRules, FormErrorsType, }
  * @FilePath: src/shared/validator/formValidate.ts
  */
 export const formValidate = <T extends JSONValue>(
-  formData: T,
+  formData: Partial<T>,
   rules: FormRules<T>,
 ): FormErrorsType<T> => {
   const errorHash: FormErrorsType<T> = {}

@@ -1,8 +1,8 @@
 import { GradientBanner } from "@/components/GradientBanner"
 import { SvgIcon } from "@/components/SvgIcon"
 import { TopNav } from "@/components/TopNav"
-import { formValidate } from "@/lib/validator/formValidate";
-import { useSignInStore } from "@/stores/useSignInStore";
+import { FormErrorsType, FormRules, formValidate, JSONValue, } from "@/lib/validator/formValidate";
+import { SignInFormData, useSignInStore } from "@/stores/useSignInStore";
 import { cn } from "cn"
 import { FormEventHandler } from "react";
 
@@ -10,10 +10,17 @@ interface Props {
   className?: string
 }
 
+const signInRules: FormRules<SignInFormData> = [
+  { key: 'email', type: 'required', required: true, message: '请输入邮箱地址', },
+  { key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确', },
+  { key: 'code', type: 'required', required: true, message: '请输入验证码', },
+  { key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码', },
+]
+
 export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
   const Icon = (<SvgIcon name="back-arrow" className="" />)
 
-  const { data, setData, error, setError, } = useSignInStore()
+  const { data, setData, error, setError, clearError, } = useSignInStore()
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -29,20 +36,21 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
     })
   }
 
+  const onFormItemsBlur = <T extends JSONValue>(
+    formData: Partial<T>,
+    formRules: FormRules<T>,
+    lastError?: FormErrorsType<T>
+  ) => {
+    clearError()
+    const keys = Object.keys(formData)
+    const validatingRules = formRules.filter(rule => keys.includes(String(rule.key)))
+    const formError = formValidate(formData, validatingRules)
+    setError({...lastError, ...formError})
+  }
+
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    const error = formValidate(data, [
-      {key: 'email', type: 'required', required: true, message: '请输入邮箱地址',},
-      {key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确',},
-      {key: 'code', type: 'required', required: true, message: '请输入验证码',},
-      {key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码',},
-    ])
-    setError(error)
-
-    console.log('onSubmit_______________________')
-    console.log('%c⧭ data', 'color: #731d1d', data);
-    console.log('%c⧭ error', 'color: #731d1d', error);
-    console.log('_______________________onSubmit')
+    onFormItemsBlur<SignInFormData>(data, signInRules)
   }
 
   return (
@@ -56,8 +64,6 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
         <SvgIcon name="mangosteen" className="inline w-[64px] h-[68px]" />
         <h1 className="text-[2em] color-[var(--app-name-text)] font-bold">山竹记账</h1>
       </section>
-
-      <div className="border b-solid b-red">{ JSON.stringify(data) }</div>
 
       {/* 表单 */}
       <form onSubmit={onSubmit} className="form-sc">
@@ -76,6 +82,8 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
             id="email"
             value={data.email}
             onChange={onChangeEmail}
+            onBlur={() => onFormItemsBlur<SignInFormData>({ email: data.email }, signInRules, error)}
+            onFocus={() => clearError('email')}
             placeholder="请输入邮箱，然后点击发送验证码"
             className="form-input-text-sc" />
         </section>
@@ -95,6 +103,8 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
               id="sms-code"
               value={data.code}
               onChange={onChangeCode}
+              onBlur={() => onFormItemsBlur<SignInFormData>({ code: data.code }, signInRules, error)}
+              onFocus={() => clearError('code')}
               placeholder="六位数字"
               className="form-input-text-sc w-[9em]" />
             <button type="button" className="grow-1 form-btn-sc">发送验证码</button>
