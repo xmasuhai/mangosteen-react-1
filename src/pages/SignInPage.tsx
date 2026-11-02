@@ -1,6 +1,7 @@
 import { GradientBanner } from "@/components/GradientBanner"
 import { SvgIcon } from "@/components/SvgIcon"
 import { TopNav } from "@/components/TopNav"
+import { formValidate } from "@/lib/validator/formValidate";
 import { useSignInStore } from "@/stores/useSignInStore";
 import { cn } from "cn"
 import { FormEventHandler } from "react";
@@ -12,7 +13,7 @@ interface Props {
 export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
   const Icon = (<SvgIcon name="back-arrow" className="" />)
 
-  const { data, setData } = useSignInStore()
+  const { data, setData, error, setError, clearError } = useSignInStore()
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -30,8 +31,18 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
+    clearError()
+    const error = formValidate(data, [
+      {key: 'email', type: 'required', required: true, message: '请输入邮箱地址',},
+      {key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确',},
+      {key: 'code', type: 'required', required: true, message: '请输入验证码',},
+      {key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码',},
+    ])
+    setError(error)
+
     console.log('onSubmit_______________________')
-    console.log('%c⧭', 'color: #731d1d', data);
+    console.log('%c⧭ data', 'color: #731d1d', data);
+    console.log('%c⧭ error', 'color: #731d1d', error);
     console.log('_______________________onSubmit')
   }
 
@@ -53,7 +64,13 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
       <form onSubmit={onSubmit} className="form-sc">
         {/* 邮箱 */}
         <section form-label-sc>
-          <label htmlFor="email" className="block text-[0.8em] mb-[0.5em]">邮箱地址</label>
+          <label htmlFor="email" className="vertical-mid block text-[0.8em] mb-[0.5em]">
+            邮箱地址：
+            {(
+              error.email &&
+                <span className="color-[var(--error-color)]">{error.email.join('，')}</span>
+            )}
+          </label>
           <input
             type="email"
             name="email"
@@ -66,7 +83,13 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
 
         {/* 验证码 */}
         <section form-label-sc>
-          <label htmlFor="sms-code" className="block text-[0.8em] mb-[0.5em]">验证码</label>
+          <label htmlFor="sms-code" className="vertical-mid block text-[0.8em] mb-[0.5em]">
+            验证码：
+            {(
+              error.code &&
+              <span className="color-[var(--error-color)]">{error.code.join('，')}</span>
+            )}
+          </label>
           <div className="flex w-full gap-x-[1em]">
             <input
               type="text"
