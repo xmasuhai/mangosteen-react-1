@@ -1,6 +1,7 @@
 import { Root } from '@/components/Root'
 import { Home } from '@/pages/Home'
 import { ItemsPage } from '@/pages/ItemsPage'
+import { SignInPage } from '@/pages/SignInPage'
 import { welcomeRouter } from '@/route/welcomeRouter'
 import type { RouteObject } from 'react-router-dom'
 
@@ -18,7 +19,7 @@ export const routes: RouteObject[] = [
     path: '/items',
     element: <ItemsPage />,
   },
-  { path: '/sign_in', element: <div>sign in</div>},
+  { path: '/sign_in', element: <SignInPage />},
   { path: '/statistics', element: <div>统计图表</div>},
   { path: '/export', element: <div>敬请期待</div>},
   { path: '/notify', element: <div>敬请期待</div>},
