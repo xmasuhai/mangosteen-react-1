@@ -17,7 +17,9 @@ export default defineConfig({
   transformers: [
     // 支持 where:(a b c) 这种分组写法
     transformerVariantGroup(),
+    // 支持在 JSX 中使用属性化语法
     transformerAttributifyJsx(),
+    // 支持 @apply、@screen、theme() 和 icon()
     transformerDirectives(),
   ],
   theme: {
