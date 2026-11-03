@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx, transformerVariantGroup } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx, transformerDirectives, transformerVariantGroup } from 'unocss'
 import { presetWind4 } from '@unocss/preset-wind4'
 import { cn } from 'cn'
 
@@ -18,6 +18,7 @@ export default defineConfig({
     // 支持 where:(a b c) 这种分组写法
     transformerVariantGroup(),
     transformerAttributifyJsx(),
+    transformerDirectives(),
   ],
   theme: {
     colors: {
