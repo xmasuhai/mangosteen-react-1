@@ -22,7 +22,7 @@ export const ItemsPage: React.FC = () => {
     <div className={cn('container w-screen h-screen relative')}>
       <GradientBanner>
         <TopNav icon={Icon} title="山竹记账" />
-        <DateRangePicker selectedId={selectedDate} onSelected={setSelectedDate} />
+        <DateRangePicker selectedId={selectedDate} onSelect={setSelectedDate} />
       </GradientBanner>
 
       <main className="max-h-[calc(100svh-112px)]">

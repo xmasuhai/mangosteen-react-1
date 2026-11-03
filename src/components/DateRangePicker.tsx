@@ -1,10 +1,10 @@
-import { cn } from "cn"
+import { SwitchTabs } from "@/components/SwitchTabs";
 
 export type DateTabRangeStr = 'thisMonth' | 'lastMonth' | 'thisYear' | 'customDate'
 
 interface Props {
   selectedId: DateTabRangeStr
-  onSelected: (selectedId: DateTabRangeStr) => void
+  onSelect: (key: DateTabRangeStr) => void
 }
 
 type DateRange = {
@@ -21,32 +21,12 @@ const dateRanges: Readonly<DateRange[]> = [
 
 export const DateRangePicker: React.FC<Props> = ({
   selectedId = 'thisMonth',
-  onSelected,
+  onSelect: onSelected,
 }) => {
-  const selectedClass = (tabId: string) =>
-    selectedId === tabId
-      ? cn(
-        'relative',
-        `after:(content-[""] block absolute bottom-0 left-0 w-full h-4px bg-[var(--tabs-indicator-bg)])`,
-      )
-      : ''
   return (
-    <nav className="">
-      <menu className={cn(
-        'flex text-white',
-        'children:(px-24px py-12px cursor-pointer)',
-      )}>
-        {
-          dateRanges.map(item => (
-            <li
-              key={item.key}
-              onClick={() => onSelected(item.key)}
-              className={selectedClass(item.key)}>
-              {item.text}
-            </li>
-          ))
-        }
-      </menu>
-    </nav>
+    <SwitchTabs
+      selectedTabKey={selectedId}
+      tabItems={dateRanges}
+      onSwitchTab={onSelected} />
   )
 }
