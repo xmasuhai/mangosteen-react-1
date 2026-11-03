@@ -25,8 +25,8 @@ export const ItemsPage: React.FC = () => {
         <DateRangePicker selectedId={selectedDate} onSelected={setSelectedDate} />
       </GradientBanner>
 
-      <main className="max-h-[calc(100vh-112px)]">
-        <div className="relative max-h-[calc(100vh-112px)] flex flex-col">
+      <main className="max-h-[calc(100svh-112px)]">
+        <div className="relative max-h-[calc(100svh-112px)] flex flex-col">
           <ItemsSummary startDate={selectedDate} endDate={selectedDate} />
 
           <ItemsList startDate={selectedDate} endDate={selectedDate} />

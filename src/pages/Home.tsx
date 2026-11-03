@@ -25,7 +25,7 @@ export const Home: React.FC<Props> = ({ title }) => {
   if (isLoadingMe || isLoadingItems) {
     return (
       <main h-screen flex flex-col justify-center items-center>
-        <InLoading className="h-100vh size-[5em]" message="正在加载，请稍等..." />
+        <InLoading className="h-100svh size-[5em]" message="正在加载，请稍等..." />
       </main>
     )
   }

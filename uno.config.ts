@@ -38,6 +38,7 @@ export default defineConfig({
     [/^scrollbar-default$/, () => ({
       'scrollbar-width': 'auto',
     })],
+    ["h-screen", { height: 'calc(100vh - var(--vh-offset, 0px))' }],
   ],
   variants: [
     // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
