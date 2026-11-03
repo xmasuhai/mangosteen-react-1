@@ -21,6 +21,7 @@
     "react-router-dom": "6.30.6",
     "styled-components": "6.6.0",
     "swr": "2.5.1",
+    "vh-check": "2.0.5",
     "zustand": "5.0.16"
   },
   "devDependencies": {

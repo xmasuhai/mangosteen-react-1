@@ -190,6 +190,9 @@ importers:
       swr:
         specifier: 2.5.1
         version: 2.5.1(react@18.3.1)
+      vh-check:
+        specifier: 2.0.5
+        version: 2.0.5
       zustand:
         specifier: 5.0.16
         version: 5.0.16(@types/react@18.3.31)(react@18.3.1)(use-sync-external-store@1.7.0(react@18.3.1))
@@ -3881,6 +3884,9 @@ packages:
   verkit@0.4.1:
     resolution: {integrity: sha512-mMVzj0TXExtVdlDEq+Mzp0eyOuyznNpFobNM3uAqe3HVm/Ps2c+u17BligMkZjZCA6EiXpoon8iRTer3iu40SQ==}
     engines: {node: '>=18.12.0'}
+
+  vh-check@2.0.5:
+    resolution: {integrity: sha512-vHtIYWt9uLl2P2tLlatVpMwv9+ezuJCtMNjUVIpzd5Pa/dJXN8AtqkKmVRcNSlmXyCjkCkbMQX/Vs9axmdlfgg==}
 
   vite-plugin-console-banner@0.1.2:
     resolution: {integrity: sha512-8aZ75tMR0qJoEh+3nM9h/aDBmd+LQ6MMv9yXUx0e04sVVoInG9nsENXR5q+U0fylny61IhjqUS8OVYsjENtHpg==}
@@ -7786,6 +7792,8 @@ snapshots:
   verkit@0.3.2: {}
 
   verkit@0.4.1: {}
+
+  vh-check@2.0.5: {}
 
   vite-plugin-console-banner@0.1.2(figlet@1.12.0)(vite@8.3.5(@types/node@26.6.3)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.107.1)(sass@1.107.1)(yaml@2.9.1)):
     dependencies:
