@@ -10,6 +10,11 @@ interface Props {
   endDate: string
 }
 
+const Div = styled.div`
+    padding: 16px;
+    text-align: center;
+  `
+
 export const ItemsList: React.FC<Props> = ({
   // startDate,
   // endDate,
@@ -38,11 +43,6 @@ export const ItemsList: React.FC<Props> = ({
   const loadMore = () => {
     setSize(size + 1)
   }
-
-  const Div = styled.div`
-    padding: 16px;
-    text-align: center;
-  `
   const errorTip = error && (<Div className="color-[var(--error-color)]">数据加载失败，请稍后刷新页面</Div>)
 
   const inLoadingState = isLoading || isValidating
