@@ -21,12 +21,13 @@ const dateRanges: Readonly<DateRange[]> = [
 
 export const DateRangePicker: React.FC<Props> = ({
   selectedId = 'thisMonth',
-  onSelect: onSelected,
+  onSelect,
 }) => {
   return (
     <SwitchTabs
       selectedTabKey={selectedId}
       tabItems={dateRanges}
-      onSwitchTab={onSelected} />
+      onSwitchTab={onSelect}
+      className="bg-[var(--welcome-card-end)]" />
   )
 }

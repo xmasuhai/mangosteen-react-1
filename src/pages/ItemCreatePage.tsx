@@ -10,26 +10,32 @@ interface Props {
 }
 
 type TabKey = 'incomes' | 'expenses'
-const tabItems = [
-  { key: 'expenses', text: '支出' },
-  { key: 'incomes', text: '收入' },
+interface TabItem {
+  key: TabKey
+  text: string
+  tabContent?: React.ReactNode
+}
+const tabItems: Readonly<Array<TabItem>> = [
+  { key: 'expenses', text: '支出', tabContent: <div>支出</div>, },
+  { key: 'incomes', text: '收入', tabContent: <div>收入</div>, },
 ] as const
 
-export const ItemCreatePage: React.FC<Props> = ({ /* className, */ }) => {
+export const ItemCreatePage: React.FC<Props> = ({ className, }) => {
   const Icon = (<SvgIcon name="back-arrow" className="size-[24px]" />)
-
-  const [selectedKey, setSelectedKey] = useState<TabKey>('incomes')
+  const [selectedKey, setSelectedKey] = useState<TabKey>('expenses')
 
   return (
-    <div className={cn('container w-screen h-screen relative')}>
+    <div className={cn('container w-screen h-screen relative', className)}>
       <GradientBanner>
         <TopNav icon={Icon} title="记一笔" />
-        <SwitchTabs
-          selectedTabKey={selectedKey}
-          tabItems={tabItems}
-          onSwitchTab={(key: TabKey) => { setSelectedKey(key) }}
-          className={cn('[&>menu>li]:(grow-1 text-center)')}/>
       </GradientBanner>
+
+      <SwitchTabs
+        classPrefix="fuck"
+        selectedTabKey={selectedKey}
+        tabItems={tabItems}
+        onSwitchTab={(key: TabKey) => { setSelectedKey(key) }}
+        className={cn('[&>nav>menu>li]:(grow-1 text-center bg-[var(--welcome-card-end)])')} />
     </div>
   )
 }
