@@ -59,4 +59,11 @@
   // item-tag
   --item-tag-bg: #efefef;
   --item-tag-text-color: #666;
+  // input pad
+    --pad-border-color: #ddd;
+    --pad-button-bg-color: var(--main-light-bg);
+    --pad-submit-button-bg-color: var(--button-bg);
+    --pad-submit-button-text-color: var(--button-text-color);
+    --amount-text-color: #53a867;
+    --date-text-color: #999;
 }
