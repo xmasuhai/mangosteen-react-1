@@ -1,31 +1,40 @@
+import { SvgIcon } from "@/components/SvgIcon";
 import type { TabKind } from "@/global";
+import { IconTagItem } from "@/modules/tags/IconTagItem";
 import { cn } from "cn";
+import { useState } from "react";
 
 interface Props {
   className?: string
   kind: TabKind
 }
 
+const tags = Array.from({ length: 21 }, (_, i) => i + 1)
+
 export const IconTags: React.FC<Props> = ({ className, kind }) => {
   console.log('IconTags %c⧭ kind', 'color: #007300', kind);
-  const tags = Array.from({ length: 99 }, (_, i) => i + 1)
+
+  const [selectedTabKey, setSelectedTabKey] = useState<string>('1')
   return (
     <div className={cn(className) }>
       <ol className={cn(
         'grid place-items-center justify-center grid-cols-[repeat(auto-fit,3em)]',
-        'py-1em px-.5em gap-x-[2em] gap-y-[1em]'
+        'py-1em px-.5em gap-x-[2em] gap-y-[1em]',
       )}>
+        <IconTagItem
+          tagKey="add"
+          tagName="添加" >
+          <SvgIcon name="add" className="size-[24px] fill-[var(--main)]" />
+        </IconTagItem>
         {tags.map(tag => (
-          <li
+          <IconTagItem
             key={tag}
-            className={cn(
-            'size-3em flex items-center justify-center',
-            ' b-1 b-solid b-red '
-          )}>
-            🤣
-          </li>
+            selectedKey={selectedTabKey}
+            onSelectKey={setSelectedTabKey}
+            tagKey={`${tag}`}
+            tagName="打的"
+            tagSign="🤑" />
         ))}
-
       </ol>
     </div>
   )
