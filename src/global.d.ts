@@ -42,3 +42,5 @@ export interface ResponseData<T> {
 }
 
 export type JSONValue = string | number | boolean | null | { [key: string]: JSONValue } | JSONValue[]
+
+export type TabKind = Item['kind'] // 'incomes' | 'expenses'
