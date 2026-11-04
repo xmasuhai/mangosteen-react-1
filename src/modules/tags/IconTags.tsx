@@ -9,7 +9,7 @@ interface Props {
   kind: TabKind
 }
 
-const tags = Array.from({ length: 21 }, (_, i) => i + 1)
+const tags = Array.from({ length: 98 }, (_, i) => i + 1)
 
 export const IconTags: React.FC<Props> = ({ className, kind }) => {
   console.log('IconTags %c⧭ kind', 'color: #007300', kind);

@@ -23,9 +23,12 @@ export const SwitchTabs = <T extends string>({
   )
 
   return (
-    <div className={cn(className, classPrefix)}>
+    <div className={cn(className, classPrefix, 'flex flex-col',)}>
       {/* 切换标签导航 */}
-      <nav className={cn(classPrefix ? `${classPrefix}-tab-nav` : 'tab-nav',)}>
+      <nav className={cn(
+        classPrefix ? `${classPrefix}-tab-nav` : 'tab-nav',
+        'grow-0 shrink-0',
+      )}>
         <menu className={cn(
           classPrefix ? `${classPrefix}-tab-menu` : 'tab-menu',
           'flex text-white',
@@ -50,6 +53,8 @@ export const SwitchTabs = <T extends string>({
       {/* 导航内容 */}
       <section className={cn(
         classPrefix ? `${classPrefix}-tab-content` : 'tab-content',
+        'grow-1 shrink-1',
+        'overflow-y-auto scrollbar-hide',
       )}>
         {tabItems.find(item => item.key === selectedTabKey)?.tabContent}
       </section>

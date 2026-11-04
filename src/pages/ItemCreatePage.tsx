@@ -3,6 +3,7 @@ import { SvgIcon } from "@/components/SvgIcon";
 import { SwitchTabs } from "@/components/SwitchTabs";
 import { TopNav } from "@/components/TopNav";
 import { TabKind } from "@/global";
+import { InputPad } from "@/modules/items/input/InputPad";
 import { IconTags } from "@/modules/tags/IconTags";
 import { cn } from "cn";
 import { useState } from "react";
@@ -18,7 +19,8 @@ interface TabItem {
 }
 const tabItems: Readonly<Array<TabItem>> = [
   {
-    key: 'expenses', text: '支出', tabContent: <IconTags kind="expenses" />, },
+    key: 'expenses', text: '支出', tabContent: <IconTags kind="expenses" />,
+  },
   { key: 'incomes', text: '收入', tabContent: <IconTags kind="incomes" />, },
 ] as const
 
@@ -26,8 +28,11 @@ export const ItemCreatePage: React.FC<Props> = ({ className, }) => {
   const Icon = (<SvgIcon name="back-arrow" className="size-[24px]" />)
   const [selectedKey, setSelectedKey] = useState<TabKind>('expenses')
   return (
-    <div className={cn('container w-screen h-screen relative', className)}>
-      <GradientBanner>
+    <div className={cn(
+      'container w-screen h-screen relative flex flex-col',
+      className,
+    )}>
+      <GradientBanner className="grow-0 shrink-0">
         <TopNav icon={Icon} title="记一笔" />
       </GradientBanner>
 
@@ -35,7 +40,14 @@ export const ItemCreatePage: React.FC<Props> = ({ className, }) => {
         selectedTabKey={selectedKey}
         tabItems={tabItems}
         onSwitchTab={(key: TabKind) => { setSelectedKey(key) }}
-        className={cn('[&>nav>menu>li]:(grow-1 text-center bg-[var(--welcome-card-end)])')} />
+        className={cn(
+          'grow-1 shrink-1 overflow-hidden',
+          '[&>nav>menu>li]:(grow-1 text-center bg-[var(--welcome-card-end)])',
+        )} />
+
+      <section className="grow-0 shrink-0 border b-solid b-red ">
+        <InputPad />
+      </section>
     </div>
   )
 }
