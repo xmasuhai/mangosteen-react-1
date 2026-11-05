@@ -1,12 +1,23 @@
+import { SvgIcon } from "@/components/SvgIcon";
+import { genDateStr } from "@/lib/helpers/genDateStr";
+import { useState } from "react";
+
 interface Props {
   className?: string
 }
 
 export const DateInput: React.FC<Props> = ({ /* className, */ }) => {
-
+  const [currentDate,] = useState<string>(genDateStr())
+  const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false)
+  const toggleDatePicker = () => {
+    setDatePickerVisible(!datePickerVisible)
+  }
   return (
     <span className="flex justify-start items-center">
-      DateInput
+      <SvgIcon onClick={toggleDatePicker} name="salary-calendar" className="size-[2.5em] mx-1" />
+      <span className="animation-rainbow text-[14px] font-mono color-[var(--vp-c-brand-next)]">
+        <span onClick={toggleDatePicker}>{currentDate}</span>
+      </span>
     </span>
   )
 }
