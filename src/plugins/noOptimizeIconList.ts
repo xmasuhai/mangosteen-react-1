@@ -1,11 +1,13 @@
 export const noOptimizeIconList = [
   'chart',
+  'clock',
+  'cloud',
   'export',
   'notify',
   'pig',
   'mangosteen',
-  'tech_stack',
-  'work-card',
   'moneybag',
   'tag-dollar',
+  'tech_stack',
+  'work-card',
 ]
