@@ -10,7 +10,7 @@ export const AmountNumberOutput: React.FC<Props> = ({ className, }) => {
       'text-[24px] font-mono color-[var(--amount-text-color)]',
       className,
     )}>
-      18399.89
+      123456789.01
     </span>
   )
 }
