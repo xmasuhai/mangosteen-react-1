@@ -8,5 +8,9 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["vite.config.ts", "./src/plugins/*.ts"]
+  "include": [
+    "vite.config.ts",
+    "./src/plugins/*.ts",
+    "src/vite-env.d.ts"
+  ]
 }

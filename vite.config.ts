@@ -15,6 +15,9 @@ export default defineConfig(({ command }: ConfigEnv) => ({
     __IS_DEV__: command === 'serve',
   },
   plugins: [
+    svgsprites({
+      noOptimizeList: noOptimizeIconList,
+    }),
     UnoCSS(),
     jsxScoped({ scopedIdAttributeName: 'scopedid' }),
     mockDevServerPlugin({
@@ -36,9 +39,6 @@ export default defineConfig(({ command }: ConfigEnv) => ({
         { label: "徐帅的博客", url: "https://xmasuhai.xyz" },
         { label: "徐帅${year}简历", url: "https://xmasuhai.xyz/my-latest-resume/" },
       ],
-    }),
-    svgsprites({
-      noOptimizeList: noOptimizeIconList,
     }),
   ],
   server: {
