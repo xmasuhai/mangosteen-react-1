@@ -5,15 +5,16 @@ import { useMenuStore } from "@/stores/useMenuStore"
 import { animated, useSpring } from "@react-spring/web"
 import { cn } from "cn"
 
-interface Props { }
+interface Props {
+  className?: string
+}
 
-export const FloatingOverlayMenu: React.FC<Props> = () => {
+export const FloatingOverlayMenu: React.FC<Props> = ({ className, }) => {
   const { visible, setVisible, } = useMenuStore()
   const menuStyle = useSpring({
     transform: visible ? 'translateX(0%)' : 'translateX(-100%)',
     opacity: visible ? 1 : 0,
   })
-
   return (
     <>
       <animated.div
@@ -24,6 +25,7 @@ export const FloatingOverlayMenu: React.FC<Props> = () => {
           'w-70vw max-w-20em h-screen',
           'flex flex-col',
           'z-[var(--z-menu)]',
+          className,
         )}>
         <UserHeader className="grow-0 shrink-0" />
         <MenuList className="grow-1 shrink-1" />

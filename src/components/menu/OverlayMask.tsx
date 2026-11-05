@@ -20,7 +20,6 @@ export const OverlayMask: React.FC<Props> = ({ className, visible, onClickMask, 
     },
     visibility: maskVisible ? 'visible' : 'hidden',
   })
-
   return (
     <animated.div
       style={maskAnimeStyle}
