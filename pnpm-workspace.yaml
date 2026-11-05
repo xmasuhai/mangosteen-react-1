@@ -33,7 +33,7 @@ minimumReleaseAgeExclude:
   - sass-embedded-win32-x64@1.105.1 || 1.106.1 || 1.107.1
   - sass-embedded@1.105.1 || 1.106.1 || 1.107.1
   - sass@1.105.1 || 1.106.1 || 1.107.1
-  - vite@8.3.5
+  - vite@8.3.5 || 8.3.6
   - zustand@5.0.16
   - '@unocss/autocomplete@66.12.0'
   - '@unocss/cli@66.12.0'
