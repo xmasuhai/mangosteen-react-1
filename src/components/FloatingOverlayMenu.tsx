@@ -31,7 +31,7 @@ export const FloatingOverlayMenu: React.FC<Props> = () => {
 
       <OverlayMask
         visible={visible}
-        onClickOverlay={() => setVisible(false)} />
+        onClickMask={() => setVisible(false)} />
     </>
   )
 }
