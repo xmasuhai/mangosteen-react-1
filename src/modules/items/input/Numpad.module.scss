@@ -1,0 +1,23 @@
+/**
+ * @Description: 演示grid布局
+ * @Description: 定义 grid-area 的名称列表；遍历生成对应的 grid-area 子元素样式名称
+ * @Description: 与tsx名称逻辑耦合
+ * @Author: xmasuhai <xmasuhai@163.com>
+ * @Date: 2026-10-16 14:58:28
+ * @LastEditors: xmasuhai <xmasuhai@163.com>
+ * @LastEditTime: 2026-10-16 20:37:35
+ * @FilePath: src/modules/items/Numpad.module.scss
+ */
+
+.button-wrapper {
+  display: grid;
+  grid-auto-rows: 56px;
+  grid-auto-columns: 1fr;
+  background: var(--pad-border-color);
+  gap: 1px;
+  border-top: 1px solid var(--pad-border-color);
+
+  &>.button-item {
+    border-color: transparent;
+  }
+}

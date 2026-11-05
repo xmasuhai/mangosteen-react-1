@@ -45,7 +45,7 @@ export const ItemCreatePage: React.FC<Props> = ({ className, }) => {
           '[&>nav>menu>li]:(grow-1 text-center bg-[var(--welcome-card-end)])',
         )} />
 
-      <section className="grow-0 shrink-0 border b-solid b-red ">
+      <section className="grow-0 shrink-0">
         <InputPad />
       </section>
     </div>
