@@ -39,8 +39,6 @@
   --button-height: 48px;
   // sign_in
   --user-text: #cea1ff;
-  // 划出浮层 遮罩层
-  --z-index-float-overlay: 40;
   --overlay-mask-bg: rgba(0, 0, 0, 0.5);
   --overlay-bg: var(--main-light-bg);
   --overlay-user-bg: var(--button-bg);
@@ -49,8 +47,10 @@
 
   // z-index
   --z-default: 128;
+  --z-float-overlay: 192;
   --z-menu: 256;
   --z-dialog: 512;
+  --z-popup: 1024;
   // form
   --input-shadow: rgba(0, 0, 0, 0.25);
   // uno-vars
