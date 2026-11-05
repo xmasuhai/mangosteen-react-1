@@ -7,6 +7,7 @@ export const noOptimizeIconList = [
   'pig',
   'mangosteen',
   'moneybag',
+  'salary-calendar',
   'tag-dollar',
   'tech_stack',
   'work-card',
