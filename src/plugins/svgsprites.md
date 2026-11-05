@@ -103,6 +103,21 @@ svgsprites({
 })
 ```
 
+### 项目当前配置中的免优化图标列表
+
+本项目 `vite.config.ts` 通过 `noOptimizeIconList.ts` 传入 `noOptimizeList`，当前免优化图标包括：
+
+- `chart`
+- `export`
+- `notify`
+- `pig`
+- `mangosteen`
+- `tech_stack`
+- `work-card`
+- `moneybag`
+- `tag-dollar`
+
+这些图标在构建时将跳过 SVGO 优化，以保留其原始属性与结构。
 ### 多实例使用
 
 ```ts
