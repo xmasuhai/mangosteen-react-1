@@ -8,10 +8,9 @@ import 'virtual:svgsprites'
 import vhCheck from 'vh-check'
 vhCheck()
 
-// const div = document.getElementById('root') as HTMLElement
-const div = document.getElementById('root')
+export const rootElement = document.getElementById('root') as HTMLElement
 
-const root = ReactDOM.createRoot(div!)
+export const root = ReactDOM.createRoot(rootElement)
 
 root.render(
   <React.StrictMode>

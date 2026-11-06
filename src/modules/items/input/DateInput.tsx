@@ -1,5 +1,5 @@
 import { SvgIcon } from "@/components/SvgIcon";
-import { PopUp } from "@/components/ui/PopUp";
+import { usePopup } from "@/hooks/usePopup";
 import { genDateStr } from "@/lib/helpers/genDateStr";
 import { cn } from "cn";
 import { useState } from "react";
@@ -10,17 +10,14 @@ interface Props {
 
 export const DateInput: React.FC<Props> = ({ className, }) => {
   const [currentDate,] = useState<string>(genDateStr())
-  const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false)
-  const toggleDatePicker = () => {
-    setDatePickerVisible(!datePickerVisible)
-  }
-
+  const { portalPopup, togglePopup, } = usePopup()
   return (
     <>
+      {portalPopup}
       <span
-        onClick={toggleDatePicker}
+        onClick={togglePopup}
         className={cn(
-          'flex justify-start items-center gap-x-[.5em]',
+          'flex justify-start items-center gap-x-[.5em] pr-1em',
           className,
         )}>
         <SvgIcon name="salary-calendar" className="grow-0 shrink-0 size-[2.5em] mx-1 pl-.5em" />
@@ -28,10 +25,6 @@ export const DateInput: React.FC<Props> = ({ className, }) => {
           {currentDate}
         </span>
       </span>
-
-      <PopUp
-        visible={datePickerVisible}
-        onClickMask={toggleDatePicker}/>
     </>
   )
 }

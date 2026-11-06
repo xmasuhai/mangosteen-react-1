@@ -1,6 +1,7 @@
 import { OverlayMask } from "@/components/menu/OverlayMask";
 import { animated, useSpring } from "@react-spring/web";
 import { cn } from "cn";
+import s from "./PopUp.module.scss";
 
 interface Props {
   className?: string
@@ -34,6 +35,8 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, }) => 
       <animated.div
         style={menuStyle}
         className={cn(
+          'popup-content',
+          s.popupContent,
           'fixed bottom-0 left-0 w-full min-h-300px bg-red',
           'z-[calc(var(--z-popup)+1)]',
         )}>

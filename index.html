@@ -8,7 +8,11 @@
     <title>Vite + React + TS</title>
   </head>
   <body>
+    <!-- 将会生成svg-sprites隐藏节点 -->
+    <!-- 业务代码根节点 -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- 独立的全局传送门：天然免疫应用内部的 transform 和 z-index 污染 -->
+    <div id="portal-root"></div>
   </body>
 </html>
