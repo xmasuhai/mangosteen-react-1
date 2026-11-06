@@ -7,9 +7,10 @@ interface Props {
   className?: string
   visible: boolean
   onClickMask?: () => void
+  children?: React.ReactNode
 }
 
-export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, }) => {
+export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, children, }) => {
   const menuStyle = useSpring({
     transform: visible ? 'translateY(0%)' : 'translateY(100%)',
     opacity: visible ? 1 : 0,
@@ -40,7 +41,7 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, }) => 
           'fixed bottom-0 left-0 w-full min-h-300px bg-red',
           'z-[calc(var(--z-popup)+1)]',
         )}>
-        visible {`${visible}`}
+        {children}
       </animated.div>
     </div>
   )
