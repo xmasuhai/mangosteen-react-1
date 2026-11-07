@@ -28,11 +28,11 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
   }
   const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
     const remainder = translateY % 36
-    if (Math.abs(remainder) < 18) {
-      setTranslateY(translateY - remainder)
-    } else {
-      setTranslateY(translateY + 36 * (remainder > 0 ? 1 : -1) - remainder)
+    let resultY = translateY - remainder
+    if (Math.abs(remainder) > 18) {
+      resultY += 36 * (remainder > 0 ? 1 : -1)
     }
+    setTranslateY(resultY)
     setIsTouching(false)
   }
 
