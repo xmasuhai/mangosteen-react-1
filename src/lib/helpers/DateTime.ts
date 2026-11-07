@@ -1,3 +1,5 @@
+import { createJSONStorage } from 'zustand/middleware'
+
 type Parts = {
   year: number
   month: number
@@ -8,10 +10,11 @@ type Parts = {
   ms: number
 }
 type Unit = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'ms'
+type DateTimeParams = number | string | Date
 
 export class DateTime {
   #date: Date
-  constructor(p?: number | string | Date) {
+  constructor(p?: DateTimeParams) {
     this.#date = p ? new Date(p) : new Date()
   }
   // t = new DateTime(); t.parts.year;
@@ -121,3 +124,5 @@ export class DateTime {
       .replace(/sss/g, this.ms.toString().padStart(3, '0'))
   }
 }
+
+export const createDateTime = (p?: DateTimeParams) => new DateTime(p)
