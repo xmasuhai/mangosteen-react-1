@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "react-perf", "unicorn", "oxc"],
+  "ignorePatterns": ["dist", "*.config.*"],
+  "rules": {
+    "typescript/consistent-type-definitions": "off"
+  }
+}
