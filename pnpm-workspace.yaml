@@ -34,7 +34,7 @@ minimumReleaseAgeExclude:
   - sass-embedded@1.105.1 || 1.106.1 || 1.107.1 || 1.108.0
   - sass@1.105.1 || 1.106.1 || 1.107.1 || 1.108.0
   - vite@8.3.5 || 8.3.6
-  - zustand@5.0.16
+  - zustand@5.0.16 || 5.1.0
   - '@unocss/autocomplete@66.12.0'
   - '@unocss/cli@66.12.0'
   - '@unocss/config@66.12.0'

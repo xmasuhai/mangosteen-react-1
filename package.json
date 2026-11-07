@@ -22,7 +22,7 @@
     "styled-components": "6.6.0",
     "swr": "2.5.1",
     "vh-check": "2.0.5",
-    "zustand": "5.0.16"
+    "zustand": "5.1.0"
   },
   "devDependencies": {
     "@10coding/vite-plugin-jsx-scoped": "0.6.0",
