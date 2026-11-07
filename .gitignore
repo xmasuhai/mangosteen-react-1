@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 /.aicodequalityrisk/
 .terminals/
+.agents/
+.aider-desk/
