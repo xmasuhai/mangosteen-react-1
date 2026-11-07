@@ -1,4 +1,4 @@
-import { DateTime } from '@/lib/helpers/DateTime'
+import { createDateTime } from '@/lib/helpers/DateTime'
 import { cn } from 'cn'
 import { TouchEventHandler, useState } from 'react'
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const DatePickerPopup: React.FC<Props> = ({ className, start, end, value }) => {
-  const t = new DateTime()
+  const t = createDateTime()
   console.log('DatePickerPopup_______________________')
   console.log('%c⧭ t', 'color: #1d3f73', t.add(-10, 'year').format('YYYY年MM月DD日'))
   console.log('_______________________DatePickerPopup')
