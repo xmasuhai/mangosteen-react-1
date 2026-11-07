@@ -23,7 +23,7 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, childr
 
   return (
     <div className={cn(
-      'z-[var(--z-popup)]',
+      'z-[var(--z-popup)] touch-none',
       className,
     )}>
       {/* 遮罩层 */}
@@ -38,7 +38,7 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, childr
         className={cn(
           'popup-content',
           s.popupContent,
-          'fixed bottom-0 left-0 w-full min-h-300px bg-red',
+          'fixed bottom-0 left-0 w-full min-h-300px bg-white',
           'z-[calc(var(--z-popup)+1)]',
         )}>
         {children}
