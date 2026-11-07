@@ -1,18 +1,29 @@
+import { DateTime } from '@/lib/helpers/DateTime'
 import { cn } from 'cn'
 import { TouchEventHandler, useState } from 'react'
 
 interface Props {
   className?: string
+  start?: Date
+  end?: Date
+  value?: Date
 }
 
-export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
+export const DatePickerPopup: React.FC<Props> = ({ className, start, end, value }) => {
+  const t = new DateTime()
+  console.log('DatePickerPopup_______________________')
+  console.log('%c⧭ t', 'color: #1d3f73', t.add(-10, 'year').format('YYYY年MM月DD日'))
+  console.log('_______________________DatePickerPopup')
+
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
   const [translateY, setTranslateY] = useState(0)
+
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
     setIsTouching(true)
     setLastY(e.touches[0].clientY)
   }
+
   const onTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
     if (!isTouching) {
       return
@@ -20,12 +31,9 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
     const currentY = e.touches[0].clientY
     const deltaY = currentY - lastY
     setTranslateY(translateY + deltaY)
-
-    console.log('onTouchMove_______________________')
-    console.log('%c⧭ deltaY', 'color: #0f2913', deltaY)
-    console.log('_______________________onTouchMove')
     setLastY(currentY)
   }
+
   const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
     const remainder = translateY % 36
     let resultY = translateY - remainder
@@ -41,7 +49,7 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className="date-picker-wrapper h-[50vh] overflow-clip relative">
+      className={cn('date-picker-wrapper h-[50vh] overflow-clip relative', className)}>
       <div
         className={cn(
           'highlight-select-box h-[36px] w-full',

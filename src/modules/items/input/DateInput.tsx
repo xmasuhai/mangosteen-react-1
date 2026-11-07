@@ -12,7 +12,7 @@ interface Props {
 export const DateInput: React.FC<Props> = ({ className }) => {
   const [currentDate] = useState<string>(genDateStr())
 
-  const { portalPopup, togglePopup } = usePopup(DatePickerPopup({}), true)
+  const { portalPopup, togglePopup } = usePopup(<DatePickerPopup />, true)
 
   return (
     <>
