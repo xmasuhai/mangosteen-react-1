@@ -66,4 +66,7 @@
   --pad-submit-button-text-color: var(--button-text-color);
   --amount-text-color: #53a867;
   --date-text-color: #999;
+  --picker-mask-color:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4)),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4));
 }

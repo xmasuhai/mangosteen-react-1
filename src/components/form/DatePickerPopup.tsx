@@ -18,6 +18,63 @@ export const DatePickerPopup: React.FC<Props> = ({
   value,
   dateItemHeight = 36,
 }) => {
+  return (
+    <div className={cn(className, 'flex relative')}>
+      <DateTimeColumn
+        className="grow-1"
+        start={start}
+        end={end}
+        value={value}
+        dateItemHeight={dateItemHeight}
+      />
+      <DateTimeColumn
+        className="grow-1"
+        start={start}
+        end={end}
+        value={value}
+        dateItemHeight={dateItemHeight}
+      />
+      <DateTimeColumn
+        className="grow-1"
+        start={start}
+        end={end}
+        value={value}
+        dateItemHeight={dateItemHeight}
+      />
+      <div
+        className={cn(
+          'picker-mask z-1 pointer-events-none w-full h-full',
+          'absolute top-0 left-1em right-1em transform-gpu',
+          'bg-[image:var(--picker-mask-color)] bg-no-repeat',
+          'bg-[position:center_top,center_bottom] bg-[size:100%_110px]'
+        )}></div>
+      <div
+        className={cn(
+          'pricker-frame z-2 h-[36px] pointer-events-none',
+          'absolute top-[50%] left-[1em] right-[1em] translate-y-[-50%]',
+          'animation-rainbow after:(b-color-[var(--vp-c-brand-next)])',
+          'after:(content-[""] b-y-2.5)',
+          'after:(absolute top-[-50%] bottom-[-50%] left-[-50%] right-[-50%] scale-[.5])'
+        )}></div>
+    </div>
+  )
+}
+
+interface ColumnProps {
+  className?: string
+  start?: Date
+  end?: Date
+  value?: Date
+  dateItemHeight?: number
+}
+
+const DateTimeColumn: React.FC<ColumnProps> = ({
+  className,
+  start,
+  end,
+  value,
+  dateItemHeight = 36,
+}) => {
   const startTime = start ? createDateTime(start) : createDateTime().add(-3, 'year')
   const endTime = end ? createDateTime(end) : createDateTime().add(3, 'year')
   if (startTime.getTimestamp() >= endTime.getTimestamp()) {
@@ -40,8 +97,8 @@ export const DatePickerPopup: React.FC<Props> = ({
   const [lastY, setLastY] = useState(-1)
   const [translateY, setTranslateYState] = useState(currentYearIndex * -dateItemHeight)
 
-  const spring = useSpring({
-    transform: `translateY(${translateY}px)`,
+  const springStyle = useSpring({
+    transform: `translate3d(0, ${translateY}px, 0)`,
     immediate: isTouching,
     config: {
       tension: 300,
@@ -79,7 +136,6 @@ export const DatePickerPopup: React.FC<Props> = ({
     setTranslateY(resultY)
     setIsTouching(false)
   }
-
   return (
     <div
       onTouchStart={onTouchStart}
@@ -90,16 +146,16 @@ export const DatePickerPopup: React.FC<Props> = ({
         'date-picker-wrapper h-[var(--total-height)] overflow-clip relative',
         className
       )}>
+      {/*
       <div
         className={cn(
           'highlight-select-box h-[var(--date-item-height)] w-full',
           'absolute top-[calc(50%-var(--half-date-item-height))] left-0',
-          'border b-solid b-red'
+          'b-t-1.5 b-b-1.5 b-solid b-[#ccc]/50'
         )}></div>
+         */}
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
-        <animated.ol
-          style={spring}
-          className="year-picker text-center">
+        <animated.ol style={springStyle} className="year-picker text-center">
           {yearList.map((year) => (
             <li
               key={year}
