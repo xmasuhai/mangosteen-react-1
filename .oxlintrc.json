@@ -3,6 +3,7 @@
   "plugins": ["typescript", "react", "react-perf", "unicorn", "oxc"],
   "ignorePatterns": ["dist", "*.config.*"],
   "rules": {
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
     "typescript/consistent-type-definitions": "off"
   }
 }

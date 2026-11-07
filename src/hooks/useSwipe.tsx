@@ -20,7 +20,6 @@ function getSwipeDirection(distanceX: number, distanceY: number): SwipeDirection
   }
 }
 
-// eslint-disable-next-line antfu/top-level-function
 export const useSwipe = (
   elementRef: RefObject<HTMLElement | null>,
   config?: Config,
