@@ -26,3 +26,10 @@ dist-ssr
 .terminals/
 .agents/
 .aider-desk/
+/.claude/
+/.grok/
+/.junie/
+/.kiro/
+/.codebuddy/
+/.lingma/
+/.qoder/
