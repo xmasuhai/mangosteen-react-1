@@ -8,7 +8,7 @@ interface Props {
 export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
-  const [translateT, setTranslateT] = useState(0)
+  const [translateY, setTranslateY] = useState(0)
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
     setIsTouching(true)
     setLastY(e.touches[0].clientY)
@@ -19,13 +19,25 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
     }
     const currentY = e.touches[0].clientY
     const deltaY = currentY - lastY
-    setTranslateT(translateT + deltaY)
+    setTranslateY(translateY + deltaY)
+
     console.log('onTouchMove_______________________')
-    console.log('%c⧭ deltaY', 'color: #bfffc8', deltaY)
+    console.log('%c⧭ deltaY', 'color: #0f2913', deltaY)
     console.log('_______________________onTouchMove')
     setLastY(currentY)
   }
   const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
+    const remainder = translateY % 36
+    if (remainder > 0) {
+      remainder < 18
+        ? setTranslateY(translateY - remainder)
+        : setTranslateY(translateY + 36 - remainder)
+    } else {
+      remainder < -18
+        ? setTranslateY(translateY - 36 - remainder)
+        : setTranslateY(translateY - remainder)
+    }
+
     setIsTouching(false)
   }
 
@@ -34,17 +46,17 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className="h-[50vh] overflow-clip relative">
+      className="date-picker-wrapper h-[50vh] overflow-clip relative">
       <div
         className={cn(
           'highlight-select-box h-[36px] w-full',
           'absolute top-[calc(50%-18px)] left-0',
           'border b-solid b-red'
         )}></div>
-      <div className=" h-[36px] w-full absolute top-[calc(50%-18px)]">
+      <div className="picker-positioner w-full absolute top-[calc(50%-18px)]">
         <ol
-          style={{ transform: `translateY(${translateT}px)` }}
-          className="children:(h-[36px] leading-[36px]) text-center">
+          style={{ transform: `translateY(${translateY}px)` }}
+          className="year-picker children:(h-[36px] leading-[36px]) text-center">
           <li>2021</li>
           <li>2022</li>
           <li>2023</li>

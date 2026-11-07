@@ -22,7 +22,7 @@ export const DateInput: React.FC<Props> = ({ className }) => {
         className={cn('flex justify-start items-center gap-x-[.5em] pr-1em', className)}>
         <SvgIcon name="salary-calendar" className="grow-0 shrink-0 size-[2.5em] mx-1 pl-.5em" />
         <time
-          datetime={currentDate}
+          dateTime={currentDate}
           className="grow-1 shrink-1 animation-rainbow text-[14px] font-mono color-[var(--vp-c-brand-next)]">
           {currentDate}
         </time>
