@@ -1,5 +1,6 @@
 import { createDateTime } from '@/lib/helpers/DateTime'
 import { cn } from 'cn'
+import { animated, useSpring } from '@react-spring/web'
 import { TouchEventHandler, useState } from 'react'
 
 interface Props {
@@ -37,12 +38,21 @@ export const DatePickerPopup: React.FC<Props> = ({
 
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
-  const [translateY, _setTranslateY] = useState(currentYearIndex * -dateItemHeight)
+  const [translateY, setTranslateYState] = useState(currentYearIndex * -dateItemHeight)
+
+  const spring = useSpring({
+    transform: `translateY(${translateY}px)`,
+    immediate: isTouching,
+    config: {
+      tension: 300,
+      friction: 30,
+    },
+  })
 
   const setTranslateY = (y: number) => {
     y = Math.min(0, y)
     y = Math.max(y, (yearList.length - 1) * -dateItemHeight)
-    _setTranslateY(y)
+    setTranslateYState(y)
   }
 
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
@@ -87,8 +97,8 @@ export const DatePickerPopup: React.FC<Props> = ({
           'border b-solid b-red'
         )}></div>
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
-        <ol
-          style={{ transform: `translateY(${translateY}px)` }}
+        <animated.ol
+          style={spring}
           className="year-picker text-center">
           {yearList.map((year) => (
             <li
@@ -97,7 +107,7 @@ export const DatePickerPopup: React.FC<Props> = ({
               {year}
             </li>
           ))}
-        </ol>
+        </animated.ol>
       </div>
     </div>
   )
