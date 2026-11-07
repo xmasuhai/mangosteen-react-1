@@ -17,6 +17,9 @@ export class DateTime {
   constructor(p?: DateTimeParams) {
     this.#date = p ? new Date(p) : new Date()
   }
+  getTimestamp() {
+    return this.#date.getTime()
+  }
   // t = new DateTime(); t.parts.year;
   get parts(): Parts {
     return {
