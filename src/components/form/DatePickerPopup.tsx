@@ -28,16 +28,11 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
   }
   const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
     const remainder = translateY % 36
-    if (remainder > 0) {
-      remainder < 18
-        ? setTranslateY(translateY - remainder)
-        : setTranslateY(translateY + 36 - remainder)
+    if (Math.abs(remainder) < 18) {
+      setTranslateY(translateY - remainder)
     } else {
-      remainder < -18
-        ? setTranslateY(translateY - 36 - remainder)
-        : setTranslateY(translateY - remainder)
+      setTranslateY(translateY + 36 * (remainder > 0 ? 1 : -1) - remainder)
     }
-
     setIsTouching(false)
   }
 
@@ -53,7 +48,7 @@ export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
           'absolute top-[calc(50%-18px)] left-0',
           'border b-solid b-red'
         )}></div>
-      <div className="picker-positioner w-full absolute top-[calc(50%-18px)]">
+      <div className="picker-positioner w-full absolute top-[calc(50%-18px-180px)]">
         <ol
           style={{ transform: `translateY(${translateY}px)` }}
           className="year-picker children:(h-[36px] leading-[36px]) text-center">
