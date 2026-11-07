@@ -4,6 +4,7 @@
   "ignorePatterns": ["dist", "*.config.*"],
   "rules": {
     "react/only-export-components": ["warn", { "allowConstantExport": true }],
-    "typescript/consistent-type-definitions": "off"
+    "typescript/consistent-type-definitions": "off",
+    "no-unused-expressions": ["warn", { "allowTernary": true, "allowShortCircuit": true }]
   }
 }
