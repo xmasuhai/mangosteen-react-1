@@ -1,42 +1,74 @@
+import { cn } from 'cn'
+import { TouchEventHandler, useState } from 'react'
+
 interface Props {
   className?: string
 }
 
-export const DatePickerPopup: React.FC<Props> = ({ /* className, */ }) => {
-  const onTouchStart = () => { }
-  const onTouchMove = () => { }
-  const onTouchEnd = () => { }
+export const DatePickerPopup: React.FC<Props> = ({/* className, */}) => {
+  const [isTouching, setIsTouching] = useState(false)
+  const [lastY, setLastY] = useState(-1)
+  const [translateT, setTranslateT] = useState(0)
+  const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+    setIsTouching(true)
+    setLastY(e.touches[0].clientY)
+  }
+  const onTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!isTouching) {
+      return
+    }
+    const currentY = e.touches[0].clientY
+    const deltaY = currentY - lastY
+    setTranslateT(translateT + deltaY)
+    console.log('onTouchMove_______________________')
+    console.log('%c⧭ deltaY', 'color: #bfffc8', deltaY)
+    console.log('_______________________onTouchMove')
+    setLastY(currentY)
+  }
+  const onTouchEnd: TouchEventHandler<HTMLDivElement> = (e) => {
+    setIsTouching(false)
+  }
 
   return (
     <div
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className="max-h-[50vh] overflow-auto">
-      <ol>
-        <li>2021</li>
-        <li>2022</li>
-        <li>2023</li>
-        <li>2024</li>
-        <li>2025</li>
-        <li>2026</li>
-        <li>2027</li>
-        <li>2028</li>
-        <li>2029</li>
-        <li>2030</li>
-        <li>2031</li>
-        <li>2021</li>
-        <li>2022</li>
-        <li>2023</li>
-        <li>2024</li>
-        <li>2025</li>
-        <li>2026</li>
-        <li>2027</li>
-        <li>2028</li>
-        <li>2029</li>
-        <li>2030</li>
-        <li>2031</li>
-      </ol>
+      className="h-[50vh] overflow-clip relative">
+      <div
+        className={cn(
+          'highlight-select-box h-[36px] w-full',
+          'absolute top-[calc(50%-18px)] left-0',
+          'border b-solid b-red'
+        )}></div>
+      <div className=" h-[36px] w-full absolute top-[calc(50%-18px)]">
+        <ol
+          style={{ transform: `translateY(${translateT}px)` }}
+          className="children:(h-[36px] leading-[36px]) text-center">
+          <li>2021</li>
+          <li>2022</li>
+          <li>2023</li>
+          <li>2024</li>
+          <li>2025</li>
+          <li>2026</li>
+          <li>2027</li>
+          <li>2028</li>
+          <li>2029</li>
+          <li>2030</li>
+          <li>2031</li>
+          <li>2021</li>
+          <li>2022</li>
+          <li>2023</li>
+          <li>2024</li>
+          <li>2025</li>
+          <li>2026</li>
+          <li>2027</li>
+          <li>2028</li>
+          <li>2029</li>
+          <li>2030</li>
+          <li>2031</li>
+        </ol>
+      </div>
     </div>
   )
 }
