@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "migrate-oxfmt": {
+      "source": "oxc-project/oxc",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/migrate-oxfmt/SKILL.md",
+      "computedHash": "53dfc68838b847cdcd8c310f1aad82631944e92b787c400fdbc9988c5a6d6ce3"
+    },
     "migrate-oxlint": {
       "source": "oxc-project/oxc",
       "sourceType": "github",
