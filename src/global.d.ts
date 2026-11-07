@@ -41,6 +41,19 @@ export interface ResponseData<T> {
   data: T
 }
 
-export type JSONValue = string | number | boolean | null | { [key: string]: JSONValue } | JSONValue[]
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: JSONValue }
+  | JSONValue[]
 
 export type TabKind = Item['kind'] // 'incomes' | 'expenses'
+
+export declare module 'react' {
+  interface CSSProperties {
+    // 允许任意以 -- 开头的 CSS 变量 --date-item-height
+    [key: `--${string}`]: string | number | undefined
+  }
+}

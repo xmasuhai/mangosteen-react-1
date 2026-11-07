@@ -17,11 +17,6 @@ export const DatePickerPopup: React.FC<Props> = ({
   value,
   dateItemHeight = 36,
 }) => {
-  const halfDateItemHeight = dateItemHeight / 2
-  const style = {
-    '--date-item-height': `${dateItemHeight}px`,
-    '--half-date-item-height': `${halfDateItemHeight}px`,
-  } as React.CSSProperties
   const startTime = start ? createDateTime(start) : createDateTime().add(-3, 'year')
   const endTime = end ? createDateTime(end) : createDateTime().add(3, 'year')
   if (startTime.getTimestamp() >= endTime.getTimestamp()) {
@@ -32,6 +27,12 @@ export const DatePickerPopup: React.FC<Props> = ({
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 }).map(
     (_, i) => startTime.year + i
   )
+  const halfDateItemHeight = dateItemHeight / 2
+  const itemHeightVarStyle = {
+    '--date-item-height': `${dateItemHeight}px`,
+    '--half-date-item-height': `${halfDateItemHeight}px`,
+    '--total-height': `${yearList.length * dateItemHeight}px`,
+  }
   const currentYearIndex = yearList.indexOf(valueTime.year)
 
   const [isTouching, setIsTouching] = useState(false)
@@ -68,8 +69,11 @@ export const DatePickerPopup: React.FC<Props> = ({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className={cn('date-picker-wrapper h-[50vh] overflow-clip relative', className)}
-      style={style}>
+      style={itemHeightVarStyle}
+      className={cn(
+        'date-picker-wrapper h-[var(--total-height)] overflow-clip relative',
+        className
+      )}>
       <div
         className={cn(
           'highlight-select-box h-[var(--date-item-height)] w-full',
