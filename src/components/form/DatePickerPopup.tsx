@@ -37,7 +37,13 @@ export const DatePickerPopup: React.FC<Props> = ({
 
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
-  const [translateY, setTranslateY] = useState(currentYearIndex * -dateItemHeight)
+  const [translateY, _setTranslateY] = useState(currentYearIndex * -dateItemHeight)
+
+  const setTranslateY = (y: number) => {
+    y = Math.min(0, y)
+    y = Math.max(y, (yearList.length - 1) * -dateItemHeight)
+    _setTranslateY(y)
+  }
 
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
     setIsTouching(true)
