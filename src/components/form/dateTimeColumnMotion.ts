@@ -64,6 +64,11 @@ export const getResistedTranslateY = (
  * 只返回索引，不直接移动列表，也不启动动画
  * 先把位移限制在列表范围内，再按行高四舍五入；
  * 空列表或非正行高时返回 0 作为兜底，此时并不表示列表中存在可选项。
+ * 返回值：从 0 开始的选项索引
+ * 列表首项对应位移 0；每向后移动一项，列表向上移动一行
+ * 超过首项边界，截断为 0；
+ * 超过末项边界，截断为 listLength - 1
+ * 中间项换算并四舍五入 Math.round(-boundedTranslateY / itemHeight)
  */
 export const getNearestDateTimeIndex = (
   // 列表当前的垂直位移
@@ -74,8 +79,10 @@ export const getNearestDateTimeIndex = (
   if (listLength <= 0 || itemHeight <= 0) {
     return 0
   }
-
+  // 将位移限制在合法范围 [minTranslateY, 0]
   const minTranslateY = -(listLength - 1) * itemHeight
+  // 先用 Math.min 将位移限制为不大于 0，再用 Math.max 将其限制为不小于末项位移
   const boundedTranslateY = Math.max(minTranslateY, Math.min(0, translateY))
+  // 将索引限制在 [0, listLength - 1]
   return Math.max(0, Math.min(listLength - 1, Math.round(-boundedTranslateY / itemHeight)))
 }
