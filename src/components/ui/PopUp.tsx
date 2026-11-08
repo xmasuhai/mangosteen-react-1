@@ -10,7 +10,12 @@ interface Props {
   children?: React.ReactNode
 }
 
-export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, children }) => {
+export const PopUp: React.FC<Props> = ({
+  className,
+  visible,
+  onClickMask,
+  children,
+}) => {
   const menuStyle = useSpring({
     transform: visible ? 'translateY(0%)' : 'translateY(100%)',
     opacity: visible ? 1 : 0,
@@ -32,11 +37,13 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, childr
         className={cn(
           'popup-content',
           s.popupContent,
-          'fixed bottom-0 left-0 w-full h-[--popup-height] bg-white',
+          'fixed bottom-0 left-0 w-full bg-white',
           'z-[calc(var(--z-popup)+1)]',
-          'flex items-center justify-center',
+          'rounded-t-[1em] overflow-hidden',
+          'flex flex-col items-center justify-center',
           'children:(w-full)'
         )}>
+        {/* 插槽 */}
         {children}
       </animated.div>
     </div>
