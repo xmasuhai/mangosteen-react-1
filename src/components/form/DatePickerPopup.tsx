@@ -1,6 +1,7 @@
 import { cn } from 'cn'
 import { DateTimeColumn } from '@/components/form/DateTimeColumn'
 import { createDateTime } from '@/lib/helpers/DateTime'
+import { useRef, useState } from 'react'
 
 interface Props {
   className?: string
@@ -8,6 +9,7 @@ interface Props {
   end?: Date
   value?: Date
   dateItemHeight?: number
+  onChange?: (value: Date) => void
 }
 
 export const DatePickerPopup: React.FC<Props> = ({
@@ -16,6 +18,7 @@ export const DatePickerPopup: React.FC<Props> = ({
   end,
   value,
   dateItemHeight = 36,
+  onChange,
 }) => {
   const startTime = start ? createDateTime(start) : createDateTime().add(-3, 'year')
   const endTime = end ? createDateTime(end) : createDateTime().add(3, 'year')
@@ -23,36 +26,58 @@ export const DatePickerPopup: React.FC<Props> = ({
     throw new Error('startTime must be greater than endTime')
   }
 
-  const valueTime = value ? createDateTime(value) : createDateTime()
+  const valueTime = useRef(value ? createDateTime(value) : createDateTime())
+  const [_, forceUpdate] = useState({})
+
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, i) => startTime.year + i)
     .map((item) => item.toString())
   const monthList = Array.from({ length: 12 })
     .map((_, i) => i + 1)
     .map((item) => item.toString())
-  const dayList = Array.from({ length: valueTime.lastDayOfMonth })
+  const dayList = Array.from({ length: valueTime.current.lastDayOfMonth })
     .map((_, i) => i + 1)
     .map((item) => item.toString())
 
+  const onChangeYear = (value: string) => {
+    valueTime.current.year = parseInt(value)
+    forceUpdate({})
+    onChange?.(valueTime.current.rawDate)
+  }
+  const onChangeMonth = (value: string) => {
+    valueTime.current.month = parseInt(value)
+    forceUpdate({})
+    onChange?.(valueTime.current.rawDate)
+  }
+  const onChangeDay = (value: string) => {
+    valueTime.current.day = parseInt(value)
+    forceUpdate({})
+    onChange?.(valueTime.current.rawDate)
+  }
+
   return (
     <div className={cn(className, 'flex relative')}>
+      {valueTime.current.format()}
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={valueTime.year.toString()}
+        dateTimeValue={valueTime.current.year.toString()}
         dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
+        onChange={onChangeYear}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={valueTime.month.toString()}
+        dateTimeValue={valueTime.current.month.toString()}
         dateTimeList={monthList}
         dateItemHeight={dateItemHeight}
+        onChange={onChangeMonth}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={valueTime.day.toString()}
+        dateTimeValue={valueTime.current.day.toString()}
         dateTimeList={dayList}
         dateItemHeight={dateItemHeight}
+        onChange={onChangeDay}
       />
       <div
         className={cn(

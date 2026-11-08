@@ -18,6 +18,26 @@ export class DateTime {
   getTimestamp() {
     return this.#date.getTime()
   }
+  // DateTime {day, month, hour,... }
+  get originDate() {
+    return new DateTime(this.#date)
+  }
+  // Date: Sat Nov 07 2026 23:03:43 GMT-0800 (Pacific Standard Time)
+  get rawDate() {
+    return this.#date
+  }
+  // '2026-11-07T23:03:43.000Z' '2026-11-08T07:07:13.295Z'
+  get isoString() {
+    return this.#date.toISOString()
+  }
+  // '2026-11-07 23:03:43' '11/7/2026, 11:07:13 PM'
+  get localString() {
+    return this.#date.toLocaleString()
+  }
+  // '2026-11-07' '11/7/2026'
+  get localDateString() {
+    return this.#date.toLocaleDateString()
+  }
   // t = new DateTime(); t.parts.year;
   get parts(): DateTimeParts {
     return {

@@ -7,6 +7,7 @@ interface ColumnProps {
   dateItemHeight?: number
   dateTimeValue: string
   dateTimeList: string[]
+  onChange: (value: string) => void
 }
 
 export const DateTimeColumn: React.FC<ColumnProps> = ({
@@ -14,6 +15,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
   dateItemHeight = 36,
   dateTimeValue,
   dateTimeList,
+  onChange,
 }) => {
   const halfDateItemHeight = dateItemHeight / 2
   const itemHeightVarStyle = {
@@ -68,6 +70,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
     }
     setTranslateY(resultY)
     setIsTouching(false)
+    onChange(dateTimeList[Math.abs(resultY / dateItemHeight)])
   }
 
   return (
