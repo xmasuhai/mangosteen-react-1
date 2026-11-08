@@ -1,5 +1,6 @@
 import { cn } from 'cn'
 import { DateTimeColumn } from '@/components/form/DateTimeColumn'
+import { createDateTime } from '@/lib/helpers/DateTime'
 
 interface Props {
   className?: string
@@ -16,27 +17,38 @@ export const DatePickerPopup: React.FC<Props> = ({
   value,
   dateItemHeight = 36,
 }) => {
+  const startTime = start ? createDateTime(start) : createDateTime().add(-3, 'year')
+  const endTime = end ? createDateTime(end) : createDateTime().add(3, 'year')
+  if (startTime.getTimestamp() >= endTime.getTimestamp()) {
+    throw new Error('startTime must be greater than endTime')
+  }
+
+  const valueTime = value ? createDateTime(value) : createDateTime()
+  const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
+    .map((_, i) => startTime.year + i)
+    .map((item) => item.toString())
+
   return (
     <div className={cn(className, 'flex relative')}>
       <DateTimeColumn
         className="grow-1"
-        start={start}
-        end={end}
-        value={value}
+        dateTime={valueTime}
+        datetimeUnit="year"
+        dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        start={start}
-        end={end}
-        value={value}
+        dateTime={valueTime}
+        datetimeUnit="year"
+        dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        start={start}
-        end={end}
-        value={value}
+        dateTime={valueTime}
+        datetimeUnit="year"
+        dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <div

@@ -1,6 +1,4 @@
-import { createJSONStorage } from 'zustand/middleware'
-
-type Parts = {
+export type DateTimeParts = {
   year: number
   month: number
   day: number
@@ -9,7 +7,7 @@ type Parts = {
   second: number
   ms: number
 }
-type Unit = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'ms'
+export type DateTimeUnit = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'ms'
 type DateTimeParams = number | string | Date
 
 export class DateTime {
@@ -21,7 +19,7 @@ export class DateTime {
     return this.#date.getTime()
   }
   // t = new DateTime(); t.parts.year;
-  get parts(): Parts {
+  get parts(): DateTimeParts {
     return {
       year: this.#date.getFullYear(),
       month: this.#date.getMonth() + 1,
@@ -95,7 +93,7 @@ export class DateTime {
   }
 
   // t.add(-10, 'year').year
-  add(n: number, unit: Unit) {
+  add(n: number, unit: DateTimeUnit) {
     const table = {
       year: 'year',
       month: 'month',

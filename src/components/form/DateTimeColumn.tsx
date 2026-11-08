@@ -1,45 +1,35 @@
-import { createDateTime } from '@/lib/helpers/DateTime'
+import { DateTimeParts, DateTimeUnit } from '@/lib/helpers/DateTime'
 import { animated, useSpring } from '@react-spring/web'
 import { cn } from 'cn'
 import { TouchEventHandler, useState } from 'react'
 
 interface ColumnProps {
   className?: string
-  start?: Date
-  end?: Date
-  value?: Date
+  dateTime: DateTimeParts
   dateItemHeight?: number
+  dateTimeList: string[]
+  datetimeUnit: DateTimeUnit
 }
 
 export const DateTimeColumn: React.FC<ColumnProps> = ({
   className,
-  start,
-  end,
-  value,
+  dateTime,
   dateItemHeight = 36,
+  dateTimeList,
+  datetimeUnit,
 }) => {
-  const startTime = start ? createDateTime(start) : createDateTime().add(-3, 'year')
-  const endTime = end ? createDateTime(end) : createDateTime().add(3, 'year')
-  if (startTime.getTimestamp() >= endTime.getTimestamp()) {
-    throw new Error('startTime must be greater than endTime')
-  }
-
-  const valueTime = value ? createDateTime(value) : createDateTime()
-  const yearList = Array.from({ length: endTime.year - startTime.year + 1 }).map(
-    (_, i) => startTime.year + i
-  )
   const halfDateItemHeight = dateItemHeight / 2
   const itemHeightVarStyle = {
     '--date-item-height': `${dateItemHeight}px`,
     '--half-date-item-height': `${halfDateItemHeight}px`,
-    '--total-height': `${yearList.length * dateItemHeight}px`,
+    '--total-height': `${dateTimeList.length * dateItemHeight}px`,
   }
 
-  const currentYearIndex = yearList.indexOf(valueTime.year)
+  const currentDateIndex = dateTimeList.indexOf(dateTime[datetimeUnit].toString())
 
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
-  const [translateY, setTranslateYState] = useState(currentYearIndex * -dateItemHeight)
+  const [translateY, setTranslateYState] = useState(currentDateIndex * -dateItemHeight)
 
   const springStyle = useSpring({
     transform: `translate3d(0, ${translateY}px, 0)`,
@@ -52,7 +42,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
 
   const setTranslateY = (y: number) => {
     y = Math.min(0, y)
-    y = Math.max(y, (yearList.length - 1) * -dateItemHeight)
+    y = Math.max(y, (dateTimeList.length - 1) * -dateItemHeight)
     setTranslateYState(y)
   }
 
@@ -100,11 +90,11 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
          */}
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
         <animated.ol style={springStyle} className="year-picker text-center">
-          {yearList.map((year) => (
+          {dateTimeList.map((dateStr) => (
             <li
-              key={year}
+              key={dateStr}
               className="h-[var(--date-item-height)] leading-[var(--date-item-height)]">
-              {year}
+              {dateStr}
             </li>
           ))}
         </animated.ol>
