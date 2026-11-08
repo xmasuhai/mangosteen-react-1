@@ -1,6 +1,12 @@
 import { animated, useSpring } from '@react-spring/web'
 import { cn } from 'cn'
-import { TouchEventHandler, useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import type { TouchEventHandler } from 'react'
+import {
+  getDragTranslateY,
+  getNearestDateTimeIndex,
+  getResistedTranslateY,
+} from './dateTimeColumnMotion'
 
 interface ColumnProps {
   className?: string
@@ -21,6 +27,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
   const itemHeightVarStyle = {
     '--date-item-height': `${dateItemHeight}px`,
     '--half-date-item-height': `${halfDateItemHeight}px`,
+    touchAction: 'none',
   }
 
   const currentDateIndex = dateTimeList.indexOf(dateTimeValue)
@@ -28,54 +35,97 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
     throw new Error('dateTimeValue is not in dateTimeList')
   }
 
-  const [isTouching, setIsTouching] = useState(false)
-  const [lastY, setLastY] = useState(-1)
-  const [translateY, setTranslateYState] = useState(currentDateIndex * -dateItemHeight)
-
-  const springStyle = useSpring({
-    transform: `translate3d(0, ${translateY}px, 0)`,
-    immediate: isTouching,
-    config: {
-      tension: 300,
-      friction: 30,
-    },
-  })
-
-  const setTranslateY = (y: number) => {
-    y = Math.min(0, y)
-    y = Math.max(y, (dateTimeList.length - 1) * -dateItemHeight)
-    setTranslateYState(y)
-  }
+  const gestureRef = useRef<{ pointerY: number; translateY: number } | null>(null)
+  const settlingTargetRef = useRef<{
+    index: number
+    itemHeight: number
+    listLength: number
+  } | null>(null)
+  const [springs, springApi] = useSpring(() => ({
+    y: currentDateIndex * -dateItemHeight,
+    config: { tension: 300, friction: 30 },
+  }))
 
   useEffect(() => {
-    const currentDateIndex = dateTimeList.indexOf(dateTimeValue)
-    setTranslateY(currentDateIndex * -dateItemHeight)
-  }, [dateTimeValue])
+    if (gestureRef.current) {
+      return
+    }
+    const settlingTarget = settlingTargetRef.current
+    if (settlingTarget) {
+      if (
+        settlingTarget.index === currentDateIndex &&
+        settlingTarget.itemHeight === dateItemHeight &&
+        settlingTarget.listLength === dateTimeList.length
+      ) {
+        return
+      }
+      settlingTargetRef.current = null
+    }
+    springApi.start({ y: currentDateIndex * -dateItemHeight })
+  }, [currentDateIndex, dateItemHeight, dateTimeList.length, springApi])
 
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
-    setIsTouching(true)
-    setLastY(e.touches[0].clientY)
+    const touch = e.touches[0]
+    if (!touch) {
+      return
+    }
+
+    settlingTargetRef.current = null
+    springApi.stop()
+    const translateY = springs.y.get()
+    springApi.set({ y: translateY })
+    gestureRef.current = { pointerY: touch.clientY, translateY }
   }
 
   const onTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
-    if (!isTouching) {
+    const gesture = gestureRef.current
+    const touch = e.touches[0]
+    if (!gesture || !touch) {
       return
     }
-    const currentY = e.touches[0].clientY
-    const deltaY = currentY - lastY
-    setTranslateY(translateY + deltaY)
-    setLastY(currentY)
+
+    const translateY = getDragTranslateY(gesture.translateY, gesture.pointerY, touch.clientY)
+    springApi.set({
+      y: getResistedTranslateY(translateY, dateTimeList.length, dateItemHeight),
+    })
   }
 
-  const onTouchEnd: TouchEventHandler<HTMLDivElement> = (/* e */) => {
-    const remainder = translateY % dateItemHeight
-    let resultY = translateY - remainder
-    if (Math.abs(remainder) > halfDateItemHeight) {
-      resultY += dateItemHeight * (remainder > 0 ? 1 : -1)
+  const onTouchEnd: TouchEventHandler<HTMLDivElement> = () => {
+    if (!gestureRef.current) {
+      return
     }
-    setTranslateY(resultY)
-    setIsTouching(false)
-    onChange(dateTimeList[Math.abs(resultY / dateItemHeight)])
+
+    gestureRef.current = null
+    const resultIndex = getNearestDateTimeIndex(
+      springs.y.get(),
+      dateTimeList.length,
+      dateItemHeight
+    )
+    const settlingTarget = {
+      index: resultIndex,
+      itemHeight: dateItemHeight,
+      listLength: dateTimeList.length,
+    }
+    settlingTargetRef.current = settlingTarget
+    springApi.start({
+      y: resultIndex * -dateItemHeight,
+      config: { tension: 300, friction: 18 },
+      onRest: () => {
+        if (settlingTargetRef.current === settlingTarget) {
+          settlingTargetRef.current = null
+        }
+      },
+    })
+    onChange(dateTimeList[resultIndex])
+  }
+
+  const onTouchCancel: TouchEventHandler<HTMLDivElement> = () => {
+    if (!gestureRef.current) {
+      return
+    }
+
+    gestureRef.current = null
+    springApi.start({ y: currentDateIndex * -dateItemHeight })
   }
 
   return (
@@ -83,13 +133,16 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchCancel}
       style={itemHeightVarStyle}
       className={cn(
         'date-picker-column h-[var(--popup-height)] overflow-clip relative',
         className
       )}>
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
-        <animated.ol style={springStyle} className="date-time-picker text-center">
+        <animated.ol
+          style={{ transform: springs.y.to((y) => `translate3d(0, ${y}px, 0)`) }}
+          className="date-time-picker text-center">
           {dateTimeList.map((dateTimeStr) => (
             <li
               key={dateTimeStr}
