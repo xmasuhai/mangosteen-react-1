@@ -92,6 +92,9 @@ export class DateTime {
     this.parts = { ms: value }
   }
 
+  get lastDayOfMonth() {
+    return new DateTime(new Date(this.year, this.month - 1 + 1, 0)).day
+  }
   // t.add(-10, 'year').year
   add(n: number, unit: DateTimeUnit) {
     const table = {

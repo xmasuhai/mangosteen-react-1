@@ -19,7 +19,6 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
   const itemHeightVarStyle = {
     '--date-item-height': `${dateItemHeight}px`,
     '--half-date-item-height': `${halfDateItemHeight}px`,
-    '--total-height': `${dateTimeList.length * dateItemHeight}px`,
   }
 
   const currentDateIndex = dateTimeList.indexOf(dateTimeValue)
@@ -70,6 +69,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
     setTranslateY(resultY)
     setIsTouching(false)
   }
+
   return (
     <div
       onTouchStart={onTouchStart}
@@ -77,19 +77,11 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
       onTouchEnd={onTouchEnd}
       style={itemHeightVarStyle}
       className={cn(
-        'date-picker-wrapper h-[var(--total-height)] overflow-clip relative',
+        'date-picker-column h-[var(--popup-height)] overflow-clip relative',
         className
       )}>
-      {/*
-      <div
-        className={cn(
-          'highlight-select-box h-[var(--date-item-height)] w-full',
-          'absolute top-[calc(50%-var(--half-date-item-height))] left-0',
-          'b-t-1.5 b-b-1.5 b-solid b-[#ccc]/50'
-        )}></div>
-         */}
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
-        <animated.ol style={springStyle} className="year-picker text-center">
+        <animated.ol style={springStyle} className="date-time-picker text-center">
           {dateTimeList.map((dateTimeStr) => (
             <li
               key={dateTimeStr}

@@ -24,29 +24,34 @@ export const DatePickerPopup: React.FC<Props> = ({
   }
 
   const valueTime = value ? createDateTime(value) : createDateTime()
-  const dateTimeValue = valueTime.year.toString()
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, i) => startTime.year + i)
+    .map((item) => item.toString())
+  const monthList = Array.from({ length: 12 })
+    .map((_, i) => i + 1)
+    .map((item) => item.toString())
+  const dayList = Array.from({ length: valueTime.lastDayOfMonth })
+    .map((_, i) => i + 1)
     .map((item) => item.toString())
 
   return (
     <div className={cn(className, 'flex relative')}>
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={dateTimeValue}
+        dateTimeValue={valueTime.year.toString()}
         dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={dateTimeValue}
-        dateTimeList={yearList}
+        dateTimeValue={valueTime.month.toString()}
+        dateTimeList={monthList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTimeValue={dateTimeValue}
-        dateTimeList={yearList}
+        dateTimeValue={valueTime.day.toString()}
+        dateTimeList={dayList}
         dateItemHeight={dateItemHeight}
       />
       <div

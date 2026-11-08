@@ -32,7 +32,7 @@ export const PopUp: React.FC<Props> = ({ className, visible, onClickMask, childr
         className={cn(
           'popup-content',
           s.popupContent,
-          'fixed bottom-0 left-0 w-full min-h-300px bg-white',
+          'fixed bottom-0 left-0 w-full h-[--popup-height] bg-white',
           'z-[calc(var(--z-popup)+1)]',
           'flex items-center justify-center',
           'children:(w-full)'
