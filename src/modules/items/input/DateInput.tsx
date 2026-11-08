@@ -14,10 +14,6 @@ export const DateInput: React.FC<Props> = ({ className }) => {
   const onChange = (value: Date) => {
     const dateStr = genDateStr(value)
     setCurrentDate(dateStr)
-    console.log('DateInput onChange_______________________')
-    console.log('value: ', value)
-    console.log('dateStr: ', dateStr)
-    console.log('_______________________DateInput onChange')
   }
   const { portalPopup, togglePopup } = usePopup(<DatePickerPopup onChange={onChange} />, true)
 

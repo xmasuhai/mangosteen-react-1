@@ -57,7 +57,6 @@ export const DatePickerPopup: React.FC<Props> = ({
 
   return (
     <div className={cn(className, 'flex relative')}>
-      {valueTime.current.format()}
       <DateTimeColumn
         className="grow-1"
         dateTimeValue={valueTime.current.year.toString()}
