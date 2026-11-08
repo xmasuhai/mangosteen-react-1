@@ -1,6 +1,6 @@
 import { animated, useSpring } from '@react-spring/web'
 import { cn } from 'cn'
-import { TouchEventHandler, useState } from 'react'
+import { TouchEventHandler, useEffect, useState } from 'react'
 
 interface ColumnProps {
   className?: string
@@ -46,6 +46,11 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
     y = Math.max(y, (dateTimeList.length - 1) * -dateItemHeight)
     setTranslateYState(y)
   }
+
+  useEffect(() => {
+    const currentDateIndex = dateTimeList.indexOf(dateTimeValue)
+    setTranslateY(currentDateIndex * -dateItemHeight)
+  }, [dateTimeValue])
 
   const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
     setIsTouching(true)
