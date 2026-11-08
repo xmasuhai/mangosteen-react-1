@@ -1,22 +1,19 @@
-import { DateTimeParts, DateTimeUnit } from '@/lib/helpers/DateTime'
 import { animated, useSpring } from '@react-spring/web'
 import { cn } from 'cn'
 import { TouchEventHandler, useState } from 'react'
 
 interface ColumnProps {
   className?: string
-  dateTime: DateTimeParts
   dateItemHeight?: number
+  dateTimeValue: string
   dateTimeList: string[]
-  datetimeUnit: DateTimeUnit
 }
 
 export const DateTimeColumn: React.FC<ColumnProps> = ({
   className,
-  dateTime,
   dateItemHeight = 36,
+  dateTimeValue,
   dateTimeList,
-  datetimeUnit,
 }) => {
   const halfDateItemHeight = dateItemHeight / 2
   const itemHeightVarStyle = {
@@ -25,7 +22,10 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
     '--total-height': `${dateTimeList.length * dateItemHeight}px`,
   }
 
-  const currentDateIndex = dateTimeList.indexOf(dateTime[datetimeUnit].toString())
+  const currentDateIndex = dateTimeList.indexOf(dateTimeValue)
+  if (currentDateIndex === -1) {
+    throw new Error('dateTimeValue is not in dateTimeList')
+  }
 
   const [isTouching, setIsTouching] = useState(false)
   const [lastY, setLastY] = useState(-1)
@@ -90,11 +90,11 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
          */}
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
         <animated.ol style={springStyle} className="year-picker text-center">
-          {dateTimeList.map((dateStr) => (
+          {dateTimeList.map((dateTimeStr) => (
             <li
-              key={dateStr}
+              key={dateTimeStr}
               className="h-[var(--date-item-height)] leading-[var(--date-item-height)]">
-              {dateStr}
+              {dateTimeStr}
             </li>
           ))}
         </animated.ol>

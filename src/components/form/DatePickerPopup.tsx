@@ -24,6 +24,7 @@ export const DatePickerPopup: React.FC<Props> = ({
   }
 
   const valueTime = value ? createDateTime(value) : createDateTime()
+  const dateTimeValue = valueTime.year.toString()
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, i) => startTime.year + i)
     .map((item) => item.toString())
@@ -32,22 +33,19 @@ export const DatePickerPopup: React.FC<Props> = ({
     <div className={cn(className, 'flex relative')}>
       <DateTimeColumn
         className="grow-1"
-        dateTime={valueTime}
-        datetimeUnit="year"
+        dateTimeValue={dateTimeValue}
         dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTime={valueTime}
-        datetimeUnit="year"
+        dateTimeValue={dateTimeValue}
         dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
       <DateTimeColumn
         className="grow-1"
-        dateTime={valueTime}
-        datetimeUnit="year"
+        dateTimeValue={dateTimeValue}
         dateTimeList={yearList}
         dateItemHeight={dateItemHeight}
       />
