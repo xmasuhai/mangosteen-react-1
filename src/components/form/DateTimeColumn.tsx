@@ -1,6 +1,7 @@
 import { animated } from '@react-spring/web'
 import { cn } from 'cn'
 import { useDateTimeColumnMotion } from './useDateTimeColumnMotion'
+import React from 'react'
 
 interface ColumnProps {
   className?: string

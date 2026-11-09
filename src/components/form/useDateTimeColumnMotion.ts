@@ -1,6 +1,6 @@
 import { useSpring, type SpringValue, type SpringRef } from '@react-spring/web'
-import { useEffect, useRef } from 'react'
-import type { TouchEventHandler } from 'react'
+import { useEffect, useRef, } from 'react'
+import type { MutableRefObject, TouchEventHandler } from 'react'
 import {
   getDragTranslateY,
   getNearestDateTimeIndex,
@@ -34,7 +34,7 @@ interface SettlingTarget {
 }
 
 interface TouchStart {
-  e: TouchEvent<HTMLDivElement>,
+  e: TouchEventHandler<HTMLDivElement>,
   gestureRef: MutableRefObject<GestureStart | null>,
   settlingTargetRef: MutableRefObject<SettlingTarget | null>
   springApi: SpringRef<{ y: number }>
@@ -42,7 +42,7 @@ interface TouchStart {
 }
 
 interface TouchMove {
-  e: TouchEvent<HTMLDivElement>
+  e: TouchEventHandler<HTMLDivElement>
   gestureRef: MutableRefObject<GestureStart | null>
   springApi: SpringRef<{ y: number }>
   dateTimeList: string[]
