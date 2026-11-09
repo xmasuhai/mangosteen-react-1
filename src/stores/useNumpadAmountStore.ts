@@ -1,3 +1,4 @@
+import { useGlobalHintsBus } from '@/hooks/useGlobalHintsBus'
 import { create } from 'zustand'
 
 interface NumpadAmountState {
@@ -8,6 +9,8 @@ interface NumpadAmountActions {
   backspaceText: () => void
   clearText: () => void
 }
+
+const { bus } = useGlobalHintsBus()
 
 export const useNumpadAmountStore = create<NumpadAmountState & NumpadAmountActions>()(
   (set, get) => ({
@@ -62,8 +65,8 @@ export const useNumpadAmountStore = create<NumpadAmountState & NumpadAmountActio
           check: () => get().amount.replace('.', '').length >= 10,
           action: () => {
             inputText = ''
-            console.warn('输入的数字长度不支持超过10位')
-            // emit({ type: 'warning', position: 'bottom', message: '输入的数字长度不支持超过10位' })
+
+            bus.emit('hint')
           },
         },
       ]
