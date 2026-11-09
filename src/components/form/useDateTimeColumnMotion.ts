@@ -1,6 +1,6 @@
 import { useSpring, type SpringValue, type SpringRef } from '@react-spring/web'
-import { useEffect, useRef, } from 'react'
-import type { MutableRefObject, TouchEventHandler } from 'react'
+import { useEffect, useRef } from 'react'
+import type { MutableRefObject, TouchEventHandler, TouchEvent } from 'react'
 import {
   getDragTranslateY,
   getNearestDateTimeIndex,
@@ -34,15 +34,15 @@ interface SettlingTarget {
 }
 
 interface TouchStart {
-  e: TouchEventHandler<HTMLDivElement>,
-  gestureRef: MutableRefObject<GestureStart | null>,
+  e: TouchEvent<HTMLDivElement>
+  gestureRef: MutableRefObject<GestureStart | null>
   settlingTargetRef: MutableRefObject<SettlingTarget | null>
   springApi: SpringRef<{ y: number }>
   springs: { y: SpringValue<number> }
 }
 
 interface TouchMove {
-  e: TouchEventHandler<HTMLDivElement>
+  e: TouchEvent<HTMLDivElement>
   gestureRef: MutableRefObject<GestureStart | null>
   springApi: SpringRef<{ y: number }>
   dateTimeList: string[]
@@ -62,20 +62,12 @@ interface TouchEnd {
 interface TouchCancel {
   gestureRef: MutableRefObject<GestureStart | null>
   springApi: SpringRef<{ y: number }>
-  currentDateIndex: number,
-  dateItemHeight: number,
+  currentDateIndex: number
+  dateItemHeight: number
 }
 
 // 只取首个触点；没有触点则不建立手势
-const useTouchStart = (
-  {
-    e,
-    settlingTargetRef,
-    springApi,
-    springs,
-    gestureRef,
-  }: TouchStart
-) => {
+const useTouchStart = ({ e, settlingTargetRef, springApi, springs, gestureRef }: TouchStart) => {
   const touch = e.touches[0]
   if (!touch) {
     return
@@ -86,19 +78,11 @@ const useTouchStart = (
   springApi.stop()
   const translateY = springs.y.get()
   springApi.set({ y: translateY })
-  gestureRef.current = { pointerY: touch.clientY, translateY, }
+  gestureRef.current = { pointerY: touch.clientY, translateY }
 }
 
 // 先从手势起点计算原始位移，再施加越界阻尼，避免累计阻尼导致回拖失真。
-const useTouchMove = (
-  {
-    e,
-    gestureRef,
-    springApi,
-    dateTimeList,
-    dateItemHeight,
-  }: TouchMove
-) => {
+const useTouchMove = ({ e, gestureRef, springApi, dateTimeList, dateItemHeight }: TouchMove) => {
   const gesture = gestureRef.current
   const touch = e.touches[0]
   if (!gesture || !touch) {
@@ -114,17 +98,15 @@ const useTouchMove = (
 }
 
 // 按当前可见位移选取最近合法项，并启动吸附动画
-const useTouchEnd = (
-  {
-    springs,
-    springApi,
-    gestureRef,
-    settlingTargetRef,
-    dateTimeList,
-    dateItemHeight,
-    onChange,
-  }: TouchEnd
-) => {
+const useTouchEnd = ({
+  springs,
+  springApi,
+  gestureRef,
+  settlingTargetRef,
+  dateTimeList,
+  dateItemHeight,
+  onChange,
+}: TouchEnd) => {
   if (!gestureRef.current) {
     // 忽略未开始或已结束的手势，避免重复吸附和通知。
     return
@@ -132,11 +114,7 @@ const useTouchEnd = (
 
   // 先释放拖动状态，让后续受控值同步能识别本次吸附目标。
   gestureRef.current = null
-  const resultIndex = getNearestDateTimeIndex(
-    springs.y.get(),
-    dateTimeList.length,
-    dateItemHeight
-  )
+  const resultIndex = getNearestDateTimeIndex(springs.y.get(), dateTimeList.length, dateItemHeight)
   const settlingTarget = {
     index: resultIndex,
     itemHeight: dateItemHeight,
@@ -158,14 +136,12 @@ const useTouchEnd = (
 }
 
 // 清空当前受控选中项
-const useTouchCancel = (
-  {
-    gestureRef,
-    springApi,
-    currentDateIndex,
-    dateItemHeight,
-  }: TouchCancel
-) => {
+const useTouchCancel = ({
+  gestureRef,
+  springApi,
+  currentDateIndex,
+  dateItemHeight,
+}: TouchCancel) => {
   if (!gestureRef.current) {
     return
   }
@@ -173,7 +149,6 @@ const useTouchCancel = (
   gestureRef.current = null
   springApi.start({ y: currentDateIndex * -dateItemHeight })
 }
-
 
 /**
  * 管理日期列的手势、弹簧动画和受控选中值同步，要求选中值存在于可选列表中。
@@ -225,7 +200,7 @@ export const useDateTimeColumnMotion = ({
   }, [currentDateIndex /* dateItemHeight, dateTimeList.length, springApi */])
 
   // 触摸开始时只取首个触点；没有触点则不建立手势。
-  const onTouchStart: TouchEventHandler<HTMLDivElement> = (e) => {
+  const onTouchStart: TouchEventHandler<HTMLDivElement> = (e: TouchEvent<HTMLDivElement>) => {
     useTouchStart({
       e,
       settlingTargetRef,
@@ -235,7 +210,7 @@ export const useDateTimeColumnMotion = ({
     })
   }
   // 移动时先从手势起点计算原始位移，再施加越界阻尼，避免累计阻尼导致回拖失真。
-  const onTouchMove: TouchEventHandler<HTMLDivElement> = (e) => {
+  const onTouchMove: TouchEventHandler<HTMLDivElement> = (e: TouchEvent<HTMLDivElement>) => {
     useTouchMove({
       e,
       gestureRef,
@@ -267,6 +242,7 @@ export const useDateTimeColumnMotion = ({
   }
 
   return {
+    currentDateIndex,
     translateYSpringValue: springs.y,
     touchHandlers: { onTouchStart, onTouchMove, onTouchEnd, onTouchCancel },
   }

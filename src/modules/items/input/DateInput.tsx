@@ -17,7 +17,11 @@ export const DateInput: React.FC<Props> = ({ className }) => {
   }
 
   const { portalPopup, togglePopup, hidePopup } = usePopup(
-    <DatePickerPopup onConfirm={onConfirm} onCancel={() => hidePopup()} />,
+    <DatePickerPopup
+      value={new Date(currentDate)}
+      onConfirm={onConfirm}
+      onCancel={() => hidePopup()}
+    />,
     false
   )
 
@@ -30,7 +34,10 @@ export const DateInput: React.FC<Props> = ({ className }) => {
         <SvgIcon name="salary-calendar" className="grow-0 shrink-0 size-[2.5em] mx-1 pl-.5em" />
         <time
           dateTime={currentDate}
-          className="grow-1 shrink-1 animation-rainbow text-[14px] font-mono color-[var(--vp-c-brand-next)]">
+          className={cn(
+            'grow-1 shrink-1 text-[14px] font-mono',
+            'animation-rainbow color-[var(--vp-c-brand-next)]'
+          )}>
           {currentDate}
         </time>
       </span>

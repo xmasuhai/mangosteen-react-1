@@ -24,7 +24,10 @@ export class DateTime {
   }
   // Date: Sat Nov 07 2026 23:03:43 GMT-0800 (Pacific Standard Time)
   get rawDate() {
-    return this.#date
+    return new Date(this.#date)
+  }
+  get date() {
+    return new Date(this.#date)
   }
   // '2026-11-07T23:03:43.000Z' '2026-11-08T07:07:13.295Z'
   get isoString() {

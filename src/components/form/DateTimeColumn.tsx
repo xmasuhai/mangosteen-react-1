@@ -18,7 +18,7 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
   dateTimeList,
   onChange,
 }) => {
-  const { translateYSpringValue, touchHandlers } = useDateTimeColumnMotion({
+  const { currentDateIndex, translateYSpringValue, touchHandlers } = useDateTimeColumnMotion({
     dateItemHeight,
     dateTimeValue,
     dateTimeList,
@@ -42,11 +42,14 @@ export const DateTimeColumn: React.FC<ColumnProps> = ({
       <div className="picker-positioner w-full absolute top-[calc(50%-var(--half-date-item-height))]">
         <animated.ol
           style={{ transform: translateYSpringValue.to((y) => `translate3d(0, ${y}px, 0)`) }}
-          className="date-time-picker text-center">
-          {dateTimeList.map((dateTimeStr) => (
+          className="date-time-picker text-center animation-rainbow">
+          {dateTimeList.map((dateTimeStr, index) => (
             <li
               key={dateTimeStr}
-              className="h-[var(--date-item-height)] leading-[var(--date-item-height)]">
+              className={cn(
+                'h-[var(--date-item-height)] leading-[var(--date-item-height)]',
+                index === currentDateIndex && 'color-[var(--vp-c-brand-next)]'
+              )}>
               {dateTimeStr}
             </li>
           ))}

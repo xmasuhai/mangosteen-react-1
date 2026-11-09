@@ -1,10 +1,11 @@
 import { cn } from 'cn'
 import { DateTimeColumn } from '@/components/form/DateTimeColumn'
 import { createDateTime } from '@/lib/helpers/DateTime'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   className?: string
+  visible?: boolean
   start?: Date
   end?: Date
   value?: Date
@@ -16,6 +17,7 @@ interface Props {
 
 export const DatePickerPopup: React.FC<Props> = ({
   className,
+  visible,
   start,
   end,
   value,
@@ -31,6 +33,14 @@ export const DatePickerPopup: React.FC<Props> = ({
 
   const valueTime = useRef(value ? createDateTime(value) : createDateTime())
   const [_, forceUpdate] = useState({})
+  // 同步更新外部日期，防止组件内外的日期不一致
+  useEffect(() => {
+    if (!value) {
+      return
+    }
+    valueTime.current = createDateTime(value)
+    forceUpdate({})
+  }, [value])
 
   const yearList = Array.from({ length: endTime.year - startTime.year + 1 })
     .map((_, i) => startTime.year + i)

@@ -28,6 +28,7 @@ export const usePopup = (children?: React.ReactNode, initVisible = false) => {
   const portalPopup = createPortal(popup, portalElement, useId())
 
   return {
+    visible,
     popup,
     portalPopup,
     showPopup,
