@@ -1,6 +1,6 @@
 // import type { SvgIconName } from '@svgoStore'
 import { cn } from 'cn'
-// import { useNumpadAmountStore } from '@/stores/useNumpadAmountStore.ts'
+import { useNumpadAmountStore } from '@/stores/useNumpadAmountStore.ts'
 
 type ButtonItem<T extends boolean = boolean> = {
   id: string
@@ -9,13 +9,13 @@ type ButtonItem<T extends boolean = boolean> = {
   extraClass?: string
 } & (T extends true
   ? {
-    hasIcon: T
-    iconName: string //SvgIconName
-  }
+      hasIcon: T
+      iconName: string //SvgIconName
+    }
   : {
-    hasIcon?: false
-    iconName?: never
-  })
+      hasIcon?: false
+      iconName?: never
+    })
 
 /**
  * @Description: 数字按键列表
@@ -27,15 +27,12 @@ type ButtonItem<T extends boolean = boolean> = {
  * @FilePath: src/modules/items/useNumpadButtons.tsx
  */
 export const useNumpadButtons = () => {
-  // const { appendText, clearText, backspaceText } = useNumpadAmountStore()
-  const appendText = (str: string) => void str
-  const backspaceText = () => void 0
-  const clearText = () => void 0
+  const { appendText, clearText, backspaceText } = useNumpadAmountStore()
   const numpadButtons: ButtonItem[] = [
     { id: '1', text: '1', onClick: () => appendText('1') },
     { id: '2', text: '2', onClick: () => appendText('2') },
     { id: '3', text: '3', onClick: () => appendText('3') },
-    { id: 'clear', text: Math.random() > 0.5 ? '归零' : '清空', onClick: () => clearText() },
+    { id: 'clear', text: '归零' /* '清空' */, onClick: () => clearText() },
     { id: '4', text: '4', onClick: () => appendText('4') },
     { id: '5', text: '5', onClick: () => appendText('5') },
     { id: '6', text: '6', onClick: () => appendText('6') },
