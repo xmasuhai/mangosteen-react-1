@@ -5,19 +5,16 @@ import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   className?: string
-  visible?: boolean
   start?: Date
   end?: Date
   value?: Date
   dateItemHeight?: number
-  onChange?: (value: Date) => void
   onCancel?: () => void
   onConfirm?: (dateTimeStr: string) => void
 }
 
 export const DatePickerPopup: React.FC<Props> = ({
   className,
-  visible,
   start,
   end,
   value,
@@ -30,7 +27,6 @@ export const DatePickerPopup: React.FC<Props> = ({
   if (startTime.getTimestamp() >= endTime.getTimestamp()) {
     throw new Error('startTime must be greater than endTime')
   }
-
   const valueTime = useRef(value ? createDateTime(value) : createDateTime())
   const [_, forceUpdate] = useState({})
   // 同步更新外部日期，防止组件内外的日期不一致

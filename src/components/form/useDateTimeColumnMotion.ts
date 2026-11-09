@@ -97,7 +97,7 @@ const useTouchMove = ({ e, gestureRef, springApi, dateTimeList, dateItemHeight }
   })
 }
 
-// 按当前可见位移选取最近合法项，并启动吸附动画
+// 按当前可见位移选取最近合法项，并启动吸附动画，并且最后执行change通知父组件更新选中值
 const useTouchEnd = ({
   springs,
   springApi,
