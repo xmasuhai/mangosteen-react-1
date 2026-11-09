@@ -1,5 +1,5 @@
 import { SvgIcon } from "@/components/SvgIcon";
-import { useNumpadButtons } from "@/modules/items/input/useNumpadButtons.tsx";
+import { useNumpadButtons } from "@/modules/items/input/numpad/useNumpadButtons";
 import { cn } from "cn";
 import s from './Numpad.module.scss'
 
