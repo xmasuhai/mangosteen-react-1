@@ -11,11 +11,15 @@ interface Props {
 
 export const DateInput: React.FC<Props> = ({ className }) => {
   const [currentDate, setCurrentDate] = useState<string>(genDateStr())
-  const onChange = (value: Date) => {
-    const dateStr = genDateStr(value)
-    setCurrentDate(dateStr)
+  const onConfirm = (value: string) => {
+    setCurrentDate(value)
+    hidePopup?.()
   }
-  const { portalPopup, togglePopup } = usePopup(<DatePickerPopup onChange={onChange} />, true)
+
+  const { portalPopup, togglePopup, hidePopup } = usePopup(
+    <DatePickerPopup onConfirm={onConfirm} onCancel={() => hidePopup()} />,
+    false
+  )
 
   return (
     <>
