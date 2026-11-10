@@ -25,11 +25,10 @@ export interface GlobalHintsEvents {
   hint: (payload?: HintPayload) => void
 }
 
-export const useGlobalHintsBus = () => {
-  const emitter = createNanoEvents<GlobalHintsEvents>()
-  return {
-    bus: emitter,
-  }
-}
-
 export const emitter = createNanoEvents<GlobalHintsEvents>()
+
+export const useGlobalHintsBus = () => ({
+  ...(emitter ? emitter : createNanoEvents<GlobalHintsEvents>()),
+  on: emitter.on.bind(emitter),
+  emit: emitter.emit.bind(emitter),
+})

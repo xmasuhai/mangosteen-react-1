@@ -2,7 +2,7 @@ import { SvgIcon } from '@/components/SvgIcon'
 import { useNumpadButtons } from '@/modules/items/input/numpad/useNumpadButtons'
 import { cn } from 'cn'
 import s from './Numpad.module.scss'
-import { useNumberLimit } from '@/modules/items/input/numpad/useNumberLimit'
+import { useNanoEvent } from '@/hooks/useNanoEvent'
 import { numberLimitListener } from '@/modules/items/input/numpad/numberLimitListener'
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 export const Numpad: React.FC<Props> = ({/* className, */}) => {
   const numberSizeClass = (text: string) => (/[0-9|dot]/g.test(text) ? cn('text-18px') : '')
   const { numpadButtons } = useNumpadButtons()
-  useNumberLimit('hint', numberLimitListener)
+  useNanoEvent('hint', numberLimitListener)
   return (
     <div
       className={cn(
