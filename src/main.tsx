@@ -6,6 +6,7 @@ import '@/main.scss'
 import 'virtual:uno.css'
 import 'virtual:svgsprites'
 import vhCheck from 'vh-check'
+
 vhCheck()
 
 export const rootElement = document.getElementById('root') as HTMLElement
@@ -18,6 +19,7 @@ root.render(
       future={{
         v7_startTransition: true,
       }}
-      router={router} />
-  </React.StrictMode>,
+      router={router}
+    />
+  </React.StrictMode>
 )

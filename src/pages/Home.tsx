@@ -15,17 +15,24 @@ interface Props {
 export const Home: React.FC<Props> = ({ title }) => {
   useTitle(title ?? '记账首页')
 
-  const { data: meData, /* error: meError, */ isLoading: isLoadingMe } = useSWR('/api/v1/me', async path =>
-    (await request.get<ResponseData<Resource<User>>>(path))?.data?.data)
+  const { data: meData, /* error: meError, */ isLoading: isLoadingMe } = useSWR(
+    '/api/v1/me',
+    async (path) => (await request.get<ResponseData<Resource<User>>>(path))?.data?.data
+  )
   // 为两个页面的请求设置不同的 Key 查询参数&scene=verify-不与跳转后页面相同请求互相干扰
-  const getItemKey = (meData: unknown) => meData ? '/api/v1/items?page=1&scene=verify' : null
-  const itemFetch = async (path: string) => (await request.get<ResponseData<Resources<Item>>>(path))?.data
-  const { data: itemsData, /* error: itemsError, */ isLoading: isLoadingItems, mutate, } = useSWR(getItemKey(meData), itemFetch)
+  const getItemKey = (meData: unknown) => (meData ? '/api/v1/items?page=1&scene=verify' : null)
+  const itemFetch = async (path: string) =>
+    (await request.get<ResponseData<Resources<Item>>>(path))?.data
+  const {
+    data: itemsData,
+    /* error: itemsError, */ isLoading: isLoadingItems,
+    // mutate,
+  } = useSWR(getItemKey(meData), itemFetch)
 
   if (isLoadingMe || isLoadingItems) {
     return (
       <main h-screen flex flex-col justify-center items-center>
-        <InLoading className="h-100svh size-[5em]" message="正在加载，请稍等..." />
+        <InLoading className="h-screen size-[5em]" message="正在加载，请稍等..." />
       </main>
     )
   }
@@ -41,10 +48,7 @@ export const Home: React.FC<Props> = ({ title }) => {
       </div>
 
       <div px-16px self-stretch>
-        <button
-          className={cn('primary-btn')}>
-          开始记账
-        </button>
+        <button className={cn('primary-btn')}>开始记账</button>
       </div>
 
       <AddItemFloatButton />
