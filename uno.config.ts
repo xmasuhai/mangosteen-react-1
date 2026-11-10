@@ -1,4 +1,12 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, transformerAttributifyJsx, transformerDirectives, transformerVariantGroup } from 'unocss'
+import {
+  defineConfig,
+  presetAttributify,
+  presetIcons,
+  presetTypography,
+  transformerAttributifyJsx,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss'
 import { presetWind4 } from '@unocss/preset-wind4'
 import { cn } from 'cn'
 
@@ -28,29 +36,37 @@ export default defineConfig({
       welcomeCardBg: 'var(--welcome-card-bg-color)',
       primaryColor: 'var(--primary-color)',
       btnPrimaryColor: 'var(--button-primary-color)',
-    }
+    },
   },
   rules: [
+    ['animate-rainbow', { animation: 'rainbow 8s linear infinite' }],
     [
-      'animate-rainbow',
-      { animation: 'rainbow 8s linear infinite' },
+      /^scrollbar-hide$/,
+      () => ({
+        'scrollbar-width': 'none',
+      }),
     ],
-    [/^scrollbar-hide$/, () => ({
-      'scrollbar-width': 'none',
-    })],
-    [/^scrollbar-default$/, () => ({
-      'scrollbar-width': 'auto',
-    })],
-    ["h-screen", { height: 'calc(100vh - var(--vh-offset, 0px))' }],
+    [
+      /^scrollbar-default$/,
+      () => ({
+        'scrollbar-width': 'auto',
+      }),
+    ],
+    [
+      'h-screen',
+      {
+        height:
+          'calc(var(--main-vh, 100vh) - var(--vh-offset, 0px) - env(safe-area-inset-bottom) - env(safe-area-inset-top))',
+      },
+    ],
   ],
   variants: [
     // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
     (matcher) => {
-      if (!matcher.startsWith('where:'))
-        return matcher
+      if (!matcher.startsWith('where:')) return matcher
       return {
         matcher: matcher.slice(6),
-        selector: s => `:where(${s})`,
+        selector: (s) => `:where(${s})`,
       }
     },
   ],
@@ -62,21 +78,21 @@ export default defineConfig({
           inherits: true;      /* 允许向下继承计算后的结果 */
           initial-value: 1;
         }
-      `
-    }
+      `,
+    },
   ],
   shortcuts: {
     'primary-btn': cn(
       'w-100% h-48px b-none rounded-8px text-center',
-      'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]',
+      'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]'
     ),
-    'disabled': 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
+    disabled: 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
     'form-sc': 'px-1em flex flex-col gap-y-24px children:(flex flex-col)',
     'form-label-sc': 'vertical-mid text-18px mb-.5em',
     'form-input-text-sc': cn(
       'w-full h-3em px-1em leading-2em py-.5em',
       'b-1 b-[var(--main)] rounded-.5em text-18px',
-      'focus:(shadow-[inset_0_0_3px_var(--main)] outline-none)',
+      'focus:(shadow-[inset_0_0_3px_var(--main)] outline-none)'
     ),
     'form-btn-sc': 'h-3em w-full bg-[var(--main)] b-unset color-white text-18px rounded-.5em',
   },
