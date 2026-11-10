@@ -17,7 +17,9 @@
   },
   "dependencies": {
     "@react-spring/web": "10.1.2",
-    "axios": "1.21.0",
+    "@reactuses/core": "6.6.1",
+    "ahooks": "3.11.0",
+    "axios": "1.21.1",
     "cn": "0.5.2",
     "nanoevents": "10.0.0",
     "react": "18.3.1",
