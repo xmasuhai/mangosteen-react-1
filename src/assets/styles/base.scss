@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  min-height: 100svh;
+  height: min(100svh, 100dvh, 100vh);
   transition:
     color 0.5s,
     background-color 0.5s;
@@ -16,15 +16,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-right: calc(env(safe-area-inset-right));
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: calc(env(safe-area-inset-left));
 }
 
-#app, #root {
+#app,
+#root {
   max-width: 1280px;
   margin: 0 auto;
   font-weight: normal;
 
   &,
-  &>.container {
+  & > .container {
     // iPhone12Pro
     min-width: 390px;
     min-height: 844px;
