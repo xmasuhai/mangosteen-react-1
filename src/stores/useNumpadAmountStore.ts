@@ -10,7 +10,7 @@ interface NumpadAmountActions {
   clearText: () => void
 }
 
-const { emit } = useGlobalHintsBus()
+const { throttledEmit } = useGlobalHintsBus()
 
 export const useNumpadAmountStore = create<NumpadAmountState & NumpadAmountActions>()(
   (set, get) => ({
@@ -65,7 +65,7 @@ export const useNumpadAmountStore = create<NumpadAmountState & NumpadAmountActio
           check: () => get().amount.replace('.', '').length >= 10,
           action: () => {
             inputText = ''
-            emit('hint')
+            throttledEmit('hint')
           },
         },
       ]

@@ -1,3 +1,4 @@
+import { throttledFn } from '@/lib/helpers/throttledFn'
 import { createNanoEvents } from 'nanoevents'
 import { SweetAlertOptions } from 'sweetalert2'
 
@@ -39,4 +40,5 @@ export const useGlobalHintsBus = () => ({
   ...(emitter ? emitter : createNanoEvents<GlobalHintsEvents>()),
   on: emitter.on.bind(emitter),
   emit: emitter.emit.bind(emitter),
+  throttledEmit: throttledFn(emitter.emit.bind(emitter), 1800),
 })
