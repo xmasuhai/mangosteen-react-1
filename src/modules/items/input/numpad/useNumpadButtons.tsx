@@ -1,6 +1,7 @@
 // import type { SvgIconName } from '@svgoStore'
 import { cn } from 'cn'
 import { useNumpadAmountStore } from '@/stores/useNumpadAmountStore.ts'
+import { useVibrate } from '@/hooks/useVibrate.ts'
 
 type ButtonItem<T extends boolean = boolean> = {
   id: string
@@ -27,7 +28,33 @@ type ButtonItem<T extends boolean = boolean> = {
  * @FilePath: src/modules/items/useNumpadButtons.tsx
  */
 export const useNumpadButtons = () => {
-  const { appendText, clearText, backspaceText } = useNumpadAmountStore()
+  const { vibrate, isSupported } = useVibrate(15)
+  const {
+    appendText: _appendText,
+    clearText: _clearText,
+    backspaceText: _backspaceText,
+  } = useNumpadAmountStore()
+
+  const appendText = (str: string) => {
+    if (isSupported) {
+      vibrate()
+    }
+    _appendText(str)
+  }
+
+  const clearText = () => {
+    if (isSupported) {
+      vibrate()
+    }
+    _clearText()
+  }
+
+  const backspaceText = () => {
+    if (isSupported) {
+      vibrate()
+    }
+    _backspaceText()
+  }
   const numpadButtons: ButtonItem[] = [
     { id: '1', text: '1', onClick: () => appendText('1') },
     { id: '2', text: '2', onClick: () => appendText('2') },
