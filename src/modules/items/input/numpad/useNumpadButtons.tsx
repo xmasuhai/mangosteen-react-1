@@ -28,33 +28,21 @@ type ButtonItem<T extends boolean = boolean> = {
  * @FilePath: src/modules/items/useNumpadButtons.tsx
  */
 export const useNumpadButtons = () => {
-  const { vibrate, isSupported } = useVibrate(15)
   const {
     appendText: _appendText,
     clearText: _clearText,
     backspaceText: _backspaceText,
   } = useNumpadAmountStore()
+  const {
+    triggerMap: { _appendText: appendText, _clearText: clearText, _backspaceText: backspaceText },
+  } = useVibrate(15, {
+    rawTriggerMap: {
+      _appendText,
+      _clearText,
+      _backspaceText,
+    },
+  })
 
-  const appendText = (str: string) => {
-    if (isSupported) {
-      vibrate()
-    }
-    _appendText(str)
-  }
-
-  const clearText = () => {
-    if (isSupported) {
-      vibrate()
-    }
-    _clearText()
-  }
-
-  const backspaceText = () => {
-    if (isSupported) {
-      vibrate()
-    }
-    _backspaceText()
-  }
   const numpadButtons: ButtonItem[] = [
     { id: '1', text: '1', onClick: () => appendText('1') },
     { id: '2', text: '2', onClick: () => appendText('2') },

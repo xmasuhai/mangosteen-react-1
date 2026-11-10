@@ -1,18 +1,21 @@
 import { useEffect, useRef, useCallback } from 'react'
 
+type RawTriggerMap = Record<string, (...args: any[]) => any>
+
 export interface UseVibrateOptions {
   /**
    * 是否循环震动
    * @default false
    */
   isLoop?: boolean
+  rawTriggerMap?: RawTriggerMap
 }
 
 export const useVibrate = (
   pattern: VibratePattern = 15, // 默认轻触反馈 15ms
   options: UseVibrateOptions = {}
 ) => {
-  const { isLoop = false } = options
+  const { isLoop = false, rawTriggerMap } = options
   const intervalRef = useRef<number | null>(null)
 
   // 检查当前浏览器是否支持
@@ -62,10 +65,22 @@ export const useVibrate = (
     return () => stop()
   }, [stop])
 
+  // 为每一个rawTriggerMap的key创建一个震动触发器，然后映射到triggerMap中
+  const triggerMap = rawTriggerMap
+    ? Object.keys(rawTriggerMap).reduce((acc, key) => {
+        acc[key] = (...args) => {
+          trigger()
+          rawTriggerMap[key](...args)
+        }
+        return acc
+      }, {} as RawTriggerMap)
+    : {}
+
   return {
     isSupported,
     vibrate: trigger, // 触发单次/传入模式震动
     start, // 开始循环（如果配置了 isLoop: true）
     stop, // 停止震动
+    triggerMap, // 创建的触发器
   }
 }
