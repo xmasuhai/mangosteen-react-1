@@ -27,7 +27,7 @@ const tabItems: Readonly<Array<TabItem>> = [
 ] as const
 
 export const ItemCreatePage: React.FC<Props> = ({ className }) => {
-  const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
+  const Icon = <SvgIcon name="back-arrow" className="flip-360 size-[24px]" />
   const [selectedKey, setSelectedKey] = useState<TabKind>('expenses')
   return (
     <div className={cn('container w-screen h-screen relative flex flex-col', className)}>
