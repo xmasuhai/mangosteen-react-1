@@ -5,6 +5,7 @@ import { cn } from 'cn'
 interface Props {
   className?: string
   mainTopic?: string
+  onChangeMainTopic: (topic: EmojiMainTopic) => void
 }
 
 /**
@@ -15,11 +16,12 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:14
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiMainTopicNav: React.FC<Props> = ({ className, mainTopic }) => {
+export const EmojiMainTopicNav: React.FC<Props> = ({ className, mainTopic = '表情', onChangeMainTopic }) => {
   const navList = useMemo(() => emojiTopicList.map((topicItem) => topicItem.mainTopic), [])
   const [selectedMainTopic, setSelectedMainTopic] = useState(navList?.[0] ?? mainTopic)
   const selectMainTopic = (topic: EmojiMainTopic) => {
     setSelectedMainTopic(topic)
+    onChangeMainTopic(topic)
   }
 
   return (

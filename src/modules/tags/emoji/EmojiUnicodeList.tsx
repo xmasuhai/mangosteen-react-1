@@ -9,7 +9,7 @@ import { safeEmojiList, type EmojiItem } from '@/lib/const/safeEmojiList.ts'
 
 interface Props {
   className?: string
-  selectedMainTopic?: EmojiMainTopic
+  mainTopic?: EmojiMainTopic
 }
 
 /**
@@ -20,11 +20,11 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:49
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiUnicodeList: React.FC<Props> = ({ className, selectedMainTopic = '表情' }) => {
+export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表情' }) => {
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
     () =>
-      emojiTopicList?.find((topicItem) => topicItem.mainTopic === selectedMainTopic)?.topics ?? [],
-    [selectedMainTopic]
+      emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
+    [mainTopic]
   )
 
   const selectedFlattedEmojiList = useMemo<EmojiItem[]>(
@@ -35,6 +35,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, selectedMainTopic
     [selectedTopicList]
   )
 
+  // ["\u{1F600}", ...]
   const selectedMainTopicEmojiUnicodeList = useMemo<string[]>(
     () => selectedFlattedEmojiList.map((item) => item.unicode),
     [selectedFlattedEmojiList]
@@ -53,7 +54,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, selectedMainTopic
         <li
           key={`${index}_${unicode}`}
           onClick={() => {
-            /*switchEmojiUnicode(unicode)*/
+            /* switchEmojiUnicode(unicode) */
           }}
           className={cn(
             'text-center grow-0 shrink-0 w-10% b-1 b-transparent'
