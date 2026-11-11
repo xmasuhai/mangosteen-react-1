@@ -1,10 +1,15 @@
 import { cn } from 'cn'
 import { useMemo } from 'react'
-import { emojiTopicList } from '@/lib/const/emojiTopicList.ts'
-import { safeEmojiList } from '@/lib/const/safeEmojiList.ts'
+import {
+  type EmojiMainTopic,
+  type EmojiSubTopic,
+  emojiTopicList,
+} from '@/lib/const/emojiTopicList.ts'
+import { safeEmojiList, type EmojiItem } from '@/lib/const/safeEmojiList.ts'
 
 interface Props {
   className?: string
+  selectedMainTopic?: EmojiMainTopic
 }
 
 /**
@@ -15,23 +20,22 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:49
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiUnicodeList: React.FC<Props> = ({/* className, */}) => {
-  const selectedMainTopic = '表情'
-  const selectedTopicList = useMemo(
+export const EmojiUnicodeList: React.FC<Props> = ({ className, selectedMainTopic = '表情' }) => {
+  const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
     () =>
-      emojiTopicList.find((topicItem) => topicItem.mainTopic === selectedMainTopic)?.topics ?? [],
-    [emojiTopicList, selectedMainTopic]
+      emojiTopicList?.find((topicItem) => topicItem.mainTopic === selectedMainTopic)?.topics ?? [],
+    [selectedMainTopic]
   )
 
-  const selectedFlattedEmojiList = useMemo(
+  const selectedFlattedEmojiList = useMemo<EmojiItem[]>(
     () =>
       safeEmojiList
         .filter((item) => selectedTopicList.includes(item.topic))
         .flatMap((item) => item.emoji_list),
-    [safeEmojiList, selectedTopicList]
+    [selectedTopicList]
   )
 
-  const selectedMainTopicEmojiUnicodeList = useMemo(
+  const selectedMainTopicEmojiUnicodeList = useMemo<string[]>(
     () => selectedFlattedEmojiList.map((item) => item.unicode),
     [selectedFlattedEmojiList]
   )
@@ -42,22 +46,23 @@ export const EmojiUnicodeList: React.FC<Props> = ({/* className, */}) => {
         'scrollbar-hide overflow-auto h-[calc(1.65em_*_12)]',
         'flex flex-wrap content-start px-.5em py-2.5px',
         'text-22px line-height-1.5em',
-        'children:(text-22px)'
+        'children:(text-22px)',
+        className
       )}>
-      {
-        selectedMainTopicEmojiUnicodeList.map((unicode, index) => (
-          <li
-            key={`${index}_${unicode}`}
-            onClick={() => {/*switchEmojiUnicode(unicode)*/}}
-            className={cn(
-              'text-center grow-0 shrink-0 w-10% b-1 b-transparent',
-              // unicode === selectedEmojiUnicode.value &&
-              // 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] rounded-[var(--input-radius)]',
-            )}>
-            {unicode}
-          </li>
-        ))
-      }
+      {selectedMainTopicEmojiUnicodeList.map((unicode, index) => (
+        <li
+          key={`${index}_${unicode}`}
+          onClick={() => {
+            /*switchEmojiUnicode(unicode)*/
+          }}
+          className={cn(
+            'text-center grow-0 shrink-0 w-10% b-1 b-transparent'
+            // unicode === selectedEmojiUnicode.value &&
+            // 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] rounded-[var(--input-radius)]',
+          )}>
+          {unicode}
+        </li>
+      ))}
     </ol>
   )
 }

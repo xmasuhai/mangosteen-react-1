@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { EmojiMainTopic, emojiTopicList } from '@/lib/const/emojiTopicList.ts'
+import { type EmojiMainTopic, emojiTopicList } from '@/lib/const/emojiTopicList.ts'
 import { cn } from 'cn'
 
 interface Props {
@@ -16,13 +16,10 @@ interface Props {
  * @FilePath: src/modules/tags/emoji
  */
 export const EmojiMainTopicNav: React.FC<Props> = ({ className, mainTopic }) => {
-  const navList = useMemo(
-    () => emojiTopicList.map((topicItem) => topicItem.mainTopic),
-    [emojiTopicList]
-  )
+  const navList = useMemo(() => emojiTopicList.map((topicItem) => topicItem.mainTopic), [])
   const [selectedMainTopic, setSelectedMainTopic] = useState(navList?.[0] ?? mainTopic)
   const selectMainTopic = (topic: EmojiMainTopic) => {
-    setSelectedMainTopic(selectedMainTopic)
+    setSelectedMainTopic(topic)
   }
 
   return (
@@ -30,7 +27,7 @@ export const EmojiMainTopicNav: React.FC<Props> = ({ className, mainTopic }) => 
       <menu
         className={cn(
           'flex flex-nowrap overflow-auto mx-1em py-0 scrollbar-hide',
-          '[&>li.selected]:(text-[var(--emoji-nav-text-selected)] font-bold)',
+          '[&>li.selected]:(text-[var(--emoji-nav-text-selected)] font-bold)'
         )}>
         {navList.map((item, index) => (
           <li
@@ -38,7 +35,7 @@ export const EmojiMainTopicNav: React.FC<Props> = ({ className, mainTopic }) => 
             onClick={() => selectMainTopic(item)}
             className={cn(
               'shrink-0 inline-block p-.5em text-[var(--emoji-nav-text)] whitespace-nowrap',
-              item === selectedMainTopic ? 'selected' : '',
+              item === selectedMainTopic ? 'selected' : ''
             )}>
             {item}
           </li>

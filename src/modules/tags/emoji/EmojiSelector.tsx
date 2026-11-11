@@ -17,13 +17,14 @@ interface Props {
  * @FilePath: src/modules/tags/emoji
  */
 export const EmojiSelector: React.FC<Props> = ({ className, hasError }) => {
-  const [selectedEmoji, setSelectedEmoji] = useState('')
+  const [_selectedEmoji, _setSelectedEmoji] = useState('')
   return (
     <div
       className={cn(
         'min-h-[var(--input-min-height)] max-w-full flex-grow-1',
         'b-1 rounded-[var(--input-radius)] text-14px',
-        hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]'
+        hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]',
+        className
       )}>
       <EmojiMainTopicNav />
 
