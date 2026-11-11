@@ -1,9 +1,10 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
-import react from '@vitejs/plugin-react'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
 import UnoCSS from 'unocss/vite'
 import jsxScoped from '@10coding/vite-plugin-jsx-scoped'
-import { consoleBanner,} from "vite-plugin-console-banner"
+import { consoleBanner } from 'vite-plugin-console-banner'
 import { svgsprites } from './src/plugins/svgsprites.ts'
 import { noOptimizeIconList } from './src/plugins/noOptimizeIconList.ts'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
@@ -25,33 +26,35 @@ export default defineConfig(({ command }: ConfigEnv) => ({
       enabled: command === 'serve',
       reload: true,
       awaitInitialLoad: command === 'serve',
-      exclude: [
-        '**/*.d.{js,ts,cjs,mjs,json,json5}',
-      ],
+      exclude: ['**/*.d.{js,ts,cjs,mjs,json,json5}'],
     }),
     react(),
+    babel({
+      presets: [reactCompilerPreset({ target: '18' })],
+    }),
     consoleBanner({
       enable: command === 'build',
-      text: "xmasuhai.xyz",
-      font: "big", // 大小写不敏感，也可用 "Big"、"ANSI Shadow"
-      color: "#476EE3",
+      text: 'xmasuhai.xyz',
+      font: 'big', // 大小写不敏感，也可用 "Big"、"ANSI Shadow"
+      color: '#476EE3',
       badges: [
-        { label: "徐帅的博客", url: "https://xmasuhai.xyz" },
-        { label: "徐帅${year}简历", url: "https://xmasuhai.xyz/my-latest-resume/" },
+        { label: '徐帅的博客', url: 'https://xmasuhai.xyz' },
+        { label: '徐帅${year}简历', url: 'https://xmasuhai.xyz/my-latest-resume/' },
       ],
     }),
   ],
   server: {
     host: true,
     proxy: {
-      '^/api': { target: '//192.168.0.104', },
+      '^/api': { target: '//192.168.0.104' },
     },
   },
   resolve: {
     // 开启 Vite 8 的原生 tsconfig 路径解析支持
     tsconfigPaths: true,
     alias: {
+      'react/compiler-runtime': 'react-compiler-runtime',
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-    }
-  }
+    },
+  },
 })) satisfies UserConfigExport
