@@ -22,13 +22,13 @@ export const IconTagItem: React.FC<Props> = ({
   selectedKey,
   onClick,
 }) => {
-  const onClickTab = () => {
+  const onClickTagItem = () => {
     onSelectKey?.(tagKey)
     onClick?.()
   }
   return (
     <li
-      onClick={onClickTab}
+      onClick={onClickTagItem}
       className={cn(className, 'w-3em flex flex-col items-center justify-center gap-y-.5em')}>
       <span
         className={cn(

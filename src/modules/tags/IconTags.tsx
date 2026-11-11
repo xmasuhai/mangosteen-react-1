@@ -19,8 +19,6 @@ export const IconTags: React.FC<Props> = ({ className, kind }) => {
 
   const navigate = useNavigate()
   const toCreateTagPage = () => {
-    console.log('toCreateTagPage_______________________')
-    console.log('_______________________toCreateTagPage')
     navigate(`/tags/create?kind=${kind}`)
   }
   return (
