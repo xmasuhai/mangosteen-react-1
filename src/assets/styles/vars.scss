@@ -72,4 +72,11 @@
   --picker-mask-color:
     linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4)),
     linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4));
+  // input emoji
+  --input-min-height: 48px;
+  --input-border-color: var(--main);
+  --input-radius: var(--button-radius);
+  --input-shadow: rgba(0, 0, 0, 0.25);
+  --emoji-nav-text: #999;
+  --emoji-nav-text-selected: #333;
 }
