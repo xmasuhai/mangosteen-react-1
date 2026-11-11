@@ -20,9 +20,9 @@
 ```bash
 npm install -g corepack@latest &&
 corepack enable &&
-corepack prepare pnpm@12.18.0 --activate
+corepack prepare pnpm@12.19.0 --activate
 # 在项目路径下执行
-corepack use pnpm@12.18.0
+corepack use pnpm@12.19.0
 ```
 
 ### 3. 包管理器 `pnpm` 后续升级
@@ -40,25 +40,30 @@ corepack use pnpm@12.19.0
 
 ### 运行时依赖
 
-| 依赖                                                | 版本   | 用途                         |
-| --------------------------------------------------- | ------ | ---------------------------- |
-| [react](https://react.dev/)                         | 18.3.1 | UI 框架                      |
-| [react-dom](https://react.dev/)                     | 18.3.1 | React DOM 渲染               |
-| [react-router-dom](https://reactrouter.com/)        | 6.30.6 | 路由管理                     |
-| [zustand](https://zustand-demo.pmnd.rs/)            | 5.1.0  | 轻量级全局状态管理           |
-| [swr](https://swr.vercel.app/)                      | 2.5.1  | 数据请求与缓存               |
-| [axios](https://axios-http.com/)                    | 1.21.0 | HTTP 客户端                  |
-| [styled-components](https://styled-components.com/) | 6.6.0  | CSS-in-JS 样式方案           |
-| [@react-spring/web](https://www.react-spring.dev/)  | 10.1.2 | 物理动画                     |
-| [cn](https://github.com/lukeed/cn)                  | 0.5.2  | 类名合并工具                 |
-| [vh-check](https://github.com/xmasuhai/vh-check)    | 2.0.5  | 视口单位 (vh) 检查与适配工具 |
+| 依赖                                                                                  | 版本     | 用途                         |
+| ------------------------------------------------------------------------------------- | -------- | ---------------------------- |
+| [react](https://react.dev/)                                                           | 18.3.1   | UI 框架                      |
+| [react-dom](https://react.dev/)                                                       | 18.3.1   | React DOM 渲染               |
+| [react-router-dom](https://reactrouter.com/)                                          | 6.30.6   | 路由管理                     |
+| [zustand](https://zustand-demo.pmnd.rs/)                                              | 5.1.0    | 轻量级全局状态管理           |
+| [swr](https://swr.vercel.app/)                                                        | 2.5.1    | 数据请求与缓存               |
+| [axios](https://axios-http.com/)                                                      | 1.21.1   | HTTP 客户端                  |
+| [styled-components](https://styled-components.com/)                                   | 6.6.0    | CSS-in-JS 样式方案           |
+| [@react-spring/web](https://www.react-spring.dev/)                                    | 10.1.2   | 物理动画                     |
+| [@reactuses/core](https://github.com/childrentime/reactuse)                           | 6.6.1    | React Hooks 工具库           |
+| [ahooks](https://ahooks.js.org/)                                                      | 3.11.0   | React Hooks 工具库           |
+| [cn](https://github.com/lukeed/cn)                                                    | 0.5.2    | 类名合并工具                 |
+| [nanoevents](https://github.com/ai/nanoevents)                                        | 10.0.0   | 轻量级事件总线               |
+| [sweetalert2](https://sweetalert2.github.io/)                                         | 11.26.25 | 弹窗组件                     |
+| [sweetalert2-react-content](https://github.com/sweetalert2/sweetalert2-react-content) | 5.1.2    | SweetAlert2 React 集成       |
+| [vh-check](https://github.com/xmasuhai/vh-check)                                      | 2.0.5    | 视口单位 (vh) 检查与适配工具 |
 
 ### 开发依赖
 
 | 依赖                                                                                               | 版本    | 用途                         |
 | -------------------------------------------------------------------------------------------------- | ------- | ---------------------------- |
-| [vite](https://vitejs.dev/)                                                                        | 8.3.6   | 构建工具与开发服务器         |
-| [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)                                | 6.2.1   | Vite React 插件              |
+| [vite](https://vitejs.dev/)                                                                        | 8.3.8   | 构建工具与开发服务器         |
+| [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)                                | 6.3.0   | Vite React 插件              |
 | [@10coding/vite-plugin-jsx-scoped](https://github.com/10coding/vite-plugin-jsx-scoped)             | 0.6.0   | Vite JSX 作用域插件          |
 | [vite-plugin-console-banner](https://github.com/xmasuhai/vite-plugin-console-banner)               | 0.1.2   | 构建控制台横幅插件           |
 | [vite-plugin-mock-dev-server](https://github.com/xmasuhai/vite-plugin-mock-dev-server)             | 2.7.1   | Mock 开发服务器插件          |
@@ -69,18 +74,19 @@ corepack use pnpm@12.19.0
 | [typescript](https://www.typescriptlang.org/)                                                      | 7.0.2   | 类型检查                     |
 | [@types/react](https://www.typescriptlang.org/)                                                    | 18.3.31 | React TypeScript 类型定义    |
 | [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
-| [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.91.0  | 代码检查                     |
-| [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.76.0  | 代码格式化                   |
-| [sass-embedded](https://sass-lang.com/)                                                            | 1.108.1 | Sass 编译器                  |
+| [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.93.0  | 代码检查                     |
+| [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.78.0  | 代码格式化                   |
+| [sass-embedded](https://sass-lang.com/)                                                            | 1.108.2 | Sass 编译器                  |
 | [stylelint](https://stylelint.io/)                                                                 | 18.0.0  | 样式代码检查                 |
 | [stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss) | 17.0.0  | SCSS 样式检查配置            |
 | [svgo](https://github.com/svgoco/svgo)                                                             | 4.1.0   | SVG 优化工具                 |
 | [svgstore](https://github.com/w0rm/svgstore)                                                       | 3.0.1   | SVG 雪碧图合并工具           |
 | [@faker-js/faker](https://fakerjs.dev/)                                                            | 10.6.0  | 模拟数据生成工具             |
+| [vitest](https://vitest.dev/)                                                                      | 5.1.0   | 测试框架                     |
 
 ### 包管理器与运行时要求
 
-- **包管理器**：`pnpm >=12.18.0`（`packageManager: pnpm@12.18.0+sha512...`）
+- **包管理器**：`pnpm >=12.19.0`（`packageManager: pnpm@12.18.0+sha512...`）
 - **Node.js**：`>=26.13.0`
 
 ## 📦 依赖安装与启动
