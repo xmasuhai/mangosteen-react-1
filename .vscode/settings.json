@@ -108,5 +108,8 @@
   "auto-fold.enable-str-search-imports-for-js": true,
   "[javascript]": {
     "editor.defaultFormatter": "TypeScriptTeam.native-preview"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }
