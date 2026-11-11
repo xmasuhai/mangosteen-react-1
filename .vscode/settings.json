@@ -105,5 +105,8 @@
     "source.organizeImports": "never"
   },
   "auto-fold.fold/unfold-imports-when-focus/blur": true,
-  "auto-fold.enable-str-search-imports-for-js": true
+  "auto-fold.enable-str-search-imports-for-js": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "TypeScriptTeam.native-preview"
+  }
 }
