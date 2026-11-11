@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, pathToFileURL, URL } from 'node:url'
 import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import babel from '@rolldown/plugin-babel'
@@ -55,6 +55,21 @@ export default defineConfig(({ command }: ConfigEnv) => ({
     alias: {
       'react/compiler-runtime': 'react-compiler-runtime',
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // 自定义 importers 解析 @/ 别名
+        importers: [
+          {
+            findFileUrl(url) {
+              if (!url.startsWith('@/')) return null;
+              return new URL(url.substring(2), pathToFileURL('./src'));
+            }
+          },
+        ],
+      },
     },
   },
 })) satisfies UserConfigExport
