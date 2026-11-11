@@ -1,4 +1,8 @@
-import { GlobalHintsEvents, HintPayload, useGlobalHintsBus } from '@/hooks/useGlobalHintsBus'
+import {
+  type GlobalHintsEvents,
+  type HintPayload,
+  useGlobalHintsBus,
+} from '@/hooks/useGlobalHintsBus'
 import { useEffect } from 'react'
 
 export const useNanoEvent = <K extends keyof GlobalHintsEvents = 'hint'>(

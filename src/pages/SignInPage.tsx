@@ -1,26 +1,26 @@
-import { GradientBanner } from "@/components/GradientBanner"
-import { SvgIcon } from "@/components/SvgIcon"
-import { TopNav } from "@/components/TopNav"
-import { request } from "@/lib/request/request";
-import {  FormRules, hasError, } from "@/lib/validator/formValidate";
-import { SignInFormData, useSignInStore } from "@/stores/useSignInStore";
-import { cn } from "cn"
-import { FormEventHandler } from "react";
-import { useNavigate } from "react-router-dom";
+import { GradientBanner } from '@/components/GradientBanner'
+import { SvgIcon } from '@/components/SvgIcon'
+import { TopNav } from '@/components/TopNav'
+import { request } from '@/lib/request/request'
+import { type FormRules, hasError } from '@/lib/validator/formValidate'
+import { type SignInFormData, useSignInStore } from '@/stores/useSignInStore'
+import { cn } from 'cn'
+import type { FormEventHandler } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   className?: string
 }
 
 const signInRules: FormRules<SignInFormData> = [
-  { key: 'email', type: 'required', required: true, message: '请输入邮箱地址', },
-  { key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确', },
-  { key: 'code', type: 'required', required: true, message: '请输入验证码', },
-  { key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码', },
+  { key: 'email', type: 'required', required: true, message: '请输入邮箱地址' },
+  { key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确' },
+  { key: 'code', type: 'required', required: true, message: '请输入验证码' },
+  { key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码' },
 ]
 
-export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
-  const Icon = (<SvgIcon name="back-arrow" className="" />)
+export const SignInPage: React.FC<Props> = ({/* className, */}) => {
+  const Icon = <SvgIcon name="back-arrow" className="" />
 
   const { data, setData, error, clearError, revalidateFormItems } = useSignInStore()
 
@@ -39,7 +39,7 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
   }
 
   const nav = useNavigate()
-  const onSubmit: FormEventHandler<HTMLFormElement> = async(e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     revalidateFormItems<SignInFormData>(data, signInRules)
     if (!hasError(error)) {
@@ -68,9 +68,10 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
         <section>
           <label htmlFor="email" className="form-label-sc">
             邮箱地址：
-            {(
-              error.email &&
-                <span className="vertical-mid color-[var(--error-color)] text-.75em">{error.email.join('，')}</span>
+            {error.email && (
+              <span className="vertical-mid color-[var(--error-color)] text-.75em">
+                {error.email.join('，')}
+              </span>
             )}
           </label>
           <input
@@ -79,19 +80,23 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
             id="email"
             value={data.email}
             onChange={onChangeEmail}
-            onBlur={() => revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)}
+            onBlur={() =>
+              revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)
+            }
             onFocus={() => clearError('email')}
             placeholder="请输入邮箱，然后点击发送验证码"
-            className="form-input-text-sc" />
+            className="form-input-text-sc"
+          />
         </section>
 
         {/* 验证码 */}
         <section>
           <label htmlFor="sms-code" className="form-label-sc">
             验证码：
-            {(
-              error.code &&
-              <span className="vertical-mid color-[var(--error-color)] text-.75em">{error.code.join('，')}</span>
+            {error.code && (
+              <span className="vertical-mid color-[var(--error-color)] text-.75em">
+                {error.code.join('，')}
+              </span>
             )}
           </label>
           <div className="flex w-full gap-x-[1em]">
@@ -100,21 +105,26 @@ export const SignInPage: React.FC<Props> = ({ /* className, */ }) => {
               id="sms-code"
               value={data.code}
               onChange={onChangeCode}
-              onBlur={() => revalidateFormItems<SignInFormData>({ code: data.code }, signInRules, error)}
+              onBlur={() =>
+                revalidateFormItems<SignInFormData>({ code: data.code }, signInRules, error)
+              }
               onFocus={() => clearError('code')}
               placeholder="六位数字"
-              className="form-input-text-sc w-[9em]" />
-            <button type="button" className="grow-1 form-btn-sc">发送验证码</button>
+              className="form-input-text-sc w-[9em]"
+            />
+            <button type="button" className="grow-1 form-btn-sc">
+              发送验证码
+            </button>
           </div>
         </section>
 
         {/* 登录 */}
         <section className="form-label-sc mt-[100px]">
-          <button type="submit" className="primary-btn">登录</button>
+          <button type="submit" className="primary-btn">
+            登录
+          </button>
         </section>
-
       </form>
-
     </div>
   )
 }

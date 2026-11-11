@@ -1,5 +1,4 @@
-import { FormEventHandler, useMemo } from 'react'
-import { cn } from 'cn'
+import type { FormEventHandler } from 'react'
 import { EmojiSelector } from '@/modules/tags/emoji/EmojiSelector.tsx'
 
 interface Props {

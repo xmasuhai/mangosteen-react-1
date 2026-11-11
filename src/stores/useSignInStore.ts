@@ -1,5 +1,5 @@
-import { JSONValue } from '@/global';
-import { FormErrorsType, FormRules, formValidate, } from '@/lib/validator/formValidate';
+import type { JSONValue } from '@/global'
+import { type FormErrorsType, type FormRules, formValidate } from '@/lib/validator/formValidate'
 import { create } from 'zustand'
 
 export type SignInFormData = { email: string; code: string }
@@ -17,28 +17,28 @@ interface SignInAction {
     formData: Partial<T>,
     formRules: FormRules<T>,
     lastError?: FormErrorsType<T>
-  ) => void,
+  ) => void
 }
 
 export const useSignInStore = create<SignInState & SignInAction>()((set, get) => ({
-  data: { email: '', code: '', },
-  error: { email: [], code: [], },
+  data: { email: '', code: '' },
+  error: { email: [], code: [] },
   setData: (data: Partial<SignInFormData>) => {
     set((state) => ({
       ...state,
-      data: { ...state.data, ...data, },
+      data: { ...state.data, ...data },
     }))
   },
   setError: (error: Partial<FormErrorsType<SignInFormData>>) => {
     set((state) => ({
       ...state,
-      error: { ...state.error, ...error, },
+      error: { ...state.error, ...error },
     }))
   },
   clearError: (key?: keyof SignInFormData) => {
     set((state) => ({
       ...state,
-      error: key ? { ...state.error, [key]: [], } : { email: [], code: [], },
+      error: key ? { ...state.error, [key]: [] } : { email: [], code: [] },
     }))
   },
   revalidateFormItems: <T extends JSONValue>(
@@ -48,7 +48,7 @@ export const useSignInStore = create<SignInState & SignInAction>()((set, get) =>
   ) => {
     get().clearError()
     const keys = Object.keys(formData)
-    const validatingRules = formRules.filter(rule => keys.includes(String(rule.key)))
+    const validatingRules = formRules.filter((rule) => keys.includes(String(rule.key)))
     const formError = formValidate(formData, validatingRules)
     get().setError({ ...lastError, ...formError })
   },

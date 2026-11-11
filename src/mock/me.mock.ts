@@ -1,5 +1,5 @@
-import { Resource, ResponseData, User } from "@/global"
-import { defineMock } from "vite-plugin-mock-dev-server"
+import type { Resource, ResponseData, User } from '@/global'
+import { defineMock } from 'vite-plugin-mock-dev-server'
 
 export default defineMock({
   url: '/api/v1/me',

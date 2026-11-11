@@ -1,4 +1,4 @@
-import { Item } from "@/global";
+import type { Item } from '@/global'
 
 export const accountItems: Item[] = [
   {

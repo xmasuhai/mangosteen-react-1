@@ -1,6 +1,6 @@
-import { Item, Resources, ResponseData } from "@/global"
-import { customFaker } from "@/mock/fake/customFaker"
-import type { ResponseParams } from "@/mock/mockType"
+import type { Item, Resources, ResponseData } from '@/global.d.ts'
+import { customFaker } from '@/mock/fake/customFaker'
+import type { ResponseParams } from '@/mock/mockType'
 import { defineMock } from 'vite-plugin-mock-dev-server'
 
 let id = 0
@@ -27,16 +27,11 @@ const createMockItem = (attrs?: Partial<Item>): Item => ({
 })
 
 const createMockItemList = (n: number, attrs?: Partial<Item>): Item[] =>
-  Array.from({ length: n })
-    .map(() => createMockItem(attrs))
+  Array.from({ length: n }).map(() => createMockItem(attrs))
 
 export const createItemsMockResponse = (
-  {
-    perPage = 10,
-    page = 1,
-    count = 10,
-  },
-  attrs?: Partial<Item>,
+  { perPage = 10, page = 1, count = 10 },
+  attrs?: Partial<Item>
 ) => {
   const sentCount = (page - 1) * perPage
   const rest = count - sentCount

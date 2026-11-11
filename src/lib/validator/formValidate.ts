@@ -1,4 +1,4 @@
-import { JSONValue } from "@/global";
+import type { JSONValue } from '@/global'
 
 interface FormValidatingData {
   [key: string]: JSONValue
@@ -8,17 +8,17 @@ type FormRule<T> = {
   key: keyof T
   message: string
 } & (
-  { type: 'required'; required: boolean } |
-  { type: 'chinese'; } |
-  { type: 'pattern'; regexp: RegExp } |
-  { type: 'notEqual'; value: JSONValue } |
-  { type: 'equalField'; field: keyof T } |
-  { type: 'length'; min?: number; max?: number }
+  | { type: 'required'; required: boolean }
+  | { type: 'chinese' }
+  | { type: 'pattern'; regexp: RegExp }
+  | { type: 'notEqual'; value: JSONValue }
+  | { type: 'equalField'; field: keyof T }
+  | { type: 'length'; min?: number; max?: number }
 )
 type FormRules<T> = FormRule<T>[]
 type FormErrorsType<T extends JSONValue> = { [k in keyof T]?: string[] }
 
-export type { FormValidatingData, FormRule, FormRules, FormErrorsType, }
+export type { FormValidatingData, FormRule, FormRules, FormErrorsType }
 
 /**
  * @Description: 验证表单
@@ -30,7 +30,7 @@ export type { FormValidatingData, FormRule, FormRules, FormErrorsType, }
  */
 export const formValidate = <T extends JSONValue>(
   formData: Partial<T>,
-  rules: FormRules<T>,
+  rules: FormRules<T>
 ): FormErrorsType<T> => {
   const errorHash: FormErrorsType<T> = {}
 
@@ -40,10 +40,12 @@ export const formValidate = <T extends JSONValue>(
       errorHash[key] ??= []
       errorHash[key].push(message)
     }
-    const value = formData[key]
+    const value = formData[key] ?? ''
     switch (type) {
       case 'required':
-        if (isEmpty(value)) { pushMsgToErrorHash() }
+        if (isEmpty(value)) {
+          pushMsgToErrorHash()
+        }
         break
       case 'pattern':
         if (!isEmpty(value) && !rule.regexp.test(value!.toString())) {
@@ -56,7 +58,9 @@ export const formValidate = <T extends JSONValue>(
         }
         break
       case 'length':
-        if (isEmpty(value)) {break}
+        if (isEmpty(value)) {
+          break
+        }
         if (rule.min !== undefined && value!.toString().length < rule.min) {
           pushMsgToErrorHash()
         }
@@ -88,7 +92,9 @@ export function isEmpty(value: JSONValue) {
 export function hasError(errors?: Record<string, string[]>) {
   // return Object.values(errors)
   // .reduce((result, value) => result + value.length, 0) > 0
-  if (!errors) { return false }
+  if (!errors) {
+    return false
+  }
   let result = false
   for (const key in errors) {
     if (errors[key]?.length > 0) {

@@ -1,5 +1,5 @@
 import { AddItemFloatButton } from '@/components/AddItemFloatButton'
-import { DateRangePicker, DateTabRangeStr } from '@/components/DateRangePicker'
+import { DateRangePicker, type DateTabRangeStr } from '@/components/DateRangePicker'
 import { FloatingOverlayMenu } from '@/components/FloatingOverlayMenu'
 import { GradientBanner } from '@/components/GradientBanner'
 import { SvgIcon } from '@/components/SvgIcon'
