@@ -74,6 +74,14 @@ corepack use pnpm@12.19.0
 | [typescript](https://www.typescriptlang.org/)                                                      | 7.0.2   | 类型检查                     |
 | [@types/react](https://www.typescriptlang.org/)                                                    | 18.3.31 | React TypeScript 类型定义    |
 | [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
+| 18.3.7 | ReactDOM TypeScript 类型定义 |
+| [eslint](https://eslint.org/) | 10.14.0 | 代码检查 |
+| [@antfu/eslint-config](https://github.com/antfu/eslint-config) | 10.0.0 | Antfu ESLint 配置 |
+| [@eslint-react/eslint-plugin](https://github.com/eslint-react/eslint-plugin) | 5.28.8 | React ESLint 规则插件 |
+| [@typescript-eslint/eslint-plugin](https://www.typescriptlang.org/) | 8.72.1 | TypeScript ESLint 规则插件 |
+| [@typescript-eslint/parser](https://www.typescriptlang.org/) | 8.72.1 | TypeScript ESLint 解析器 |
+| [eslint-plugin-react-hooks](https://github.com/jsx-eslint/eslint-plugin-react-hooks) | 7.1.1 | React Hooks ESLint 规则 |
+| [eslint-plugin-react-refresh](https://github.com/tylingsoft/eslint-plugin-react-refresh) | 0.5.7 | React Refresh ESLint 规则 |
 | [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.93.0  | 代码检查                     |
 | [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.78.0  | 代码格式化                   |
 | [sass-embedded](https://sass-lang.com/)                                                            | 1.108.2 | Sass 编译器                  |
