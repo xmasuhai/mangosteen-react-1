@@ -1,5 +1,7 @@
 {
   "name": "mangosteen-react-1",
+  "license": "MIT",
+  "repository": "https://github.com/xmasuhai/mangosteen-react-1",
   "type": "module",
   "version": "0.0.1",
   "private": false,
