@@ -1,4 +1,4 @@
-import type { FormEventHandler } from 'react'
+import { useState, type FormEventHandler } from 'react'
 import { EmojiSelector } from '@/modules/tags/emoji/EmojiSelector.tsx'
 import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
@@ -21,6 +21,8 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
   }
+  const [emoji, setEmoji] = useState('')
+  const [emojiHint, setEmojiHint] = useState('')
 
   return (
     <div className={cn('container w-screen h-screen relative')}>
@@ -37,9 +39,11 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
 
         <div className="flex flex-col">
           <span className="vertical-center">
-            符号 <span text-22px>😄</span>
+            符号
+            <span text-22px>{emoji}</span>
+            <span className="animate-rainbow color-[var(--vp-c-brand-next)]">{emojiHint}</span>
           </span>
-          <EmojiSelector />
+          <EmojiSelector onChangeEmojiUnicode={setEmoji} onChangeEmojiHint={setEmojiHint} />
           <span className="text-[12px] color-[var(--error-color)]">不能为空</span>
         </div>
 

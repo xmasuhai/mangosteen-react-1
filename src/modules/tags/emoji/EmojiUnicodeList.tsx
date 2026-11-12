@@ -1,5 +1,5 @@
 import { cn } from 'cn'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   type EmojiMainTopic,
   type EmojiSubTopic,
@@ -10,6 +10,8 @@ import { safeEmojiList, type EmojiItem } from '@/lib/const/safeEmojiList.ts'
 interface Props {
   className?: string
   mainTopic?: EmojiMainTopic
+  onChangeEmojiUnicode: (unicode: string) => void
+  onChangeEmojiHint: (hint: string) => void
 }
 
 /**
@@ -20,7 +22,12 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:49
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表情' }) => {
+export const EmojiUnicodeList: React.FC<Props> = ({
+  className,
+  mainTopic = '表情',
+  onChangeEmojiUnicode,
+  onChangeEmojiHint,
+}) => {
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
     () => emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
     [mainTopic]
@@ -40,6 +47,26 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表�
     [selectedFlattedEmojiList]
   )
 
+  const [emojiUnicode, setEmojiUnicode] = useState('')
+
+  const emojiHint = useMemo(
+    () =>
+      selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emojiUnicode)?.hint ?? '',
+    [selectedFlattedEmojiList, emojiUnicode]
+  )
+  const switchEmojiUnicode = (unicode: string) => {
+    setEmojiUnicode(unicode)
+  }
+
+  useEffect(() => {
+    onChangeEmojiUnicode(emojiUnicode)
+    onChangeEmojiHint(emojiHint)
+  }, [emojiHint, emojiUnicode])
+
+  useEffect(() => {
+    setEmojiUnicode('')
+  }, [mainTopic])
+
   return (
     <ol
       className={cn(
@@ -57,13 +84,13 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表�
         <li
           key={`${index}_${unicode}`}
           onClick={() => {
-            /* switchEmojiUnicode(unicode) */
+            switchEmojiUnicode(unicode)
           }}
           className={cn(
-            'text-center grow-0 shrink-0 w-10% b-1 b-transparent',
-            'flex items-center justify-center'
-            // unicode === selectedEmojiUnicode.value &&
-            // 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] rounded-[var(--input-radius)]',
+            'text-center grow-0 shrink-0 w-35px b-1 b-transparent rounded-[var(--input-radius)]',
+            'flex items-center justify-center',
+            unicode === emojiUnicode &&
+              'bg-blue-300 outline-1px outline-solid outline-[var(--main)]'
           )}>
           {unicode}
         </li>

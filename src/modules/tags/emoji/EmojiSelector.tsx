@@ -7,6 +7,8 @@ import type { EmojiMainTopic } from '@/lib/const/emojiTopicList'
 interface Props {
   className?: string
   hasError?: boolean
+  onChangeEmojiUnicode: (unicode: string) => void
+  onChangeEmojiHint: (hint: string) => void
 }
 
 /**
@@ -17,7 +19,12 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:02:00
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiSelector: React.FC<Props> = ({ className, hasError }) => {
+export const EmojiSelector: React.FC<Props> = ({
+  className,
+  hasError,
+  onChangeEmojiUnicode,
+  onChangeEmojiHint,
+}) => {
   const [_selectedEmoji, _setSelectedEmoji] = useState('')
   const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
   const onChangeMainTopic = (topic: EmojiMainTopic) => {
@@ -35,7 +42,11 @@ export const EmojiSelector: React.FC<Props> = ({ className, hasError }) => {
       )}>
       <EmojiMainTopicNav onChangeMainTopic={onChangeMainTopic} />
 
-      <EmojiUnicodeList mainTopic={mainTopic} />
+      <EmojiUnicodeList
+        mainTopic={mainTopic}
+        onChangeEmojiUnicode={onChangeEmojiUnicode}
+        onChangeEmojiHint={onChangeEmojiHint}
+      />
     </div>
   )
 }
