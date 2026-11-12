@@ -1,16 +1,8 @@
-/*
- * @Author: xmasuhai xmasuhai@163.com
- * @Date: 2026-11-11 19:16:37
- * @LastEditors: xmasuhai xmasuhai@163.com
- * @LastEditTime: 2026-11-11 23:14:52
- * @FilePath: /mangosteen-react-1/src/modules/tags/emoji/EmojiSelector.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { useState } from 'react'
 import { cn } from 'cn'
 import { EmojiMainTopicNav } from '@/modules/tags/emoji/EmojiMainTopicNav'
 import { EmojiUnicodeList } from '@/modules/tags/emoji/EmojiUnicodeList'
-import type { EmojiMainTopic } from '@/lib/const/emojiTopicList';
+import type { EmojiMainTopic } from '@/lib/const/emojiTopicList'
 
 interface Props {
   className?: string
@@ -35,12 +27,13 @@ export const EmojiSelector: React.FC<Props> = ({ className, hasError }) => {
   return (
     <div
       className={cn(
-        'min-h-[var(--input-min-height)] max-w-full flex-grow-1',
+        'grow-1 shrink-1 flex flex-col',
+        'min-h-[var(--input-min-height)] max-w-full',
         'b-1 rounded-[var(--input-radius)] text-14px',
         hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]',
         className
       )}>
-      <EmojiMainTopicNav onChangeMainTopic={onChangeMainTopic } />
+      <EmojiMainTopicNav onChangeMainTopic={onChangeMainTopic} />
 
       <EmojiUnicodeList mainTopic={mainTopic} />
     </div>

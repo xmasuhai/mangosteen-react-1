@@ -13,8 +13,8 @@ interface Props {
 }
 
 /**
- * @Description: 组件描述
- * @Author: xmasuhai <xmasuhai@163.com>
+ * @Description: 颜文字编码列表
+ * @Author: xmasuhai xmasuhai@163.com
  * @Date: 2026-11-11 18:08:49
  * @LastEditors: xmasuhai <xmasuhai@163.com>
  * @LastEditTime: 2026-11-11 18:08:49
@@ -22,8 +22,7 @@ interface Props {
  */
 export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表情' }) => {
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
-    () =>
-      emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
+    () => emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
     [mainTopic]
   )
 
@@ -45,7 +44,11 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表�
     <ol
       className={cn(
         'scrollbar-hide overflow-auto h-[calc(1.65em_*_12)]',
-        'flex flex-wrap content-start px-.5em py-2.5px',
+        'grow-1 shrink-1',
+        // 'flex flex-wrap content-start',
+        'grid place-items-center',
+        'grid-cols-[repeat(auto-fit,minmax(10%,1fr))] grid-rows-[repeat(auto-fill,1.65em)]',
+        'px-.5em p-t-.25em p-b-.5em',
         'text-22px line-height-1.5em',
         'children:(text-22px)',
         className
@@ -57,7 +60,8 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, mainTopic = '表�
             /* switchEmojiUnicode(unicode) */
           }}
           className={cn(
-            'text-center grow-0 shrink-0 w-10% b-1 b-transparent'
+            'text-center grow-0 shrink-0 w-10% b-1 b-transparent',
+            'flex items-center justify-center'
             // unicode === selectedEmojiUnicode.value &&
             // 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] rounded-[var(--input-radius)]',
           )}>
