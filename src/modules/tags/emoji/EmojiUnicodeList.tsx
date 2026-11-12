@@ -48,7 +48,6 @@ export const EmojiUnicodeList: React.FC<Props> = ({
   )
 
   const [emojiUnicode, setEmojiUnicode] = useState('')
-
   const emojiHint = useMemo(
     () =>
       selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emojiUnicode)?.hint ?? '',
@@ -61,11 +60,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({
   useEffect(() => {
     onChangeEmojiUnicode(emojiUnicode)
     onChangeEmojiHint(emojiHint)
-  }, [emojiHint, emojiUnicode])
-
-  useEffect(() => {
-    setEmojiUnicode('')
-  }, [mainTopic])
+  }, [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint])
 
   return (
     <ol

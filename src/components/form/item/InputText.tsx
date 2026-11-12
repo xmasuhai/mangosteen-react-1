@@ -40,7 +40,7 @@ export const InputText: React.FC<Props> = ({
     </>
   )
   const labelTag = ifUseLabelTag ? (
-    <label {...(labelForId ? { for: labelForId } : {})} className="form-label-sc">
+    <label {...(labelForId ? { htmlFor: labelForId } : {})} className="form-label-sc">
       {labelChildren}
     </label>
   ) : (

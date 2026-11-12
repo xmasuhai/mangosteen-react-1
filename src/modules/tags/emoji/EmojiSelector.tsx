@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { cn } from 'cn'
 import { EmojiMainTopicNav } from '@/modules/tags/emoji/EmojiMainTopicNav'
 import { EmojiUnicodeList } from '@/modules/tags/emoji/EmojiUnicodeList'
@@ -30,6 +30,11 @@ export const EmojiSelector: React.FC<Props> = ({
     setMainTopic(topic)
   }
 
+  useEffect(() => {
+    onChangeEmojiUnicode('')
+    onChangeEmojiHint('')
+  }, [mainTopic, onChangeEmojiUnicode, onChangeEmojiHint])
+
   return (
     <div
       className={cn(
@@ -42,6 +47,7 @@ export const EmojiSelector: React.FC<Props> = ({
       <EmojiMainTopicNav onChangeMainTopic={onChangeMainTopic} />
 
       <EmojiUnicodeList
+        key={mainTopic}
         mainTopic={mainTopic}
         onChangeEmojiUnicode={onChangeEmojiUnicode}
         onChangeEmojiHint={onChangeEmojiHint}
