@@ -83,7 +83,7 @@ export default defineConfig({
   ],
   shortcuts: {
     // 将 UnoCSS 的原子类映射到你 SCSS 里定义好的 .animation-rainbow 类
-    'animate-rainbow': 'animation-rainbow',
+    rainbow: 'animation-rainbow',
     'primary-btn': cn(
       'w-100% h-48px b-none rounded-8px text-center',
       'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]'
@@ -93,8 +93,9 @@ export default defineConfig({
     'form-sc': 'mgst-form px-1em py-1em flex flex-col gap-y-16px children:(flex flex-col)',
     'form-item-sc': 'mgst-form-item w-full gap-y-8px where:(flex flex-col)',
     'form-label-sc': 'mgst-form-label vertical-mid text-16px block',
-    'form-item-content-sc': 'flex w-full gap-x-[1em]',
+    'form-item-content-sc': 'mgst-form-item-content flex w-full gap-x-[1em]',
     'form-item-error-sc': cn(
+      'form-item-error',
       'block w-full min-h-18px',
       'vertical-mid text-12px color-[var(--error-color)]'
     ),
