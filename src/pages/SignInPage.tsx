@@ -20,7 +20,7 @@ const signInRules: FormRules<SignInFormData> = [
   { key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码' },
 ]
 
-export const SignInPage: React.FC<Props> = ({/* className, */}) => {
+export const SignInPage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="" />
 
   const { data, setData, error, clearError, revalidateFormItems } = useSignInStore()
@@ -52,7 +52,7 @@ export const SignInPage: React.FC<Props> = ({/* className, */}) => {
   }
 
   return (
-    <div className={cn('container w-screen h-screen relative')}>
+    <div className={cn('container w-screen h-screen relative', className)}>
       <GradientBanner>
         <TopNav title="登录" icon={Icon} />
       </GradientBanner>

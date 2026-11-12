@@ -17,7 +17,7 @@ interface Props {
  * @LastEditTime: 2026-11-11 23:18:30
  * @FilePath: /mangosteen-react-1/src/pages/TagCreatePage.tsx
  */
-export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
+export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="" />
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -26,7 +26,7 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
   const [emojiHint, setEmojiHint] = useState('')
 
   return (
-    <div className={cn('container w-screen h-screen relative')}>
+    <div className={cn('container w-screen h-screen relative', className)}>
       <GradientBanner>
         <TopNav title="新建标签" icon={Icon} />
       </GradientBanner>
