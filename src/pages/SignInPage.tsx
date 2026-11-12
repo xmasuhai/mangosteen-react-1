@@ -1,3 +1,4 @@
+import { InputText } from '@/components/form/item/InputText'
 import { GradientBanner } from '@/components/GradientBanner'
 import { SvgIcon } from '@/components/SvgIcon'
 import { TopNav } from '@/components/TopNav'
@@ -24,10 +25,10 @@ export const SignInPage: React.FC<Props> = ({/* className, */}) => {
 
   const { data, setData, error, clearError, revalidateFormItems } = useSignInStore()
 
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (value: string) => {
     setData({
       ...data,
-      email: e.target.value,
+      email: value,
     })
   }
 
@@ -65,31 +66,20 @@ export const SignInPage: React.FC<Props> = ({/* className, */}) => {
       {/* 表单 */}
       <form onSubmit={onSubmit} className="form-sc">
         {/* 邮箱 */}
-        <section className="form-item-sc">
-          <label htmlFor="email" className="form-label-sc">
-            邮箱地址：
-          </label>
-          <div className="form-item-content-sc">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={data.email}
-              onChange={onChangeEmail}
-              onBlur={() =>
-                revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)
-              }
-              onFocus={() => clearError('email')}
-              placeholder="请输入邮箱，然后点击发送验证码"
-              className="form-input-text-sc"
-            />
-          </div>
-          {
-            <span className="form-item-error-sc">
-              {(error.email && error.email.join('，')) ?? <>&nbsp;</>}
-            </span>
+        <InputText
+          label="邮箱地址"
+          labelFor="email-address"
+          inputType="email"
+          placeholder="请输入邮箱，然后点击发送验证码"
+          ifUseLabelTag={true}
+          errorHint={error.email && error.email.join('，')}
+          value={data.email}
+          onChange={onChangeEmail}
+          onBlur={() =>
+            revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)
           }
-        </section>
+          onFocus={() => clearError('email')}
+        />
 
         {/* 验证码 */}
         <section className="form-item-sc">

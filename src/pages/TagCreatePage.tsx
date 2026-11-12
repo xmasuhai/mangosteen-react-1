@@ -4,6 +4,7 @@ import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
 import { SvgIcon } from '@/components/SvgIcon'
+import { InputText } from '@/components/form/item/InputText'
 
 interface Props {
   className?: string
@@ -31,13 +32,13 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
       </GradientBanner>
 
       <form onSubmit={onSubmit} className="form-sc">
-        <section className="form-item-sc">
-          <label className="form-label-sc">标签名</label>
-          <div className="form-item-content-sc">
-            <input className="form-input-text-sc" />
-          </div>
-          <span className="form-item-error-sc">标签名太长</span>
-        </section>
+        <InputText
+          label="标签名"
+          labelFor="tag-name"
+          placeholder="请输入标签名称"
+          ifUseLabelTag={true}
+          errorHint="标签名太长"
+        />
 
         <section className="form-item-sc">
           <label className="form-label-sc">
@@ -53,7 +54,7 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
           <span className="form-item-error-sc">不能为空</span>
         </section>
 
-        <p className="form-item-sc py-[1em] text-center">记账时长按即可进行编辑</p>
+        <p className="form-item-sc text-center">记账时长按即可进行编辑</p>
 
         <div className="form-item-sc">
           <button type="submit" className="primary-btn">
