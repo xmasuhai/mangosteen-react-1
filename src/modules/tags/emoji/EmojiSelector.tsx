@@ -25,7 +25,6 @@ export const EmojiSelector: React.FC<Props> = ({
   onChangeEmojiUnicode,
   onChangeEmojiHint,
 }) => {
-  const [_selectedEmoji, _setSelectedEmoji] = useState('')
   const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
   const onChangeMainTopic = (topic: EmojiMainTopic) => {
     setMainTopic(topic)

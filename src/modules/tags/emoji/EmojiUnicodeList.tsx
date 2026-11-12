@@ -87,7 +87,8 @@ export const EmojiUnicodeList: React.FC<Props> = ({
             switchEmojiUnicode(unicode)
           }}
           className={cn(
-            'text-center grow-0 shrink-0 w-35px b-1 b-transparent rounded-[var(--input-radius)]',
+            'text-center grow-0 shrink-0 w-35px',
+            'b-1 b-transparent rounded-[var(--input-radius)]',
             'flex items-center justify-center',
             unicode === emojiUnicode &&
               'bg-blue-300 outline-1px outline-solid outline-[var(--main)]'

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { type EmojiMainTopic, emojiTopicList } from '@/lib/const/emojiTopicList.ts'
 import { cn } from 'cn'
 
@@ -21,7 +21,7 @@ export const EmojiMainTopicNav: React.FC<Props> = ({
   mainTopic = '表情',
   onChangeMainTopic,
 }) => {
-  const navList = useMemo(() => emojiTopicList.map((topicItem) => topicItem.mainTopic), [])
+  const navList = emojiTopicList?.map((topicItem) => topicItem.mainTopic) ?? []
   const [selectedMainTopic, setSelectedMainTopic] = useState(navList?.[0] ?? mainTopic)
   const selectMainTopic = (topic: EmojiMainTopic) => {
     setSelectedMainTopic(topic)
