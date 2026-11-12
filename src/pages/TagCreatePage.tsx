@@ -30,26 +30,32 @@ export const TagCreatePage: React.FC<Props> = ({/* className, */}) => {
         <TopNav title="新建标签" icon={Icon} />
       </GradientBanner>
 
-      <form onSubmit={onSubmit} className="px-[1em] py-[32px] flex flex-col gap-y-[1em]">
-        <div className="flex flex-col">
-          <span className="">标签名</span>
-          <input className="form-input-text-sc" />
-          <span className="text-[12px] color-[var(--error-color)]">标签名太长</span>
-        </div>
+      <form onSubmit={onSubmit} className="form-sc">
+        <section className="form-item-sc">
+          <label className="form-label-sc">标签名</label>
+          <div className="form-item-content-sc">
+            <input className="form-input-text-sc" />
+          </div>
+          <span className="form-item-error-sc">标签名太长</span>
+        </section>
 
-        <div className="flex flex-col">
-          <span className="vertical-center">
+        <section className="form-item-sc">
+          <label className="form-label-sc">
             符号
             <span text-22px>{emoji}</span>
             <span className="animate-rainbow color-[var(--vp-c-brand-next)]">{emojiHint}</span>
-          </span>
-          <EmojiSelector onChangeEmojiUnicode={setEmoji} onChangeEmojiHint={setEmojiHint} />
-          <span className="text-[12px] color-[var(--error-color)]">不能为空</span>
-        </div>
+          </label>
+          <EmojiSelector
+            onChangeEmojiUnicode={setEmoji}
+            onChangeEmojiHint={setEmojiHint}
+            className="form-item-content-sc"
+          />
+          <span className="form-item-error-sc">不能为空</span>
+        </section>
 
-        <p className="flex flex-col py-[1em] text-center">记账时长按即可进行编辑</p>
+        <p className="form-item-sc py-[1em] text-center">记账时长按即可进行编辑</p>
 
-        <div className="flex flex-col">
+        <div className="form-item-sc">
           <button type="submit" className="primary-btn">
             确定
           </button>

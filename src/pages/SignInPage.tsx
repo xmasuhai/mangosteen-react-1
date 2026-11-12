@@ -65,41 +65,38 @@ export const SignInPage: React.FC<Props> = ({/* className, */}) => {
       {/* 表单 */}
       <form onSubmit={onSubmit} className="form-sc">
         {/* 邮箱 */}
-        <section>
+        <section className="form-item-sc">
           <label htmlFor="email" className="form-label-sc">
             邮箱地址：
-            {error.email && (
-              <span className="vertical-mid color-[var(--error-color)] text-.75em">
-                {error.email.join('，')}
-              </span>
-            )}
           </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={data.email}
-            onChange={onChangeEmail}
-            onBlur={() =>
-              revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)
-            }
-            onFocus={() => clearError('email')}
-            placeholder="请输入邮箱，然后点击发送验证码"
-            className="form-input-text-sc"
-          />
+          <div className="form-item-content-sc">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={data.email}
+              onChange={onChangeEmail}
+              onBlur={() =>
+                revalidateFormItems<SignInFormData>({ email: data.email }, signInRules, error)
+              }
+              onFocus={() => clearError('email')}
+              placeholder="请输入邮箱，然后点击发送验证码"
+              className="form-input-text-sc"
+            />
+          </div>
+          {
+            <span className="form-item-error-sc">
+              {(error.email && error.email.join('，')) ?? <>&nbsp;</>}
+            </span>
+          }
         </section>
 
         {/* 验证码 */}
-        <section>
+        <section className="form-item-sc">
           <label htmlFor="sms-code" className="form-label-sc">
             验证码：
-            {error.code && (
-              <span className="vertical-mid color-[var(--error-color)] text-.75em">
-                {error.code.join('，')}
-              </span>
-            )}
           </label>
-          <div className="flex w-full gap-x-[1em]">
+          <div className="form-item-content-sc">
             <input
               type="text"
               id="sms-code"
@@ -116,10 +113,15 @@ export const SignInPage: React.FC<Props> = ({/* className, */}) => {
               发送验证码
             </button>
           </div>
+          {
+            <span className="form-item-error-sc">
+              {(error.code && error.code.join('，')) ?? <>&nbsp;</>}
+            </span>
+          }
         </section>
 
         {/* 登录 */}
-        <section className="form-label-sc mt-[100px]">
+        <section className="form-item-sc mt-[100px]">
           <button type="submit" className="primary-btn">
             登录
           </button>

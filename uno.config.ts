@@ -87,13 +87,25 @@ export default defineConfig({
       'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]'
     ),
     disabled: 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
-    'form-sc': 'px-1em flex flex-col gap-y-24px children:(flex flex-col)',
-    'form-label-sc': 'vertical-mid text-18px mb-.5em',
+    /* 表单相关 */
+    'form-sc': 'mgst-form px-1em py-1em flex flex-col gap-y-24px children:(flex flex-col)',
+    'form-item-sc': 'mgst-form-item w-full where:(flex flex-col)',
+    'form-label-sc': 'mgst-form-label vertical-mid text-16px mb-8px',
+    'form-item-content-sc': 'flex w-full gap-x-[1em]',
+    'form-item-error-sc': cn(
+      'block w-full min-h-18px m-t-.25em',
+      'vertical-mid text-12px color-[var(--error-color)]'
+    ),
     'form-input-text-sc': cn(
+      'mgst-form-input',
       'w-full h-[48px] px-1em leading-2em py-.5em',
       'b-1 b-[var(--main)] rounded-.5em text-18px',
       'focus:(shadow-[inset_0_0_3px_var(--main)] outline-none)'
     ),
-    'form-btn-sc': 'h-3em w-full bg-[var(--main)] b-unset color-white text-18px rounded-.5em',
+    'form-btn-sc': cn(
+      'mgst-form-btn',
+      'h-[48px] w-full b-unset rounded-.5em',
+      'bg-[var(--main)] color-white text-18px'
+    ),
   },
 })
