@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { cn } from 'cn'
-import { EmojiMainTopicNav } from '@/modules/tags/emoji/EmojiMainTopicNav'
-import { EmojiUnicodeList } from '@/modules/tags/emoji/EmojiUnicodeList'
+import { EmojiMainTopicNav } from '@/components/form/item/emoji/EmojiMainTopicNav'
+import { EmojiUnicodeList } from '@/components/form/item/emoji/EmojiUnicodeList'
 import type { EmojiMainTopic } from '@/lib/const/emojiTopicList'
 
 interface Props {

@@ -1,5 +1,5 @@
 import { useState, type FormEventHandler } from 'react'
-import { EmojiSelector } from '@/modules/tags/emoji/EmojiSelector.tsx'
+import { EmojiSelector } from '@/components/form/item/emoji/EmojiSelector'
 import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
