@@ -5,6 +5,7 @@ import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
 import { SvgIcon } from '@/components/SvgIcon'
 import { InputText } from '@/components/form/item/InputText'
+import { InputEmoji } from '@/components/form/item/InputEmoji'
 
 interface Props {
   className?: string
@@ -18,12 +19,10 @@ interface Props {
  * @FilePath: /mangosteen-react-1/src/pages/TagCreatePage.tsx
  */
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
-  const Icon = <SvgIcon name="back-arrow" className="" />
+  const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
   }
-  const [emoji, setEmoji] = useState('')
-  const [emojiHint, setEmojiHint] = useState('')
 
   return (
     <div className={cn('container w-screen h-screen relative', className)}>
@@ -40,19 +39,7 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
           errorHint="标签名太长"
         />
 
-        <section className="form-item-sc">
-          <label className="form-label-sc">
-            符号
-            <span text-22px>{emoji}</span>
-            <span className="animate-rainbow color-[var(--vp-c-brand-next)]">{emojiHint}</span>
-          </label>
-          <EmojiSelector
-            onChangeEmojiUnicode={setEmoji}
-            onChangeEmojiHint={setEmojiHint}
-            className="form-item-content-sc"
-          />
-          <span className="form-item-error-sc">不能为空</span>
-        </section>
+        <InputEmoji label="符号" errorHint="不能为空" />
 
         <p className="form-item-sc text-center">记账时长按即可进行编辑</p>
 
