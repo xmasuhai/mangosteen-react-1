@@ -90,7 +90,7 @@ export default defineConfig({
     ),
     disabled: 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
     /* 表单相关 */
-    'form-sc': 'mgst-form px-1em py-1em flex flex-col gap-y-16px children:(flex flex-col)',
+    'form-sc': 'mgst-form px-1em py-.5em flex flex-col gap-y-16px children:(flex flex-col)',
     'form-item-sc': 'mgst-form-item w-full gap-y-8px where:(flex flex-col)',
     'form-label-sc': 'mgst-form-label vertical-mid text-16px block',
     'form-item-content-sc': 'mgst-form-item-content flex w-full gap-x-[1em]',
