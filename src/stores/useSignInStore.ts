@@ -41,7 +41,7 @@ export const useSignInStore = create<SignInState & SignInAction>()((set, get) =>
       error: key ? { ...state.error, [key]: [] } : { email: [], code: [] },
     }))
   },
-  revalidateFormItems: <T extends JSONValue>(
+  revalidateFormItems: <T extends SignInFormData>(
     formData: Partial<T>,
     formRules: FormRules<T>,
     lastError?: FormErrorsType<T>

@@ -14,9 +14,9 @@ interface Props {
 }
 
 const signInRules: FormRules<SignInFormData> = [
-  { key: 'email', type: 'required', required: true, message: '请输入邮箱地址' },
+  { key: 'email', type: 'required', required: true, message: '邮箱地址不能为空' },
   { key: 'email', type: 'pattern', regexp: /^.+@.+$/, message: '邮箱地址格式不正确' },
-  { key: 'code', type: 'required', required: true, message: '请输入验证码' },
+  { key: 'code', type: 'required', required: true, message: '验证码不能为空' },
   { key: 'code', type: 'length', min: 6, max: 6, message: '请输入六位证码' },
 ] as const
 
