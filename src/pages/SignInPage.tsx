@@ -1,4 +1,5 @@
 import { InputText } from '@/components/form/item/InputText'
+import { InputValidateCodeSend } from '@/components/form/item/InputValidateCodeSend'
 import { GradientBanner } from '@/components/GradientBanner'
 import { SvgIcon } from '@/components/SvgIcon'
 import { TopNav } from '@/components/TopNav'
@@ -6,7 +7,7 @@ import { request } from '@/lib/request/request'
 import { type FormRules, hasError } from '@/lib/validator/formValidate'
 import { type SignInFormData, useSignInStore } from '@/stores/useSignInStore'
 import { cn } from 'cn'
-import { useEffect, type FormEventHandler } from 'react'
+import { type FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
@@ -37,13 +38,27 @@ export const SignInPage: React.FC<Props> = ({ className }) => {
       email: value,
     })
   }
+  const onBlurEmail = () => {
+    revalidateFormItems<SignInFormData>({ email: lastData.email }, signInRules, lastError)
+  }
+  const onFocusEmail = () => {
+    clearError('email')
+  }
 
-  const onChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCode = (value: string) => {
     setData({
       ...lastData,
-      code: e.target.value,
+      code: value,
     })
   }
+  const onBlurCode = () => {
+    revalidateFormItems<SignInFormData>({ code: lastData.code }, signInRules, lastError)
+  }
+  const onFocusCode = () => {
+    clearError('code')
+  }
+
+  const onClickSendCode = () => {}
 
   const nav = useNavigate()
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -83,40 +98,19 @@ export const SignInPage: React.FC<Props> = ({ className }) => {
           errorHint={lastError.email && lastError.email.join('，')}
           value={lastData.email}
           onChange={onChangeEmail}
-          onBlur={() =>
-            revalidateFormItems<SignInFormData>({ email: lastData.email }, signInRules, lastError)
-          }
-          onFocus={() => clearError('email')}
+          onBlur={onBlurEmail}
+          onFocus={onFocusEmail}
         />
 
         {/* 验证码 */}
-        <section className="form-item-sc">
-          <label htmlFor="sms-code" className="form-label-sc">
-            验证码：
-          </label>
-          <div className="form-item-content-sc">
-            <input
-              type="text"
-              id="sms-code"
-              value={lastData.code}
-              onChange={onChangeCode}
-              onBlur={() =>
-                revalidateFormItems<SignInFormData>({ code: lastData.code }, signInRules, lastError)
-              }
-              onFocus={() => clearError('code')}
-              placeholder="六位数字"
-              className="form-input-text-sc w-[9em]"
-            />
-            <button type="button" className="grow-1 form-btn-sc">
-              发送验证码
-            </button>
-          </div>
-          {
-            <span className="form-item-error-sc">
-              {(lastError.code && lastError.code.join('，')) ?? <>&nbsp;</>}
-            </span>
-          }
-        </section>
+        <InputValidateCodeSend
+          value={lastData.code}
+          errorHint={lastError.code && lastError.code.join('，')}
+          onChange={onChangeCode}
+          onBlur={onBlurCode}
+          onFocus={onFocusCode}
+          onClickSendCode={onClickSendCode}
+        />
 
         {/* 登录 */}
         <section className="form-item-sc mt-[100px]">
