@@ -1,5 +1,10 @@
 @use '@/assets/styles/reset' as *;
 @use '@/assets/styles/vars' as *;
 @use '@/assets/styles/base.scss' as *;
+// animations
 @use '@/assets/styles/animation/rainbow.scss' as *;
 @use '@/assets/styles/animation/flip-360.scss' as *;
+@use '@/assets/styles/animation/jello.scss' as *;
+@use '@/assets/styles/animation/wag.scss' as *;
+@use '@/assets/styles/animation/wobble.scss' as *;
+@use '@/assets/styles/animation/buzz.scss' as *;

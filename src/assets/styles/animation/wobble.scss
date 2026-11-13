@@ -1,0 +1,46 @@
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.8, 1);
+  }
+  8% {
+    transform: rotate(35deg) translateX(1px);
+    animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1);
+  }
+  20% {
+    transform: rotate(-22deg) translateX(-1px);
+    animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1);
+  }
+  35% {
+    transform: rotate(15deg) translateX(1px);
+    animation-timing-function: cubic-bezier(0.3, 0, 0.7, 1);
+  }
+  50% {
+    transform: rotate(-9deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  65% {
+    transform: rotate(5deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  78% {
+    transform: rotate(-3deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  90% {
+    transform: rotate(1deg);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wobble {
+  animation-name: shake;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 0.75s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}

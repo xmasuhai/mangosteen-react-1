@@ -1,0 +1,43 @@
+@keyframes buzz {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+  }
+  5% {
+    transform: translateX(var(--fa-buzz-distance, 4px)) rotate(0.5deg);
+  }
+  10% {
+    transform: translateX(calc(var(--fa-buzz-distance, 4px) * -1)) rotate(-0.5deg);
+  }
+  15% {
+    transform: translateX(var(--fa-buzz-distance, 4px)) rotate(0.3deg);
+  }
+  20% {
+    transform: translateX(calc(var(--fa-buzz-distance, 4px) * -1)) rotate(-0.3deg);
+  }
+
+  25% {
+    transform: translateX(calc(var(--fa-buzz-distance, 4px) * 0.7)) rotate(0.2deg);
+  }
+  30% {
+    transform: translateX(calc(var(--fa-buzz-distance, 4px) * -1 * 0.7)) rotate(-0.2deg);
+  }
+  35% {
+    transform: translateX(calc(var(--fa-buzz-distance, 4px) * 0.4)) rotate(0.1deg);
+  }
+  40% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+}
+
+.buzz {
+  animation-name: buzz;
+  animation-duration: var(--fa-animation-duration, 0.6s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+}

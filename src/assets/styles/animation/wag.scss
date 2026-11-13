@@ -1,0 +1,42 @@
+@keyframes wag {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.6, 1);
+  }
+  12% {
+    transform: rotate(var(--fa-wag-angle, 12deg));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  24% {
+    transform: rotate(2deg);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.6, 1);
+  }
+  36% {
+    transform: rotate(calc(var(--fa-wag-angle, 12deg) * 0.85));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  48% {
+    transform: rotate(1deg);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.6, 1);
+  }
+  58% {
+    transform: rotate(calc(var(--fa-wag-angle, 12deg) * 0.6));
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  68% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wag {
+  animation-name: wag;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 0.9s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-out);
+  transform-origin: center bottom;
+}
