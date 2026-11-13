@@ -1,3 +1,6 @@
+/* TODO: 使用vite plugin 自动生成类型 */
+
+//
 export interface Resource<T> {
   resource: T
 }
@@ -13,7 +16,7 @@ export interface Resources<T> {
   }
 }
 
-export interface User {
+export type User = {
   id: number
   email: string
   name: string
@@ -22,7 +25,7 @@ export interface User {
 }
 
 // 账目信息
-export interface Item {
+export type Item = {
   id: number
   user_id: string | number
   kind: 'incomes' | 'expenses'
@@ -35,6 +38,18 @@ export interface Item {
   deleted_at?: ISOString
   // tags?: []
 }
+
+export type Tag = {
+  id: number
+  user_id: string | number
+  kind: Item['kind']
+  name: string
+  sign: string
+  created_at: ISOString
+  updated_at: ISOString
+  deleted_at?: ISOString
+}
+export type PickedTag = Pick<Tag, 'name' | 'sign'>
 
 export interface ResponseData<T> {
   code: number
