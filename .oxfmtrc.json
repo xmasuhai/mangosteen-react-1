@@ -6,5 +6,10 @@
   "trailingComma": "es5",
   "bracketSameLine": true,
   "sortPackageJson": false,
-  "ignorePatterns": ["dist", "pnpm-lock.yaml"]
+  "ignorePatterns": [
+    "dist",
+    "pnpm-lock.yaml",
+    "src/lib/const/safeEmojiList.ts",
+    "src/lib/const/emojiTopicList.ts"
+  ]
 }

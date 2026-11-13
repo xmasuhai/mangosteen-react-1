@@ -17,7 +17,14 @@ export default antfu(
       'comma-dangle': 'only-multiline',
     },
     // 显式声明全局忽略的文件/文件夹（对应原 ignorePatterns）
-    ignores: ['dist', '*.md', '*.json', '*.config.*'],
+    ignores: [
+      'dist',
+      '*.md',
+      '*.json',
+      '*.config.*',
+      'src/lib/const/safeEmojiList.ts',
+      'src/lib/const/emojiTopicList.ts',
+    ],
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'perfectionist/sort-named-imports': 'off',
