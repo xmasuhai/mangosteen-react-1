@@ -33,7 +33,7 @@ export const InputEmoji: React.FC<Props> = ({
   }
   return (
     <section className={cn('form-item-sc relative', className)}>
-      <label onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
+      <div onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
         <span className="text-[16px]">
           {label} {hasLabelColon ? '：' : ''}
         </span>
@@ -41,10 +41,11 @@ export const InputEmoji: React.FC<Props> = ({
         <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">
           {emojiHint}
         </span>
-      </label>
+      </div>
       <EmojiSelector
         onChangeEmojiUnicode={setEmoji}
         onChangeEmojiHint={setEmojiHint}
+        hasError={!!errorHint}
         className="form-item-content-sc"
       />
       {(errorHint || hasErrorPlaceholder) && (

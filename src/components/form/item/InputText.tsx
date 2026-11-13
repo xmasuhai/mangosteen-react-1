@@ -59,11 +59,14 @@ export const InputText: React.FC<Props> = ({
           onBlur={onBlur}
           onFocus={onFocus}
           placeholder={placeholder}
-          className="form-input-text-sc"
+          className={cn(
+            'form-input-text-sc',
+            errorHint ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]'
+          )}
         />
       </div>
       {(errorHint || hasErrorPlaceholder) && (
-        <span className="form-item-error-sc">{errorHint ?? <>&nbsp;</>}</span>
+        <span className="form-item-error-sc w-fit buzz">{errorHint ?? <>&nbsp;</>}</span>
       )}
     </section>
   )
