@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 interface Props {
   className?: string
-  label?: string
   hasLabelColon?: boolean
   errorHint?: string
   hasErrorPlaceholder?: boolean
@@ -16,10 +15,9 @@ interface Props {
 
 export const InputEmoji: React.FC<Props> = ({
   className,
-  label = '符号',
-  hasLabelColon,
+  hasLabelColon = true,
   errorHint,
-  hasErrorPlaceholder,
+  hasErrorPlaceholder = true,
   value = '',
   onChange,
   onBlur,
@@ -34,9 +32,7 @@ export const InputEmoji: React.FC<Props> = ({
   return (
     <section className={cn('form-item-sc relative', className)}>
       <div onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
-        <span className="text-[16px]">
-          {label} {hasLabelColon ? '：' : ''}
-        </span>
+        <span className="text-[16px]">符号 {hasLabelColon ? '：' : ''}</span>
         <span className={cn('text-22px inline-block wag')}>{emoji}</span>
         <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">
           {emojiHint}

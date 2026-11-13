@@ -20,16 +20,16 @@ export const InputValidateCodeSend: React.FC<Props> = ({
   onClickSendCode,
 }) => {
   const inputType = 'text'
-  const labelFor = `form-item-${inputType}-sms-code`
+  const labelForId = `form-item-${inputType}-sms-code`
   return (
     <section className={cn('form-item-sc', className)}>
-      <label htmlFor={labelFor} className="form-label-sc">
+      <label htmlFor={labelForId} className="form-label-sc">
         验证码：
       </label>
       <div className="form-item-content-sc">
         <input
           type={inputType}
-          id={labelFor}
+          id={labelForId}
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
           onBlur={onBlur}

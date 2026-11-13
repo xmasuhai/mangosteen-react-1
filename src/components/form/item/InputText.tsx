@@ -1,3 +1,4 @@
+import type { InputType } from '@/components/form/item/FormItemType'
 import { cn } from 'cn'
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
   errorHint?: string
   hasErrorPlaceholder?: boolean
   placeholder?: string
-  inputType?: 'text' | 'password' | 'email' | 'number'
+  inputType?: InputType
   value?: string
   onChange?: (value: string) => void
   onBlur?: () => void
