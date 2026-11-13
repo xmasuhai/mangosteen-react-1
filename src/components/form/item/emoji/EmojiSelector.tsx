@@ -9,6 +9,8 @@ interface Props {
   hasError?: boolean
   onChangeEmojiUnicode: (unicode: string) => void
   onChangeEmojiHint: (hint: string) => void
+  onBlur?: () => void
+  onFocus?: () => void
 }
 
 /**
@@ -24,6 +26,7 @@ export const EmojiSelector: React.FC<Props> = ({
   hasError,
   onChangeEmojiUnicode,
   onChangeEmojiHint,
+  ...restProps
 }) => {
   const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
   const onChangeMainTopic = (topic: EmojiMainTopic) => {
@@ -51,6 +54,7 @@ export const EmojiSelector: React.FC<Props> = ({
         mainTopic={mainTopic}
         onChangeEmojiUnicode={onChangeEmojiUnicode}
         onChangeEmojiHint={onChangeEmojiHint}
+        {...restProps}
       />
     </div>
   )

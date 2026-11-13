@@ -41,6 +41,8 @@ export const InputEmoji: React.FC<Props> = ({
       <EmojiSelector
         onChangeEmojiUnicode={setEmoji}
         onChangeEmojiHint={setEmojiHint}
+        onBlur={onBlur}
+        onFocus={onFocus}
         hasError={!!errorHint}
         className="form-item-content-sc"
       />

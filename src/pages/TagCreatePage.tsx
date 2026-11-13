@@ -1,15 +1,25 @@
-import { useMemo, useState, type FormEventHandler } from 'react'
+import { useMemo, type FormEventHandler } from 'react'
 import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
 import { SvgIcon } from '@/components/SvgIcon'
 import { FormItem } from '@/components/form/item/FormItem'
+import { useTagCreateStore } from '@/stores/useTagCreateStore'
+import type { PickedTag } from '@/global'
+import { hasError, type FormRules } from '@/lib/validator/formValidate'
 
 interface Props {
   className?: string
 }
 
+const tagRules: FormRules<PickedTag> = [
+  { key: 'name', type: 'required', required: true, message: '标签名称不能为空' },
+  { key: 'name', type: 'length', min: 1, max: 4, message: '最多输入4个字符' },
+  { key: 'sign', type: 'required', required: true, message: '符号不能为空' },
+] as const
+
 /*
+ * @Description: 标签创建页
  * @Author: xmasuhai xmasuhai@163.com
  * @Date: 2026-11-11 19:16:37
  * @LastEditors: xmasuhai xmasuhai@163.com
@@ -19,21 +29,53 @@ interface Props {
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
 
-  const [emoji, setEmoji] = useState('')
-  const [tagName, setTagName] = useState('')
+  const {
+    data: lastData,
+    error: lastError,
+    setData,
+    clearError,
+    revalidateFormItems,
+  } = useTagCreateStore()
   const formData = useMemo(
     () => ({
-      emoji,
-      tagName,
+      sign: lastData.sign,
+      name: lastData.name,
     }),
-    [emoji, tagName]
+    [lastData]
   )
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onChangeTagName = (name: string) => {
+    setData({
+      ...lastData,
+      name,
+    })
+  }
+  const onBlurTagName = () => {
+    revalidateFormItems<PickedTag>({ name: lastData.name }, tagRules, lastError)
+  }
+  const onFocusTagName = () => {
+    clearError('name')
+  }
+
+  const onChangeTagSign = (sign: string) => {
+    setData({
+      sign,
+    })
+  }
+  const onBlurTagSign = () => {
+    revalidateFormItems<PickedTag>({ sign: lastData.sign }, tagRules, lastError)
+  }
+  const onFocusTagSign = () => {
+    clearError('sign')
+  }
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    console.log('onSubmit_______________________')
-    console.log('%c⧭', 'color: #00736b', formData)
-    console.log('_______________________onSubmit')
+    // 注意过期的闭包 lastData、lastError 都是闭包，不能直接使用，需要用 useSignInStore.getState() 获取最新状态
+    const freshError = useTagCreateStore.getState().error
+    const freshData = useTagCreateStore.getState().data
+    revalidateFormItems<PickedTag>(freshData, tagRules, freshError)
+    if (!hasError(freshError)) {
+    }
   }
 
   return (
@@ -51,18 +93,22 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
             labelFor: 'tag-name',
             placeholder: '请输入标签名称',
             ifUseLabelTag: true,
-            errorHint: '标签名太长',
-            value: tagName,
-            onChange: setTagName,
+            errorHint: lastError?.name && lastError.name.join('，'),
+            value: lastData.name,
+            onChange: onChangeTagName,
+            onBlur: onBlurTagName,
+            onFocus: onFocusTagName,
           }}
         />
 
         <FormItem
           formItemType="emoji"
           formItemTypeProps={{
-            errorHint: '不能为空',
-            value: emoji,
-            onChange: setEmoji,
+            errorHint: lastError?.sign && lastError.sign.join('，'),
+            value: lastData.sign,
+            onChange: onChangeTagSign,
+            onBlur: onBlurTagSign,
+            onFocus: onFocusTagSign,
           }}
         />
 

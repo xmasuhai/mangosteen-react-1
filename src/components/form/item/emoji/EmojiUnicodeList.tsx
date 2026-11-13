@@ -12,6 +12,8 @@ interface Props {
   mainTopic?: EmojiMainTopic
   onChangeEmojiUnicode: (unicode: string) => void
   onChangeEmojiHint: (hint: string) => void
+  onBlur?: () => void
+  onFocus?: () => void
 }
 
 /**
@@ -27,6 +29,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({
   mainTopic = '表情',
   onChangeEmojiUnicode,
   onChangeEmojiHint,
+  ...restProps
 }) => {
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
     () => emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
@@ -67,6 +70,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({
 
   return (
     <ol
+      tabIndex={-1}
       className={cn(
         'scrollbar-hide overflow-auto h-[calc(1.65em_*_12)]',
         'grow-1 shrink-1',
@@ -80,6 +84,9 @@ export const EmojiUnicodeList: React.FC<Props> = ({
       )}>
       {selectedMainTopicEmojiUnicodeList.map((unicode, index) => (
         <li
+          {...restProps}
+          // 设置 tabIndex 让普通元素 li 元素能够接收焦点，触发 onBlur
+          tabIndex={index}
           key={`${index}_${unicode}`}
           onClick={() => {
             switchEmojiUnicode(unicode)
