@@ -94,6 +94,7 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
       console.log('onSubmit_______________________')
       console.log('%c⧭', 'color: #40fff2', formData)
       console.log('_______________________onSubmit')
+      // TODO: 发送创建标签请求
     }
   }
 
