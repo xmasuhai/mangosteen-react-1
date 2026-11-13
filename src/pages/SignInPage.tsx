@@ -1,5 +1,4 @@
-import { InputText } from '@/components/form/item/InputText'
-import { InputValidateCodeSend } from '@/components/form/item/InputValidateCodeSend'
+import { FormItem } from '@/components/form/item/FormItem'
 import { GradientBanner } from '@/components/GradientBanner'
 import { SvgIcon } from '@/components/SvgIcon'
 import { TopNav } from '@/components/TopNav'
@@ -89,27 +88,33 @@ export const SignInPage: React.FC<Props> = ({ className }) => {
       {/* 表单 */}
       <form onSubmit={onSubmit} className="form-sc">
         {/* 邮箱 */}
-        <InputText
-          label="邮箱地址"
-          labelFor="email-address"
-          inputType="email"
-          placeholder="请输入邮箱，然后点击发送验证码"
-          ifUseLabelTag={true}
-          errorHint={lastError.email && lastError.email.join('，')}
-          value={lastData.email}
-          onChange={onChangeEmail}
-          onBlur={onBlurEmail}
-          onFocus={onFocusEmail}
+        <FormItem
+          formItemType="input"
+          formItemTypeProps={{
+            inputType: 'email',
+            label: '邮箱地址',
+            labelFor: 'email-address',
+            placeholder: '请输入邮箱，然后点击发送验证码',
+            ifUseLabelTag: true,
+            errorHint: lastError.email && lastError.email.join('，'),
+            value: lastData.email,
+            onChange: onChangeEmail,
+            onBlur: onBlurEmail,
+            onFocus: onFocusEmail,
+          }}
         />
 
         {/* 验证码 */}
-        <InputValidateCodeSend
-          value={lastData.code}
-          errorHint={lastError.code && lastError.code.join('，')}
-          onChange={onChangeCode}
-          onBlur={onBlurCode}
-          onFocus={onFocusCode}
-          onClickSendCode={onClickSendCode}
+        <FormItem
+          formItemType="validateCodeSend"
+          formItemTypeProps={{
+            value: lastData.code,
+            errorHint: lastError.code && lastError.code.join('，'),
+            onChange: onChangeCode,
+            onBlur: onBlurCode,
+            onFocus: onFocusCode,
+            onClickSendCode: onClickSendCode,
+          }}
         />
 
         {/* 登录 */}
