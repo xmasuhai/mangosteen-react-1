@@ -1,4 +1,4 @@
-import type { PickedTag } from '@/global'
+import type { PickedTag, TabKind } from '@/global'
 import { formValidate, type FormErrorsType, type FormRules } from '@/lib/validator/formValidate'
 import { create } from 'zustand'
 
@@ -8,7 +8,7 @@ interface TagCreateState {
   error?: PickedTagFormError
 }
 interface TagCreateAction {
-  setData: (data: Partial<PickedTag>) => void
+  setData: (data: Partial<PickedTag & { kind: TabKind }>) => void
   setError: (error: Partial<PickedTagFormError>) => void
   clearError: (key?: keyof PickedTag) => void
   revalidateFormItems: <T extends PickedTag>(

@@ -1,4 +1,4 @@
-import { useMemo, type FormEventHandler } from 'react'
+import { useEffect, useMemo, type FormEventHandler } from 'react'
 import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
@@ -7,6 +7,7 @@ import { FormItem } from '@/components/form/item/FormItem'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import type { PickedTag } from '@/global'
 import { hasError, type FormRules } from '@/lib/validator/formValidate'
+import { useSearchParams } from 'react-router-dom'
 
 interface Props {
   className?: string
@@ -28,7 +29,7 @@ const tagRules: FormRules<PickedTag> = [
  */
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
-
+  const [searchParams] = useSearchParams()
   const {
     data: lastData,
     error: lastError,
@@ -36,13 +37,20 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
     clearError,
     revalidateFormItems,
   } = useTagCreateStore()
-  const formData = useMemo(
-    () => ({
-      sign: lastData.sign,
-      name: lastData.name,
-    }),
-    [lastData]
-  )
+
+  useEffect(() => {
+    const kind = searchParams.get('kind')
+    if (!kind) {
+      throw new Error('kind is required')
+    }
+    if (kind !== 'incomes' && kind !== 'expenses') {
+      throw new Error('kind is invalid')
+    }
+    setData({ kind })
+    console.log('TagCreatePage_______________________')
+    console.log('%c⧭', 'color: #607339', searchParams.get('kind'))
+    console.log('_______________________TagCreatePage')
+  }, [searchParams, setData])
 
   const onChangeTagName = (name: string) => {
     setData({
@@ -68,6 +76,14 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const onFocusTagSign = () => {
     clearError('sign')
   }
+
+  const formData = useMemo(
+    () => ({
+      sign: lastData.sign,
+      name: lastData.name,
+    }),
+    [lastData]
+  )
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     // 注意过期的闭包 lastData、lastError 都是闭包，不能直接使用，需要用 useSignInStore.getState() 获取最新状态
@@ -75,6 +91,9 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
     const freshData = useTagCreateStore.getState().data
     revalidateFormItems<PickedTag>(freshData, tagRules, freshError)
     if (!hasError(freshError)) {
+      console.log('onSubmit_______________________')
+      console.log('%c⧭', 'color: #40fff2', formData)
+      console.log('_______________________onSubmit')
     }
   }
 

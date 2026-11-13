@@ -39,10 +39,12 @@ export type Item = {
   // tags?: []
 }
 
+export type TabKind = Item['kind'] // 'incomes' | 'expenses'
+
 export type Tag = {
   id: number
   user_id: string | number
-  kind: Item['kind']
+  kind: TabKind
   name: string
   sign: string
   created_at: ISOString
@@ -63,8 +65,6 @@ export type JSONValue =
   | null
   | { [key: string]: JSONValue }
   | JSONValue[]
-
-export type TabKind = Item['kind'] // 'incomes' | 'expenses'
 
 export declare module 'react' {
   interface CSSProperties {
