@@ -54,6 +54,9 @@ export const EmojiUnicodeList: React.FC<Props> = ({
     [selectedFlattedEmojiList, emojiUnicode]
   )
   const switchEmojiUnicode = (unicode: string) => {
+    if (unicode === emojiUnicode) {
+      return
+    }
     setEmojiUnicode(unicode)
   }
 

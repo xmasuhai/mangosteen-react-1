@@ -1,4 +1,4 @@
-import { type FormEventHandler } from 'react'
+import { useMemo, useState, type FormEventHandler } from 'react'
 import { cn } from 'cn'
 import { GradientBanner } from '@/components/GradientBanner'
 import { TopNav } from '@/components/TopNav'
@@ -18,8 +18,22 @@ interface Props {
  */
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
+
+  const [emoji, setEmoji] = useState('')
+  const [tagName, setTagName] = useState('')
+  const formData = useMemo(
+    () => ({
+      emoji,
+      tagName,
+    }),
+    [emoji, tagName]
+  )
+
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
+    console.log('onSubmit_______________________')
+    console.log('%c⧭', 'color: #00736b', formData)
+    console.log('_______________________onSubmit')
   }
 
   return (
@@ -38,6 +52,8 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
             placeholder: '请输入标签名称',
             ifUseLabelTag: true,
             errorHint: '标签名太长',
+            value: tagName,
+            onChange: setTagName,
           }}
         />
 
@@ -45,6 +61,8 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
           formItemType="emoji"
           formItemTypeProps={{
             errorHint: '不能为空',
+            value: emoji,
+            onChange: setEmoji,
           }}
         />
 
