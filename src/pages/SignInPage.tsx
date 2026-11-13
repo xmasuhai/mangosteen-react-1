@@ -21,7 +21,7 @@ const signInRules: FormRules<SignInFormData> = [
 ]
 
 export const SignInPage: React.FC<Props> = ({ className }) => {
-  const Icon = <SvgIcon name="back-arrow" className="" />
+  const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
 
   const { data, setData, error, clearError, revalidateFormItems } = useSignInStore()
 

@@ -86,7 +86,7 @@ export const EmojiUnicodeList: React.FC<Props> = ({
             'b-1 b-transparent rounded-[var(--input-radius)]',
             'flex items-center justify-center',
             unicode === emojiUnicode &&
-              'bg-blue-300 outline-1px outline-solid outline-[var(--main)]'
+              'bg-blue-300 outline-1px outline-solid outline-[var(--main)] jello'
           )}>
           {unicode}
         </li>
