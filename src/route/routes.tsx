@@ -4,6 +4,7 @@ import { ItemCreatePage } from '@/pages/ItemCreatePage'
 import { ItemsPage } from '@/pages/ItemsPage'
 import { SignInPage } from '@/pages/SignInPage'
 import { TagCreatePage } from '@/pages/TagCreatePage'
+import { TagEditPage } from '@/pages/TagEditPage'
 import { welcomeRouter } from '@/route/welcomeRouter'
 import type { RouteObject } from 'react-router-dom'
 
@@ -15,7 +16,7 @@ export const routes: RouteObject[] = [
   { path: '/items', element: <ItemsPage /> },
   { path: '/items/create', element: <ItemCreatePage /> },
   { path: '/tags/create', element: <TagCreatePage /> },
-  { path: '/tags', element: <div>标签</div> },
+  { path: '/tags/:id', element: <TagEditPage /> },
   { path: '/statistics', element: <div>统计图表</div> },
   { path: '/export', element: <div>敬请期待</div> },
   { path: '/notify', element: <div>敬请期待</div> },
