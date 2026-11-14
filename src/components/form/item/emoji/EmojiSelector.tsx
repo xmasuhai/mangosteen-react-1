@@ -8,8 +8,8 @@ import { useEmojiStore } from '@/stores/useEmojiStore'
 interface Props {
   className?: string
   hasError?: boolean
-  onChangeEmojiUnicode: (unicode?: string) => void
-  onChangeEmojiHint: (hint: string) => void
+  // onChangeEmojiUnicode: (unicode?: string) => void
+  // onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
 }
@@ -25,8 +25,8 @@ interface Props {
 export const EmojiSelector: React.FC<Props> = ({
   className,
   hasError,
-  onChangeEmojiUnicode,
-  onChangeEmojiHint,
+  // onChangeEmojiUnicode,
+  // onChangeEmojiHint,
   ...restProps
 }) => {
   // const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
@@ -56,8 +56,8 @@ export const EmojiSelector: React.FC<Props> = ({
       <EmojiUnicodeList
         key={mainTopic}
         /* mainTopic={mainTopic} */
-        onChangeEmojiUnicode={onChangeEmojiUnicode}
-        onChangeEmojiHint={onChangeEmojiHint}
+        // onChangeEmojiUnicode={onChangeEmojiUnicode}
+        // onChangeEmojiHint={onChangeEmojiHint}
         {...restProps}
       />
     </div>

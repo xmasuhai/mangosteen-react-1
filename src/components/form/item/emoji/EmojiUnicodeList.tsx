@@ -12,8 +12,8 @@ import { getEmojiById } from '@/lib/helpers/getEmojiById'
 interface Props {
   className?: string
   // mainTopic?: EmojiMainTopic
-  onChangeEmojiUnicode: (unicode?: string) => void
-  onChangeEmojiHint: (hint: string) => void
+  // onChangeEmojiUnicode: (unicode?: string) => void
+  // onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
 }
@@ -29,8 +29,8 @@ interface Props {
 export const EmojiUnicodeList: React.FC<Props> = ({
   className,
   // mainTopic,
-  onChangeEmojiUnicode,
-  onChangeEmojiHint,
+  // onChangeEmojiUnicode,
+  // onChangeEmojiHint,
   ...restProps
 }) => {
   const { mainTopic, emoji, setEmoji } = useEmojiStore()
@@ -72,11 +72,16 @@ export const EmojiUnicodeList: React.FC<Props> = ({
   useEffect(
     () => {
       // onChangeEmojiUnicode(emojiUnicode)
-      onChangeEmojiUnicode(emoji)
-      onChangeEmojiHint(emojiHint)
+      // onChangeEmojiUnicode(emoji)
+      // onChangeEmojiHint(emojiHint)
+      setEmoji({
+        emoji,
+        hint: emojiHint,
+      })
     },
     //  [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint]
-    [emojiHint, emoji, onChangeEmojiUnicode, onChangeEmojiHint]
+    // [emojiHint, emoji, onChangeEmojiUnicode, onChangeEmojiHint]
+    [emojiHint, emoji, setEmoji]
   )
 
   const fitScreenHeight = useMemo(() => {

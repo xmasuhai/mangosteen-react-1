@@ -48,8 +48,8 @@ export const InputEmoji: React.FC<Props> = ({
       </div>
 
       <EmojiSelector
-        onChangeEmojiUnicode={setEmoji}
-        onChangeEmojiHint={setEmojiHint}
+        // onChangeEmojiUnicode={setEmoji}
+        // onChangeEmojiHint={setEmojiHint}
         onBlur={onBlur}
         onFocus={onFocus}
         hasError={!!errorHint}
