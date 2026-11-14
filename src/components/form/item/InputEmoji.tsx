@@ -1,6 +1,8 @@
 import { EmojiSelector } from '@/components/form/item/emoji/EmojiSelector'
+import { getEmojiById } from '@/lib/helpers/getEmojiById'
+import { useEmojiStore } from '@/stores/useEmojiStore'
 import { cn } from 'cn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   className?: string
@@ -23,21 +25,28 @@ export const InputEmoji: React.FC<Props> = ({
   onBlur,
   onFocus,
 }) => {
-  const [emoji, _setEmoji] = useState(value)
-  const [emojiHint, setEmojiHint] = useState('')
-  const setEmoji = (emoji: string) => {
-    _setEmoji(emoji)
-    onChange?.(emoji)
+  const { emoji, hint, setEmoji: setEmojiItem } = useEmojiStore()
+  // const [emoji, setEmoji] = useState(value)
+  // const [emojiHint, setEmojiHint] = useState('')
+  const setEmoji = (emoji?: string) => {
+    setEmojiItem({ emoji: value ?? emoji })
+    onChange?.(emoji ?? '')
   }
+  const setEmojiHint = (hint: string) => {
+    setEmojiItem({ hint })
+  }
+
   return (
     <section className={cn('form-item-sc relative', className)}>
       <div onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
         <span className="text-[16px]">符号 {hasLabelColon ? '：' : ''}</span>
         <span className={cn('text-22px inline-block wag')}>{emoji}</span>
         <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">
-          {emojiHint}
+          {/* {emojiHint} */}
+          {hint}
         </span>
       </div>
+
       <EmojiSelector
         onChangeEmojiUnicode={setEmoji}
         onChangeEmojiHint={setEmojiHint}

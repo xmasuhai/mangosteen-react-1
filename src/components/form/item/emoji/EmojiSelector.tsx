@@ -3,11 +3,12 @@ import { cn } from 'cn'
 import { EmojiMainTopicNav } from '@/components/form/item/emoji/EmojiMainTopicNav'
 import { EmojiUnicodeList } from '@/components/form/item/emoji/EmojiUnicodeList'
 import type { EmojiMainTopic } from '@/lib/const/emojiTopicList'
+import { useEmojiStore } from '@/stores/useEmojiStore'
 
 interface Props {
   className?: string
   hasError?: boolean
-  onChangeEmojiUnicode: (unicode: string) => void
+  onChangeEmojiUnicode: (unicode?: string) => void
   onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
@@ -28,15 +29,18 @@ export const EmojiSelector: React.FC<Props> = ({
   onChangeEmojiHint,
   ...restProps
 }) => {
-  const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
+  // const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
+  const { mainTopic, setEmoji: setEmojiItem, reset } = useEmojiStore()
   const onChangeMainTopic = (topic: EmojiMainTopic) => {
-    setMainTopic(topic)
+    // setMainTopic(topic)
+    setEmojiItem({ mainTopic: topic })
   }
 
   useEffect(() => {
-    onChangeEmojiUnicode('')
-    onChangeEmojiHint('')
-  }, [mainTopic, onChangeEmojiUnicode, onChangeEmojiHint])
+    // onChangeEmojiUnicode('')
+    // onChangeEmojiHint('')
+    setEmojiItem({ emoji: '', hint: '', id: null, topic: '', mainTopic })
+  }, [mainTopic, setEmojiItem /* onChangeEmojiUnicode, onChangeEmojiHint */])
 
   return (
     <div
@@ -47,11 +51,11 @@ export const EmojiSelector: React.FC<Props> = ({
         hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]',
         className
       )}>
-      <EmojiMainTopicNav onChangeMainTopic={onChangeMainTopic} />
+      <EmojiMainTopicNav /* mainTopic={mainTopic} */ onChangeMainTopic={onChangeMainTopic} />
 
       <EmojiUnicodeList
         key={mainTopic}
-        mainTopic={mainTopic}
+        /* mainTopic={mainTopic} */
         onChangeEmojiUnicode={onChangeEmojiUnicode}
         onChangeEmojiHint={onChangeEmojiHint}
         {...restProps}

@@ -6,11 +6,13 @@ import {
   emojiTopicList,
 } from '@/lib/const/emojiTopicList.ts'
 import { safeEmojiList, type EmojiItem } from '@/lib/const/safeEmojiList.ts'
+import { useEmojiStore } from '@/stores/useEmojiStore'
+import { getEmojiById } from '@/lib/helpers/getEmojiById'
 
 interface Props {
   className?: string
-  mainTopic?: EmojiMainTopic
-  onChangeEmojiUnicode: (unicode: string) => void
+  // mainTopic?: EmojiMainTopic
+  onChangeEmojiUnicode: (unicode?: string) => void
   onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
@@ -26,11 +28,13 @@ interface Props {
  */
 export const EmojiUnicodeList: React.FC<Props> = ({
   className,
-  mainTopic = '表情',
+  // mainTopic,
   onChangeEmojiUnicode,
   onChangeEmojiHint,
   ...restProps
 }) => {
+  const { mainTopic, emoji, setEmoji } = useEmojiStore()
+
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
     () => emojiTopicList?.find((topicItem) => topicItem.mainTopic === mainTopic)?.topics ?? [],
     [mainTopic]
@@ -44,29 +48,36 @@ export const EmojiUnicodeList: React.FC<Props> = ({
     [selectedTopicList]
   )
 
-  // ["\u{1F600}", ...]
-  const selectedMainTopicEmojiUnicodeList = useMemo<string[]>(
-    () => selectedFlattedEmojiList.map((item) => item.unicode),
-    [selectedFlattedEmojiList]
-  )
-
-  const [emojiUnicode, setEmojiUnicode] = useState('')
+  // const [emojiUnicode, setEmojiUnicode] = useState('')
   const emojiHint = useMemo(
     () =>
-      selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emojiUnicode)?.hint ?? '',
-    [selectedFlattedEmojiList, emojiUnicode]
+      // selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emojiUnicode)?.hint ?? '',
+      selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emoji)?.hint ?? '',
+    // [selectedFlattedEmojiList, emojiUnicode]
+    [selectedFlattedEmojiList, emoji]
   )
-  const switchEmojiUnicode = (unicode: string) => {
-    if (unicode === emojiUnicode) {
+  const switchEmojiUnicode = (unicode: string, id: number) => {
+    // if (unicode === emojiUnicode) {
+    if (unicode === emoji) {
       return
     }
-    setEmojiUnicode(unicode)
+    const emojiItem = getEmojiById(id)
+    setEmoji({
+      ...emojiItem,
+    })
+    // setEmojiUnicode(unicode)
+    setEmoji({ emoji: unicode })
   }
 
-  useEffect(() => {
-    onChangeEmojiUnicode(emojiUnicode)
-    onChangeEmojiHint(emojiHint)
-  }, [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint])
+  useEffect(
+    () => {
+      // onChangeEmojiUnicode(emojiUnicode)
+      onChangeEmojiUnicode(emoji)
+      onChangeEmojiHint(emojiHint)
+    },
+    //  [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint]
+    [emojiHint, emoji, onChangeEmojiUnicode, onChangeEmojiHint]
+  )
 
   const fitScreenHeight = useMemo(() => {
     const height = window.innerHeight
@@ -88,21 +99,21 @@ export const EmojiUnicodeList: React.FC<Props> = ({
         'children:(text-22px)',
         className
       )}>
-      {selectedMainTopicEmojiUnicodeList.map((unicode, index) => (
+      {selectedFlattedEmojiList.map(({ index: id, unicode }, index) => (
         <li
           {...restProps}
           // 设置 tabIndex 让普通元素 li 元素能够接收焦点，触发 onBlur
           tabIndex={index}
-          key={`${index}_${unicode}`}
+          key={`id_${id}_${index}_${unicode}`}
           onClick={() => {
-            switchEmojiUnicode(unicode)
+            switchEmojiUnicode(unicode, id)
           }}
           className={cn(
             'text-center grow-0 shrink-0 w-35px',
             'b-1 b-transparent rounded-[var(--input-radius)]',
             'flex items-center justify-center',
-            unicode === emojiUnicode &&
-              'bg-blue-300 outline-1px outline-solid outline-[var(--main)] jello'
+            // unicode === emojiUnicode &&
+            unicode === emoji && 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] jello'
           )}>
           {unicode}
         </li>
