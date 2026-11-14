@@ -16,7 +16,7 @@ export const routes: RouteObject[] = [
   { path: '/items', element: <ItemsPage /> },
   { path: '/items/create', element: <ItemCreatePage /> },
   { path: '/tags/create', element: <TagCreatePage /> },
-  { path: '/tags/:id', element: <TagEditPage /> },
+  { path: '/tags/edit/:id', element: <TagEditPage /> },
   { path: '/statistics', element: <div>统计图表</div> },
   { path: '/export', element: <div>敬请期待</div> },
   { path: '/notify', element: <div>敬请期待</div> },
