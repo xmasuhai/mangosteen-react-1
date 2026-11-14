@@ -18,16 +18,12 @@ interface TagCreateAction {
   ) => void
 }
 
+const genInitData = () => ({ kind: 'expenses', name: '', sign: '' })
+const genInitError = () => ({ name: [], sign: [] })
+
 export const useTagCreateStore = create<TagCreateState & TagCreateAction>()((set, get) => ({
-  data: {
-    kind: 'expenses',
-    name: '',
-    sign: '',
-  },
-  error: {
-    name: [],
-    sign: [],
-  },
+  data: genInitData(),
+  error: genInitError(),
   setData: (data: Partial<PickedTag>) => {
     set((state) => ({
       ...state,
@@ -43,7 +39,7 @@ export const useTagCreateStore = create<TagCreateState & TagCreateAction>()((set
   clearError: (key?: keyof PickedTag) => {
     set((state) => ({
       ...state,
-      error: key ? { ...state.error, [key]: [] } : { name: [], sign: [] },
+      error: key ? { ...state.error, [key]: [] } : genInitError(),
     }))
   },
   revalidateFormItems: <T extends PickedTag>(

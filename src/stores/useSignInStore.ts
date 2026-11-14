@@ -20,9 +20,12 @@ interface SignInAction {
   ) => void
 }
 
+const genInitData = () => ({ email: '', code: '' })
+const genInitError = () => ({ email: [], code: [] })
+
 export const useSignInStore = create<SignInState & SignInAction>()((set, get) => ({
-  data: { email: '', code: '' },
-  error: { email: [], code: [] },
+  data: genInitData(),
+  error: genInitError(),
   setData: (data: Partial<SignInFormData>) => {
     set((state) => ({
       ...state,
@@ -38,7 +41,7 @@ export const useSignInStore = create<SignInState & SignInAction>()((set, get) =>
   clearError: (key?: keyof SignInFormData) => {
     set((state) => ({
       ...state,
-      error: key ? { ...state.error, [key]: [] } : { email: [], code: [] },
+      error: key ? { ...state.error, [key]: [] } : genInitError(),
     }))
   },
   revalidateFormItems: <T extends SignInFormData>(
