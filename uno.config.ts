@@ -108,7 +108,7 @@ export default defineConfig({
     'form-btn-sc': cn(
       'mgst-form-btn',
       'h-[48px] w-full b-unset rounded-.5em',
-      'bg-[var(--main)] color-white text-18px'
+      'where:(bg-[var(--main)] color-white text-18px)'
     ),
   },
 })
