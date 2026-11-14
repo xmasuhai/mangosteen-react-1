@@ -47,6 +47,7 @@ export type Tag = {
   kind: TabKind
   name: string
   sign: string
+  sign_id: string
   created_at: ISOString
   updated_at: ISOString
   deleted_at?: ISOString

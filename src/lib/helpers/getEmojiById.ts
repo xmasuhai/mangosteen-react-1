@@ -22,7 +22,7 @@ export const getEmojiById = (id: number): EmojiItem => {
   const hint = emojiItem?.emoji_list.find((emoji) => emoji.index === id)?.hint ?? ''
   const topic = emojiItem?.topic
   const mainTopic = emojiTopicList.find((item) =>
-    item.topics?.find((topic) => topic === topic)
+    (item.topics as readonly string[]).includes(topic)
   )?.mainTopic
 
   if (!mainTopic) {

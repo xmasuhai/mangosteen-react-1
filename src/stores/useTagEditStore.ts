@@ -2,7 +2,7 @@ import type { PickedTag, TabKind } from '@/global'
 import type { FormErrorsType } from '@/lib/validator/formValidate'
 import { createFormStore } from './createFormStore'
 
-type FormSubmitData = PickedTag & { kind?: TabKind; id: number }
+type FormSubmitData = PickedTag & { kind?: TabKind; id: number; sign_id: number }
 type FormValidateData = PickedTag
 
 const genInitData = (): FormSubmitData => ({
@@ -10,6 +10,7 @@ const genInitData = (): FormSubmitData => ({
   kind: 'expenses',
   name: '',
   sign: '',
+  sign_id: 0,
 })
 
 const genInitError = (): FormErrorsType<FormValidateData> => ({ name: [], sign: [] })
