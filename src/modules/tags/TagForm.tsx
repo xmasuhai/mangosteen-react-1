@@ -3,8 +3,7 @@ import type { PickedTag } from '@/global'
 import { hasError, type FormRules } from '@/lib/validator/formValidate'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { cn } from 'cn'
-import { type FormEventHandler, useEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { type FormEventHandler, useMemo } from 'react'
 
 interface Props {
   className?: string
@@ -16,8 +15,17 @@ const tagRules: FormRules<PickedTag> = [
   { key: 'sign', type: 'required', required: true, message: '符号不能为空' },
 ] as const
 
+/*
+ * @Author: xmasuhai
+ * @Email: xmasuhai@163.com
+ * @Date: 2026-11-14 12:35:58
+ * @Last Modified by:   xmasuhai
+ * @Last Modified time: 2026-11-14 13:19:45
+ * @Description: 标签表单-创建/编辑
+ * @Description: 入参数据：lastData、lastError
+ * @Description: 表单操作：更新数据、清除错误提示、验证数据、提交数据
+ */
 export const TagForm: React.FC<Props> = ({ className }) => {
-  const [searchParams] = useSearchParams()
   const {
     data: lastData,
     error: lastError,
@@ -25,20 +33,6 @@ export const TagForm: React.FC<Props> = ({ className }) => {
     clearError,
     revalidateFormItems,
   } = useTagCreateStore()
-
-  useEffect(() => {
-    const kind = searchParams.get('kind')
-    if (!kind) {
-      throw new Error('kind is required')
-    }
-    if (kind !== 'incomes' && kind !== 'expenses') {
-      throw new Error('kind is invalid')
-    }
-    setData({ kind })
-    console.log('TagCreatePage_______________________')
-    console.log('%c⧭', 'color: #607339', searchParams.get('kind'))
-    console.log('_______________________TagCreatePage')
-  }, [searchParams, setData])
 
   const onChangeTagName = (name: string) => {
     setData({
@@ -72,17 +66,19 @@ export const TagForm: React.FC<Props> = ({ className }) => {
     }),
     [lastData]
   )
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
+    revalidateFormItems<PickedTag>(lastData, tagRules, lastError)
     // 注意过期的闭包 lastData、lastError 都是闭包，不能直接使用，需要用 useSignInStore.getState() 获取最新状态
     const freshError = useTagCreateStore.getState().error
     const freshData = useTagCreateStore.getState().data
-    revalidateFormItems<PickedTag>(freshData, tagRules, freshError)
     if (!hasError(freshError)) {
       console.log('onSubmit_______________________')
-      console.log('%c⧭', 'color: #40fff2', formData)
+      console.log('%c⧭ freshData', 'color: #40fff2', freshData)
+      console.log('%c⧭ freshError', 'color: #40fff2', freshError)
+      console.log('%c⧭ TODO: 发送创建标签请求', 'color: #40fff2', formData)
       console.log('_______________________onSubmit')
-      // TODO: 发送创建标签请求
     }
   }
 

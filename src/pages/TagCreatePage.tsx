@@ -12,12 +12,12 @@ interface Props {
 }
 
 /*
- * @Description: 标签创建页
+ * @Description: 标签创建页 /tags/create?kind=incomes | expenses
  * @Author: xmasuhai xmasuhai@163.com
  * @Date: 2026-11-11 19:16:37
  * @LastEditors: xmasuhai xmasuhai@163.com
  * @LastEditTime: 2026-11-11 23:18:30
- * @FilePath: /mangosteen-react-1/src/pages/TagCreatePage.tsx
+ * @FilePath: @/pages/TagCreatePage.tsx
  */
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
@@ -33,9 +33,6 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
       throw new Error('kind is invalid')
     }
     setData({ kind })
-    console.log('TagCreatePage_______________________')
-    console.log('%c⧭', 'color: #607339', searchParams.get('kind'))
-    console.log('_______________________TagCreatePage')
   }, [searchParams, setData])
 
   return (
