@@ -8,7 +8,8 @@ import { type FormEventHandler, useMemo } from 'react'
 
 interface Props {
   className?: string
-  mode?: 'create' | 'edit'
+  mode: 'create' | 'edit'
+  submitButtonText?: string
 }
 
 const tagRules: FormRules<PickedTag> = [
@@ -22,12 +23,16 @@ const tagRules: FormRules<PickedTag> = [
  * @Email: xmasuhai@163.com
  * @Date: 2026-11-14 12:35:58
  * @Last Modified by:   xmasuhai
- * @Last Modified time: 2026-11-14 13:19:45
+ * @Last Modified time: 2026-11-14 13:57:35
  * @Description: 标签表单-创建/编辑
  * @Description: 入参数据：lastData、lastError
  * @Description: 表单操作：更新数据、清除错误提示、验证数据、提交数据
  */
-export const TagForm: React.FC<Props> = ({ className, mode = 'create' }) => {
+export const TagForm: React.FC<Props> = ({
+  className,
+  mode = 'create',
+  submitButtonText = '确定',
+}) => {
   const create = useTagCreateStore()
   const edit = useTagEditStore()
   const {
@@ -116,13 +121,21 @@ export const TagForm: React.FC<Props> = ({ className, mode = 'create' }) => {
         }}
       />
 
-      <p className="form-item-sc text-center">记账时长按即可进行编辑</p>
+      <p className="form-item-sc text-center">记账时长按，即可进行编辑</p>
 
       <div className="form-item-sc">
         <button type="submit" className="primary-btn">
-          确定
+          {submitButtonText}
         </button>
       </div>
+
+      {mode === 'edit' && (
+        <div className="form-item-sc mb-32px">
+          <button type="submit" className="primary-btn bg-[var(--delete-button-bg)]">
+            删除标签
+          </button>
+        </div>
+      )}
     </form>
   )
 }

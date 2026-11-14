@@ -41,7 +41,7 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
         <TopNav title="新建标签" icon={Icon} />
       </GradientBanner>
 
-      <TagForm mode="create" />
+      <TagForm mode="create" submitButtonText="创建" />
     </div>
   )
 }

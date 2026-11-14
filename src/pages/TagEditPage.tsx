@@ -16,7 +16,7 @@ interface Props {
  * @Email: xmasuhai@163.com
  * @Date: 2026-11-14 12:43:28
  * @Last Modified by:   xmasuhai
- * @Last Modified time: 2026-11-14 13:22:46
+ * @Last Modified time: 2026-11-14 13:50:37
  * @FilePath: @/pages/TagEditPage.tsx
  */
 export const TagEditPage: React.FC<Props> = ({ className }) => {
@@ -39,7 +39,7 @@ export const TagEditPage: React.FC<Props> = ({ className }) => {
         <TopNav title="标签详情" icon={Icon} />
       </GradientBanner>
 
-      <TagForm mode="edit" />
+      <TagForm mode="edit" submitButtonText="保存" />
     </div>
   )
 }

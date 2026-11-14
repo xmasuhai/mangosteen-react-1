@@ -68,11 +68,17 @@ export const EmojiUnicodeList: React.FC<Props> = ({
     onChangeEmojiHint(emojiHint)
   }, [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint])
 
+  const fitScreenHeight = useMemo(() => {
+    const height = window.innerHeight
+    return height <= 844 ? 'h-[calc(1.65em_*_10)]' : 'h-[calc(1.65em_*_12)]'
+  }, [])
+
   return (
     <ol
       tabIndex={-1}
       className={cn(
-        'scrollbar-hide overflow-auto h-[calc(1.65em_*_12)]',
+        'scrollbar-hide overflow-auto',
+        fitScreenHeight,
         'grow-1 shrink-1',
         // 'flex flex-wrap content-start',
         'grid place-items-center',
