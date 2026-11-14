@@ -15,12 +15,10 @@ export type FormStore<TData, TForm extends JSONValue> = {
   ) => void
 }
 
-export function createFormStore<TData, TForm extends JSONValue>(
-  options: {
-    genInitData: () => TData
-    genInitError: () => FormErrorsType<TForm>
-  }
-) {
+export function createFormStore<TData, TForm extends JSONValue>(options: {
+  genInitData: () => TData
+  genInitError: () => FormErrorsType<TForm>
+}) {
   return create<FormStore<TData, TForm>>()((set, get) => ({
     data: options.genInitData(),
     error: options.genInitError(),

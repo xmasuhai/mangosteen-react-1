@@ -4,7 +4,7 @@ import { hasError, type FormRules } from '@/lib/validator/formValidate'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
-import { type FormEventHandler, useMemo } from 'react'
+import React, { type FormEventHandler } from 'react'
 
 interface Props {
   className?: string
@@ -23,7 +23,7 @@ const tagRules: FormRules<PickedTag> = [
  * @Email: xmasuhai@163.com
  * @Date: 2026-11-14 12:35:58
  * @Last Modified by:   xmasuhai
- * @Last Modified time: 2026-11-14 13:57:35
+ * @Last Modified time: 2026-11-14 19:48:26
  * @Description: 标签表单-创建/编辑
  * @Description: 入参数据：lastData、lastError
  * @Description: 表单操作：更新数据、清除错误提示、验证数据、提交数据
@@ -61,20 +61,13 @@ export const TagForm: React.FC<Props> = ({
       sign,
     })
   }
+
   const onBlurTagSign = () => {
     revalidateFormItems<PickedTag>({ sign: lastData.sign }, tagRules, lastError)
   }
   const onFocusTagSign = () => {
     clearError('sign')
   }
-
-  const formData = useMemo(
-    () => ({
-      sign: lastData.sign,
-      name: lastData.name,
-    }),
-    [lastData]
-  )
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
@@ -85,9 +78,11 @@ export const TagForm: React.FC<Props> = ({
     const freshData = activeStore.getState().data
     if (!hasError(freshError)) {
       console.log('onSubmit_______________________')
+      console.log('%c⧭ lastData', 'color: #40fff2', lastData)
       console.log('%c⧭ freshData', 'color: #40fff2', freshData)
+      console.log('%c⧭ lastError', 'color: #40fff2', lastError)
       console.log('%c⧭ freshError', 'color: #40fff2', freshError)
-      console.log('%c⧭ TODO: 发送创建标签请求', 'color: #40fff2', formData)
+      // console.log('%c⧭ TODO: 发送创建标签请求', 'color: #40fff2', formData)
       console.log('_______________________onSubmit')
     }
   }

@@ -22,7 +22,7 @@ interface Props {
 export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
   const [searchParams] = useSearchParams()
-  const { setData } = useTagCreateStore()
+  const { data, setData } = useTagCreateStore()
 
   useEffect(() => {
     const kind = searchParams.get('kind')
@@ -33,7 +33,11 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
       throw new Error('kind is invalid')
     }
     setData({ kind })
-  }, [searchParams, setData])
+    console.log('TagCreatePage_______________________')
+    console.log('%c⧭', 'color: #86bf60', data)
+    console.log('%c⧭', 'color: #cc7033', kind)
+    console.log('_______________________TagCreatePage')
+  }, [searchParams])
 
   return (
     <div className={cn('container w-screen h-screen relative', className)}>
