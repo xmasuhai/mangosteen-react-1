@@ -317,6 +317,9 @@ importers:
       vitest:
         specifier: 5.1.0
         version: 5.1.0(@types/node@26.6.3)(vite@8.3.8(@types/node@26.6.3)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.108.2)(sass@1.108.2)(yaml@2.9.1))
+      zustand-devtools-bridge:
+        specifier: 0.2.1
+        version: 0.2.1(zustand@5.1.0(@types/react@18.3.31)(react@18.3.1)(use-sync-external-store@1.7.0(react@18.3.1)))
 
 packages:
 
@@ -1215,6 +1218,12 @@ packages:
     resolution: {integrity: sha512-uNQqHJrtHIiSl8pMbhDktmGpA1hqwldWNO8kbNpNFhVt+BYk4C3Ge8nlJgkRtGjtMam0+542G5UQJJG6lLePbg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
+    os: [win32]
+
+  '@oxfmt/binding-win32-ia32-msvc@0.78.0':
+    resolution: {integrity: sha512-W6omURRT39EHBPH4Z8sUPIOzWVjMbhCCCWcfT0sa6aeC+vOXNyBAJmpQRh5//KfPDX96jJlNith9i4N65wxB+Q==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ia32]
     os: [win32]
 
   '@oxfmt/binding-win32-x64-msvc@0.78.0':
@@ -4279,6 +4288,11 @@ packages:
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
+  zustand-devtools-bridge@0.2.1:
+    resolution: {integrity: sha512-w2d7mBDyHYSJLvA6xUOQXuoIbKLMAWSd5mhuamUqZOPkQtxjKPiNsRIe52NdDbtg1UbMdpPO7NSGC1S08i8Wlw==}
+    peerDependencies:
+      zustand: '>=4.5.0 <6'
+
   zustand@5.1.0:
     resolution: {integrity: sha512-ciJZlP48M1PTQbVQq81CGVFxHTLpZNrFjKqwjtCU34AWuXTZT/jrF3p9+fI84Cf1eSCMLapxqBy/SNTfwOBuqA==}
     engines: {node: '>=12.20.0'}
@@ -5020,6 +5034,9 @@ snapshots:
     optional: true
 
   '@oxfmt/binding-win32-arm64-msvc@0.78.0':
+    optional: true
+
+  '@oxfmt/binding-win32-ia32-msvc@0.78.0':
     optional: true
 
   '@oxfmt/binding-win32-x64-msvc@0.78.0':
@@ -7369,6 +7386,7 @@ snapshots:
       '@oxfmt/binding-linux-x64-musl': 0.78.0
       '@oxfmt/binding-openharmony-arm64': 0.78.0
       '@oxfmt/binding-win32-arm64-msvc': 0.78.0
+      '@oxfmt/binding-win32-ia32-msvc': 0.78.0
       '@oxfmt/binding-win32-x64-msvc': 0.78.0
 
   oxlint@1.93.0:
@@ -8190,6 +8208,10 @@ snapshots:
       zod: 4.6.7
 
   zod@4.6.7: {}
+
+  zustand-devtools-bridge@0.2.1(zustand@5.1.0(@types/react@18.3.31)(react@18.3.1)(use-sync-external-store@1.7.0(react@18.3.1))):
+    dependencies:
+      zustand: 5.1.0(@types/react@18.3.31)(react@18.3.1)(use-sync-external-store@1.7.0(react@18.3.1))
 
   zustand@5.1.0(@types/react@18.3.31)(react@18.3.1)(use-sync-external-store@1.7.0(react@18.3.1)):
     optionalDependencies:
