@@ -1,58 +1,11 @@
-import type { JSONValue } from '@/global'
-import { type FormErrorsType, type FormRules, formValidate } from '@/lib/validator/formValidate'
-import { create } from 'zustand'
+import { createFormStore } from './createFormStore'
 
 export type SignInFormData = { email: string; code: string }
-
-interface SignInState {
-  data: SignInFormData
-  error: FormErrorsType<SignInFormData>
-}
-
-interface SignInAction {
-  setData: (data: Partial<SignInFormData>) => void
-  setError: (error: Partial<FormErrorsType<SignInFormData>>) => void
-  clearError: (key?: keyof SignInFormData) => void
-  revalidateFormItems: <T extends SignInFormData>(
-    formData: Partial<T>,
-    formRules: FormRules<T>,
-    lastError?: FormErrorsType<T>
-  ) => void
-}
 
 const genInitData = () => ({ email: '', code: '' })
 const genInitError = () => ({ email: [], code: [] })
 
-export const useSignInStore = create<SignInState & SignInAction>()((set, get) => ({
-  data: genInitData(),
-  error: genInitError(),
-  setData: (data: Partial<SignInFormData>) => {
-    set((state) => ({
-      ...state,
-      data: { ...state.data, ...data },
-    }))
-  },
-  setError: (error: Partial<FormErrorsType<SignInFormData>>) => {
-    set((state) => ({
-      ...state,
-      error: { ...state.error, ...error },
-    }))
-  },
-  clearError: (key?: keyof SignInFormData) => {
-    set((state) => ({
-      ...state,
-      error: key ? { ...state.error, [key]: [] } : genInitError(),
-    }))
-  },
-  revalidateFormItems: <T extends SignInFormData>(
-    formData: Partial<T>,
-    formRules: FormRules<T>,
-    lastError?: FormErrorsType<T>
-  ) => {
-    get().clearError()
-    const keys = Object.keys(formData)
-    const validatingRules = formRules.filter((rule) => keys.includes(String(rule.key)))
-    const formError = formValidate(formData, validatingRules)
-    get().setError({ ...lastError, ...formError })
-  },
-}))
+export const useSignInStore = createFormStore<SignInFormData, SignInFormData>({
+  genInitData,
+  genInitError,
+})
