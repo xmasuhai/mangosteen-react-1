@@ -2,11 +2,13 @@ import { FormItem } from '@/components/form/item/FormItem'
 import type { PickedTag } from '@/global'
 import { hasError, type FormRules } from '@/lib/validator/formValidate'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
+import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
 import { type FormEventHandler, useMemo } from 'react'
 
 interface Props {
   className?: string
+  mode?: 'create' | 'edit'
 }
 
 const tagRules: FormRules<PickedTag> = [
@@ -25,14 +27,16 @@ const tagRules: FormRules<PickedTag> = [
  * @Description: 入参数据：lastData、lastError
  * @Description: 表单操作：更新数据、清除错误提示、验证数据、提交数据
  */
-export const TagForm: React.FC<Props> = ({ className }) => {
+export const TagForm: React.FC<Props> = ({ className, mode = 'create' }) => {
+  const create = useTagCreateStore()
+  const edit = useTagEditStore()
   const {
     data: lastData,
     error: lastError,
     setData,
     clearError,
     revalidateFormItems,
-  } = useTagCreateStore()
+  } = mode === 'edit' ? edit : create
 
   const onChangeTagName = (name: string) => {
     setData({
@@ -71,8 +75,9 @@ export const TagForm: React.FC<Props> = ({ className }) => {
     e.preventDefault()
     revalidateFormItems<PickedTag>(lastData, tagRules, lastError)
     // 注意过期的闭包 lastData、lastError 都是闭包，不能直接使用，需要用 useSignInStore.getState() 获取最新状态
-    const freshError = useTagCreateStore.getState().error
-    const freshData = useTagCreateStore.getState().data
+    const activeStore = mode === 'edit' ? useTagEditStore : useTagCreateStore
+    const freshError = activeStore.getState().error
+    const freshData = activeStore.getState().data
     if (!hasError(freshError)) {
       console.log('onSubmit_______________________')
       console.log('%c⧭ freshData', 'color: #40fff2', freshData)

@@ -16,13 +16,13 @@ interface Props {
  * @Email: xmasuhai@163.com
  * @Date: 2026-11-14 12:43:28
  * @Last Modified by:   xmasuhai
- * @Last Modified time: 2026-11-14 13:02:27
+ * @Last Modified time: 2026-11-14 13:22:46
  * @FilePath: @/pages/TagEditPage.tsx
  */
 export const TagEditPage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
   const params = useParams()
-  // const { setData } = useTagCreateStore()
+  // const { setData } = useTagEditStore()
   useEffect(() => {
     const id = params.id
     if (!id) {
@@ -39,7 +39,7 @@ export const TagEditPage: React.FC<Props> = ({ className }) => {
         <TopNav title="标签详情" icon={Icon} />
       </GradientBanner>
 
-      <TagForm />
+      <TagForm mode="edit" />
     </div>
   )
 }
