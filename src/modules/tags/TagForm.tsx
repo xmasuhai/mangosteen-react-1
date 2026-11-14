@@ -4,7 +4,7 @@ import { hasError, type FormRules } from '@/lib/validator/formValidate'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
-import React, { type FormEventHandler } from 'react'
+import React, { useEffect, type FormEventHandler } from 'react'
 
 interface Props {
   className?: string
@@ -23,7 +23,7 @@ const tagRules: FormRules<PickedTag> = [
  * @Email: xmasuhai@163.com
  * @Date: 2026-11-14 12:35:58
  * @Last Modified by:   xmasuhai
- * @Last Modified time: 2026-11-14 19:48:26
+ * @Last Modified time: 2026-11-14 23:11:45
  * @Description: 标签表单-创建/编辑
  * @Description: 入参数据：lastData、lastError
  * @Description: 表单操作：更新数据、清除错误提示、验证数据、提交数据
@@ -42,6 +42,12 @@ export const TagForm: React.FC<Props> = ({
     clearError,
     revalidateFormItems,
   } = mode === 'edit' ? edit : create
+
+  useEffect(() => {
+    console.log('TagForm_______________________')
+    console.log('%c⧭', 'color: #ffa640', lastData)
+    console.log('_______________________TagForm')
+  }, [lastData])
 
   const onChangeTagName = (name: string) => {
     setData({

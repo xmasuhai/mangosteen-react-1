@@ -4,11 +4,11 @@ import { create } from 'zustand'
 import { withDevtoolsBridge } from 'zustand-devtools-bridge'
 
 interface EmojiState {
-  id: number | null
-  emoji: string
-  hint: string
-  topic: EmojiTopic['topic'] | ''
-  mainTopic: EmojiMainTopic | ''
+  id?: number | null
+  emoji?: string
+  hint?: string
+  topic?: EmojiTopic['topic'] | ''
+  mainTopic?: EmojiMainTopic
 }
 
 interface EmojiActions {
@@ -21,14 +21,14 @@ const initialEmojiState: EmojiState = {
   emoji: '',
   hint: '',
   topic: '',
-  mainTopic: '',
+  mainTopic: '表情',
 }
 
 export const useEmojiStore = create<EmojiState & EmojiActions>()(
   withDevtoolsBridge(
     (set, _get) => ({
       ...initialEmojiState,
-      setEmoji: (emojiState: EmojiState) => set((state) => ({ ...state, ...emojiState })),
+      setEmoji: (emojiState: Partial<EmojiState>) => set((state) => ({ ...state, ...emojiState })),
       reset: () => set(initialEmojiState),
     }),
     {
