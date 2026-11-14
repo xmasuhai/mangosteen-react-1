@@ -119,7 +119,7 @@ export const SignInPage: React.FC<Props> = ({ className }) => {
 
         {/* 登录 */}
         <section className="form-item-sc mt-[100px]">
-          <button type="submit" className="primary-btn">
+          <button type="submit" className="form-btn-sc">
             登录
           </button>
         </section>
