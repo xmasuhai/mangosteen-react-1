@@ -9,8 +9,8 @@ const genInitData = (): FormSubmitData => ({
   id: 0,
   kind: 'expenses',
   name: '',
-  sign: '',
   sign_id: 0,
+  sign: '',
 })
 
 const genInitError = (): FormErrorsType<FormValidateData> => ({ name: [], sign: [] })
@@ -18,4 +18,5 @@ const genInitError = (): FormErrorsType<FormValidateData> => ({ name: [], sign: 
 export const useTagEditStore = createFormStore<FormSubmitData, FormValidateData>({
   genInitData,
   genInitError,
+  mode: 'edit',
 })
