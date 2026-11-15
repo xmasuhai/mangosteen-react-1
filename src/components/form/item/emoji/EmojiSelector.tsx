@@ -29,7 +29,7 @@ export const EmojiSelector: React.FC<Props> = ({ className, hasError, ...restPro
         hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]',
         className
       )}>
-      <EmojiMainTopicNav />
+      <EmojiMainTopicNav {...restProps} />
       <EmojiUnicodeList key={mainTopic} {...restProps} />
     </div>
   )

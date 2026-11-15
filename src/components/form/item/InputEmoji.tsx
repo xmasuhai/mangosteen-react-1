@@ -1,4 +1,5 @@
 import { EmojiSelector } from '@/components/form/item/emoji/EmojiSelector'
+import { getEmojiById } from '@/lib/helpers/getEmojiById'
 import { useEmojiStore } from '@/stores/useEmojiStore'
 import { cn } from 'cn'
 import { useEffect } from 'react'
@@ -21,29 +22,29 @@ export const InputEmoji: React.FC<Props> = ({
   hasErrorPlaceholder = true,
   value = '',
   onChange,
-  onBlur,
-  onFocus,
+  ...restProps
 }) => {
-  const { id: emojiId, emoji, hint, mainTopic } = useEmojiStore()
+  const { id: emojiId, emoji, hint, mainTopic, setEmoji } = useEmojiStore()
 
   useEffect(() => {
+    if (!emojiId || !emoji) {
+      return
+    }
+    const emojiItem = getEmojiById(emojiId)
+    setEmoji(emojiItem)
     onChange?.(emojiId ?? 0, emoji ?? '')
-  }, [emojiId, value, emoji, mainTopic, onChange])
+  }, [emojiId, value, emoji, mainTopic, onChange, setEmoji])
 
   return (
     <section className={cn('form-item-sc relative', className)}>
-      <div onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
+      <div className="form-label-sc text-[22px]">
         <span className="text-[16px]">符号 {hasLabelColon ? '：' : ''}</span>
         <span className={cn('text-22px inline-block wag')}>{emoji}</span>
         <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">{hint}</span>
       </div>
 
-      <EmojiSelector
-        onBlur={onBlur}
-        onFocus={onFocus}
-        hasError={!!errorHint}
-        className="form-item-content-sc"
-      />
+      <EmojiSelector {...restProps} hasError={!!errorHint} className="form-item-content-sc" />
+
       {(errorHint || hasErrorPlaceholder) && (
         <span className="form-item-error-sc w-fit buzz">{errorHint ?? <>&nbsp;</>}</span>
       )}

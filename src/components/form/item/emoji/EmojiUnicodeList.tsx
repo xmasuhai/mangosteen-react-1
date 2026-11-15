@@ -78,13 +78,13 @@ export const EmojiUnicodeList: React.FC<Props> = ({ className, ...restProps }) =
       )}>
       {selectedFlattedEmojiList.map(({ index: id, unicode }, index) => (
         <li
-          {...restProps}
           // 设置 tabIndex 让普通元素 li 元素能够接收焦点，触发 onBlur
           tabIndex={index}
           key={`id_${id}_${index}_${unicode}`}
           onClick={() => {
             switchEmojiUnicode(unicode, id)
           }}
+          {...restProps}
           className={cn(
             'text-center grow-0 shrink-0 w-35px',
             'b-1 b-transparent rounded-[var(--input-radius)]',

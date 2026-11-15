@@ -5,6 +5,8 @@ import { useEmojiStore } from '@/stores/useEmojiStore'
 
 interface Props {
   className?: string
+  onBlur?: () => void
+  onFocus?: () => void
 }
 
 /**
@@ -15,7 +17,7 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:14
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiMainTopicNav: React.FC<Props> = ({ className }) => {
+export const EmojiMainTopicNav: React.FC<Props> = ({ className, ...restProps }) => {
   const navList = emojiTopicList?.map((topicItem) => topicItem.mainTopic) ?? []
   const { mainTopic = navList?.[0], setEmoji, reset } = useEmojiStore()
 
@@ -38,8 +40,10 @@ export const EmojiMainTopicNav: React.FC<Props> = ({ className }) => {
         )}>
         {navList.map((item, index) => (
           <li
+            tabIndex={index}
             key={`${index}_${item}`}
             onClick={() => selectMainTopic(item)}
+            {...restProps}
             className={cn(
               'shrink-0 inline-block p-.5em',
               'text-[var(--emoji-nav-text)] whitespace-nowrap truncate',
