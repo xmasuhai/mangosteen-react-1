@@ -24,6 +24,10 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
   const [searchParams] = useSearchParams()
   const { data, setData } = useTagCreateStore()
 
+  console.log('TagCreatePage render_______________________')
+  console.log('%c⧭', 'color: #86bf60', data)
+  console.log('_______________________TagCreatePage render')
+
   useEffect(() => {
     const kind = searchParams.get('kind')
     if (!kind) {
@@ -33,11 +37,10 @@ export const TagCreatePage: React.FC<Props> = ({ className }) => {
       throw new Error('kind is invalid')
     }
     setData({ kind })
-    console.log('TagCreatePage_______________________')
-    console.log('%c⧭', 'color: #86bf60', data)
+    console.log('TagCreatePage useEffect_______________________')
     console.log('%c⧭', 'color: #cc7033', kind)
-    console.log('_______________________TagCreatePage')
-  }, [searchParams])
+    console.log('_______________________TagCreatePage useEffect')
+  }, [searchParams, setData])
 
   return (
     <div className={cn('container w-screen h-screen relative', className)}>
