@@ -17,9 +17,13 @@ export type CommonFormItemTypeProps = {
 }
 
 export type FormItemTypeProps<T extends FormItemType> = T extends 'input'
-  ? { type?: 'input'; inputType: InputType } & CommonFormItemTypeProps
+  ? CommonFormItemTypeProps & { type?: 'input'; inputType: InputType }
   : T extends 'emoji'
-    ? { type?: 'emoji' } & CommonFormItemTypeProps
+    ? Omit<CommonFormItemTypeProps, 'value' | 'onChange'> & {
+        type?: 'emoji'
+        value?: number
+        onChange?: (sign_in: number, sign: string) => void
+      }
     : T extends 'validateCodeSend'
-      ? { type?: 'validateCodeSend'; onClickSendCode?: () => void } & CommonFormItemTypeProps
+      ? CommonFormItemTypeProps & { type?: 'validateCodeSend'; onClickSendCode?: () => void }
       : never

@@ -4,7 +4,7 @@ import { hasError, type FormRules } from '@/lib/validator/formValidate'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
-import React, { useEffect, type FormEventHandler } from 'react'
+import React, { type FormEventHandler } from 'react'
 
 interface Props {
   className?: string
@@ -43,12 +43,6 @@ export const TagForm: React.FC<Props> = ({
     revalidateFormItems,
   } = mode === 'edit' ? edit : create
 
-  useEffect(() => {
-    console.log('TagForm_______________________')
-    console.log('%c⧭', 'color: #ffa640', lastData)
-    console.log('_______________________TagForm')
-  }, [lastData])
-
   const onChangeTagName = (name: string) => {
     setData({
       ...lastData,
@@ -62,8 +56,9 @@ export const TagForm: React.FC<Props> = ({
     clearError('name')
   }
 
-  const onChangeTagSign = (sign: string) => {
+  const onChangeTagSign = (sign_id: number, sign: string) => {
     setData({
+      sign_id,
       sign,
     })
   }
@@ -115,7 +110,7 @@ export const TagForm: React.FC<Props> = ({
         formItemType="emoji"
         formItemTypeProps={{
           errorHint: lastError?.sign && lastError.sign.join('，'),
-          value: lastData.sign,
+          value: lastData.sign_id,
           onChange: onChangeTagSign,
           onBlur: onBlurTagSign,
           onFocus: onFocusTagSign,

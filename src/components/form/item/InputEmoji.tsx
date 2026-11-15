@@ -1,16 +1,15 @@
 import { EmojiSelector } from '@/components/form/item/emoji/EmojiSelector'
-import { getEmojiById } from '@/lib/helpers/getEmojiById'
 import { useEmojiStore } from '@/stores/useEmojiStore'
 import { cn } from 'cn'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface Props {
   className?: string
   hasLabelColon?: boolean
   errorHint?: string
   hasErrorPlaceholder?: boolean
-  value?: string
-  onChange?: (value: string) => void
+  value?: number
+  onChange?: (sign_id: number, sign: string) => void
   onBlur?: () => void
   onFocus?: () => void
 }
@@ -25,31 +24,21 @@ export const InputEmoji: React.FC<Props> = ({
   onBlur,
   onFocus,
 }) => {
-  const { emoji, hint, setEmoji: setEmojiItem } = useEmojiStore()
-  // const [emoji, setEmoji] = useState(value)
-  // const [emojiHint, setEmojiHint] = useState('')
-  const setEmoji = (emoji?: string) => {
-    setEmojiItem({ emoji: value ?? emoji })
-    onChange?.(emoji ?? '')
-  }
-  const setEmojiHint = (hint: string) => {
-    setEmojiItem({ hint })
-  }
+  const { id: emojiId, emoji, hint, mainTopic } = useEmojiStore()
+
+  useEffect(() => {
+    onChange?.(emojiId ?? 0, emoji ?? '')
+  }, [emojiId, value, emoji, mainTopic, onChange])
 
   return (
     <section className={cn('form-item-sc relative', className)}>
       <div onBlur={onBlur} onFocus={onFocus} className="form-label-sc text-[22px]">
         <span className="text-[16px]">符号 {hasLabelColon ? '：' : ''}</span>
         <span className={cn('text-22px inline-block wag')}>{emoji}</span>
-        <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">
-          {/* {emojiHint} */}
-          {hint}
-        </span>
+        <span className="text-[16px] animate-rainbow color-[var(--vp-c-brand-next)]">{hint}</span>
       </div>
 
       <EmojiSelector
-        // onChangeEmojiUnicode={setEmoji}
-        // onChangeEmojiHint={setEmojiHint}
         onBlur={onBlur}
         onFocus={onFocus}
         hasError={!!errorHint}
