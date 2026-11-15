@@ -1,19 +1,12 @@
 import { cn } from 'cn'
-import { useEffect, useMemo, useState } from 'react'
-import {
-  type EmojiMainTopic,
-  type EmojiSubTopic,
-  emojiTopicList,
-} from '@/lib/const/emojiTopicList.ts'
+import { useEffect, useMemo } from 'react'
+import { type EmojiSubTopic, emojiTopicList } from '@/lib/const/emojiTopicList.ts'
 import { safeEmojiList, type EmojiItem } from '@/lib/const/safeEmojiList.ts'
 import { useEmojiStore } from '@/stores/useEmojiStore'
 import { getEmojiById } from '@/lib/helpers/getEmojiById'
 
 interface Props {
   className?: string
-  // mainTopic?: EmojiMainTopic
-  // onChangeEmojiUnicode: (unicode?: string) => void
-  // onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
 }
@@ -26,13 +19,7 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:49
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiUnicodeList: React.FC<Props> = ({
-  className,
-  // mainTopic,
-  // onChangeEmojiUnicode,
-  // onChangeEmojiHint,
-  ...restProps
-}) => {
+export const EmojiUnicodeList: React.FC<Props> = ({ className, ...restProps }) => {
   const { mainTopic, emoji, setEmoji } = useEmojiStore()
 
   const selectedTopicList = useMemo<readonly EmojiSubTopic[]>(
@@ -48,16 +35,11 @@ export const EmojiUnicodeList: React.FC<Props> = ({
     [selectedTopicList]
   )
 
-  // const [emojiUnicode, setEmojiUnicode] = useState('')
   const emojiHint = useMemo(
-    () =>
-      // selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emojiUnicode)?.hint ?? '',
-      selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emoji)?.hint ?? '',
-    // [selectedFlattedEmojiList, emojiUnicode]
+    () => selectedFlattedEmojiList?.find((emojiItem) => emojiItem.unicode === emoji)?.hint ?? '',
     [selectedFlattedEmojiList, emoji]
   )
   const switchEmojiUnicode = (unicode: string, id: number) => {
-    // if (unicode === emojiUnicode) {
     if (unicode === emoji) {
       return
     }
@@ -65,24 +47,14 @@ export const EmojiUnicodeList: React.FC<Props> = ({
     setEmoji({
       ...emojiItem,
     })
-    // setEmojiUnicode(unicode)
-    setEmoji({ emoji: unicode })
   }
 
-  useEffect(
-    () => {
-      // onChangeEmojiUnicode(emojiUnicode)
-      // onChangeEmojiUnicode(emoji)
-      // onChangeEmojiHint(emojiHint)
-      setEmoji({
-        emoji,
-        hint: emojiHint,
-      })
-    },
-    //  [emojiHint, emojiUnicode, onChangeEmojiUnicode, onChangeEmojiHint]
-    // [emojiHint, emoji, onChangeEmojiUnicode, onChangeEmojiHint]
-    [emojiHint, emoji, setEmoji]
-  )
+  useEffect(() => {
+    setEmoji({
+      emoji,
+      hint: emojiHint,
+    })
+  }, [emoji, emojiHint, setEmoji])
 
   const fitScreenHeight = useMemo(() => {
     const height = window.innerHeight
@@ -117,7 +89,6 @@ export const EmojiUnicodeList: React.FC<Props> = ({
             'text-center grow-0 shrink-0 w-35px',
             'b-1 b-transparent rounded-[var(--input-radius)]',
             'flex items-center justify-center',
-            // unicode === emojiUnicode &&
             unicode === emoji && 'bg-blue-300 outline-1px outline-solid outline-[var(--main)] jello'
           )}>
           {unicode}

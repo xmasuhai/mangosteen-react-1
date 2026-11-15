@@ -1,12 +1,10 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { type EmojiMainTopic, emojiTopicList } from '@/lib/const/emojiTopicList.ts'
 import { cn } from 'cn'
 import { useEmojiStore } from '@/stores/useEmojiStore'
 
 interface Props {
   className?: string
-  // mainTopic?: EmojiMainTopic
-  onChangeMainTopic: (topic: EmojiMainTopic) => void
 }
 
 /**
@@ -17,20 +15,19 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:08:14
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiMainTopicNav: React.FC<Props> = ({
-  className,
-  /* mainTopic, */
-  onChangeMainTopic,
-}) => {
+export const EmojiMainTopicNav: React.FC<Props> = ({ className }) => {
   const navList = emojiTopicList?.map((topicItem) => topicItem.mainTopic) ?? []
-  const { mainTopic = navList?.[0], setEmoji } = useEmojiStore()
-  // const [selectedMainTopic, setSelectedMainTopic] = useState(mainTopic ?? navList?.[0])
+  const { mainTopic = navList?.[0], setEmoji, reset } = useEmojiStore()
 
-  const selectMainTopic = (topic: EmojiMainTopic) => {
-    // setSelectedMainTopic(topic)
-    setEmoji({ mainTopic: topic })
-    onChangeMainTopic(topic)
+  const selectMainTopic = (mainTopic: EmojiMainTopic) => {
+    reset()
+    setEmoji({ mainTopic })
   }
+
+  useEffect(() => {
+    reset()
+    setEmoji({ mainTopic })
+  }, [mainTopic, setEmoji, reset])
 
   return (
     <nav className={cn('min-h-35px', className)}>
@@ -46,7 +43,6 @@ export const EmojiMainTopicNav: React.FC<Props> = ({
             className={cn(
               'shrink-0 inline-block p-.5em',
               'text-[var(--emoji-nav-text)] whitespace-nowrap truncate',
-              // item === selectedMainTopic ? 'selected' : ''
               item === mainTopic ? 'selected' : ''
             )}>
             {item}

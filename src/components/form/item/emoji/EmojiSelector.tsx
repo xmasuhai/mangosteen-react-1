@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react'
 import { cn } from 'cn'
 import { EmojiMainTopicNav } from '@/components/form/item/emoji/EmojiMainTopicNav'
 import { EmojiUnicodeList } from '@/components/form/item/emoji/EmojiUnicodeList'
-import type { EmojiMainTopic } from '@/lib/const/emojiTopicList'
 import { useEmojiStore } from '@/stores/useEmojiStore'
 
 interface Props {
   className?: string
   hasError?: boolean
-  // onChangeEmojiUnicode: (unicode?: string) => void
-  // onChangeEmojiHint: (hint: string) => void
   onBlur?: () => void
   onFocus?: () => void
 }
@@ -22,26 +18,8 @@ interface Props {
  * @LastEditTime: 2026-11-11 18:02:00
  * @FilePath: src/modules/tags/emoji
  */
-export const EmojiSelector: React.FC<Props> = ({
-  className,
-  hasError,
-  // onChangeEmojiUnicode,
-  // onChangeEmojiHint,
-  ...restProps
-}) => {
-  // const [mainTopic, setMainTopic] = useState<EmojiMainTopic>('表情')
-  const { mainTopic, setEmoji: setEmojiItem, reset } = useEmojiStore()
-  const onChangeMainTopic = (topic: EmojiMainTopic) => {
-    // setMainTopic(topic)
-    setEmojiItem({ mainTopic: topic })
-  }
-
-  useEffect(() => {
-    // onChangeEmojiUnicode('')
-    // onChangeEmojiHint('')
-    setEmojiItem({ emoji: '', hint: '', id: null, topic: '', mainTopic })
-  }, [mainTopic, setEmojiItem /* onChangeEmojiUnicode, onChangeEmojiHint */])
-
+export const EmojiSelector: React.FC<Props> = ({ className, hasError, ...restProps }) => {
+  const { mainTopic } = useEmojiStore()
   return (
     <div
       className={cn(
@@ -51,15 +29,8 @@ export const EmojiSelector: React.FC<Props> = ({
         hasError ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]',
         className
       )}>
-      <EmojiMainTopicNav /* mainTopic={mainTopic} */ onChangeMainTopic={onChangeMainTopic} />
-
-      <EmojiUnicodeList
-        key={mainTopic}
-        /* mainTopic={mainTopic} */
-        // onChangeEmojiUnicode={onChangeEmojiUnicode}
-        // onChangeEmojiHint={onChangeEmojiHint}
-        {...restProps}
-      />
+      <EmojiMainTopicNav />
+      <EmojiUnicodeList key={mainTopic} {...restProps} />
     </div>
   )
 }

@@ -25,24 +25,31 @@ interface Props {
 export const TagEditPage: React.FC<Props> = ({ className }) => {
   const Icon = <SvgIcon name="back-arrow" className="size-[24px]" />
   const params = useParams()
-  const { data, setData } = useTagEditStore()
+  const { setData } = useTagEditStore()
   const { setEmoji } = useEmojiStore()
-  const emojiItem = getEmojiById(415)
 
   useEffect(() => {
     const id = Number(params.id)
     if (!id) {
       throw new Error('id is required')
     }
-    // TODO: 接口获取标签详情数据
-    setData({ id, kind: 'incomes', name: '走水', sign: '\u{1F6B6}', sign_id: 415 })
+    // TODO: 根据id 请求接口获取标签详情数据
+    const mockData = {
+      id,
+      kind: 'incomes',
+      name: '走水',
+      sign: '\u{1F6B6}',
+      sign_id: 415,
+    } as const
+    const emojiItem = getEmojiById(415)
+    setData(mockData)
     setEmoji(emojiItem)
+
     console.log('TagEditPage_______________________')
     console.log('%c⧭ params', 'color: #9c87f0', params)
-    console.log('%c⧭ data', 'color: #5277cc', data)
-    console.log('%c⧭', 'color: #733d00', emojiItem)
+    console.log('%c⧭ emojiItem', 'color: #733d00', emojiItem)
     console.log('_______________________TagEditPage')
-  }, [params])
+  }, [params, setEmoji, setData])
 
   return (
     <div className={cn('container w-screen h-screen relative', className)}>
