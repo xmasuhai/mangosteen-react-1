@@ -83,7 +83,8 @@ export const TagForm: React.FC<Props> = ({
       console.log('%c⧭ freshData', 'color: #40fff2', freshData)
       console.log('%c⧭ lastError', 'color: #40fff2', lastError)
       console.log('%c⧭ freshError', 'color: #40fff2', freshError)
-      // console.log('%c⧭ TODO: 发送创建标签请求', 'color: #40fff2', formData)
+      // TODO: 发送创建标签请求
+      // console.log('%c⧭ 发送创建标签请求', 'color: #40fff2', formData)
       console.log('_______________________onSubmit')
     }
   }
@@ -125,6 +126,7 @@ export const TagForm: React.FC<Props> = ({
         </button>
       </div>
 
+      {/* TODO: 实现删除标签请求 */}
       {mode === 'edit' && (
         <div className="form-item-sc mb-32px">
           <button type="submit" className="primary-btn bg-[var(--delete-button-bg)]">
