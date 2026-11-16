@@ -1,7 +1,8 @@
 allowBuilds:
+  '@pnpm/exe': true
   '@parcel/watcher': true
+  'vite-plugin-console-banner': true
   esbuild: true
-  vite-plugin-console-banner: true
 minimumReleaseAgeExclude:
   - sass-embedded-all-unknown@1.105.1 || 1.106.1 || 1.107.1 || 1.108.0 || 1.108.1 || 1.108.2
   - sass-embedded-android-arm64@1.105.1 || 1.106.1 || 1.107.1 || 1.108.0 || 1.108.1 || 1.108.2
