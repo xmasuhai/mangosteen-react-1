@@ -1,10 +1,11 @@
 import { FormItem } from '@/components/form/item/FormItem'
 import type { PickedTag } from '@/global'
 import { hasError, type FormRules } from '@/lib/validator/formValidate'
+import { useEmojiStore } from '@/stores/useEmojiStore'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
-import React, { type FormEventHandler } from 'react'
+import React, { useEffect, type FormEventHandler } from 'react'
 
 interface Props {
   className?: string
@@ -42,6 +43,14 @@ export const TagForm: React.FC<Props> = ({
     clearError,
     revalidateFormItems,
   } = mode === 'edit' ? edit : create
+  const { id: emojiId, emoji } = useEmojiStore()
+
+  useEffect(() => {
+    setData({
+      sign_id: emojiId ?? 0,
+      sign: emoji,
+    })
+  }, [emojiId, emoji, setData])
 
   const onChangeTagName = (name: string) => {
     setData({
