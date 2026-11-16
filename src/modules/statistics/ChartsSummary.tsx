@@ -1,6 +1,7 @@
 import { AmountProgress } from '@/modules/statistics/AmountProgress'
 import { AmountProportionChart } from '@/modules/statistics/AmountProportionChart'
 import { DateAmountChart } from '@/modules/statistics/DateAmountChart'
+import { cn } from 'cn'
 
 interface Props {
   className?: string
@@ -14,11 +15,16 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
   console.log('%c⧭', 'color: #731d1d', startDate)
   console.log('_______________________ChartsSummary')
 
+  const items = [
+    { date: '2026-12-01', amount: 1200 },
+    { date: '2026-12-02', amount: 2300 },
+    { date: '2026-12-30', amount: 1800 },
+  ].map((item) => ({ x: item.date, y: item.amount }))
   return (
     <div className={className}>
       {/* 类型选择器 */}
-      {/* 柱状图 */}
-      <DateAmountChart />
+      {/* 折线图 */}
+      <DateAmountChart chartData={items} className={cn('h-400px')} />
 
       {/* 饼图 */}
       <AmountProportionChart />
