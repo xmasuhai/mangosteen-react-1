@@ -85,7 +85,7 @@ export default defineConfig({
     // 将 UnoCSS 的原子类映射到你 SCSS 里定义好的 .animation-rainbow 类
     rainbow: 'animation-rainbow',
     'primary-btn': cn(
-      'w-full h-48px b-none rounded-8px text-center ] ',
+      'w-full h-48px b-none rounded-8px text-center',
       'bg-[var(--button-primary-color)] color-[var(--button-primary-text-color)]'
     ),
     disabled: 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
