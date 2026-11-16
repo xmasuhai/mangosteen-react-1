@@ -29,7 +29,7 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
     <div className={className}>
       {/* 类型选择器 */}
       {/* 折线图 */}
-      <DateAmountChart chartData={items} className={cn('h-150px')} />
+      <DateAmountChart chartData={items} className={cn('h-150px px-.5em')} />
 
       {/* 饼图 */}
       <AmountProportionChart />

@@ -29,26 +29,12 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
     }
 
     const option: EChartsOption = {
-      grid: { left: '5%', right: '5%', top: '20%', bottom: '20%' },
+      grid: { left: 0, right: 0, top: '20%', bottom: '20%' },
       tooltip: {
         show: true,
-        trigger: 'axis',
-        formatter: (params: TooltipComponentFormatterCallbackParams) => {
-          const { seriesName, marker, axisValue, data, /* color */ } = params?.[0] ?? {}
-          const partsDate = axisValue.split('-')
-          const label = `${partsDate[0]}年${partsDate[1]}月${partsDate[2]}日`
-          const dataValue = data === null ? '无数据' : `¥ ${data}元`
-          // 未实现 style="{border: '3px solid ${color}'}"
-          return `
-            <div>
-              ${marker} ${seriesName}
-            </div>
-            <div>
-              <span>${label}</span>
-              <span>${dataValue}</span>
-            </div>
-          `
-        },
+        // 如果针对 series 单独设置，通常用 'item'
+        trigger: 'item',
+        confine: true,
       },
       xAxis: {
         type: 'category',
@@ -79,6 +65,28 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
               borderWidth: 3,
             },
           },
+          tooltip: {
+            show: true,
+            confine: true,
+            trigger: 'item',
+            formatter: (params: TooltipComponentFormatterCallbackParams) => {
+              const { seriesName, marker, name, data} = params
+              const partsDate = name.split('-')
+              const label = `${partsDate[0]}年${partsDate[1]}月${partsDate[2]}日`
+              const dataValue = data === null ? '无数据' : `¥ ${data}元`
+              return `
+                <div>
+                  <div>
+                    ${marker} ${seriesName}
+                  </div>
+                  <div>
+                    <span>${label}</span>
+                    <span>${dataValue}</span>
+                  </div>
+                </div>
+              `
+            },
+          },
         },
       ],
     }
@@ -100,7 +108,7 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
         seriesIndex: 0, // 第几个 series（通常为 0）
         dataIndex: 0, // 显示第一项（索引从 0 开始）
       })
-    }, 0)
+    }, 800)
 
     // 4. 组件卸载或重新执行 effect 前销毁实例
     return () => {
