@@ -20,18 +20,18 @@
 ```bash
 npm install -g corepack@latest &&
 corepack enable &&
-corepack prepare pnpm@12.19.0 --activate
+corepack prepare pnpm@12.21.0 --activate
 # 在项目路径下执行
-corepack use pnpm@12.19.0
+corepack use pnpm@12.21.0
 ```
 
 ### 3. 包管理器 `pnpm` 后续升级
 
-- 提示有新版本的 `pnpm@12.19.0`
+- 提示有新版本的 `pnpm@12.21.0`
 - 在项目内运行以下命令
 
 ```bash
-corepack use pnpm@12.19.0
+corepack use pnpm@12.21.0
 ```
 
 ## 📦 技术栈
@@ -44,7 +44,7 @@ corepack use pnpm@12.19.0
 | ------------------------------------------------------------------------------------- | -------- | ---------------------------- |
 | [react](https://react.dev/)                                                           | 18.3.1   | UI 框架                      |
 | [react-dom](https://react.dev/)                                                       | 18.3.1   | React DOM 渲染               |
-| [react-router-dom](https://reactrouter.com/)                                          | 6.30.6   | 路由管理                     |
+| [react-compiler-runtime](https://react.dev/)                                          | 1.0.0    | React Compiler 运行时        || [react-router-dom](https://reactrouter.com/)                                          | 6.30.6   | 路由管理                     |
 | [zustand](https://zustand-demo.pmnd.rs/)                                              | 5.1.0    | 轻量级全局状态管理           |
 | [swr](https://swr.vercel.app/)                                                        | 2.5.1    | 数据请求与缓存               |
 | [axios](https://axios-http.com/)                                                      | 1.21.1   | HTTP 客户端                  |
@@ -67,34 +67,38 @@ corepack use pnpm@12.19.0
 | [@10coding/vite-plugin-jsx-scoped](https://github.com/10coding/vite-plugin-jsx-scoped)             | 0.6.0   | Vite JSX 作用域插件          |
 | [vite-plugin-console-banner](https://github.com/xmasuhai/vite-plugin-console-banner)               | 0.1.2   | 构建控制台横幅插件           |
 | [vite-plugin-mock-dev-server](https://github.com/xmasuhai/vite-plugin-mock-dev-server)             | 2.7.1   | Mock 开发服务器插件          |
-| [unocss](https://unocss.dev/)                                                                      | 66.12.0 | 原子化 CSS 引擎              |
-| [@unocss/vite](https://unocss.dev/)                                                                | 66.12.0 | UnoCSS Vite 插件             |
-| [@unocss/preset-wind4](https://unocss.dev/)                                                        | 66.12.0 | Wind4 预设                   |
-| [@unocss/preset-attributify](https://unocss.dev/)                                                  | 66.12.0 | Attributify 预设             |
+| [unocss](https://unocss.dev/)                                                                      | 66.13.0 | 原子化 CSS 引擎              |
+| [@unocss/vite](https://unocss.dev/)                                                                | 66.13.0 | UnoCSS Vite 插件             |
+| [@unocss/preset-wind4](https://unocss.dev/)                                                        | 66.13.0 | Wind4 预设                   |
+| [@unocss/preset-attributify](https://unocss.dev/)                                                  | 66.13.0 | Attributify 预设             |
+| [@babel/core](https://babeljs.io/)                                                                 | 8.1.2   | Babel 核心                   |
+| [@rolldown/plugin-babel](https://github.com/rolldown/rolldown)                                     | 0.3.1   | Rolldown Babel 插件          |
+| [babel-plugin-react-compiler](https://react.dev/)                                                  | 1.0.0   | React Compiler Babel 插件    |
 | [typescript](https://www.typescriptlang.org/)                                                      | 7.0.2   | 类型检查                     |
 | [@types/react](https://www.typescriptlang.org/)                                                    | 18.3.31 | React TypeScript 类型定义    |
 | [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
-| 18.3.7 | ReactDOM TypeScript 类型定义 |
-| [eslint](https://eslint.org/) | 10.14.0 | 代码检查 |
-| [@antfu/eslint-config](https://github.com/antfu/eslint-config) | 10.0.0 | Antfu ESLint 配置 |
-| [@eslint-react/eslint-plugin](https://github.com/eslint-react/eslint-plugin) | 5.28.8 | React ESLint 规则插件 |
-| [@typescript-eslint/eslint-plugin](https://www.typescriptlang.org/) | 8.72.1 | TypeScript ESLint 规则插件 |
-| [@typescript-eslint/parser](https://www.typescriptlang.org/) | 8.72.1 | TypeScript ESLint 解析器 |
-| [eslint-plugin-react-hooks](https://github.com/jsx-eslint/eslint-plugin-react-hooks) | 7.1.1 | React Hooks ESLint 规则 |
-| [eslint-plugin-react-refresh](https://github.com/tylingsoft/eslint-plugin-react-refresh) | 0.5.7 | React Refresh ESLint 规则 |
+| [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
+| [eslint](https://eslint.org/)                                                                      | 10.15.0 | 代码检查                     |
+| [@antfu/eslint-config](https://github.com/antfu/eslint-config)                                     | 10.0.0  | Antfu ESLint 配置            |
+| [@eslint-react/eslint-plugin](https://github.com/eslint-react/eslint-plugin)                        | 5.30.3  | React ESLint 规则插件        |
+| [@typescript-eslint/eslint-plugin](https://www.typescriptlang.org/)                                 | 8.72.2  | TypeScript ESLint 规则插件   |
+| [@typescript-eslint/parser](https://www.typescriptlang.org/)                                       | 8.72.2  | TypeScript ESLint 解析器     |
+| [eslint-plugin-react-hooks](https://github.com/jsx-eslint/eslint-plugin-react-hooks)                | 7.1.1   | React Hooks ESLint 规则      |
+| [eslint-plugin-react-refresh](https://github.com/tylingsoft/eslint-plugin-react-refresh)            | 0.5.8   | React Refresh ESLint 规则    |
 | [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.93.0  | 代码检查                     |
 | [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.78.0  | 代码格式化                   |
 | [sass-embedded](https://sass-lang.com/)                                                            | 1.108.2 | Sass 编译器                  |
 | [stylelint](https://stylelint.io/)                                                                 | 18.0.0  | 样式代码检查                 |
-| [stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss) | 17.0.0  | SCSS 样式检查配置            |
+| [stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss) | 18.0.0  | SCSS 样式检查配置            |
 | [svgo](https://github.com/svgoco/svgo)                                                             | 4.1.0   | SVG 优化工具                 |
 | [svgstore](https://github.com/w0rm/svgstore)                                                       | 3.0.1   | SVG 雪碧图合并工具           |
 | [@faker-js/faker](https://fakerjs.dev/)                                                            | 10.6.0  | 模拟数据生成工具             |
 | [vitest](https://vitest.dev/)                                                                      | 5.1.0   | 测试框架                     |
+| [zustand-devtools-bridge](https://github.com/pmndrs/zustand)                                       | 0.2.1   | Zustand 开发工具桥接         |
 
 ### 包管理器与运行时要求
 
-- **包管理器**：`pnpm >=12.19.0`（`packageManager: pnpm@12.18.0+sha512...`）
+- **包管理器**：`pnpm >=12.21.0`（`packageManager: pnpm@12.21.0+sha512...`）
 - **Node.js**：`>=26.13.0`
 
 ## 📦 依赖安装与启动
