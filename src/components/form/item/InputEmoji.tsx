@@ -30,25 +30,14 @@ export const InputEmoji: React.FC<Props> = ({
   const hint = useEmojiStore((state) => state.hint)
   const setEmoji = useEmojiStore((state) => state.setEmoji)
 
-  // 用户在 store 中选中符号后，同步通知表单
   useEffect(() => {
     if (!emojiId || !emoji) {
       return
     }
-    onChange?.(emojiId, emoji)
-  }, [emojiId, emoji, onChange])
-
-  // 表单回填 value 时，反向同步到 store（index 从 1 开始，0 表示未选择）
-  useEffect(() => {
-    if (!value || value === emojiId) {
-      return
-    }
-    try {
-      setEmoji(getEmojiById(value))
-    } catch (error) {
-      console.warn('[InputEmoji] invalid emoji value:', value, error)
-    }
-  }, [value, emojiId, setEmoji])
+    const emojiItem = getEmojiById(emojiId)
+    setEmoji(emojiItem)
+    onChange?.(emojiId ?? 0, emoji ?? '')
+  }, [value, emojiId, emoji])
 
   return (
     <section className={cn('form-item-sc relative', className)}>

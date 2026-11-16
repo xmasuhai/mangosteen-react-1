@@ -43,6 +43,7 @@ export const TagForm: React.FC<Props> = ({
     clearError,
     revalidateFormItems,
   } = mode === 'edit' ? edit : create
+
   const { id: emojiId, emoji } = useEmojiStore()
 
   useEffect(() => {
