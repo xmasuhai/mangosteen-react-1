@@ -18,13 +18,18 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
   const items = [
     { date: '2026-12-01', amount: 1200 },
     { date: '2026-12-02', amount: 2300 },
+    { date: '2026-12-03', amount: 2300 },
+    { date: '2026-12-04', amount: 2300 },
+    { date: '2026-12-05', amount: 2300 },
+    { date: '2026-12-06', amount: 2300 },
     { date: '2026-12-30', amount: 1800 },
-  ].map((item) => ({ x: item.date, y: item.amount }))
+  ].map((item) =>
+    ({ x: item.date, y: item.amount / 100 }))
   return (
     <div className={className}>
       {/* 类型选择器 */}
       {/* 折线图 */}
-      <DateAmountChart chartData={items} className={cn('h-400px')} />
+      <DateAmountChart chartData={items} className={cn('h-150px')} />
 
       {/* 饼图 */}
       <AmountProportionChart />
