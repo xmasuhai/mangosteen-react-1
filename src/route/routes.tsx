@@ -3,6 +3,7 @@ import { Home } from '@/pages/Home'
 import { ItemCreatePage } from '@/pages/ItemCreatePage'
 import { ItemsPage } from '@/pages/ItemsPage'
 import { SignInPage } from '@/pages/SignInPage'
+import { StatisticsPage } from '@/pages/StatisticsPage'
 import { TagCreatePage } from '@/pages/TagCreatePage'
 import { TagEditPage } from '@/pages/TagEditPage'
 import { welcomeRouter } from '@/route/welcomeRouter'
@@ -17,7 +18,7 @@ export const routes: RouteObject[] = [
   { path: '/items/create', element: <ItemCreatePage /> },
   { path: '/tags/create', element: <TagCreatePage /> },
   { path: '/tags/edit/:id', element: <TagEditPage /> },
-  { path: '/statistics', element: <div>统计图表</div> },
+  { path: '/statistics', element: <StatisticsPage /> },
   { path: '/export', element: <div>敬请期待</div> },
   { path: '/notify', element: <div>敬请期待</div> },
   { path: '/tech_stack', element: <div>敬请期待</div> },
