@@ -35,6 +35,7 @@ export type FormItemTypeProps<T extends FormItemType, U = string> = T extends 'i
       : T extends 'optionSelector'
         ? Omit<CommonFormItemTypeProps, 'value' | 'onChange'> & {
             type?: 'optionSelector'
+            ifOneLineLabel?: boolean
             value: U
             options: SelectorOption<U>[]
             onChange?: (value: U) => void

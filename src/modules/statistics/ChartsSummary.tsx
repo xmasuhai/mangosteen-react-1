@@ -48,11 +48,12 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
   return (
     <div className={className}>
       {/* 类型选择器 */}
-      <div className={cn('form-sc w-full')}>
+      <div className={cn('form-sc w-full mt-1em px-1.5em')}>
         <FormItem
           formItemType="optionSelector"
           formItemTypeProps={{
             label: '类型',
+            ifOneLineLabel: true,
             labelFor: 'kind',
             placeholder: '请选择类型',
             value: kind,
@@ -69,7 +70,7 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
       </div>
 
       {/* 折线图 */}
-      <DateAmountChart chartData={lineChartItems} className={cn('h-160px px-.5em')} />
+      <DateAmountChart chartData={lineChartItems} className={cn('h-160px px-1.5em')} />
 
       {/* 饼图 */}
       <AmountProportionChart chartData={pieChartItems} className={cn('h-320px px-.5em')} />

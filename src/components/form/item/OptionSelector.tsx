@@ -7,6 +7,7 @@ interface Props<T> {
   labelFor?: string
   label?: string
   hasLabelColon?: boolean
+  ifOneLineLabel?: boolean
   errorHint?: string
   hasErrorPlaceholder?: boolean
   value?: T
@@ -20,6 +21,7 @@ interface Props<T> {
 export const OptionSelector = <T extends string | number>({
   className,
   label,
+  ifOneLineLabel = false,
   labelFor,
   hasLabelColon = true,
   errorHint,
@@ -48,8 +50,8 @@ export const OptionSelector = <T extends string | number>({
   }
   return (
     <section className={cn('form-item-sc', className)}>
-      {label && labelTag}
-      <div className="form-item-content-sc">
+      <div className={cn('form-item-content-sc', ifOneLineLabel ? 'flex-row' : 'flex-col')}>
+        <span className="flex items-center">{label && labelTag}</span>
         <select
           id={labelForId}
           value={value}
@@ -57,7 +59,8 @@ export const OptionSelector = <T extends string | number>({
           onBlur={onBlur}
           onFocus={onFocus}
           class={cn(
-            'grow-1 min-h-[var(--input-min-height)] p-x-.5em text-18px',
+            'where:(text-1em)',
+            'grow-1 min-h-[var(--input-min-height)] p-x-.5em',
             'b-1 rounded-[var(--input-radius)] shadow-[inset_0_0_3px_var(--input-shadow)]',
             errorHint ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]'
           )}
