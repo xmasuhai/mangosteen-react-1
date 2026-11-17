@@ -1,8 +1,8 @@
 import { cn } from 'cn'
-import * as echarts from 'echarts'
-import { useEffect, useId, useRef, } from 'react'
+import { useEffect } from 'react'
 import type { EChartsOption, TooltipComponentFormatterCallbackParams } from 'echarts'
-import { useChartTooltipCarousel } from '@/hooks/useChartCarousel';
+import { useChartTooltipCarousel } from '@/hooks/useChartCarousel'
+import { useChartLifeCycle } from '@/hooks/useChartLifeCycle'
 
 interface Props {
   className?: string
@@ -10,42 +10,14 @@ interface Props {
 }
 
 export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
-  const chartId = useId()
-  const chartDomRef = useRef<HTMLDivElement>(null)
-  const chartInstance = useRef<echarts.ECharts | null>(null)
-
-  // 1. 仅负责在挂载时初始化，卸载时销毁
-  useEffect(() => {
-    if (!chartDomRef.current) {
-      return
-    }
-    // 优先获取已存在的实例，避免重复初始化
-    // 1. 检查该 DOM 是否已经初始化过 ECharts 实例
-    // 2. 如果没有，则进行初始化
-    chartInstance.current = echarts.getInstanceByDom(chartDomRef.current) ??
-      echarts.init(chartDomRef.current)
-
-    const handleResize = () => {
-      if (chartInstance.current && !chartInstance.current?.isDisposed()) {
-        chartInstance.current?.resize?.()
-      }
-    }
-    window.addEventListener('resize', handleResize)
-
-    // 组件卸载或重新执行 effect 前销毁实例
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      chartInstance.current?.dispose()
-      chartInstance.current = null
-    }
-  }, [])
+  const { chartId, chartDomRef, chartInstanceRef } = useChartLifeCycle()
 
   // 2. 负责监听 chartData 变化重新渲染图表
   useEffect(() => {
     const xItems = chartData?.map((item) => item.x)
     const yItems = chartData?.map((item) => item.y)
     // 如果组件已经卸载，则不执行下一步渲染，防止严格模式（Strict Mode） 触发组件双重渲染
-    if (!chartInstance.current || chartInstance.current?.isDisposed()) {
+    if (!chartInstanceRef.current || chartInstanceRef.current?.isDisposed()) {
       return
     }
 
@@ -111,13 +83,12 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
     }
 
     // 3. 渲染图表数据
-    chartInstance.current.setOption(option)
-
-  }, [chartData])
+    chartInstanceRef.current.setOption(option)
+  }, [chartData, chartInstanceRef])
 
   // 轮播 tooltip
   useChartTooltipCarousel({
-    chartInstance,
+    chartInstance: chartInstanceRef,
     chartDomRef,
     dataLength: chartData?.length ?? 0,
     initDelay: 800,
