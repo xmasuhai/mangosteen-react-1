@@ -3,10 +3,11 @@ import { useEffect } from 'react'
 import type { EChartsOption, TooltipComponentFormatterCallbackParams } from 'echarts'
 import { useChartTooltipCarousel } from '@/hooks/useChartCarousel'
 import { useChartLifeCycle } from '@/hooks/useChartLifeCycle'
+import type { lineChartsItem } from '@/modules/statistics/chartData'
 
 interface Props {
   className?: string
-  chartData?: { x: number | string; y: number }[]
+  chartData?: lineChartsItem[]
 }
 
 export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
@@ -81,7 +82,6 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
         },
       ],
     }
-
     // 3. 渲染图表数据
     chartInstanceRef.current.setOption(option)
   }, [chartData, chartInstanceRef])

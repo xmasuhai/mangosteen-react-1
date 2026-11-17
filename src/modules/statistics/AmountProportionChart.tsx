@@ -1,12 +1,13 @@
 import { useChartTooltipCarousel } from '@/hooks/useChartCarousel'
 import { useChartLifeCycle } from '@/hooks/useChartLifeCycle'
+import type { pieChartsItem } from '@/modules/statistics/chartData'
 import type { EChartsOption } from 'echarts'
 import type { OptionDataValue } from 'echarts/types/src/util/types.js'
 import { useEffect } from 'react'
 
 interface Props {
   className?: string
-  chartData?: { name: string; value: number }[]
+  chartData?: pieChartsItem[]
 }
 
 export const AmountProportionChart: React.FC<Props> = ({ className, chartData }) => {
