@@ -65,6 +65,7 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
               { value: 'incomes', label: '收入' },
             ],
             hasErrorPlaceholder: false,
+            maxWidth: '12em',
           }}
         />
       </div>

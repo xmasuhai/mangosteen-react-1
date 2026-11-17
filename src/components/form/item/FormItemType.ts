@@ -18,6 +18,7 @@ export type CommonFormItemTypeProps = {
   onChange?: (value: string) => void
   onBlur?: () => void
   onFocus?: () => void
+  maxWidth?: string
 }
 
 export type FormItemTypeProps<T extends FormItemType, U = string> = T extends 'input'

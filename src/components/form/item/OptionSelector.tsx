@@ -18,6 +18,7 @@ interface Props<T> {
   onChange?: (value: T) => void
   onBlur?: () => void
   onFocus?: () => void
+  maxWidth?: string
 }
 
 export const OptionSelector = <T extends string | number>({
@@ -34,6 +35,7 @@ export const OptionSelector = <T extends string | number>({
   onChange,
   onBlur,
   onFocus,
+  maxWidth = '12em',
 }: Props<T>) => {
   const labelForId = labelFor && `form-item-select-${labelFor}`
   const labelChildren = (
@@ -51,7 +53,7 @@ export const OptionSelector = <T extends string | number>({
     onChange?.(e.target.value as T)
   }
   return (
-    <section className={cn('form-item-sc', className)}>
+    <section style={{ maxWidth }} className={cn('form-item-sc', className)}>
       <div className={cn('form-item-content-sc', ifOneLineLabel ? 'flex-row' : 'flex-col')}>
         <span className="flex items-center">{label && labelTag}</span>
         <select
