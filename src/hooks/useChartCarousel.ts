@@ -81,6 +81,7 @@ export function useChartTooltipCarousel({
       stopCarousel()
       // 只有 1 条数据时展示第一项即可，无需开启循环定时器
       if (dataLength <= 1) return
+      chart.dispatchAction({ type: 'downplay', seriesIndex })
 
       timerRef.current = setInterval(() => {
         // 轮播逻辑精髓 取余 实现循环
@@ -119,7 +120,7 @@ export function useChartTooltipCarousel({
 
     // 5. 页面切后台/锁屏时自动暂停，节省移动端性能
     const handleVisibilityChange = () => {
-        document.hidden ? stopCarousel() : startCarousel();
+      document.hidden ? stopCarousel() : startCarousel()
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
 

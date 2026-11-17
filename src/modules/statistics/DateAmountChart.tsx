@@ -38,12 +38,12 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
           const dataValue = data === null ? '无数据' : `¥ ${data}元`
           return `
                 <div>
-                  <div>
+                  <div style="font-size:14px;color:#6d6e73;font-weight:400;margin-left:2px">
                     ${marker} ${seriesName}
                   </div>
-                  <div>
-                    <span>${label}</span>
-                    <span>${dataValue}</span>
+                  <div style="font-size:14px;color:#6d6e73;">
+                    <span style="" >${label}</span>
+                    <span style="float:right;margin-left:20px;font-weight:900" >${dataValue}</span>
                   </div>
                 </div>
               `
