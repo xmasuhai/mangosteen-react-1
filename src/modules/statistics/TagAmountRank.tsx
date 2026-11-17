@@ -1,3 +1,4 @@
+import { Money } from '@/components/Money'
 import type { RankChartItem } from '@/modules/statistics/chartData'
 import { cn } from 'cn'
 
@@ -39,7 +40,7 @@ export const TagAmountRank: React.FC<Props> = ({ className, chartData }) => {
                   <span>
                     {tag.name} - {percent}%
                   </span>
-                  <span> ¥ {amount / 100}</span>
+                  <Money amount={amount} />
                 </div>
 
                 {/* 进度条 */}
