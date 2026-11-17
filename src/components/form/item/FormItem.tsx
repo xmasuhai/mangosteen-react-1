@@ -10,7 +10,9 @@ interface Props<T extends FormItemType, U extends string | number = string> {
   formItemTypeProps: FormItemTypeProps<T, U>
 }
 
-export function FormItem<T extends FormItemType, U extends string | number = string>(props: Props<T, U>) {
+export function FormItem<T extends FormItemType, U extends string | number = string>(
+  props: Props<T, U>
+) {
   const { className, formItemType, formItemTypeProps } = props
   const renderContent = () => {
     // TS 在 switch (formItemType) 中不会把泛型 T 缩窄为字面量
@@ -20,11 +22,16 @@ export function FormItem<T extends FormItemType, U extends string | number = str
     switch (formItemType) {
       case 'input':
         return (
-          <InputText {...(formItemTypeProps as FormItemTypeProps<'input'>)} className={className} />
+          <InputText
+            type={formItemType}
+            {...(formItemTypeProps as FormItemTypeProps<'input'>)}
+            className={className}
+          />
         )
       case 'emoji':
         return (
           <InputEmoji
+            type={formItemType}
             {...(formItemTypeProps as FormItemTypeProps<'emoji'>)}
             className={className}
           />
@@ -32,6 +39,7 @@ export function FormItem<T extends FormItemType, U extends string | number = str
       case 'validateCodeSend':
         return (
           <InputValidateCodeSend
+            type={formItemType}
             {...(formItemTypeProps as FormItemTypeProps<'validateCodeSend'>)}
             className={className}
           />
@@ -39,6 +47,7 @@ export function FormItem<T extends FormItemType, U extends string | number = str
       case 'optionSelector':
         return (
           <OptionSelector<U>
+            type={formItemType}
             {...(formItemTypeProps as FormItemTypeProps<'optionSelector', U>)}
             className={className}
           />

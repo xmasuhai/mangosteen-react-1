@@ -1,7 +1,5 @@
 export type FormItemType = 'input' | 'emoji' | 'validateCodeSend' | 'optionSelector'
-
 export type InputType = 'text' | 'password' | 'email' | 'number'
-
 export interface SelectorOption<U = string> {
   label: string
   value: U
@@ -41,3 +39,18 @@ export type FormItemTypeProps<T extends FormItemType, U = string> = T extends 'i
             onChange?: (value: U) => void
           }
         : never
+
+// 兼容互斥类型
+export type FormItemTypePropsXxx = CommonFormItemTypeProps &
+  (
+    | { type: 'input'; inputType: InputType }
+    | { type: 'emoji'; value: number; onChange: (sign_in: number, sign: string) => void }
+    | { type: 'validateCodeSend'; onClickSendCode?: () => void }
+    | {
+        type: 'optionSelector'
+        ifOneLineLabel?: boolean
+        value: string
+        options: SelectorOption[]
+        onChange: (value: string) => void
+      }
+  )

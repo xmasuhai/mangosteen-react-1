@@ -1,6 +1,8 @@
 import { cn } from 'cn'
 
 interface Props {
+  // 仅用作区分 FormItemType 类型
+  type?: 'validateCodeSend'
   className?: string
   value?: string
   errorHint?: string

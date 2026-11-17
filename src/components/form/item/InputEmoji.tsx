@@ -5,6 +5,8 @@ import { cn } from 'cn'
 import { useEffect } from 'react'
 
 interface Props {
+  // 仅用作区分 FormItemType 类型
+  type?: 'emoji'
   className?: string
   hasLabelColon?: boolean
   errorHint?: string

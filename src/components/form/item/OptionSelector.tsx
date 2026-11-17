@@ -2,6 +2,8 @@ import type { SelectorOption } from '@/components/form/item/FormItemType'
 import { cn } from 'cn'
 
 interface Props<T> {
+  // 仅用作区分 FormItemType 类型
+  type?: 'optionSelector'
   className?: string
   // for 属性，用于内部 input 标签 id 属性联动
   labelFor?: string
@@ -58,7 +60,7 @@ export const OptionSelector = <T extends string | number>({
           onChange={handleChange}
           onBlur={onBlur}
           onFocus={onFocus}
-          class={cn(
+          className={cn(
             'where:(text-1em)',
             'grow-1 min-h-[var(--input-min-height)] p-x-.5em',
             'b-1 rounded-[var(--input-radius)] shadow-[inset_0_0_3px_var(--input-shadow)]',

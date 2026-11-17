@@ -2,6 +2,8 @@ import type { InputType } from '@/components/form/item/FormItemType'
 import { cn } from 'cn'
 
 interface Props {
+  // 仅用作区分 FormItemType 类型
+  type?: 'input'
   className?: string
   ifUseLabelTag?: boolean
   // for 属性，用于内部 input 标签 id 属性联动
