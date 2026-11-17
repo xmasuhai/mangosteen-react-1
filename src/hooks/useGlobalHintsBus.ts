@@ -1,6 +1,6 @@
 import { throttledFn } from '@/lib/helpers/throttledFn'
 import { createNanoEvents } from 'nanoevents'
-import { SweetAlertOptions } from 'sweetalert2'
+import type { SweetAlertOptions } from 'sweetalert2'
 
 type HintType = 'warning' | 'error' | 'success' | 'info' | 'question'
 type HintPosition =

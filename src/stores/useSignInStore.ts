@@ -8,4 +8,5 @@ const genInitError = () => ({ email: [], code: [] })
 export const useSignInStore = createFormStore<SignInFormData, SignInFormData>({
   genInitData,
   genInitError,
+  mode: 'create',
 })

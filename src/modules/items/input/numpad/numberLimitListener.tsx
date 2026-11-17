@@ -1,5 +1,6 @@
 import type { HintPayload } from '@/hooks/useGlobalHintsBus'
-import SwAl, { SweetAlertOptions } from 'sweetalert2'
+import SwAl from 'sweetalert2'
+import type { SweetAlertOptions } from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 export const Notify = withReactContent(SwAl)
