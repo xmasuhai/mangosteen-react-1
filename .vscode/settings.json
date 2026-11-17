@@ -112,5 +112,15 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "TypeScriptTeam.native-preview"
-  }
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "TypeScriptTeam.native-preview"
+  },
+  "tsLspRust.enable": true,
+  "tsimporter.filesToExclude": [
+    ".idea",
+    ".vscode",
+    "node_modules",
+    "dist"
+  ]
 }
