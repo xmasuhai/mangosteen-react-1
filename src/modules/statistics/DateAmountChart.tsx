@@ -24,14 +24,22 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
     chartInstance.current = echarts.getInstanceByDom(chartDomRef.current) ??
       echarts.init(chartDomRef.current)
 
+    const handleResize = () => {
+      if (!chartInstance.current || !chartInstance.current?.isDisposed()) {
+        chartInstance.current?.resize?.()
+      }
+    }
+    window.addEventListener('resize', handleResize)
+
     // 组件卸载或重新执行 effect 前销毁实例
     return () => {
+      window.removeEventListener('resize', handleResize)
       chartInstance.current?.dispose()
       chartInstance.current = null
     }
   }, [])
 
-  // 负责监听 option 变化重新渲染图表
+  // 2. 负责监听 chartData 变化重新渲染图表
   useEffect(() => {
     const xItems = chartData?.map((item) => item.x)
     const yItems = chartData?.map((item) => item.y)
@@ -101,7 +109,7 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
       ],
     }
 
-    // 3. 渲染你的图表数据
+    // 3. 渲染图表数据
     chartInstance.current.setOption(option)
 
     // 记录定时器 ID，并在回调中再次检查实例状态
