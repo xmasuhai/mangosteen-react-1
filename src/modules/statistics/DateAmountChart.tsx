@@ -2,6 +2,7 @@ import { cn } from 'cn'
 import * as echarts from 'echarts'
 import { useEffect, useId, useRef, } from 'react'
 import type { EChartsOption, TooltipComponentFormatterCallbackParams } from 'echarts'
+import { useChartTooltipCarousel } from '@/hooks/useChartCarousel';
 
 interface Props {
   className?: string
@@ -25,7 +26,7 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
       echarts.init(chartDomRef.current)
 
     const handleResize = () => {
-      if (!chartInstance.current || !chartInstance.current?.isDisposed()) {
+      if (chartInstance.current && !chartInstance.current?.isDisposed()) {
         chartInstance.current?.resize?.()
       }
     }
@@ -112,21 +113,16 @@ export const DateAmountChart: React.FC<Props> = ({ className, chartData }) => {
     // 3. 渲染图表数据
     chartInstance.current.setOption(option)
 
-    // 记录定时器 ID，并在回调中再次检查实例状态
-    const timer = setTimeout(() => {
-      if (chartInstance.current?.isDisposed() || xItems?.length === 0) {
-        return
-      }
-      chartInstance.current?.dispatchAction({
-        type: 'showTip',
-        // 轴触发类型（trigger: 'axis'）时使用:
-        seriesIndex: 0, // 第几个 series（通常为 0）
-        dataIndex: 0, // 显示第一项（索引从 0 开始）
-      })
-    }, 800)
-
-    return () => clearTimeout(timer)
   }, [chartData])
+
+  // 轮播 tooltip
+  useChartTooltipCarousel({
+    chartInstance,
+    chartDomRef,
+    dataLength: chartData?.length ?? 0,
+    initDelay: 800,
+    interval: 1800,
+  })
 
   return <div ref={chartDomRef} id={chartId} className={cn(className)} />
 }
