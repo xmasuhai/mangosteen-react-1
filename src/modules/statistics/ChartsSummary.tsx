@@ -3,6 +3,9 @@ import { AmountProportionChart } from '@/modules/statistics/AmountProportionChar
 import { DateAmountChart } from '@/modules/statistics/DateAmountChart'
 import { cn } from 'cn'
 import type { RankChartItem, lineChartsItem, pieChartsItem } from '@/modules/statistics/chartData'
+import { FormItem } from '@/components/form/item/FormItem'
+import { useState } from 'react'
+import type { TabKind } from '@/global'
 
 interface Props {
   className?: string
@@ -40,9 +43,27 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
     { id: 3, tag: { sign: '💵', name: '奖金', tag_id: 3 }, amount: 12323, percent: 33 },
   ]
 
+  const [kind, setKind] = useState<TabKind>('expenses')
+
   return (
     <div className={className}>
       {/* 类型选择器 */}
+      <FormItem
+        formItemType="optionSelector"
+        formItemTypeProps={{
+          label: '类型',
+          labelFor: 'kind',
+          placeholder: '请选择类型',
+          value: kind,
+          onChange: (value: TabKind) => setKind(value),
+          // onBlur: () => {},
+          // onFocus: () => {},
+          options: [
+            { value: 'expenses', label: '支出' },
+            { value: 'incomes', label: '收入' },
+          ],
+        }}
+      />
 
       {/* 折线图 */}
       <DateAmountChart chartData={lineChartItems} className={cn('h-160px px-.5em')} />

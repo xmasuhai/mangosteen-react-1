@@ -2,6 +2,8 @@ import { InputEmoji } from '@/components/form/item/InputEmoji'
 import { InputText } from '@/components/form/item/InputText'
 import { InputValidateCodeSend } from '@/components/form/item/InputValidateCodeSend'
 import type { FormItemType, FormItemTypeProps } from '@/components/form/item/FormItemType.ts'
+import { OptionSelector } from '@/components/form/item/OptionSelector'
+import type { TabKind } from '@/global'
 
 interface Props<T extends FormItemType> {
   className?: string
@@ -35,6 +37,13 @@ export const FormItem = <T extends FormItemType>({
         return (
           <InputValidateCodeSend
             {...(formItemTypeProps as FormItemTypeProps<'validateCodeSend'>)}
+            className={className}
+          />
+        )
+      case 'optionSelector':
+        return (
+          <OptionSelector
+            {...(formItemTypeProps as FormItemTypeProps<'optionSelector', TabKind>)}
             className={className}
           />
         )

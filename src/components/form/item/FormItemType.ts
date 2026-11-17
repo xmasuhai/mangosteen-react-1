@@ -1,6 +1,12 @@
-export type FormItemType = 'input' | 'emoji' | 'validateCodeSend'
+export type FormItemType = 'input' | 'emoji' | 'validateCodeSend' | 'optionSelector'
 
 export type InputType = 'text' | 'password' | 'email' | 'number'
+
+export interface SelectorOption<U = string> {
+  label: string
+  value: U
+  disabled?: boolean
+}
 
 export type CommonFormItemTypeProps = {
   label?: string
@@ -16,7 +22,7 @@ export type CommonFormItemTypeProps = {
   onFocus?: () => void
 }
 
-export type FormItemTypeProps<T extends FormItemType> = T extends 'input'
+export type FormItemTypeProps<T extends FormItemType, U = string> = T extends 'input'
   ? CommonFormItemTypeProps & { type?: 'input'; inputType: InputType }
   : T extends 'emoji'
     ? Omit<CommonFormItemTypeProps, 'value' | 'onChange'> & {
@@ -26,4 +32,11 @@ export type FormItemTypeProps<T extends FormItemType> = T extends 'input'
       }
     : T extends 'validateCodeSend'
       ? CommonFormItemTypeProps & { type?: 'validateCodeSend'; onClickSendCode?: () => void }
-      : never
+      : T extends 'optionSelector'
+        ? Omit<CommonFormItemTypeProps, 'value' | 'onChange'> & {
+            type?: 'optionSelector'
+            value: U
+            options: SelectorOption<U>[]
+            onChange?: (value: U) => void
+          }
+        : never
