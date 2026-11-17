@@ -81,4 +81,18 @@
   --emoji-nav-text-selected: var(--main);
   // form
   --delete-button-bg: var(--error-color);
+  // tag
+  --tag-bg: #efefef;
+  // item
+  --list-tag-text: #333;
+  --list-amount-text: var(--amount-text-color);
+  --list-time-text: var(--date-text-color);
+  --total-bg: #252a43;
+  --total-text: white;
+  --total-income: #fe7275;
+  --total-expenses: #53a867;
+  // 弹出框
+  --dialog-header-text: white;
+  --text-muted: #666;
+  --bar-bg: #ccc;
 }
