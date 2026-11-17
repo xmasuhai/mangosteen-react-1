@@ -3,19 +3,15 @@ import { InputText } from '@/components/form/item/InputText'
 import { InputValidateCodeSend } from '@/components/form/item/InputValidateCodeSend'
 import type { FormItemType, FormItemTypeProps } from '@/components/form/item/FormItemType.ts'
 import { OptionSelector } from '@/components/form/item/OptionSelector'
-import type { TabKind } from '@/global'
 
-interface Props<T extends FormItemType> {
+interface Props<T extends FormItemType, U extends string | number = string> {
   className?: string
   formItemType: T
-  formItemTypeProps: FormItemTypeProps<T>
+  formItemTypeProps: FormItemTypeProps<T, U>
 }
 
-export const FormItem = <T extends FormItemType>({
-  className,
-  formItemType,
-  formItemTypeProps,
-}: Props<T>) => {
+export function FormItem<T extends FormItemType, U extends string | number = string>(props: Props<T, U>) {
+  const { className, formItemType, formItemTypeProps } = props
   const renderContent = () => {
     // TS 在 switch (formItemType) 中不会把泛型 T 缩窄为字面量
     // 因此 formItemTypeProps 仍为联合类型
@@ -42,8 +38,8 @@ export const FormItem = <T extends FormItemType>({
         )
       case 'optionSelector':
         return (
-          <OptionSelector
-            {...(formItemTypeProps as FormItemTypeProps<'optionSelector', TabKind>)}
+          <OptionSelector<U>
+            {...(formItemTypeProps as FormItemTypeProps<'optionSelector', U>)}
             className={className}
           />
         )

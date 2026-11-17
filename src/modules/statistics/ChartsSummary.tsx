@@ -48,22 +48,25 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
   return (
     <div className={className}>
       {/* 类型选择器 */}
-      <FormItem
-        formItemType="optionSelector"
-        formItemTypeProps={{
-          label: '类型',
-          labelFor: 'kind',
-          placeholder: '请选择类型',
-          value: kind,
-          onChange: (value: TabKind) => setKind(value),
-          // onBlur: () => {},
-          // onFocus: () => {},
-          options: [
-            { value: 'expenses', label: '支出' },
-            { value: 'incomes', label: '收入' },
-          ],
-        }}
-      />
+      <div className={cn('form-sc w-full')}>
+        <FormItem
+          formItemType="optionSelector"
+          formItemTypeProps={{
+            label: '类型',
+            labelFor: 'kind',
+            placeholder: '请选择类型',
+            value: kind,
+            onChange: (value: TabKind) => setKind(value),
+            // onBlur: () => {},
+            // onFocus: () => {},
+            options: [
+              { value: 'expenses', label: '支出' },
+              { value: 'incomes', label: '收入' },
+            ],
+            hasErrorPlaceholder: false,
+          }}
+        />
+      </div>
 
       {/* 折线图 */}
       <DateAmountChart chartData={lineChartItems} className={cn('h-160px px-.5em')} />
