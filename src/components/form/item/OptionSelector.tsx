@@ -57,7 +57,7 @@ export const OptionSelector = <T extends string | number>({
           onBlur={onBlur}
           onFocus={onFocus}
           class={cn(
-            'min-h-[var(--input-min-height)] p-x-.5em text-18px',
+            'grow-1 min-h-[var(--input-min-height)] p-x-.5em text-18px',
             'b-1 rounded-[var(--input-radius)] shadow-[inset_0_0_3px_var(--input-shadow)]',
             errorHint ? 'b-[var(--error-color)]' : 'b-[var(--input-border-color)]'
           )}
@@ -68,10 +68,10 @@ export const OptionSelector = <T extends string | number>({
             </option>
           ))}
         </select>
-        {(errorHint || hasErrorPlaceholder) && (
-          <span className="form-item-error-sc w-fit buzz">{errorHint ?? <>&nbsp;</>}</span>
-        )}
       </div>
+      {(errorHint || hasErrorPlaceholder) && (
+        <span className="form-item-error-sc w-fit buzz">{errorHint ?? <>&nbsp;</>}</span>
+      )}
     </section>
   )
 }
