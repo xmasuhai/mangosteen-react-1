@@ -26,11 +26,11 @@ export const TagAmountRank: React.FC<Props> = ({ className, chartData }) => {
               {/* 图标 */}
               <div
                 className={cn(
-                  'sign size-3em rounded-[50%] bg-[var(--tag-bg)]',
-                  'border-1 border-color-[oklch(70%_0.15_calc(var(--sibling-idx)*70))]',
+                  'sign size-3em rounded-[50%]',
+                  'bg-[var(--tag-bg)] border-1 border-color-[oklch(70%_0.15_calc(var(--sibling-idx)*70))]',
                   'grow-0 shrink-0 flex items-center justify-center'
                 )}>
-                {tag.sign}
+                <span className="text-24px flip-360">{tag.sign}</span>
               </div>
 
               {/* 名称-占比-金额 */}
@@ -39,7 +39,7 @@ export const TagAmountRank: React.FC<Props> = ({ className, chartData }) => {
                   <span>
                     {tag.name} - {percent}%
                   </span>
-                  <span> ¥ {amount}</span>
+                  <span> ¥ {amount / 100}</span>
                 </div>
 
                 {/* 进度条 */}
