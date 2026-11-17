@@ -15,7 +15,7 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
   console.log('%c⧭', 'color: #731d1d', startDate)
   console.log('_______________________ChartsSummary')
 
-  const items = [
+  const lineChartItems = [
     { date: '2026-12-01', amount: 1200 },
     { date: '2026-12-02', amount: 2300 },
     { date: '2026-12-03', amount: 2300 },
@@ -23,16 +23,24 @@ export const ChartsSummary: React.FC<Props> = ({ className, startDate, endDate }
     { date: '2026-12-05', amount: 2300 },
     { date: '2026-12-06', amount: 2300 },
     { date: '2026-12-30', amount: 1800 },
-  ].map((item) =>
-    ({ x: item.date, y: item.amount / 100 }))
+  ].map((item) => ({ x: item.date, y: item.amount / 100 }))
+
+  const pieChartItems = [
+    { amount: 10480, name: 'Search Engine' },
+    { amount: 7350, name: 'Direct' },
+    { amount: 5800, name: 'Email' },
+    { amount: 4840, name: 'Union Ads' },
+    { amount: 3000, name: 'Video Ads' },
+  ].map((item) => ({ name: item.name, value: item.amount / 100 }))
+
   return (
     <div className={className}>
       {/* 类型选择器 */}
       {/* 折线图 */}
-      <DateAmountChart chartData={items} className={cn('h-150px px-.5em')} />
+      <DateAmountChart chartData={lineChartItems} className={cn('h-150px px-.5em')} />
 
       {/* 饼图 */}
-      <AmountProportionChart />
+      <AmountProportionChart chartData={pieChartItems} className={cn('h-240px px-.5em')} />
 
       {/* 排名条 */}
       <AmountProgress />
