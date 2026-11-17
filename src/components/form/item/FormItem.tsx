@@ -1,7 +1,7 @@
+import type { FormItemType, FormItemTypeProps } from '@/components/form/item/FormItemType.ts'
 import { InputEmoji } from '@/components/form/item/InputEmoji'
 import { InputText } from '@/components/form/item/InputText'
 import { InputValidateCodeSend } from '@/components/form/item/InputValidateCodeSend'
-import type { FormItemType, FormItemTypeProps } from '@/components/form/item/FormItemType.ts'
 import { OptionSelector } from '@/components/form/item/OptionSelector'
 
 interface Props<T extends FormItemType, U extends string | number = string> {
