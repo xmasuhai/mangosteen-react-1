@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 rm -rf dist
-pnpm build
+pnpm build --base='/mangosteen-react-1-preview/'
 cd dist
 git init
 git add .
