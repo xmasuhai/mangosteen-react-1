@@ -123,5 +123,14 @@
     ".vscode",
     "node_modules",
     "dist"
-  ]
+  ],
+  "scssAliasJump.aliases": {
+    "@": "${workspaceFolder}/src"
+  },
+  "vscodeScssAlias.aliases": {
+    "@": "src"
+  },
+  "path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src"
+  }
 }
