@@ -15,11 +15,6 @@ export const root = ReactDOM.createRoot(rootElement)
 
 root.render(
   <React.StrictMode>
-    <RouterProvider
-      future={{
-        v7_startTransition: true,
-      }}
-      router={router}
-    />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )
