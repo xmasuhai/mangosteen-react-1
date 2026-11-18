@@ -20,18 +20,18 @@
 ```bash
 npm install -g corepack@latest &&
 corepack enable &&
-corepack prepare pnpm@12.21.0 --activate
+corepack prepare pnpm@12.22.0 --activate
 # 在项目路径下执行
-corepack use pnpm@12.21.0
+corepack use pnpm@12.22.0
 ```
 
 ### 3. 包管理器 `pnpm` 后续升级
 
-- 提示有新版本的 `pnpm@12.21.0`
+- 提示有新版本的 `pnpm@12.22.0`
 - 在项目内运行以下命令
 
 ```bash
-corepack use pnpm@12.21.0
+corepack use pnpm@12.22.0
 ```
 
 ## 📦 技术栈
@@ -42,9 +42,10 @@ corepack use pnpm@12.21.0
 
 | 依赖                                                                                  | 版本     | 用途                         |
 | ------------------------------------------------------------------------------------- | -------- | ---------------------------- |
-| [react](https://react.dev/)                                                           | 18.3.1   | UI 框架                      |
-| [react-dom](https://react.dev/)                                                       | 18.3.1   | React DOM 渲染               |
-| [react-compiler-runtime](https://react.dev/)                                          | 1.0.0    | React Compiler 运行时        || [react-router-dom](https://reactrouter.com/)                                          | 6.30.6   | 路由管理                     |
+| [react](https://react.dev/)                                                           | 19.3.1   | UI 框架                      |
+| [react-dom](https://react.dev/)                                                       | 19.3.1   | React DOM 渲染               |
+| [react-compiler-runtime](https://react.dev/)                                          | 1.0.0    | React Compiler 运行时        |
+| [react-router-dom](https://reactrouter.com/)                                          | 7.18.5   | 路由管理                     |
 | [zustand](https://zustand-demo.pmnd.rs/)                                              | 5.1.0    | 轻量级全局状态管理           |
 | [swr](https://swr.vercel.app/)                                                        | 2.5.1    | 数据请求与缓存               |
 | [axios](https://axios-http.com/)                                                      | 1.21.1   | HTTP 客户端                  |
@@ -52,6 +53,7 @@ corepack use pnpm@12.21.0
 | [@react-spring/web](https://www.react-spring.dev/)                                    | 10.1.2   | 物理动画                     |
 | [@reactuses/core](https://github.com/childrentime/reactuse)                           | 6.6.1    | React Hooks 工具库           |
 | [ahooks](https://ahooks.js.org/)                                                      | 3.11.0   | React Hooks 工具库           |
+| [echarts](https://echarts.apache.org/)                                                | 6.1.0    | 图表库                       |
 | [cn](https://github.com/lukeed/cn)                                                    | 0.5.2    | 类名合并工具                 |
 | [nanoevents](https://github.com/ai/nanoevents)                                        | 10.0.0   | 轻量级事件总线               |
 | [sweetalert2](https://sweetalert2.github.io/)                                         | 11.26.25 | 弹窗组件                     |
@@ -75,18 +77,17 @@ corepack use pnpm@12.21.0
 | [@rolldown/plugin-babel](https://github.com/rolldown/rolldown)                                     | 0.3.1   | Rolldown Babel 插件          |
 | [babel-plugin-react-compiler](https://react.dev/)                                                  | 1.0.0   | React Compiler Babel 插件    |
 | [typescript](https://www.typescriptlang.org/)                                                      | 7.0.2   | 类型检查                     |
-| [@types/react](https://www.typescriptlang.org/)                                                    | 18.3.31 | React TypeScript 类型定义    |
-| [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
-| [@types/react-dom](https://www.typescriptlang.org/)                                                | 18.3.7  | ReactDOM TypeScript 类型定义 |
+| [@types/react](https://www.typescriptlang.org/)                                                    | 19.3.0  | React TypeScript 类型定义    |
+| [@types/react-dom](https://www.typescriptlang.org/)                                                | 19.3.0  | ReactDOM TypeScript 类型定义 |
 | [eslint](https://eslint.org/)                                                                      | 10.15.0 | 代码检查                     |
 | [@antfu/eslint-config](https://github.com/antfu/eslint-config)                                     | 10.0.0  | Antfu ESLint 配置            |
-| [@eslint-react/eslint-plugin](https://github.com/eslint-react/eslint-plugin)                        | 5.30.3  | React ESLint 规则插件        |
-| [@typescript-eslint/eslint-plugin](https://www.typescriptlang.org/)                                 | 8.72.2  | TypeScript ESLint 规则插件   |
-| [@typescript-eslint/parser](https://www.typescriptlang.org/)                                       | 8.72.2  | TypeScript ESLint 解析器     |
+| [@eslint-react/eslint-plugin](https://github.com/eslint-react/eslint-plugin)                        | 5.30.4  | React ESLint 规则插件        |
+| [@typescript-eslint/eslint-plugin](https://www.typescriptlang.org/)                                 | 8.73.0  | TypeScript ESLint 规则插件   |
+| [@typescript-eslint/parser](https://www.typescriptlang.org/)                                       | 8.73.0  | TypeScript ESLint 解析器     |
 | [eslint-plugin-react-hooks](https://github.com/jsx-eslint/eslint-plugin-react-hooks)                | 7.1.1   | React Hooks ESLint 规则      |
 | [eslint-plugin-react-refresh](https://github.com/tylingsoft/eslint-plugin-react-refresh)            | 0.5.8   | React Refresh ESLint 规则    |
-| [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.93.0  | 代码检查                     |
-| [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.78.0  | 代码格式化                   |
+| [oxlint](https://oxc.rs/docs/guide/usage/linter.html)                                              | 1.94.0  | 代码检查                     |
+| [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)                                            | 0.79.0  | 代码格式化                   |
 | [sass-embedded](https://sass-lang.com/)                                                            | 1.108.2 | Sass 编译器                  |
 | [stylelint](https://stylelint.io/)                                                                 | 18.0.0  | 样式代码检查                 |
 | [stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss) | 18.0.0  | SCSS 样式检查配置            |
@@ -98,7 +99,7 @@ corepack use pnpm@12.21.0
 
 ### 包管理器与运行时要求
 
-- **包管理器**：`pnpm >=12.21.0`（`packageManager: pnpm@12.21.0+sha512...`）
+- **包管理器**：`pnpm >=12.18.0`（`packageManager: pnpm@12.22.0+sha512...`）
 - **Node.js**：`>=26.13.0`
 
 ## 📦 依赖安装与启动

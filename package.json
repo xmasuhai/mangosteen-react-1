@@ -3,7 +3,7 @@
   "license": "MIT",
   "repository": "https://github.com/xmasuhai/mangosteen-react-1",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "scripts": {
     "dev": "vite --host",
