@@ -21,6 +21,11 @@ export default defineConfig(({ command }: ConfigEnv) => ({
     }),
     UnoCSS(),
     jsxScoped({ scopedIdAttributeName: 'scopedid' }),
+    react(),
+    babel({
+      presets: [reactCompilerPreset({ target: '18' })],
+    }),
+
     mockDevServerPlugin({
       dir: './src/mock',
       enabled: command === 'serve',
@@ -28,16 +33,17 @@ export default defineConfig(({ command }: ConfigEnv) => ({
       awaitInitialLoad: command === 'serve',
       exclude: ['**/*.d.{js,ts,cjs,mjs,json,json5}'],
     }),
-    react(),
-    babel({
-      presets: [reactCompilerPreset({ target: '18' })],
-    }),
+
     consoleBanner({
       enable: command === 'build',
       text: 'xmasuhai.xyz',
       font: 'big', // 大小写不敏感，也可用 "Big"、"ANSI Shadow"
       color: '#476EE3',
       badges: [
+        {
+          label: '山竹记账-react版',
+          url: 'http://xmasuhai.github.io/mangosteen-react-1-publish/index.html',
+        },
         { label: '徐帅的博客', url: 'https://xmasuhai.xyz' },
         { label: '徐帅${year}简历', url: 'https://xmasuhai.xyz/my-latest-resume/' },
       ],
@@ -64,9 +70,9 @@ export default defineConfig(({ command }: ConfigEnv) => ({
         importers: [
           {
             findFileUrl(url) {
-              if (!url.startsWith('@/')) return null;
-              return new URL(url.substring(2), pathToFileURL('./src'));
-            }
+              if (!url.startsWith('@/')) return null
+              return new URL(url.substring(2), pathToFileURL('./src'))
+            },
           },
         ],
       },
