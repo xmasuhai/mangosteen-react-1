@@ -22,6 +22,17 @@ export default defineConfig({
     }),
     presetTypography(),
   ],
+  preflights: [
+    {
+      getCSS: () => `
+        @property --sibling-idx {
+          syntax: '<integer>'; /* 核心：限制为整数类型，迫使浏览器立即求值 */
+          inherits: true;      /* 允许向下继承计算后的结果 */
+          initial-value: 1;
+        }
+      `,
+    },
+  ],
   transformers: [
     // 支持 where:(a b c) 这种分组写法
     transformerVariantGroup(),
@@ -60,27 +71,6 @@ export default defineConfig({
       },
     ],
   ],
-  variants: [
-    // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
-    (matcher) => {
-      if (!matcher.startsWith('where:')) return matcher
-      return {
-        matcher: matcher.slice(6),
-        selector: (s) => `:where(${s})`,
-      }
-    },
-  ],
-  preflights: [
-    {
-      getCSS: () => `
-        @property --sibling-idx {
-          syntax: '<integer>'; /* 核心：限制为整数类型，迫使浏览器立即求值 */
-          inherits: true;      /* 允许向下继承计算后的结果 */
-          initial-value: 1;
-        }
-      `,
-    },
-  ],
   shortcuts: {
     // 将 UnoCSS 的原子类映射到你 SCSS 里定义好的 .animation-rainbow 类
     rainbow: 'animation-rainbow',
@@ -105,4 +95,14 @@ export default defineConfig({
     ),
     'form-btn-sc': cn('primary-btn text-18px'),
   },
+  variants: [
+    // where:xxx -> :where(.where\:xxx) { ... }，优先级 0,0,0
+    (matcher) => {
+      if (!matcher.startsWith('where:')) return matcher
+      return {
+        matcher: matcher.slice(6),
+        selector: (s) => `:where(${s})`,
+      }
+    },
+  ],
 })
