@@ -10,7 +10,7 @@
 
 请确保你的本地 Node.js 版本符合项目要求：
 
-- **要求版本**：`>=26.13.0`
+- **要求版本**：`>=26.13.1`
 - **检查命令**：`node -v`
 
 ### 2. 开启官方 Corepack
@@ -67,7 +67,7 @@ corepack use pnpm@12.22.0
 | [vite](https://vitejs.dev/)                                                                        | 8.3.8   | 构建工具与开发服务器         |
 | [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)                                | 6.3.0   | Vite React 插件              |
 | [@10coding/vite-plugin-jsx-scoped](https://github.com/10coding/vite-plugin-jsx-scoped)             | 0.6.0   | Vite JSX 作用域插件          |
-| [vite-plugin-console-banner](https://github.com/xmasuhai/vite-plugin-console-banner)               | 0.1.2   | 构建控制台横幅插件           |
+| [vite-plugin-console-banner](https://github.com/xmasuhai/vite-plugin-console-banner)               | 0.1.4   | 构建控制台横幅插件           |
 | [vite-plugin-mock-dev-server](https://github.com/xmasuhai/vite-plugin-mock-dev-server)             | 2.7.1   | Mock 开发服务器插件          |
 | [unocss](https://unocss.dev/)                                                                      | 66.13.0 | 原子化 CSS 引擎              |
 | [@unocss/vite](https://unocss.dev/)                                                                | 66.13.0 | UnoCSS Vite 插件             |
@@ -99,8 +99,8 @@ corepack use pnpm@12.22.0
 
 ### 包管理器与运行时要求
 
-- **包管理器**：`pnpm >=12.18.0`（`packageManager: pnpm@12.22.0+sha512...`）
-- **Node.js**：`>=26.13.0`
+- **包管理器**：`pnpm >=12.22.0`（`packageManager: pnpm@12.22.0+sha512...`）
+- **Node.js**：`>=26.13.1`
 
 ## 📦 依赖安装与启动
 
