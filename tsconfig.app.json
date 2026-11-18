@@ -1,33 +1,38 @@
 {
+  "include": ["src/**/*", "src/**/*.tsx"],
+  "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "composite": true,
-    "target": "es2023",
+    "target": "es2025",
     "useDefineForClassFields": true,
-    "lib": ["es2023", "DOM", "DOM.Iterable"],
+    "lib": ["ES2025", "DOM", "DOM.Iterable"],
     "module": "esnext",
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowArbitraryExtensions": true,
-    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    /* Linting */
-    "erasableSyntaxOnly": true,
-    "strict": true,
+    // Extra safety for array and object lookups, but may have false positives.
+    "noUncheckedSideEffectImports": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "allowArbitraryExtensions": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    /* Linting */
+    "erasableSyntaxOnly": true,
+    "strict": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     /* 路径别名 */
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "@10coding/vite-plugin-jsx-scoped/client"]
-  },
-  "include": ["src", "src/mock"]
+    "types": ["vite/client", "@10coding/vite-plugin-jsx-scoped/client"],
+    // Specified here to keep it out of the root directory.
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo"
+  }
 }

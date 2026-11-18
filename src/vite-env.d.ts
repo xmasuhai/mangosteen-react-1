@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="@10coding/vite-plugin-jsx-scoped/client" />
 
 // vite-env.d.ts
 declare const __IS_DEV__: boolean

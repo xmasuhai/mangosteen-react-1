@@ -1,6 +1,6 @@
 /* TODO: 使用vite plugin 自动生成类型 */
 
-//
+// 请求资源
 export interface Resource<T> {
   resource: T
 }
