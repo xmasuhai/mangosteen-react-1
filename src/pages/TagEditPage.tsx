@@ -57,7 +57,9 @@ export const TagEditPage: React.FC<Props> = ({ className }) => {
         <TopNav title="标签详情" icon={Icon} />
       </GradientBanner>
 
-      <TagForm mode="edit" submitButtonText="保存" />
+      <main className="h-[calc(var(--safe-screen-height,100vh)-64px)]">
+        <TagForm mode="edit" submitButtonText="保存" />
+      </main>
     </div>
   )
 }

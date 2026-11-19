@@ -5,7 +5,7 @@ import { useEmojiStore } from '@/stores/useEmojiStore'
 import { useTagCreateStore } from '@/stores/useTagCreateStore'
 import { useTagEditStore } from '@/stores/useTagEditStore'
 import { cn } from 'cn'
-import React, { useEffect, type FormEventHandler } from 'react'
+import React, { useEffect, type SubmitEventHandler } from 'react'
 
 interface Props {
   className?: string
@@ -80,7 +80,7 @@ export const TagForm: React.FC<Props> = ({
     clearError('sign')
   }
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     revalidateFormItems<PickedTag>(lastData, tagRules, lastError)
     // 注意过期的闭包 lastData、lastError 都是闭包，不能直接使用，需要用 useSignInStore.getState() 获取最新状态
