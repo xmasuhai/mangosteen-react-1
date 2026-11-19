@@ -26,8 +26,8 @@ export const ItemsPage: React.FC = () => {
 
       <DateRangePicker selectedId={selectedDate} onSelect={setSelectedDate} />
 
-      <main className="max-h-[calc(var(--main-vh,100vh)-112px)]">
-        <div className="relative max-h-[calc(var(--main-vh,100vh)-112px)] flex flex-col">
+      <main className="max-h-[calc(var(--safe-screen-height,100vh)-112px)]">
+        <div className="relative max-h-[calc(var(--safe-screen-height,100vh)-112px)] flex flex-col">
           <ItemsSummary startDate={selectedDate} endDate={selectedDate} />
 
           <ItemsList startDate={selectedDate} endDate={selectedDate} />

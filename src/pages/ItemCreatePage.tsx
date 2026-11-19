@@ -44,7 +44,7 @@ export const ItemCreatePage: React.FC<Props> = ({ className }) => {
         className={cn(
           'grow-1 shrink-1 overflow-hidden',
           '[&>nav>menu>li]:(grow-1 text-center bg-[var(--welcome-card-end)])',
-          'max-h-[calc(var(--main-vh,100vh)-364px)]'
+          'max-h-[calc(var(--safe-screen-height,100vh)-364px)]'
         )}
       />
 
