@@ -7,7 +7,9 @@ import 'virtual:uno.css'
 import 'virtual:svgsprites'
 import vhCheck from 'vh-check'
 
-vhCheck()
+vhCheck({
+  cssVarName: 'vh-offset', // default 注入 --vh-offset
+})
 
 export const rootElement = document.getElementById('root') as HTMLElement
 

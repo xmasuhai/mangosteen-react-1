@@ -1,5 +1,9 @@
 :root {
   --main-vh: min(100svh, 100dvh, 100vh);
+  --safe-screen-height: calc(
+    var(--main-vh, 100vh) - var(--vh-offset, 0px) - env(safe-area-inset-bottom) -
+      env(safe-area-inset-top)
+  );
   --main: #5c33be;
   --main-text: #555;
   --main-light-bg: white;

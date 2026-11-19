@@ -63,13 +63,7 @@ export default defineConfig({
         'scrollbar-width': 'auto',
       }),
     ],
-    [
-      'h-screen',
-      {
-        height:
-          'calc(var(--main-vh, 100vh) - var(--vh-offset, 0px) - env(safe-area-inset-bottom) - env(safe-area-inset-top))',
-      },
-    ],
+    ['h-screen', { height: 'var(--safe-screen-height)' }],
   ],
   shortcuts: {
     // 将 UnoCSS 的原子类映射到你 SCSS 里定义好的 .animation-rainbow 类
