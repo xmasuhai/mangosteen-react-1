@@ -24,8 +24,8 @@
     "noEmit": true,
     /* Linting */
     "erasableSyntaxOnly": true,
-    "strict": true,
     "verbatimModuleSyntax": true,
+    "strict": true,
     "moduleDetection": "force",
     /* 路径别名 */
     "paths": {
