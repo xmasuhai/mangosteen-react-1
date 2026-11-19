@@ -48,9 +48,13 @@ export const ItemCreatePage: React.FC<Props> = ({ className }) => {
         )}
       />
 
-      <section className="grow-0 shrink-0 min-h-[300px]">
+      <main
+        className={cn(
+          'grow-0 shrink-0 min-h-[300px]',
+          'max-h-[calc(var(--safe-screen-height,100vh)-112px)]'
+        )}>
         <InputPad />
-      </section>
+      </main>
     </div>
   )
 }

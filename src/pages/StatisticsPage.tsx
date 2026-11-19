@@ -20,6 +20,7 @@ export const StatisticsPage: React.FC<Props> = ({ className }) => {
       </GradientBanner>
 
       <DateRangePicker selectedId={selectedDate} onSelect={setSelectedDate} />
+
       <main className="h-[calc(var(--safe-screen-height,100vh)-112px)]">
         <ChartsSummary startDate={selectedDate} endDate={selectedDate} />
       </main>
