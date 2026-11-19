@@ -74,7 +74,7 @@ export default defineConfig({
     ),
     disabled: 'bg-[var(--button-bg-default)] pointer-events-none cursor-not-allowed',
     /* 表单相关 */
-    'form-sc': 'px-1em py-.5em flex flex-col gap-y-16px children:(flex flex-col)',
+    'form-sc': 'h-full px-1em py-.5em flex flex-col gap-y-16px children:(flex flex-col)',
     'form-item-sc': 'w-full gap-y-8px where:(flex flex-col)',
     'form-label-sc': 'vertical-mid text-16px block',
     'form-item-content-sc': 'flex w-full gap-x-[1em]',
