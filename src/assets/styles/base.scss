@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: env(safe-area-inset-top) calc(env(safe-area-inset-right)) env(safe-area-inset-bottom) calc(env(safe-area-inset-left));
   height: min(100svh, 100dvh, 100vh);
   transition:
     color 0.5s,
@@ -16,10 +17,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  padding-top: env(safe-area-inset-top);
-  padding-right: calc(env(safe-area-inset-right));
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: calc(env(safe-area-inset-left));
 }
 
 #app,
